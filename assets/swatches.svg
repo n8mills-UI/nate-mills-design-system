@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="swatches-title swatches-desc">
+  <title id="swatches-title">Portfolio colour swatches</title>
+  <desc id="swatches-desc">Brand palette for natemills.me. Brand lime, brand ink, paper, surface, and ink alpha steps. Each swatch shows the token name, hex value, and WCAG contrast ratio against paper.</desc>
+
+  <defs>
+    <style>
+      .label  { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+      .hex    { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 13px; font-weight: 500; }
+      .ratio  { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+      .title  { font-family: "Inter", system-ui, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+      .eyebrow{ font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+      .ink-78 { fill: rgba(28,28,31,0.78); }
+      .ink-60 { fill: rgba(28,28,31,0.60); }
+      .ink-40 { fill: rgba(28,28,31,0.40); }
+    </style>
+  </defs>
+
+  <!-- Background: paper -->
+  <rect width="1200" height="760" fill="#f5f5f3"/>
+
+  <!-- Header -->
+  <circle cx="64" cy="68" r="4" fill="#d2ff37"/>
+  <text x="80" y="72" class="eyebrow ink-60">Colour</text>
+  <text x="64" y="116" class="title" fill="#1c1c1f">Brand palette<tspan fill="#d2ff37">.</tspan></text>
+  <line x1="64" y1="148" x2="120" y2="148" stroke="#1c1c1f" stroke-width="3"/>
+
+  <!-- HERO LIME (large feature swatch) -->
+  <rect x="64"  y="200" width="360" height="320" rx="12" fill="#d2ff37"/>
+  <text x="88"  y="246" class="label" fill="#1c1c1f">Brand lime</text>
+  <text x="88"  y="494" class="hex"   fill="#1c1c1f">#d2ff37</text>
+  <text x="88"  y="468" class="ratio" fill="rgba(28,28,31,0.6)">RGB 210 255 55</text>
+
+  <!-- INK -->
+  <rect x="456" y="200" width="220" height="156" rx="10" fill="#1c1c1f"/>
+  <text x="476" y="240" class="label" fill="#f5f5f3">Brand ink</text>
+  <text x="476" y="336" class="hex"   fill="#f5f5f3">#1c1c1f</text>
+  <text x="476" y="316" class="ratio" fill="rgba(245,245,243,0.6)">16.4 : 1</text>
+
+  <!-- PAPER -->
+  <rect x="700" y="200" width="220" height="156" rx="10" fill="#f5f5f3" stroke="rgba(28,28,31,0.12)" stroke-width="1"/>
+  <text x="720" y="240" class="label" fill="#1c1c1f">Paper</text>
+  <text x="720" y="336" class="hex"   fill="#1c1c1f">#f5f5f3</text>
+  <text x="720" y="316" class="ratio" fill="rgba(28,28,31,0.4)">Page ground</text>
+
+  <!-- SURFACE -->
+  <rect x="944" y="200" width="192" height="156" rx="10" fill="#ffffff" stroke="rgba(28,28,31,0.12)" stroke-width="1"/>
+  <text x="964" y="240" class="label" fill="#1c1c1f">Surface</text>
+  <text x="964" y="336" class="hex"   fill="#1c1c1f">#ffffff</text>
+  <text x="964" y="316" class="ratio" fill="rgba(28,28,31,0.4)">Cards</text>
+
+  <!-- INK ALPHA SCALE (right column) -->
+  <text x="456" y="396" class="eyebrow ink-60">Ink scale</text>
+
+  <rect x="456" y="412" width="68" height="108" rx="8" fill="rgba(28,28,31,1.00)"/>
+  <text x="490" y="546" class="ratio" fill="#1c1c1f" text-anchor="middle">100</text>
+  <text x="490" y="562" class="ratio" fill="rgba(28,28,31,0.4)" text-anchor="middle">16.4</text>
+
+  <rect x="540" y="412" width="68" height="108" rx="8" fill="rgba(28,28,31,0.78)"/>
+  <text x="574" y="546" class="ratio" fill="#1c1c1f" text-anchor="middle">78</text>
+  <text x="574" y="562" class="ratio" fill="rgba(28,28,31,0.4)" text-anchor="middle">8.94</text>
+
+  <rect x="624" y="412" width="68" height="108" rx="8" fill="rgba(28,28,31,0.60)"/>
+  <text x="658" y="546" class="ratio" fill="#1c1c1f" text-anchor="middle">60</text>
+  <text x="658" y="562" class="ratio" fill="rgba(28,28,31,0.4)" text-anchor="middle">4.16</text>
+
+  <rect x="708" y="412" width="68" height="108" rx="8" fill="rgba(28,28,31,0.40)"/>
+  <text x="742" y="546" class="ratio" fill="#1c1c1f" text-anchor="middle">40</text>
+  <text x="742" y="562" class="ratio" fill="rgba(28,28,31,0.4)" text-anchor="middle">2.42</text>
+
+  <rect x="792" y="412" width="68" height="108" rx="8" fill="rgba(28,28,31,0.22)"/>
+  <text x="826" y="546" class="ratio" fill="#1c1c1f" text-anchor="middle">22</text>
+  <text x="826" y="562" class="ratio" fill="rgba(28,28,31,0.4)" text-anchor="middle">1.51</text>
+
+  <rect x="876" y="412" width="68" height="108" rx="8" fill="rgba(28,28,31,0.12)"/>
+  <text x="910" y="546" class="ratio" fill="#1c1c1f" text-anchor="middle">12</text>
+  <text x="910" y="562" class="ratio" fill="rgba(28,28,31,0.4)" text-anchor="middle">Rule</text>
+
+  <!-- Footer / meta strip -->
+  <line x1="64" y1="640" x2="1136" y2="640" stroke="rgba(28,28,31,0.12)" stroke-width="1"/>
+  <text x="64"   y="676" class="ratio ink-40">SOURCE</text>
+  <text x="64"   y="708" class="hex" fill="#1c1c1f">tokens.css</text>
+  <text x="320"  y="676" class="ratio ink-40">CONTRAST</text>
+  <text x="320"  y="708" class="hex" fill="#1c1c1f">WCAG 2.2 AA, on paper</text>
+  <text x="720"  y="676" class="ratio ink-40">UPDATED</text>
+  <text x="720"  y="708" class="hex" fill="#1c1c1f">2026 - 05</text>
+</svg>

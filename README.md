@@ -1,8 +1,6 @@
 <div align="center">
 
-# Nate Mills Design System
-
-**Authored once as DTCG tokens, generated to CSS, audited to WCAG 2.2 AA.**
+<img src="./assets/header-banner.png" alt="Nate Mills Design System. Authored once as DTCG tokens, generated to CSS, audited to WCAG 2.2 AA." width="860">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-d2ff37?style=flat-square&labelColor=1c1c1f)](./LICENSE)
 [![Design Tokens: DTCG](https://img.shields.io/badge/Design_Tokens-DTCG-d2ff37?style=flat-square&labelColor=1c1c1f)](https://www.designtokens.org/)
@@ -12,9 +10,7 @@
 [![Design system, live](https://img.shields.io/badge/Design_system-Live-d2ff37?style=flat-square&labelColor=1c1c1f)](https://nate-mills-portfolio.netlify.app/#uth-colour)
 [![Live site](https://img.shields.io/badge/Live-natemills.me-1c1c1f?style=flat-square)](https://natemills.me)
 [![Case study](https://img.shields.io/badge/Case_study-Bupa-1c1c1f?style=flat-square)](https://bupa.natemills.me)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-millsdesign-0a66c2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/millsdesign)
-
-<img src="./assets/showcase-all-three.png" alt="Colour, type, and spacing specimens generated from the token source" width="900">
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-millsdesign-0a66c2?style=flat-square&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2EyLjA2MiAyLjA2MiAwIDAxLTIuMDYzLTIuMDY1IDIuMDY0IDIuMDY0IDAgMTEyLjA2MyAyLjA2NXptMS43ODIgMTMuMDE5SDMuNTU1VjloMy41NjR2MTEuNDUyek0yMi4yMjUgMEgxLjc3MUMuNzkyIDAgMCAuNzc0IDAgMS43Mjl2MjAuNTQyQzAgMjMuMjI3Ljc5MiAyNCAxLjc3MSAyNGgyMC40NTFDMjMuMiAyNCAyNCAyMy4yMjcgMjQgMjIuMjcxVjEuNzI5QzI0IC43NzQgMjMuMiAwIDIyLjIyNSAweiIvPjwvc3ZnPg==&logoColor=white)](https://www.linkedin.com/in/millsdesign)
 
 </div>
 
@@ -45,13 +41,16 @@ COMPONENTS   classes that read semantics only        -->  e.g. .btn--primary { b
 
 One way, top to bottom: components read semantics, semantics read primitives, primitives are literals. Nothing reaches back up. So one edit at the top, a new brand hue, propagates through every semantic and component that uses it. No find-and-replace, no drift. That propagation is the whole point.
 
-## Token preview
+## The foundations at a glance
 
 <div align="center">
-<img src="./assets/swatches.svg" alt="The neutral and lime token swatches" width="780">
-<br><br>
-<img src="./assets/type-scale.svg" alt="The type scale, from caption to hero" width="780">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/bento-foundations-dark.png">
+  <img src="./assets/bento-foundations-lime.png" alt="The design system foundations in one view: the lime and ink colour ramps, the Inter display face, the type ladder, the motion curve, and the 12-step spacing scale" width="860">
+</picture>
 </div>
+
+Colour, type, motion, and spacing, all generated from `tokens.json`. The type is Inter for everything, JetBrains Mono for labels and numbers, and PT Serif for the one place that earns it: the pull quotes.
 
 ## Accessibility is a constraint, not a feature
 

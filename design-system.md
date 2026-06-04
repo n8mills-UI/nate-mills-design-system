@@ -93,6 +93,12 @@ rendered design actually lands on but that do not fall on a clean grid.
 **Green (lime).** The only colour primitive the brand needs. `--green-500 #d2ff37` is the brand
 lime; the rest are derived for hover and dim states.
 
+**Authored in OKLCH.** The colour primitives are written in OKLCH, the perceptual colour space from
+CSS Color Module Level 4 (by Björn Ottosson), as DTCG colour objects that also carry the original
+hex. The build emits a hex fallback line then the `oklch()`, so the colour is identical everywhere
+and pre-2023 browsers still get the hex. The OKLCH values are exact conversions of the hand-tuned
+hexes, verified to land on the same pixel, not a regenerated ramp, so the lime keeps its character.
+
 **What is deliberately missing.** No emerald, amber, or red. A portfolio has no warning or error UI,
 and padding the system with state colours no component reads would be the opposite of the discipline
 it is meant to show. If a future consumer needs them, the rule is: add at the primitive layer, route

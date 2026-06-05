@@ -224,7 +224,7 @@
   --glass-blur-webkit: 14px;
   --glass-saturate: 170%;
   --glass-dim: 1;
-  --glass-dim-scrolled: 1.6;
+  --glass-dim-scrolled: 1.15;
 }
 
 [data-theme="light"] {

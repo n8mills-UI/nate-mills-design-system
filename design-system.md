@@ -5,6 +5,10 @@ file map. It is small on purpose, and strict on purpose. If you came to see how 
 system stays consistent without a framework or a build pipeline you have to babysit, this is the
 whole thing.
 
+**The bar.** This is a portfolio system, not a utilitarian toolkit. It is built to clear the bar,
+not scrape it: considered polish, a little playfulness, and engineering rigour, from one person
+doing design, systems, and build.
+
 ---
 
 ## Philosophy
@@ -41,6 +45,10 @@ and rules, and anyone evaluating whether the claims this portfolio makes about s
   as well as pixels.
 - **If you maintain the system:** read the Contribution Rules and the Guardrails. They are the
   difference between a system and a stylesheet.
+
+For every token value, not just the highlights, see the engineering reference
+(`design-system-reference.md`) and the live Under-the-Hood page. Both are generated straight from
+`tokens.json`, so they never drift.
 
 ---
 
@@ -262,6 +270,17 @@ so the system names the rule and holds to it.
 ---
 
 ## 10. Accessibility
+
+WCAG 2.2 AA is the floor here, not the ceiling. WCAG 2.2 is a W3C Recommendation, and since October
+2025 it is also the international standard ISO/IEC 40500:2025. Every AA claim on this site is a
+self-assessment, backed by an axe-core gate that runs on both themes on every deploy, not a
+third-party certification.
+
+I also explore APCA, the perceptual contrast model, as a forward-looking readability ceiling above
+that floor. APCA is not a conformance standard: it was pulled from the WCAG 3 Working Draft in 2023,
+and WCAG 3 is still years from being a standard, so I treat APCA as a sharper readability check,
+never a compliance claim. The short version: WCAG 2.2 AA as the floor, APCA explored as a
+forward-looking readability ceiling.
 
 - WCAG 2.2 AA contrast for every text token, verified against every surface it can land on. The
   ratios are written into the comments in `tokens.css`.

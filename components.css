@@ -46,7 +46,7 @@
   font-weight: var(--weight-semibold);
   line-height: 1;
   white-space: nowrap;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-full);
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
@@ -179,7 +179,7 @@
 .card {
   background: var(--color-bg-elevated);
   border: var(--border-hairline);
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-lg);
   padding: var(--space-5);
   color: var(--color-text-primary);
 }
@@ -211,7 +211,7 @@
   color: var(--color-text-primary);
   background: var(--color-bg-subtle);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-full);
 }
 .chip i[data-lucide],
 .chip svg[data-lucide],
@@ -543,7 +543,7 @@
   padding: var(--space-6);
   background: var(--color-bg-elevated);
   border: 2px dashed var(--color-border);
-  border-radius: var(--radius-soft);
+  border-radius: var(--radius-sm);
   color: var(--color-text-tertiary);
   text-align: center;
   font-family: var(--font-body);

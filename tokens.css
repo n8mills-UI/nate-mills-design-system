@@ -171,6 +171,9 @@
   --space-11: 192px;
   --space-12: 256px;
   --section-padding: clamp(var(--space-9), 12vw, var(--space-10));
+  --card-pad-compact: var(--space-4);
+  --card-pad-standard: var(--space-5);
+  --card-pad-spacious: var(--space-6);
   --duration-fast: 150ms;
   --duration-base: 220ms;
   --duration-slow: 400ms;

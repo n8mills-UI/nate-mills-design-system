@@ -445,15 +445,23 @@ Doubling rhythm from 4 to 256 px, with `--space-3 (12px)` and `--space-5 (24px)`
 | `--space-1` | `4px` | Hairline gap. Icon-to-label, tight inline spacing. |
 | `--space-2` | `8px` | Tight gap. Chip padding, small stacks. |
 | `--space-3` | `12px` | Medium-tight break (added between 2 and 4). Heading-to-body, compact rows. |
-| `--space-4` | `16px` | Base unit. Default gap between related elements and standard card padding. |
-| `--space-5` | `24px` | Medium break (added between 4 and 6). Group separation inside a section. |
-| `--space-6` | `32px` | Large gap. Between subsections and card to card. |
+| `--space-4` | `16px` | Base unit. Default gap between related elements; the compact card-padding tier (--card-pad-compact). |
+| `--space-5` | `24px` | Medium break (added between 4 and 6). Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
+| `--space-6` | `32px` | Large gap. Between subsections and card to card; the spacious card-padding tier (--card-pad-spacious). |
 | `--space-7` | `48px` | Block spacing between stacked content blocks. |
 | `--space-8` | `64px` | Major block separation and section inner padding. |
 | `--space-9` | `96px` | Section rhythm. The lower bound of vertical section padding (--section-padding). |
 | `--space-10` | `128px` | Section rhythm. The upper bound of vertical section padding (--section-padding). |
 | `--space-11` | `192px` | Outsized spacing for full-bleed editorial breaks. |
 | `--space-12` | `256px` | Largest step. Rare, marquee-scale vertical space. |
+
+**Card padding (semantic tiers)**
+
+| Token | Value | Description |
+|---|---|---|
+| `--card-pad-compact` | `--space-4` | Compact card-padding tier (16px). Dense content tiles: credential cards, health-check tiles, inner controls. |
+| `--card-pad-standard` | `--space-5` | Standard card-padding tier (24px). The default content-card inset; matches the base .card. The standard, resolving the old 16-vs-24 doc conflict. |
+| `--card-pad-spacious` | `--space-6` | Spacious card-padding tier (32px). Large feature, award, and full-testimonial cards (often the desktop step up from standard). |
 
 <!-- TOKENS:spacing:end -->
 

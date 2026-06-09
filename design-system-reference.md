@@ -4,6 +4,16 @@ The architecture, the rules, and the file map for the design system that powers 
 
 If you came here to verify the system claims this portfolio makes, this document is the audit trail. If you came here to extend it, the rules below tell you which layer to edit.
 
+## The foundation, in one read
+
+The system runs on one mechanic and one rule; everything else is detail.
+
+**The mechanic, one edit propagates (Section 1).** Two tiers, one direction: primitives are raw values, semantics reference primitives by role, components read semantics only, never a primitive. Change one primitive and every semantic that references it follows, every component that reads those semantics follows, every project that consumes the tokens follows. The whole system is authored once in `tokens.json` (DTCG) and generated from there; the CSS, the documentation tables, and the live Under-the-Hood specimen all build from that one source and are drift-gated, so the doc, the build, and the portfolio cannot disagree about a value.
+
+**The rule, naming matches the scale (Section 16).** Words for small fixed sets (radius `sm`/`md`/`lg`/`xl`), numbers for open ramps (spacing `1..12`, colour `0..950`), intent for roles (`--color-text-primary`). Each convention is benchmarked against the leaders (EightShapes, DTCG, Tailwind, Material 3, Spectrum, Polaris), chosen for fit, not invented and not copied wholesale.
+
+**The honest framing.** The palette and the proportions are custom and hand-tuned; the architecture and the naming conventions are borrowed and proven; one rule governs all of it. Accessibility is a floor, not a feature: WCAG 2.2 AA across light and dark, verified by an axe gate on every deploy. The platform is plain, CSS custom properties and semantic HTML, no runtime framework.
+
 ---
 
 ## 1. Architecture, the three-tier model
@@ -157,6 +167,16 @@ Bupa case study scope-overrides the accent family inside `#bupa` to bring blue b
 
 **Accent foreground.** `--color-accent-foreground` is the canonical name for text or icons sitting on an accent surface. The old `--color-text-on-accent` token was a never-referenced duplicate and has been removed. Any consumer needing a foreground colour on accent must use `--color-accent-foreground`.
 
+### Brand namespaces, three prefixes
+
+Brand-adjacent colour lives under three deliberate prefixes, so a reviewer can tell our identity from a licensed logo colour from a decorative effect at a glance:
+
+- **`--brand-*`** = OUR core identity: lime, ink, and their on-surface pairs (`--brand-lime`, `--brand-ink`, `--brand-on-lime`, `--brand-on-ink`, `--color-brand-emphasis`). The only brand the system designs with.
+- **`--ext-brand-*`** = LICENSED external brand colours, locked constants reproduced for accuracy, never themed and never aliased into a semantic token: `--ext-brand-anthropic-large` / `-body` (UTH page only), `--ext-brand-linkedin` (the LinkedIn mark), `--ext-brand-bupa-blue` / `-dark` / `-subtle` (Bupa case study only). Each is scoped to its context; none is a system colour.
+- **`--fx-*`** = decorative EFFECT colours, not palette colours: `--fx-glitch-magenta` / `-cyan` (the footer wordmark glitch). Never themed, never used as UI colour.
+
+The test: if changing our brand would change it, it is `--brand-*`; if it belongs to someone else's brand, it is `--ext-brand-*`; if it is a visual effect with no semantic meaning, it is `--fx-*`.
+
 ### Brand identity (semantic aliases)
 
 | Token | Value | Use |
@@ -166,8 +186,8 @@ Bupa case study scope-overrides the accent family inside `#bupa` to bring blue b
 | `--brand-on-lime` | `var(--neutral-850)` | Text colour when sitting on `--brand-lime` |
 | `--brand-on-ink` | `var(--green-500)` | Lime text on dark slabs, used sparingly |
 | `--color-brand-emphasis` | ink (light) / lime (dark) | Theme-aware brand-tinted foreground text |
-| `--brand-anthropic-orange-large` | `#d97757` | Brand-exception colour #3. Anthropic warm orange, UTH page only, 18px+ bold |
-| `--brand-anthropic-orange-body` | `#b85033` | Darker Anthropic orange for 12-14px body text, UTH page only |
+| `--ext-brand-anthropic-large` | `#d97757` | Brand-exception colour #3. Anthropic warm orange, UTH page only, 18px+ bold |
+| `--ext-brand-anthropic-body` | `#b85033` | Darker Anthropic orange for 12-14px body text, UTH page only |
 
 ### When to reach for which token
 
@@ -188,7 +208,7 @@ Lime is the brand accent but it fails WCAG as foreground text on the off-white p
 
 **Worked example, the footer lime-on-lime bug.** `#site-footer` has `background: var(--brand-lime)` hardcoded in both themes (it is a brand identity surface, not theme-following). A prior session swapped the "Design Systems Consultant" inline span from `--brand-ink` to `--color-brand-emphasis` in the name of using more semantic tokens. In dark mode `--color-brand-emphasis` resolves to lime, producing lime-on-lime, invisible. The correct token is `--brand-on-lime` because the surface is always lime regardless of theme. The fix tells you the rule: **`--color-brand-emphasis` is for text on theme-following surfaces; "on" tokens are for text on fixed-colour surfaces.** If the background does not flip with the theme, the text token should not flip either.
 
-**Brand-exception colour #3, Anthropic warm orange.** Promoted into the token system as `--brand-anthropic-orange-large` (`#d97757`, large display) and `--brand-anthropic-orange-body` (`#b85033`, body text). These are the third brand-exception colours alongside the lime pair; they are intentional brand mentions, a documented brand exception, restricted to inline Anthropic name mentions and the UTH page H1 divider. The orange measures 2.86:1 on `#f5f5f5`, failing WCAG AA-large (3:1) by a hair. Allowed only at 18 px+ bold per the exception. Defined in `tokens.css`. An automated WCAG check flags `.uth-accent` as an advisory; this is expected and intentional given the brand exception.
+**Brand-exception colour #3, Anthropic warm orange.** Promoted into the token system as `--ext-brand-anthropic-large` (`#d97757`, large display) and `--ext-brand-anthropic-body` (`#b85033`, body text). These are the third brand-exception colours alongside the lime pair; they are intentional brand mentions, a documented brand exception, restricted to inline Anthropic name mentions and the UTH page H1 divider. The orange measures 2.86:1 on `#f5f5f5`, failing WCAG AA-large (3:1) by a hair. Allowed only at 18 px+ bold per the exception. Defined in `tokens.css`. An automated WCAG check flags `.uth-accent` as an advisory; this is expected and intentional given the brand exception.
 
 ### Brand-exception colours, `.uth-accent`
 
@@ -196,8 +216,8 @@ The Anthropic warm-orange pair is the only chromatic colour in the system beside
 
 | Class | Token | Value | Use |
 |---|---|---|---|
-| `.uth-accent` | `--brand-anthropic-orange-large` | `#d97757` | Large display orange. 18px+ bold only. Inline Anthropic mentions and the UTH H1 divider. |
-| `.uth-accent-text` | `--brand-anthropic-orange-body` | `#b85033` | Darker orange for 12-14px body text. The darker value lifts contrast at small sizes. |
+| `.uth-accent` | `--ext-brand-anthropic-large` | `#d97757` | Large display orange. 18px+ bold only. Inline Anthropic mentions and the UTH H1 divider. |
+| `.uth-accent-text` | `--ext-brand-anthropic-body` | `#b85033` | Darker orange for 12-14px body text. The darker value lifts contrast at small sizes. |
 
 `#d97757` measures 2.86:1 on `#f5f5f5`, just under WCAG AA-large (3:1), so it is allowed only at 18px+ bold per the documented brand exception. `#b85033` is the body-size companion. Both tokens are defined in `tokens.css`. The WCAG hook flags `.uth-accent` as an advisory: this is expected and intentional given the brand exception.
 
@@ -554,7 +574,7 @@ Sections are full-bleed at the outer level (`width: 100vw`, `margin-inline: calc
 
 ## 9. Components (extracted into its own file)
 
-Each component lives in `components.css`, reads semantic tokens only, has documented variants.
+Each component reads semantic tokens only and has documented variants. **Location rule:** truly reusable, content-agnostic components (button, card, chip, avatar, eyebrow, section-head, stat) live in the master `components.css` and are shared across projects. Portfolio-specific or section-scoped components (the editorial `.feat-card`, the shared header nav, the role / testimonial / health-check cards) live in `assets/sections.css`, defined once and scoped to their section, never duplicated per instance. The `.feat-card` canonical pattern below is the anti-drift template for that second class. The table's "Documented in" column reflects this split.
 
 | Component | Variants | Documented in |
 |---|---|---|

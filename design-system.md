@@ -18,7 +18,7 @@ apart later, quietly, when nobody is looking: a stray hex here, a one-off font s
 that drifts a few pixels from its siblings. This system is built so that drift is hard to introduce
 and easy to catch.
 
-Four values shape every decision:
+Five values shape every decision:
 
 - **One source, one edit.** Every value lives once, in `tokens.json`. Change a primitive and every
   semantic and component that references it follows. Reskinning the brand is a single line.
@@ -28,6 +28,10 @@ Four values shape every decision:
   does not use, no themes it does not need. The smaller the system, the easier it is to govern.
 - **Plain platform.** CSS custom properties, semantic HTML, no runtime framework. The whole thing
   loads in one network round trip and works even when opened as a local file.
+- **Borrowed and proven, custom where it counts.** The architecture and the naming conventions follow
+  the leaders (DTCG, Material 3, Polaris, Tailwind), under one rule: match the naming to the scale,
+  words for small fixed sets, numbers for open ramps, intent for roles. The palette and the
+  proportions are hand-tuned for this portfolio. Eclectic on purpose, not by accident.
 
 **Who this is for.** Engineers reading the token and component layers, designers reading the scales
 and rules, and anyone evaluating whether the claims this portfolio makes about systems are real.

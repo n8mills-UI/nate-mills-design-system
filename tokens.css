@@ -79,6 +79,8 @@
   --color-bg: var(--neutral-100);
   --color-surface: var(--neutral-0);
   --color-surface-sunken: var(--neutral-200);
+  --color-surface-inverse: var(--neutral-950);
+  --color-surface-inverse-sunken: var(--neutral-900);
   --color-text-primary: var(--neutral-950);
   --color-text-secondary: var(--neutral-700);
   --color-text-tertiary: var(--neutral-600);

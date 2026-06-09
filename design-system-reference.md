@@ -119,6 +119,8 @@ Reference primitives via `var()`. Every component reads these, never raw hex.
 | `--color-bg` | `--neutral-100` | `--neutral-950` |
 | `--color-surface` | `--neutral-0` | `--neutral-850` |
 | `--color-surface-sunken` | `--neutral-200` | `--neutral-900` |
+| `--color-surface-inverse` | `--neutral-950` | same |
+| `--color-surface-inverse-sunken` | `--neutral-900` | same |
 | `--color-text-primary` | `--neutral-950` | `--neutral-150` |
 | `--color-text-secondary` | `--neutral-700` | `--neutral-500` |
 | `--color-text-tertiary` | `--neutral-600` | `--neutral-550` |

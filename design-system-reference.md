@@ -77,8 +77,8 @@ The colour primitives are authored in OKLCH (the perceptual colour space defined
 | `--neutral-600` | `#67676f` | `oklch(51.7% 0.012 286)` | Text-tertiary on light; section labels. |
 | `--neutral-700` | `#3f3f46` | `oklch(37% 0.012 285.8)` | Text-secondary on light; strong border on dark. |
 | `--neutral-800` | `#27272a` | `oklch(27.4% 0.005 286)` | Border on dark. |
-| `--neutral-850` | `#1c1c1f` | `oklch(22.8% 0.006 285.9)` | Half-step. Brand ink; accent on light; bg-subtle on dark. |
-| `--neutral-900` | `#141416` | `oklch(19.2% 0.004 286)` | bg-elevated on dark. |
+| `--neutral-850` | `#1c1c1f` | `oklch(22.8% 0.006 285.9)` | Half-step. Brand ink; accent on light; surface on dark. |
+| `--neutral-900` | `#141416` | `oklch(19.2% 0.004 286)` | surface-sunken on dark. |
 | `--neutral-950` | `#0a0a0b` | `oklch(14.5% 0.002 286.1)` | bg on dark; text-primary on light; accent-hover on light. |
 
 **Green (lime, the brand colour)**
@@ -117,8 +117,8 @@ Reference primitives via `var()`. Every component reads these, never raw hex.
 | Token | Light | Dark |
 |---|---|---|
 | `--color-bg` | `--neutral-100` | `--neutral-950` |
-| `--color-bg-elevated` | `--neutral-0` | `--neutral-900` |
-| `--color-bg-subtle` | `--neutral-200` | `--neutral-850` |
+| `--color-surface` | `--neutral-0` | `--neutral-850` |
+| `--color-surface-sunken` | `--neutral-200` | `--neutral-900` |
 | `--color-text-primary` | `--neutral-950` | `--neutral-150` |
 | `--color-text-secondary` | `--neutral-700` | `--neutral-500` |
 | `--color-text-tertiary` | `--neutral-600` | `--neutral-550` |
@@ -153,6 +153,7 @@ source of truth.
 |---|---|---|
 | `--color-border` | `--neutral-300` | `--neutral-800` |
 | `--color-border-strong` | `--neutral-400` | `--neutral-700` |
+| `--color-border-brand` | `--brand-lime` | same |
 | `--color-accent` | `--neutral-850` | `--green-500` |
 | `--color-accent-hover` | `--neutral-950` | `--brand-lime-dim` |
 | `--color-accent-subtle` | `--neutral-150` | `--green-950` |

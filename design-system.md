@@ -125,10 +125,12 @@ Roles that reference primitives through `var()`. Every component reads these, ne
 | Token | Light | Dark | Role |
 |---|---|---|---|
 | `--color-bg` | `--neutral-100` | `--neutral-950` | Page background |
-| `--color-bg-elevated` | `--neutral-0` | `--neutral-900` | Raised surface |
+| `--color-surface` | `--neutral-0` | `--neutral-850` | Default card / panel surface (a white card lifts off the grey page in light) |
+| `--color-surface-sunken` | `--neutral-200` | `--neutral-900` | Recessed wells, insets, thumbnails (a step below the card) |
 | `--color-text-primary` | `--neutral-950` | `--neutral-150` | Body and headings |
 | `--color-text-secondary` | `--neutral-700` | `--neutral-500` | Supporting copy |
 | `--color-border` | `--neutral-300` | `--neutral-800` | Hairline |
+| `--color-border-brand` | `--brand-lime` | `--brand-lime` | Brand-lime outline accent (theme-invariant) |
 | `--color-accent` | `--neutral-850` | `--neutral-150` | Primary accent (ink, not blue) |
 | `--color-focus-ring` | `--neutral-850` | `--neutral-150` | Focus outline |
 

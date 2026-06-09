@@ -77,13 +77,14 @@
   --fx-glitch-magenta: #ff2bd6;
   --fx-glitch-cyan: #00d4ff;
   --color-bg: var(--neutral-100);
-  --color-bg-elevated: var(--neutral-0);
-  --color-bg-subtle: var(--neutral-200);
+  --color-surface: var(--neutral-0);
+  --color-surface-sunken: var(--neutral-200);
   --color-text-primary: var(--neutral-950);
   --color-text-secondary: var(--neutral-700);
   --color-text-tertiary: var(--neutral-600);
   --color-border: var(--neutral-300);
   --color-border-strong: var(--neutral-400);
+  --color-border-brand: var(--brand-lime);
   --color-border-hover: var(--brand-ink);
   --color-accent: var(--neutral-850);
   --color-accent-hover: var(--neutral-950);
@@ -219,8 +220,8 @@
 
 [data-theme="light"] {
   --color-bg: var(--neutral-100);
-  --color-bg-elevated: var(--neutral-0);
-  --color-bg-subtle: var(--neutral-200);
+  --color-surface: var(--neutral-0);
+  --color-surface-sunken: var(--neutral-200);
   --color-text-primary: var(--neutral-950);
   --color-text-secondary: var(--neutral-700);
   --color-text-tertiary: var(--neutral-600);
@@ -238,8 +239,8 @@
 
 [data-theme="dark"] {
   --color-bg: var(--neutral-950);
-  --color-bg-elevated: var(--neutral-900);
-  --color-bg-subtle: var(--neutral-850);
+  --color-surface: var(--neutral-850);
+  --color-surface-sunken: var(--neutral-900);
   --color-text-primary: var(--neutral-150);
   --color-text-secondary: var(--neutral-500);
   --color-text-tertiary: var(--neutral-550);
@@ -272,8 +273,8 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
       --color-bg: #0a0a0b;
-      --color-bg-elevated: #141416;
-      --color-bg-subtle: #1c1c1f;
+      --color-surface: #1c1c1f;
+      --color-surface-sunken: #141416;
       --color-text-primary: #f4f4f5;
       --color-text-secondary: #a1a1aa;
       --color-text-tertiary: #909096;

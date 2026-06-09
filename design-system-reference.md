@@ -551,7 +551,7 @@ Two accent-shadow tokens keep the lime accents legible on light backgrounds, and
 --ease-exit         cubic-bezier(0.4, 0, 1, 1)
 ```
 
-Every animation must respect `prefers-reduced-motion`. The reduced-motion override at the bottom of `tokens.css` collapses every duration to 1 ms and disables transforms.
+Every animation must respect `prefers-reduced-motion`. The reduced-motion override at the bottom of `tokens.css` collapses every duration to 1 ms and disables transforms. As of W14 that freeze yields to an explicit user choice: it skips elements under `html[data-motion="full"]` (the Display preferences "Full" option, so a user can re-enable motion despite an OS reduce request), and `html[data-motion="reduce"]` applies the freeze even when the OS does not ask. See Section 10, Display preferences.
 
 ---
 
@@ -610,10 +610,10 @@ Until the `<feat-card>` web component is built (a future enhancement), every `.f
   <div class="feat-card" data-reveal data-theme="light">
 
     <div class="feat-cta-corner">
-      <a href="..." class="btn btn--primary" target="_blank" rel="noopener noreferrer" aria-label="...">
+      <a href="..." class="btn btn--primary" target="_blank" rel="noopener noreferrer" aria-label="..., opens in a new tab">
         <i data-lucide="..." aria-hidden="true"></i>
         Read the case study
-        <i data-lucide="external-link" aria-hidden="true"></i>
+        <i data-lucide="arrow-up-right" aria-hidden="true"></i>
       </a>
     </div>
 
@@ -786,6 +786,39 @@ The hamburger menu (`.menu-overlay-a` / `#mobile-nav-drawer`) is one global comp
 - Lime on light backgrounds is forbidden as foreground text. `--brand-lime` on `--color-bg` (`#d2ff37` on `#f5f5f5`) is 1.6:1, decorative use only. Lime as foreground only on `--brand-ink` (14.42:1).
 - **Never dim accessible text with `opacity`** (or low-alpha ink) to make it read as secondary. Opacity multiplies against whatever sits behind the element and silently drops a passing colour below 4.5:1; the token looks correct in source but fails on screen. Choose a lighter text token that itself clears 4.5:1 instead. (2026-06-01: this trap caused most of an axe-core contrast sweep, `.pol-num` dimmed to `.55`, `.about-muted-list` ink at `0.5`, and the Featured carousel fading non-active cards to `0.4`.)
 - **Every `<img>` declares `width` and `height` attributes.** Prevents Cumulative Layout Shift (CLS). Content jumping as images load disorients screen-reader users tracking position, magnifier users following focus, and users with cognitive or vestibular conditions. Dimensions should be the image's natural pixel size; CSS handles responsive scaling on top. SVGs included. Decorative spacer images may use `width="0" height="0"`. Enforced by an automated build check.
+
+### External links (new tab, one icon, screen-reader cue)
+
+A link is external when its `href` leaves the site (a different host to the portfolio; `bupa.natemills.me`, the standalone case study, counts as external because it is a separate deployed site). Every external link MUST have, all four:
+
+1. `target="_blank"`.
+2. `rel="noopener noreferrer"`. `noopener` stops the new page reaching back into this tab through `window.opener` (security); `noreferrer` also drops the referrer (privacy). Keep both, consistently.
+3. The `arrow-up-right` glyph as the affordance, trailing: `<i data-lucide="arrow-up-right" aria-hidden="true"></i>`. The old `external-link` box glyph is retired for this use. Icon-only links (round social buttons with no visible text) are exempt from the visible arrow; an arrow crammed beside a brand glyph reads worse than none.
+4. A screen-reader "opens in a new tab" cue. The icons are `aria-hidden`, so without it a screen-reader user gets no warning. Use ONE phrase, "opens in a new tab", delivered by whichever name the link already carries: a trailing `<span class="sr-only">(opens in a new tab)</span>` on a text link, or folded into the `aria-label` on a link whose accessible name comes from `aria-label` (icon-only or aria-labelled links, where an sr-only span would be ignored).
+
+No WCAG success criterion dictates the glyph (arrow or box both pass). Warning before a new tab opens is SC 3.2.5 Change on Request (Level AAA, advisory for an AA target) via techniques G201 and H83; the accessible fix is the cue, not the icon.
+
+Same-page anchors that genuinely stay on this page (e.g. the Insights section's "Training and standards" link to `#certifications`) are NOT external: they take no external glyph and no cue. Note the Insights "see also" links to the Bupa case study (`bupa.natemills.me`) and the Token Exporter plugin DO leave the site, so they follow the external pattern above (deep-linked, arrow, new tab, cue), they are not same-page jumps. (The Insights section is `#insights` in markup; its internal CSS classes are still `.faq-*`.) One nuance: the "See the design system" button targets `#under-the-hood-embedded`, which lives in the same file but is a separate view in the layout (the Alpine-toggled Under-the-Hood "page"), so its `arrow-up-right` reads as cross-view navigation, not "external", and stays.
+
+The View-source cards in Under-the-Hood are generated by `tokens/showcase.mjs` (spliced into `index.html` between `UTH:` markers, gated by `showcase.mjs --check`), so the pattern lives in the generator too: edit the generator, not the spliced output. Enforced warn-first by `tokens/external-link-lint.mjs` (`--check`), wired `continue-on-error` in `deploy-portfolio.yml` beside the card-surface guard.
+
+### Display preferences (the first-party preferences control, W14)
+
+A header icon button (`sliders-horizontal`, next to the dark-mode toggle) opens a small **Display preferences** panel: text size, contrast, and motion. It is the first-party replacement for the removed UserWay overlay (overlays cannot fix source markup, test poorly with real assistive tech, and carry a credibility and legal liability). It is deliberately **lean**: the site already respects the device's own settings natively, so the panel is a small per-site complement, not a re-implementation of the OS.
+
+**Honest framing.** It is called "Display preferences," never an "accessibility toolbar." The page is already WCAG 2.2 AA on its own; the panel is an enhancement layered on top, not what makes the site accessible. Every control defaults to "follow your device." The site natively honours `prefers-color-scheme`, `prefers-reduced-motion`, `prefers-contrast`, `prefers-reduced-transparency` (the header glass goes solid), and Save-Data / slow connections (the Spline hero is skipped) with no UI. (An AbilityNet "My Computer My Way" link was considered and dropped as UK-public-sector boilerplate, off-key for a global personal portfolio.)
+
+**The three controls** (contrast and motion are emitted by the token generator `tokens/build.mjs` into `tokens.css`; text size is real page-zoom in `sections.css`):
+
+- **Text size** (`Default / Large / Largest`) sets `html[data-text-size="lg"|"xl"]`, which applies CSS `zoom` to the content containers (`#main` and the Under-the-Hood section), never the fixed chrome. It is real page-zoom, so it scales the whole page uniformly (text, layout, the testimonial name AND role) the way the browser's own zoom does. Token scaling was deliberately rejected: this codebase mixes tokens with intentional hardcoded px (the testimonial half-pixel sizes), so a token-based scale could never be uniform. Supports 1.4.4 Resize Text (AA), 1.4.10 Reflow (AA).
+- **Contrast** (`System / Normal / High`) sets `html[data-contrast="more"]`, a maximal-contrast theme (~20:1) layering over light AND dark (dark wins by specificity in both explicit and OS dark). "System" follows `prefers-contrast: more`. A `forced-colors` pass cooperates with Windows High Contrast. Supports 1.4.6 Contrast Enhanced (AAA), 1.4.11 Non-text Contrast (AA).
+- **Motion** (`System / Reduced / Full`) sets `html[data-motion]`. The `prefers-reduced-motion` freeze in `tokens.css` now yields to `data-motion="full"` (so a user can re-enable motion despite an OS reduce request), and `data-motion="reduce"` applies even when the OS does not ask. Supports 2.3.3 Animation from Interactions (AAA).
+
+**Architecture.** State lives on `<html>` as `data-*` attributes; choices persist in `localStorage` (`pref:text-size`, `pref:contrast`, `pref:motion`; theme reuses `resume-theme`). A synchronous inline `<head>` script applies saved choices **before first paint** (no flash). "System" means no stored key, so the OS media query governs, live (a `matchMedia` listener keeps following until the user overrides). Reset clears the keys and reverts to system.
+
+**The control's own accessibility.** It is a **disclosure**, not a modal: `<button aria-expanded aria-controls>` opens a labelled region, with no focus trap and no inert background. Each control is a **native radio group** in a `<fieldset>`/`<legend>` (the most robust name/role/state across NVDA, JAWS, VoiceOver). Escape closes and returns focus to the trigger; outside-click closes. Because the frosted, transformed header creates a containing block that traps `position: fixed`, the panel is rendered at body level (the same reason the mobile drawer is) and anchored under the trigger with a few lines of JS. Conformance: 2.1.1, 2.4.7, 2.4.11, 4.1.2, 1.3.1, 2.5.8 (AA). The axe gate opens the panel and scans both high-contrast themes; see `portfolio/docs/plans/w14-display-preferences.md`.
+
+The high-contrast theme is the one deliberate, documented extension of the "light and dark only" rule (Section 14): it is a contrast *modifier* over both themes, not a third brand theme.
 
 ---
 

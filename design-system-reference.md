@@ -595,6 +595,7 @@ Each component reads semantic tokens only and has documented variants. **Locatio
 | TestimonialCard | quote, author, role, company logo | components.css |
 | FAQRow | native `<details>` based | components.css |
 | Marquee | A+A duplicate-set infinite scroll | components.css |
+| MotionPauseControl | strip-as-toggle (canonical); floating icon button (legacy regions) | `assets/sections.css` (`.strip-motion-toggle`; `.region-motion-toggle` for xpv2); `.sw-motion-toggle` inline in `index.html` (selected work); pattern below |
 | FeatCard (editorial) | image-bottom (default), image-top, 1 / 2 / 3 image strip | `assets/sections.css` (`.feat-card`), specimen at `docs/mockups/feat-editorial-card.html` |
 | Header nav | shared by main site + design-system view; states: unselected / selected / active | `assets/sections.css` (`#site-nav a, #site-header .uth-nav a`) |
 
@@ -774,6 +775,25 @@ The hamburger menu (`.menu-overlay-a` / `#mobile-nav-drawer`) is one global comp
 6. **On-ink colours only.** The drawer is always ink, even when the page is in light mode. Style its controls with explicit on-ink values (as the social icons do), not theme tokens like `--color-text-primary`, which would lose contrast on the ink surface.
 7. **Hover and current section share one lime treatment.** A faint full-bleed lime wash (`rgb(var(--brand-lime-rgb) / 0.05)`) plus a lime label marks both the hovered or focused row and the current section. This is global: every drawer item binds `:aria-current` to `activeSection`, and the scroll-spy watches the portfolio and the `uth-*` section ids alike, so both menus light up the same way.
 
+### Motion pause control (strip-as-toggle, the canonical pattern)
+
+The canonical WCAG 2.2.2 pause control for an auto-moving strip (the hero skill ticker, both logo marquees): the moving strip itself is the button. No floating chrome sits on the content; the whole strip is one large, obvious target.
+
+**Anatomy.** A full-bleed overlay `<button type="button" class="strip-motion-toggle" data-region-motion aria-pressed="false" aria-label="Pause animation">` is the first child of the strip container (which must be `position: relative`, usually via `[data-motion-region]`). The overlay carries a single `.strip-motion-glyph` badge: a `--btn-sm` circle on `--color-bg` with the hairline `--color-text-tertiary` border, `--shadow-lift`, and the pre-rendered Lucide pause + play pair toggled by `aria-pressed` (no rescan on click). The overlay approach, rather than wrapping the strip in a button, keeps real button semantics without feeding the strip's text into the accessible name or nesting flow content inside a button.
+
+**Behaviour.**
+
+- Click anywhere on the strip toggles pause and resume; Space and Enter do the same from the keyboard (native button activation).
+- The accessible name is the stable "Pause animation"; `aria-pressed` alone carries the state (toggle-button pattern, WCAG 4.1.2). The enclosing `role="group"` label tells screen-reader users which strip the control belongs to. Floating legacy controls (`.region-motion-toggle`, `data-motion-label` present) keep their dynamic Pause/Play renames instead.
+- No visible chrome at rest on hover-capable devices. Hover and keyboard focus fade the glyph badge in over `--duration-fast` `--ease-default`; the pointer shows `cursor: pointer`. Coarse-pointer touch screens (`hover: none`) show the badge at rest instead: they have no hover or focus-visible path to reveal it, and an invisible control is undiscoverable by touch.
+- Focus ring: `--color-focus-ring` at 2px, INSET (`outline-offset: -2px`) because the strip containers clip and edge-fade their contents (`overflow: hidden` + `mask-image`), which would swallow the house outside offset. On always-dark surfaces (the hero band) the ring re-scopes to `--brand-lime`, the sanctioned focus colour on dark.
+- The badge is centred in the strip so the edge-fade masks never dim it.
+- Hover-pause on the strip remains a transient preview. Do NOT pair it with `:focus-within` pause: the toggle inside keeps focus after a click, so a focus rule holds the strip frozen after the user toggles it back to playing.
+- Pause state lives on the region as `data-motion-paused="1"` (set by the shared handler in `index.html`), driving `animation-play-state` rules; videos, Lottie tiles and the Spline scene inside the region pause through the same handler. A strip can be its own region (each logo marquee pauses independently) or sit inside a larger one (the hero strip toggle stops the whole hero, including the Spline scene).
+- Under `prefers-reduced-motion: reduce` the control is `display: none`: motion is already globally frozen, so the toggle would be a dead switch; hiding it removes it from pointer, tab order and the accessibility tree.
+
+**When to use which flavour.** Strip-as-toggle for any full-width auto-moving band whose content is non-interactive (text ticker, logo marquee). The floating icon buttons remain for regions where the content itself is interactive or clickable, where a full-bleed overlay would steal the content's clicks: `.region-motion-toggle btn btn--icon` on the xpv2 carousel (styled in `assets/sections.css`) and `.sw-motion-toggle btn btn--icon` on the selected-work gallery (styled inline in `index.html`).
+
 ---
 
 ## 10. Accessibility
@@ -859,6 +879,7 @@ portfolio/
     - Tablet only: `@media (min-width: 640px) and (max-width: 1023px) { ... }`
     - When overriding a base property at a viewport, comment WHY in the override block so future edits don't blindly modify the base.
 12. **Verify at three viewports after every CSS change.** Screenshot or read `getComputedStyle` at 1440px, 768px, AND 390px. A change that fixes mobile but breaks desktop is a regression. Never claim a task complete with only one viewport checked.
+13. **Auto-moving regions need a pause control.** Any region that auto-moves for longer than 5 seconds (ticker, marquee, autoplaying video, ambient scene) must use the strip-as-toggle motion pause control (Section 9) or a visible pause control. OS reduced-motion alone is not sufficient: WCAG 2.2.2 requires an on-page pause, stop or hide mechanism for every user, not only those with the OS setting switched on.
 
 ---
 

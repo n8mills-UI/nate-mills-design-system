@@ -248,6 +248,7 @@ This is the lean type scale. **New components MUST consume these tokens.** Legac
 | `--text-body` | `16px` | 1.55 | Paragraphs, lists, default reading text, card body copy. |
 | `--text-label` | `11px` | 1.4 | Uppercase mono labels, eyebrows, stat labels, badges. |
 | `--text-caption` | `12px` | 1.5 | Tiny captions, footnotes, stat descriptions. |
+| `--text-nav` | `11px` |  | Header menu links; equals --text-label today, kept separate so nav can diverge. |
 
 <!-- TOKENS:type-semantic:end -->
 
@@ -314,6 +315,7 @@ The `--font-mono-metric` alias is preserved as a legacy reference. It previously
 | `--font-display` | `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif` | Display headings (h1, h2, h3) and large numbers. |
 | `--font-body` | `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif` | Body copy, lists, and buttons. |
 | `--font-mono` | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace` | Tabular numbers, code, and eyebrow labels. |
+| `--font-mono-metric` | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace` | M-21 tabular mono for metric digits. |
 | `--font-serif` | `"PT Serif", Georgia, serif` | Editorial pull quotes, testimonials only. |
 
 <!-- TOKENS:type-families:end -->
@@ -353,7 +355,9 @@ clamp. Sub-headings inside section bodies (h3) use the text scale
 
 | Token | Size | Line height |
 |---|---|---|
+| `--size-2xs` | `11px` |  |
 | `--size-xs` | `12px` | `1.45` |
+| `--size-meta` | `13px` |  |
 | `--size-sm` | `14px` | `1.5` |
 | `--size-base` | `16px` | `1.5` |
 | `--size-lg` | `18px` | `1.45` |

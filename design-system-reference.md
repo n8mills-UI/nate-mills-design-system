@@ -8,7 +8,7 @@ If you came here to verify the system claims this portfolio makes, this document
 
 The system runs on one mechanic and one rule; everything else is detail.
 
-**The mechanic, one edit propagates (Section 1).** Two tiers, one direction: primitives are raw values, semantics reference primitives by role, components read semantics only, never a primitive. Change one primitive and every semantic that references it follows, every component that reads those semantics follows, every project that consumes the tokens follows. The whole system is authored once in `tokens.json` (DTCG) and generated from there; the CSS, the documentation tables, and the live Under-the-Hood specimen all build from that one source and are drift-gated, so the doc, the build, and the portfolio cannot disagree about a value.
+**The mechanic, one edit propagates (Section 1).** Two tiers, one direction: primitives are raw values, semantics reference primitives by role, components read semantics only, never a primitive. Change one primitive and every semantic that references it follows, every component that reads those semantics follows, every project that consumes the tokens follows. The whole system is authored once in `tokens.json` (DTCG) and generated from there; the CSS, the documentation tables, and the live Under-the-Hood specimen all build from that one source and are drift-gated, so within those generated artefacts a value cannot disagree. Hand-written prose around them can still drift, and historically did (audit DC-01); when prose and a generated table disagree, the table is the truth.
 
 **The rule, naming matches the scale (Section 16).** Words for small fixed sets (radius `sm`/`md`/`lg`/`xl`), numbers for open ramps (spacing `1..12`, colour `0..950`), intent for roles (`--color-text-primary`). Each convention is benchmarked against the leaders (EightShapes, DTCG, Tailwind, Material 3, Spectrum, Polaris), chosen for fit, not invented and not copied wholesale.
 
@@ -57,7 +57,7 @@ Defined once at `:root` in `tokens.css`.
 
 The neutral scale is 15 stops, tuned so `--neutral-850 #1c1c1f` (the brand ink) sits warmer than Tailwind's zinc-900 `#18181b`. Half-step numbers (`-150`, `-550`, `-850`) preserve specific values that don't fall on a clean 100 grid but appear in the rendered design. The green scale is 12 stops, the only colour primitive the brand needs: `--green-500 #d2ff37` is the brand lime, the rest derived for hover, dim, and dark-mode link states.
 
-The colour primitives are authored in OKLCH (the perceptual colour space defined in CSS Color Module Level 4, created by Björn Ottosson) as DTCG colour objects that also carry the original sRGB hex. `tokens.css` emits a hex fallback line then the `oklch()` line, so the rendered colour is identical everywhere and pre-2023 browsers still get the hex. The OKLCH values are exact conversions of the hand-tuned hexes, verified to round-trip to the same pixel, so the ramp keeps its deliberate non-uniform character: `--green-600` carries higher OKLCH chroma (0.229) than the brand `--green-500` (0.2134). They are converted, not regenerated. External brand colours (`ext-brand-*`) and the glitch effect stay as exact vendor hex.
+The colour primitives are authored in OKLCH (the perceptual colour space defined in CSS Color Module Level 4, created by Björn Ottosson) as DTCG colour objects that also carry the original sRGB hex. `tokens.css` declares the hex as the base value and re-declares the `oklch()` inside an `@supports (color: oklch(0% 0 0))` block, so browsers with OKLCH support use the authored colour space and older browsers genuinely keep the hex. (Two same-property custom-property declarations are not a fallback, the later one wins everywhere, which is why the build emits `@supports`; audit TK-01.) The OKLCH values are exact conversions of the hand-tuned hexes, verified to round-trip to the same pixel, so the ramp keeps its deliberate non-uniform character: `--green-600` carries higher OKLCH chroma (0.229) than the brand `--green-500` (0.2134). They are converted, not regenerated. External brand colours (`ext-brand-*`) and the glitch effect stay as exact vendor hex.
 
 <!-- TOKENS:primitives:start -->
 
@@ -136,9 +136,12 @@ text colours for the permanently-dark slabs (testimonials, contact, the Bupa
 case study). They do not flip with the theme because those surfaces are dark
 in both themes. They replace the 40-odd hardcoded `rgba(255,255,255,a)` /
 `rgba(245,245,240,a)` text literals that were scattered across those sections.
-Use `-primary` for headings and body, `-secondary` for supporting copy,
-`-muted` for fine print and eyebrows. For text on a light surface, keep using
-`--color-text-primary / -secondary / -tertiary`.
+Use `-primary` for headings and body, `-secondary` for supporting copy.
+`-muted` is decorative and large-text only: it composites to roughly 3.8:1 on
+the ink surfaces, below the 4.5:1 small-text floor, so it must never colour
+fine print (audit AX-07; this line previously prescribed exactly that and
+contradicted the opacity rule in Section 10). For text on a light surface,
+keep using `--color-text-primary / -secondary / -tertiary`.
 
 **Border on ink.** `--color-on-ink-border` is the matching hairline
 border colour for dark slabs, the white-alpha line used by `.card--dark`, the
@@ -194,20 +197,20 @@ The test: if changing our brand would change it, it is `--brand-*`; if it belong
 
 ### When to reach for which token
 
-Lime is the brand accent but it fails WCAG as foreground text on the off-white page background (`#d2ff37` on `#f5f5f5` is 1.30:1, far below the 4.5:1 floor). The "on" tokens and `--color-brand-emphasis` cover the cases the system actually needs. Pick by asking: **what is the surface, and what is the role of this colour on it?**
+Lime is the brand accent but it fails WCAG as foreground text on the off-white page background (`#d2ff37` on `#f5f5f5` is 1.06:1, computed 2026-06-10, far below the 4.5:1 floor). The "on" tokens and `--color-brand-emphasis` cover the cases the system actually needs. Pick by asking: **what is the surface, and what is the role of this colour on it?**
 
 | Need | Reach for | Why |
 |---|---|---|
 | Lime background slab, identity surface | `--brand-lime` (background) | The accent surface itself. `--brand-lime` is for backgrounds, decorative bars, focus rings on dark surfaces, lime band underlines. Never use it as foreground text on light. |
-| Text sitting on top of a known lime background | `--brand-on-lime` (foreground) | Resolves to ink. 14.42:1 contrast on lime. The pair `background: var(--brand-lime); color: var(--brand-on-lime);` is the canonical lime button or lime card. |
-| Lime accent text on a known dark slab (`--brand-ink` background, hero gradient, testimonials, contact) | `--brand-on-ink` or `--brand-lime` | Both resolve to `--green-500`. Use `--brand-on-ink` when the relationship to the dark surface matters semantically; use `--brand-lime` when it's just "the accent on this dark thing". 14.42:1 on `--brand-ink`. |
+| Text sitting on top of a known lime background | `--brand-on-lime` (foreground) | Resolves to ink. 14.65:1 contrast on lime (computed 2026-06-10). The pair `background: var(--brand-lime); color: var(--brand-on-lime);` is the canonical lime button or lime card. |
+| Lime accent text on a known dark slab (`--brand-ink` background, hero gradient, testimonials, contact) | `--brand-on-ink` or `--brand-lime` | Both resolve to `--green-500`. Use `--brand-on-ink` when the relationship to the dark surface matters semantically; use `--brand-lime` when it's just "the accent on this dark thing". 14.65:1 on `--brand-ink` (computed 2026-06-10). |
 | Brand-tinted foreground text that needs to stay readable on both light and dark page surfaces | `--color-brand-emphasis` (foreground) | Theme-aware. Resolves to `--neutral-850` (ink) in light mode, `--green-500` (lime) in dark mode. Use for eyebrow numbers, inline `<code>` spans, in-line link styling, accent words inside body copy. This is the right answer 90 percent of the time when you previously reached for `color: var(--brand-lime)`. |
 | Decorative dot (the period in "nate mills.") | `--brand-lime` (foreground, 1-char) | Documented carveout. The dot is brand identity, 1-character decorative, and the hook's WCAG advisory does not block it. Limited to the `.dot` / `.uth-dot` selectors. |
 | Decorative lime bar under an eyebrow label, or border-color on a chip | `--brand-lime` (border / pseudo background) | Borders and pseudo-element backgrounds are not foreground text. No contrast rule applies. |
 
 **Rule of thumb.** `color: var(--brand-lime)` outside a known-dark scope is almost always wrong. If you find yourself writing it, ask whether `--color-brand-emphasis` is what you actually want.
 
-**Functional accents use `--color-accent`, never raw lime on light.** Anything that signals an *active* or *selected* state, the active tab underline, the current nav item, a segmented-toggle pressed state, must use `--color-accent` (theme-aware: ink on light, lime on dark), with `--color-accent-foreground` for text or icons sitting on the accent fill. Raw `--brand-lime` is reserved for dark surfaces; on a light surface it is ~1.4:1 and fails WCAG, so it must never carry state on light. Purely decorative *visual* fills (a divider line behind a subgroup label, a scale bar) use a theme-aware neutral (`rgb(var(--uth-fg) / 0.3)`, `--color-border-strong`), not lime, for the same contrast reason. This is a functional rule, not aesthetic: the accent marks interaction, neutrals decorate. The Under-the-Hood colour card follows it: its per-group gallery/list toggle pressed state is `--color-accent` / `--color-accent-foreground`, and the subgroup divider line is a neutral.
+**Functional accents use `--color-accent`, never raw lime on light.** Anything that signals an *active* or *selected* state, the active tab underline, the current nav item, a segmented-toggle pressed state, must use `--color-accent` (theme-aware: ink on light, lime on dark), with `--color-accent-foreground` for text or icons sitting on the accent fill. Raw `--brand-lime` is reserved for dark surfaces; on a light surface it is ~1.06:1 and fails WCAG, so it must never carry state on light. Purely decorative *visual* fills (a divider line behind a subgroup label, a scale bar) use a theme-aware neutral (`rgb(var(--uth-fg) / 0.3)`, `--color-border-strong`), not lime, for the same contrast reason. This is a functional rule, not aesthetic: the accent marks interaction, neutrals decorate. The Under-the-Hood colour card follows it: its per-group gallery/list toggle pressed state is `--color-accent` / `--color-accent-foreground`, and the subgroup divider line is a neutral.
 
 **Worked example, the footer lime-on-lime bug.** `#site-footer` has `background: var(--brand-lime)` hardcoded in both themes (it is a brand identity surface, not theme-following). A prior session swapped the "Design Systems Consultant" inline span from `--brand-ink` to `--color-brand-emphasis` in the name of using more semantic tokens. In dark mode `--color-brand-emphasis` resolves to lime, producing lime-on-lime, invisible. The correct token is `--brand-on-lime` because the surface is always lime regardless of theme. The fix tells you the rule: **`--color-brand-emphasis` is for text on theme-following surfaces; "on" tokens are for text on fixed-colour surfaces.** If the background does not flip with the theme, the text token should not flip either.
 
@@ -240,7 +243,7 @@ This is the lean type scale. **New components MUST consume these tokens.** Legac
 
 | Token | Value | Line height | Used for |
 |---|---|---|---|
-| `--text-h1` | `clamp(34px, 5.8vw, 72px)` | 1.05 | Page-level section headings (every section h2), hero h1. |
+| `--text-h1` | `clamp(34px, 5.8vw, 72px)` | 1.05 | Page-level section headings (every section h2). The hero h1 is a documented exception with its own mobile-tuned clamp. |
 | `--text-h2` | `clamp(22px, 4vw, 32px)` | 1.15 | Card titles, ledes, sub-headings inside section bodies. |
 | `--text-body` | `16px` | 1.55 | Paragraphs, lists, default reading text, card body copy. |
 | `--text-label` | `11px` | 1.4 | Uppercase mono labels, eyebrows, stat labels, badges. |
@@ -321,7 +324,7 @@ A FULL italic display heading is banned. Italic emphasis on a single word or sho
 
 | Token | Value | Used by |
 |---|---|---|
-| `--display-hero` | `clamp(40px, 9vw, 118px)` | Hero h1 |
+| `--display-hero` | `clamp(40px, 9vw, 118px)` | The Under-the-Hood display specimen. (The live hero h1 is a documented exception with its own mobile-tuned clamp; see Section 8 and the known-exceptions list.) |
 | `--display-section` | `clamp(28px, 5.8vw, 72px)` | Section h2 |
 | `--display-card-title` | `clamp(22px, 4vw, 44px)` | Card-level h2 inside featured projects (`.feat-card .section-title`). Steps down one tier from `--display-section` so card titles never compete with the page section heading above them. |
 | `--display-stat-num` | `clamp(40px, 7vw, 88px)` | Large stat numbers (`#metrics .stat-num` general rule). Narrow-mobile MQ (<639px) still has its own `clamp(40px, 12vw, 64px) !important` override for the tighter card width. |
@@ -382,13 +385,13 @@ So the token has two natural "breakpoints", but they are properties of the clamp
 
 | Token | Formula | MIN binds below | MAX binds above | Used by |
 |---|---|---|---|---|
-| `--text-h1` | `clamp(34px, 5.8vw, 72px)` | 483 px | 1241 px | Section h2, hero h1 |
+| `--text-h1` | `clamp(34px, 5.8vw, 72px)` | 586 px | 1241 px | Section h2 (`.section-title`; the hero h1 is a documented bespoke exception) |
 
 For tokens where binding behaviour matters to consumers (any heading or stat-num), additionally show the resolved value at three representative widths:
 
 | Viewport | Preferred (5.8vw) | Resolved | Why |
 |---|---|---|---|
-| 375 px (mobile) | 21.75 px | **28 px** | Below MIN, floor wins |
+| 375 px (mobile) | 21.75 px | **34 px** | Below MIN, floor wins |
 | 600 px | 34.8 px | **34.8 px** | In fluid zone |
 | 1024 px (tablet) | 59.4 px | **59.4 px** | In fluid zone |
 | 1280 px (desktop) | 74.2 px | **72 px** | Above MAX, ceiling wins |
@@ -407,12 +410,12 @@ Display tokens and heading clamps follow a 1.25 ratio (major third) anchored at 
 | Sub-tag (italic muted) | 16 px | 16 px | `var(--size-base)` |
 | Section H3 (UTH doc) | 22 px | 56 px | `clamp(22px, 4.5vw, 56px)` |
 | UTH subheading | 18 px | 32 px | `clamp(18px, 2.4vw, 32px)` |
-| Section H2 | 28 px | 72 px | `--display-section` |
+| Section H2 | 34 px | 72 px | `--text-h1` (via `.section-title`; `--display-section` floors at 28 px and is the Under-the-Hood h2) |
 | Card title (`.feat-card .section-title`) | 22 px | 28 to 44 px | `var(--display-card-title)` (mobile MQ override drops to `clamp(22px, 5vw, 28px)` below 600 px) |
 | Card spec-num | 22 px | 49 px | `clamp(22px, 3.9vw, 49px)` |
 | Stat-num (impact, narrow) | 40 px | 64 px | `clamp(40px, 12vw, 64px) !important` |
 | Stat-num (impact, general) | 40 px | 88 px | `var(--display-stat-num) !important` |
-| Display H1 (hero) | 40 px | 118 px | `--display-hero` |
+| Display H1 (hero) | 18 px | 34 px | bespoke mobile-tuned clamp, a documented exception (`--display-hero` sizes the Under-the-Hood specimen instead) |
 
 At 375 px viewport, the visible tier hierarchy reads: body 16, lede 20, subhead 18 to 22, H2 28, stat-num 40, display 40+. Each tier is visibly distinct from the next; nothing crowds the heading above it.
 
@@ -558,8 +561,8 @@ Every animation must respect `prefers-reduced-motion`. The reduced-motion overri
 ## 8. Layout
 
 ```
---container-base   960 px     (prose, single-column sections)
---container-wide   1200 px    (galleries, marquees, grids)
+--container-base   960 px                       (prose, single-column sections)
+--container-wide   clamp(1200px, 92vw, 1440px)  (galleries, marquees, grids)
 
 --bp-mobile   375 px
 --bp-tablet   768 px
@@ -567,7 +570,7 @@ Every animation must respect `prefers-reduced-motion`. The reduced-motion overri
 --bp-wide     1440 px
 ```
 
-Sections are full-bleed at the outer level (`width: 100vw`, `margin-inline: calc(50% - 50vw)`). Content centres in one of the two container widths so every section's left gutter aligns at 120 px on a 1440 px viewport.
+Sections are full-bleed at the outer level (`width: 100vw`, `margin-inline: calc(50% - 50vw)`). Content centres in one of the two container widths so every section's gutters align; on a 1440 px viewport the wide container resolves to 1324.8 px (92vw), a 57.6 px gutter each side.
 
 **Responsive value tables (Under-the-Hood).** Token reference tables and the colour list are wrapped in `.uth-table-scroll` and never drop a column at a breakpoint. On desktop, a section with several sub-palettes either pairs them two-up (when their content is narrow, e.g. the lime and neutral primitive ramps) or renders the whole section as one table with the sub-palettes as header rows, so every column lines up straight down across subsections. The rule: scroll or wrap, never hide a column.
 
@@ -595,7 +598,7 @@ Each component reads semantic tokens only and has documented variants. **Locatio
 | FeatCard (editorial) | image-bottom (default), image-top, 1 / 2 / 3 image strip | `assets/sections.css` (`.feat-card`), specimen at `docs/mockups/feat-editorial-card.html` |
 | Header nav | shared by main site + design-system view; states: unselected / selected / active | `assets/sections.css` (`#site-nav a, #site-header .uth-nav a`) |
 
-**Header navigation (shared component).** The portfolio header menu and the design-system ("under the hood") header menu are ONE shared style: a single grouped rule `#site-nav a, #site-header .uth-nav a` in `assets/sections.css`. Only the link labels differ (About / Projects / ... vs Colour / Brand / Type / ...). Do not restyle one menu in isolation, edit the shared rule so both stay identical. Link states: unselected = `--color-text-tertiary` (lighter, still AA at 5.4:1 light / 5.7:1 dark), selected and `.is-active` = `--color-text-primary` (ink) with a 1px animated `::after` underline. The underline is ink in light mode and `--brand-lime` in dark (lime on the near-white light header is ~1.1:1, so it stays ink there). State reads from the underline shape plus colour, not colour alone (passes WCAG 1.4.1). The inline menu only renders at wide desktop; narrower widths use the hamburger overlay.
+**Header navigation (shared component).** The portfolio header menu and the design-system ("under the hood") header menu are ONE shared style: a single grouped rule `#site-nav a, #site-header .uth-nav a` in `assets/sections.css`. Only the link labels differ (About / Projects / ... vs Colour / Brand / Type / ...). Do not restyle one menu in isolation, edit the shared rule so both stay identical. Link states: unselected = `--color-text-tertiary` (lighter, still AA at 5.14:1 light / 6.23:1 dark, computed 2026-06-10), selected and `.is-active` = `--color-text-primary` (ink) with a 1px animated `::after` underline. The underline is ink in light mode and `--brand-lime` in dark (lime on the near-white light header is ~1.1:1, so it stays ink there). State reads from the underline shape plus colour, not colour alone (passes WCAG 1.4.1). The inline menu only renders at wide desktop; narrower widths use the hamburger overlay.
 
 **FeatCard editorial pattern.** The featured-project card with content on the left (eyebrow row, heading, subtitle) and an image strip that can sit at the top or bottom of the card. Used by Bupa, Token Exporter, and the design-system featured-project sections. The image-top variant flips the CSS grid template areas. Image count is flexible (1, 2, or 3 images in the 3-column strip). Live specimen with both position variants at `docs/mockups/feat-editorial-card.html`. The image-position toggle and image-count toggle are documented patterns, not currently wired as runtime controls; flip via class modifier or override `grid-template-areas` on the section.
 
@@ -607,7 +610,7 @@ Until the `<feat-card>` web component is built (a future enhancement), every `.f
 
 ```html
 <section id="..." aria-labelledby="...-heading" class="container-wide" style="...padding...">
-  <div class="feat-card" data-reveal data-theme="light">
+  <div class="feat-card" data-reveal>
 
     <div class="feat-cta-corner">
       <a href="..." class="btn btn--primary" target="_blank" rel="noopener noreferrer" aria-label="..., opens in a new tab">
@@ -690,7 +693,6 @@ Adding a new component:
 |---|---|---|---|---|
 | `.btn--primary` | `--brand-lime` | `--brand-ink` | `--brand-lime` | `--color-bg` (off-white) surfaces |
 | `.btn--secondary` | transparent | `--color-text-primary` | `--color-border-strong` | `--brand-lime` surfaces (footer, lime slabs) |
-| `.btn--white` | `--color-static-white` (theme-invariant) | `--brand-ink` | white | Fixed-dark brand slabs (Bupa case study) |
 | `.btn--icon` | transparent | `--color-text-secondary` | `--color-border` | Chrome (header toggles, controls) |
 
 **Background pairing rule.** Lime-on-lime is forbidden. `.btn--primary` MUST NOT sit on a `--brand-lime` background (e.g. the footer). Use `.btn--secondary` instead so the ink text + border carry contrast.
@@ -728,11 +730,11 @@ The portfolio uses five distinct shapes. Each one carries meaning. Mixing them w
 
 | Shape | Token | Use for | Examples |
 |---|---|---|---|
-| **Pill (full radius)** | `--radius-pill` (999px) | Identity tags, taxonomic labels, status indicators | "Available for work" status pill, `.feat-badge` ("Bupa case study", "Figma plugin"), `.bupa-tags`, role chips |
-| **Rounded rectangle** | `--radius-soft` (~14px) | Action buttons and content containers | All `.btn` variants ("Get in touch", "Read the case study"), `.card`, modals, slabs |
+| **Pill (full radius)** | `--radius-full` (999px) | Identity tags, taxonomic labels, status indicators | "Available for work" status pill, `.feat-badge` ("Bupa case study", "Figma plugin"), `.bupa-tags`, role chips |
+| **Rounded rectangle** | `--radius-lg` (14px) | Action buttons and content containers | All `.btn` variants ("Get in touch", "Read the case study"), `.card`, modals, slabs |
 | **Sharp tag (small radius)** | 4px | Inline emphasis inside running prose | `.faq-stat` chips (`74%`, `18 hours/week`), `<code>` references |
 | **Circle (full circle)** | `border-radius: 50%` | Identity surfaces (people, brands) and personal/social affordances | Avatar in mobile drawer, GitHub social icon, LinkedIn social icon, brand logos in cards |
-| **Square with radius** | `--radius-soft` | Icon-only utility buttons in chrome | Theme toggle, Download PDF, Mobile hamburger, Close-modal X |
+| **Square with radius** | `--radius-sm` (8px) | Icon-only utility buttons in chrome | Theme toggle, Download PDF, Mobile hamburger, Close-modal X |
 
 **The rule (single source of truth).**
 
@@ -776,14 +778,14 @@ The hamburger menu (`.menu-overlay-a` / `#mobile-nav-drawer`) is one global comp
 
 ## 10. Accessibility
 
-- WCAG 2.2 AA contrast minimum for every text token. Verified in the comments inside `tokens.css` for every semantic colour.
+- WCAG 2.2 AA contrast minimum for every text token. Enforced two ways: the token source is contrast-linted in CI (Terrazzo, AA floor on the semantic pairs, both themes, blocking), and every swatch on the live Under-the-Hood page computes its ratio from the rendered tokens at load. (An earlier claim that ratios live as comments inside `tokens.css` predated the generated build and was never true of it; audit DC-01.)
 - WCAG 2.2 is also published as the international standard ISO/IEC 40500:2025. Any AA claim here is a self-assessment, not a third-party certification; a formal conformance claim carries a short statement (date, guidelines version and URI, level, scope of pages, technologies relied upon). Adopting OKLCH does not change any of this: contrast is a property of the resolved colour, so an `oklch()` value has the same WCAG ratio as the identical hex, and every checker (axe, Pa11y, DevTools) evaluates the computed value.
-- Focus ring is the brand `--color-focus-ring` (ink on light, off-white on dark, 2 px). Never removed without replacement.
+- Focus ring is the brand `--color-focus-ring` (ink on light, lime on dark, 2 px; always-dark surfaces re-scope the token to lime). Never removed without replacement.
 - Touch target minimum 44×44 CSS px (`--touch-target-min`).
 - Every animation gated behind `prefers-reduced-motion`.
 - Semantic HTML first: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<details>`, `<dialog>`.
 - ARIA only where semantic HTML can't carry the meaning.
-- Lime on light backgrounds is forbidden as foreground text. `--brand-lime` on `--color-bg` (`#d2ff37` on `#f5f5f5`) is 1.6:1, decorative use only. Lime as foreground only on `--brand-ink` (14.42:1).
+- Lime on light backgrounds is forbidden as foreground text. `--brand-lime` on `--color-bg` (`#d2ff37` on `#f5f5f5`) is 1.06:1, decorative use only. Lime as foreground only on `--brand-ink` (14.65:1). (Both figures computed 2026-06-10; this document previously carried three different hand-typed values for the lime pair, audit DC-01.)
 - **Never dim accessible text with `opacity`** (or low-alpha ink) to make it read as secondary. Opacity multiplies against whatever sits behind the element and silently drops a passing colour below 4.5:1; the token looks correct in source but fails on screen. Choose a lighter text token that itself clears 4.5:1 instead. (2026-06-01: this trap caused most of an axe-core contrast sweep, `.pol-num` dimmed to `.55`, `.about-muted-list` ink at `0.5`, and the Featured carousel fading non-active cards to `0.4`.)
 - **Every `<img>` declares `width` and `height` attributes.** Prevents Cumulative Layout Shift (CLS). Content jumping as images load disorients screen-reader users tracking position, magnifier users following focus, and users with cognitive or vestibular conditions. Dimensions should be the image's natural pixel size; CSS handles responsive scaling on top. SVGs included. Decorative spacer images may use `width="0" height="0"`. Enforced by an automated build check.
 
@@ -819,14 +821,18 @@ There is **no on-page preferences panel or toolbar.** The site honours the user'
 ## 11. File map
 
 ```
-docs/
+design-system/              (repo root, the canonical source folder)
+  tokens.json               THE AUTHORED SOURCE: DTCG tokens, single source of truth
+  tokens.css                GENERATED from tokens.json via Style Dictionary, never hand-edited
+  components.css            Component layer
   design-system.md          THIS FILE, the single brand + system spec
 
-tokens.css                  Token implementation (primitives + semantics)
-components.css              Component layer (extracted into its own file)
-print.css                   Print stylesheet, condensed CV format
-
-index.html                  Live portfolio; links external tokens.css + components.css
+portfolio/
+  index.html                Live portfolio; links assets/tokens.css + assets/components.css
+                            (relative symlinks into design-system/)
+  assets/sections.css       Portfolio-specific section rules
+  print.css                 Print stylesheet, condensed CV format
+  tokens/build.mjs          The Style Dictionary build (bash tokens/build.sh to regenerate)
 ```
 
 `index.html` links the external `tokens.css` and `components.css`, symlinked from the `design-system/` folder. `tokens.css` is generated from `tokens.json` and is the single source of truth. The former inline token mirror has been removed; there is no longer an inline copy to keep in sync.
@@ -927,7 +933,7 @@ This file and its peers. Deliberately drier than the site.
 
 ### Positioning hierarchy (every touchpoint follows this shape)
 
-1. Anchor role: Senior UI Designer
+1. Anchor role: Senior Product Designer (decided 2026-06-10; the page title, meta and social tags carry the full anchor "Senior Product Designer, Design Systems")
 2. Specialty: design systems, governance, accessibility, automation
 3. Range: 20 years, five disciplines, three industries
 4. Proof: numbers ($4M+ revenue, 18h per week, 74% token reduction)
@@ -980,7 +986,7 @@ One rule: **match the naming style to the scale's nature.** A small fixed set re
 
 | Scale | Convention | Decision, why, what we rejected |
 |---|---|---|
-| Radius | T-shirt: `none / sm / md / lg / xl / full` | Fixed set of about 6. Words over numbers because you never insert between radii. Rejected the old `soft` / `card` / `large` mix for putting feel, size, and component names on one axis. Old names kept as deprecated aliases during migration. |
+| Radius | T-shirt: `none / sm / md / lg / xl / full` | Fixed set of about 6. Words over numbers because you never insert between radii. Rejected the old `soft` / `card` / `large` mix for putting feel, size, and component names on one axis. The old names were removed outright (no deprecated aliases shipped; an earlier sentence here claimed they had, audit DC-03). |
 | Spacing | Ordinal on a 4px base: `--space-1..12` | Kept readable ordinals. A hundreds scale (`100` / `200`, so a `150` slots between) is more future-proof, but this system is small and stable, so it is not worth renaming 12 tokens and their consumers. Rejected T-shirt: too few names for a 12-step ramp. |
 | Colour primitives | Numeric stops: `neutral-0..950`, `green-50..950` | Hundreds so the ramp stays insertable (a `250` drops in without renaming). The future-proof convention; spacing deliberately trades it for readability. |
 | Semantic colour and type | Intent: `--color-text-primary`, `--text-h1` | Named by role, so a re-skin changes the value, not the name. Order reads object, then property, then variant (DTCG / EightShapes). |

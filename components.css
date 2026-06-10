@@ -26,9 +26,11 @@
      .btn--icon         round, single icon glyph, hairline border
    Sizes (opt-in modifiers that wire the --btn-* tokens; base .btn equals md):
      .btn--sm   32px   compact: dense cards, toolbars, filters (WCAG 2.5.8 AA)
-     .btn--md   44px   the default, identical to base .btn (WCAG 2.5.5 AAA)
+     .btn--md   44px   the default min-height, same as base .btn (WCAG 2.5.5 AAA);
+                       note its padding is the tokenised 8px/16px while base .btn
+                       keeps 10px/18px, so the class is not a strict no-op (DC-03)
      .btn--lg   52px   hero CTAs, primary conversion (WCAG 2.5.5 AAA)
-   States: hover lifts via translateY(-1px) on primary / white, lime tint on
+   States: hover lifts via translateY(-1px) on primary, lime tint on
    icon; :disabled dims and blocks the pointer; prefers-reduced-motion collapses
    the transform.
    ----------------------------------------------------------------------------- */
@@ -415,17 +417,19 @@
    scroll-snap track (one card per view) with a single row of dots
    (built by the ds-carousel init in index.html). At 769px and up it
    is inert and the container keeps its own grid layout. Dots + swipe
-   only, no arrows. The `!important` flags are intentional: they
-   override the id-scoped grid rules each section already defines
-   (e.g. `#skills .disc-blocks`, `#certifications .certs-grid`,
-   `#testimonials .compact-grid`), which a class selector cannot beat.
+   only, no arrows. Selector note (audit AR-06): the section grid rules
+   used to live behind raw #id scopes that only !important could beat;
+   they are now flattened to [id="..."] attribute selectors (class tier,
+   no :where() involved), and this component wins with its own honest
+   specificity, the class plus the data-ds-carousel opt-in
+   attribute (0,2,0), which also outranks the container layout rule
+   `main > section.container-* > *` (0,1,2). No !important needed.
    ============================================================ */
 @media (max-width: 768px) {
-  .ds-carousel {
-    display: flex !important;
-    grid-template-columns: none !important;
-    flex-wrap: nowrap !important;
-    gap: var(--space-3) !important;
+  /* Base carousel chrome at the component's natural specificity, so
+     section-scoped rules (now [id=...] class-tier) can still tune margins
+     and spacing the way they always did. */
+  .ds-carousel[data-ds-carousel] {
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -445,11 +449,21 @@
        forced to clip here because overflow-x is auto (CSS does not allow one
        axis to scroll while the other stays visible). Net vertical footprint is
        unchanged. */
-    /* !important: when the track is a DIRECT child of a .container-base /
-       .container-wide section (e.g. #skills .disc-blocks), the layout rule
-       `main > section.container-* > * { margin-inline: 0 }` outranks a plain
-       class selector and cancels the bleed. !important matches the component's
-       existing pattern for beating those id-scoped section rules. */
+    padding-inline: var(--space-4);
+    scroll-padding-inline: var(--space-4);
+    padding-block: var(--space-3);
+    margin-block: calc(var(--space-3) * -1);
+  }
+  /* The doubled attribute is a deliberate specificity bump (0,3,0), carrying
+     exactly the declarations that used to be !important: the carousel layout
+     must beat the [id=...]-scoped section grid rules (0,2,0) that load after
+     this file, and the container layout rule main > section.container-* > *
+     (0,1,3). Everything else stays at natural specificity above (AR-06). */
+  .ds-carousel[data-ds-carousel][data-ds-carousel] {
+    display: flex;
+    grid-template-columns: none;
+    flex-wrap: nowrap;
+    gap: var(--space-3);
     /* Parent-agnostic full-bleed: force the track to the viewport width and
        centre it on the viewport, regardless of the parent's width/max-width
        (the #skills track is a direct .container-base child with an explicit
@@ -457,72 +471,74 @@
        widens). width:100vw + margin-inline:calc(50% - 50vw) spans edge to edge;
        padding-inline + scroll-padding-inline re-inset cards to the text gutter.
        Only applies <=768px where the carousel is active; desktop is inert. */
-    width: 100vw !important;
-    max-width: none !important;
-    margin-inline: calc(50% - 50vw) !important;
-    padding-inline: var(--space-4);
-    scroll-padding-inline: var(--space-4);
-    padding-block: var(--space-3);
-    margin-block: calc(var(--space-3) * -1);
+    width: 100vw;
+    max-width: none;
+    margin-inline: calc(50% - 50vw);
   }
-  .ds-carousel::-webkit-scrollbar { display: none; }
-  .ds-carousel > * {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
+  .ds-carousel[data-ds-carousel]::-webkit-scrollbar { display: none; }
+  .ds-carousel[data-ds-carousel] > * {
     min-width: 0;
     scroll-snap-align: start;
   }
+  .ds-carousel[data-ds-carousel][data-ds-carousel] > * {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 
-/* Pagination dots, built by the init. Shown on mobile only. */
-.ds-dots { display: none; }
+/* Pagination dots, built by the init. The dot styling is unconditional so the
+   under-the-hood showcase renders the real component at any width; live
+   carousel dot rows stay mobile-only via the display gate below (AR-01). */
+.ds-dots {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  flex-wrap: nowrap;
+  margin-top: var(--space-4);
+}
+/* WCAG 2.2 SC 2.5.8 Target Size: the visible dot stays 9px, but the button
+   itself is a 24x24 transparent hit area that centres the visual dot drawn
+   via ::before. Meets the 24px minimum without enlarging the dot visually. */
+.ds-dots button {
+  width: var(--touch-target-dot, 24px);
+  height: var(--touch-target-dot, 24px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  flex: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+.ds-dots button::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-full);
+  background: var(--color-dot-inactive);
+  /* Active dot grows into a pill. Clean ease-out (no springy overshoot)
+     and a near-instant colour switch (0.1s) so the dot reads inactive or
+     accent, never a muddy in-between. The earlier springy overshoot + 0.25s
+     colour cross-fade was what smeared and went olive under fast jumps. Width
+     is a layout property, but the hero dvh-to-svh fix removed the
+     per-scroll-frame reflow that made animating it expensive. */
+  transition: width 0.28s cubic-bezier(0.22, 0.61, 0.36, 1), background 0.1s linear;
+}
+.ds-dots button.is-active::before {
+  width: 26px;
+  background: var(--color-dot-active);
+}
+.ds-dots button:focus-visible {
+  /* Theme-aware ring (audit AX-06): the old hardcoded lime was 1.06:1 on the
+     light page. Always-dark bands re-scope --color-focus-ring to lime. */
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-full);
+}
 @media (max-width: 768px) {
-  .ds-dots {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    flex-wrap: nowrap;
-    margin-top: var(--space-4);
-  }
-  /* WCAG 2.2 SC 2.5.8 Target Size: the visible dot stays 9px, but the button
-     itself is a 24x24 transparent hit area that centres the visual dot drawn
-     via ::before. Meets the 24px minimum without enlarging the dot visually. */
-  .ds-dots button {
-    width: var(--touch-target-dot, 24px);
-    height: var(--touch-target-dot, 24px);
-    padding: 0;
-    border: 0;
-    background: transparent;
-    flex: none;
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .ds-dots button::before {
-    content: "";
-    width: 9px;
-    height: 9px;
-    border-radius: 999px;
-    background: var(--color-dot-inactive);
-    /* Active dot grows into a lime pill. Clean ease-out (no springy overshoot)
-       and a near-instant colour switch (0.1s) so the dot reads grey or lime,
-       never a muddy in-between. The earlier springy overshoot + 0.25s colour
-       cross-fade was what smeared and went olive under fast jumps. Width is a
-       layout property, but the hero dvh-to-svh fix removed the per-scroll-frame
-       reflow that made animating it expensive. */
-    transition: width 0.28s cubic-bezier(0.22, 0.61, 0.36, 1), background 0.1s linear;
-  }
-  .ds-dots button.is-active::before {
-    width: 26px;
-    background: var(--brand-lime);
-  }
-  .ds-dots button:focus-visible {
-    outline: 2px solid var(--brand-lime);
-    outline-offset: 2px;
-    border-radius: 999px;
-  }
+  .ds-dots { display: flex; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ds-carousel { scroll-behavior: auto; }

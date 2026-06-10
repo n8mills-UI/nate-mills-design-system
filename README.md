@@ -56,12 +56,12 @@ Colour, type, motion, and spacing, all generated from `tokens.json`. The type is
 
 It is wired into the tokens, so you cannot opt out of it by accident:
 
-- Every text token is contrast-checked for WCAG 2.2 AA against each surface it can land on. The ratios live in the `tokens.css` comments.
+- Every text token is contrast-checked for WCAG 2.2 AA: a blocking CI lint over the token source in both themes, plus live ratio computation on the Under-the-Hood page.
 - Focus rings are never removed without a replacement.
 - Touch targets clear 44 by 44 px.
 - Every animation is gated behind `prefers-reduced-motion`, collapsed in one place, not per component.
 
-There is one honest carveout. The brand lime is a background and accent only. It fails as foreground text on the light surface, roughly 1.3 to 1, so the system refuses to let you use it there and hands you a theme-aware token instead. The full reasoning is in [`design-system.md`](./design-system.md#10-accessibility).
+There is one honest carveout. The brand lime is a background and accent only. It fails as foreground text on the light surface, roughly 1.06 to 1, so the system refuses to let you use it there and hands you a theme-aware token instead. The full reasoning is in [`design-system.md`](./design-system.md#10-accessibility).
 
 ## Use it
 

@@ -51,8 +51,9 @@ and rules, and anyone evaluating whether the claims this portfolio makes about s
   difference between a system and a stylesheet.
 
 For every token value, not just the highlights, see the engineering reference
-(`design-system-reference.md`) and the live Under-the-Hood page. Both are generated straight from
-`tokens.json`, so they never drift.
+(`design-system-reference.md`) and the live Under-the-Hood page. The reference's token tables and
+the live page are generated straight from `tokens.json` and drift-gated in CI; the prose around
+them is written by hand, so when prose and a generated table disagree, trust the table.
 
 ---
 
@@ -86,10 +87,9 @@ formal W3C Recommendation, and the colour module is still settling. "DTCG-format
 
 ## 2. Primitives
 
-Defined once at `:root`. Mirrored in a small inline block in the page so it renders without external
-CSS.
+Defined once at `:root` in the generated `tokens.css`.
 
-**Neutrals.** A custom 16-stop scale, tuned so the brand ink (`--neutral-850 #1c1c1f`) sits a touch
+**Neutrals.** A custom 15-stop scale, tuned so the brand ink (`--neutral-850 #1c1c1f`) sits a touch
 warmer than Tailwind's zinc-900. A few half-steps (`-150`, `-550`, `-850`) preserve values that the
 rendered design actually lands on but that do not fall on a clean grid.
 
@@ -131,8 +131,8 @@ Roles that reference primitives through `var()`. Every component reads these, ne
 | `--color-text-secondary` | `--neutral-700` | `--neutral-500` | Supporting copy |
 | `--color-border` | `--neutral-300` | `--neutral-800` | Hairline |
 | `--color-border-brand` | `--brand-lime` | `--brand-lime` | Brand-lime outline accent (theme-invariant) |
-| `--color-accent` | `--neutral-850` | `--neutral-150` | Primary accent (ink, not blue) |
-| `--color-focus-ring` | `--neutral-850` | `--neutral-150` | Focus outline |
+| `--color-accent` | `--neutral-850` | `--green-500` | Primary accent (ink on light, brand lime on dark, a deliberate identity choice) |
+| `--color-focus-ring` | `--neutral-850` | `--green-500` | Focus outline (ink on light, lime on dark) |
 
 **Brand identity aliases** sit alongside the role tokens: `--brand-lime` (`var(--green-500)`),
 `--brand-ink` (`var(--neutral-850)`), and the paired "on" tokens that name the correct text colour
@@ -140,7 +140,7 @@ for a fixed-colour surface (`--brand-on-lime` resolves to ink, `--brand-on-ink` 
 
 **The one rule worth memorising.** The base accent is ink, not colour. Lime is a background and
 accent, never foreground text on a light surface. The contrast math forces it: `#d2ff37` on
-`#f5f5f5` is 1.3 to 1, far below the 4.5 to 1 floor. So the system gives you the right tool instead:
+`#f5f5f5` is 1.06 to 1, far below the 4.5 to 1 floor. So the system gives you the right tool instead:
 `--color-brand-emphasis` (theme-aware, resolves to ink on light and lime on dark) for brand-tinted
 words in running copy, and the "on" tokens for text on fixed lime or ink surfaces. If you reach for
 `color: var(--brand-lime)` outside a known-dark scope, it is almost always the wrong token.
@@ -191,7 +191,8 @@ Never use raw px for spacing in a component. The whole point is one place to edi
 ## 6. Radii, borders, shadows
 
 ```
---radius-sm    8px     (cards, modals; full scale is sm / md / lg / xl)
+--radius-sm    8px     (inputs, chips, small controls)
+--radius-lg    14px    (cards, modals; full scale is none / sm / md / lg / xl / full)
 --radius-full  999px   (pills, tags, buttons)
 
 --border-hairline  1px solid var(--color-border)
@@ -226,8 +227,8 @@ not per-component.
 ## 8. Layout
 
 ```
---container-base   960px    (prose, single-column sections)
---container-wide   1200px   (galleries, grids)
+--container-base   960px                        (prose, single-column sections)
+--container-wide   clamp(1200px, 92vw, 1440px)  (galleries, grids)
 
 --bp-mobile  375px   --bp-tablet  768px   --bp-desktop  1024px   --bp-wide  1440px
 ```
@@ -288,8 +289,9 @@ and WCAG 3 is still years from being a standard, so I treat APCA as a sharper re
 never a compliance claim. The short version: WCAG 2.2 AA as the floor, APCA explored as a
 forward-looking readability ceiling.
 
-- WCAG 2.2 AA contrast for every text token, verified against every surface it can land on. The
-  ratios are written into the comments in `tokens.css`.
+- WCAG 2.2 AA contrast for every text token. The token source is contrast-linted in CI (a blocking
+  Terrazzo check over the semantic pairs in both themes), and every swatch on the live
+  Under-the-Hood page computes its ratio from the rendered tokens at load.
 - The focus ring is a 2 px brand outline, never removed without a replacement.
 - Touch targets clear 44 by 44 px.
 - Every animation is gated behind `prefers-reduced-motion`.
@@ -313,8 +315,8 @@ components.css   The component layer
 design-system.md This document
 ```
 
-`tokens.json` is the source; `tokens.css` is generated and never hand-edited. The page also keeps a
-small inline mirror of the token block so it renders correctly when opened as a local file.
+`tokens.json` is the source; `tokens.css` is generated and never hand-edited. (An inline token
+mirror existed early on; it was removed when the tokens moved to the generated external file.)
 
 ---
 

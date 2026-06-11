@@ -50,10 +50,9 @@ and rules, and anyone evaluating whether the claims this portfolio makes about s
 - **If you maintain the system:** read the Contribution Rules and the Guardrails. They are the
   difference between a system and a stylesheet.
 
-For every token value, not just the highlights, see the engineering reference
-(`design-system-reference.md`) and the live Under-the-Hood page. The reference's token tables and
-the live page are generated straight from `tokens.json` and drift-gated in CI; the prose around
-them is written by hand, so when prose and a generated table disagree, trust the table.
+For every token value in full detail, see the live Under-the-Hood page. The token tables in this
+document and the live page are both generated straight from `tokens.json` and drift-gated in CI;
+when a text description and a generated table disagree, trust the table.
 
 ---
 
@@ -122,17 +121,23 @@ a semantic, then consume that. Lime plus neutrals is the entire palette.
 
 Roles that reference primitives through `var()`. Every component reads these, never raw hex.
 
-| Token | Light | Dark | Role |
-|---|---|---|---|
-| `--color-bg` | `--neutral-100` | `--neutral-950` | Page background |
-| `--color-surface` | `--neutral-0` | `--neutral-850` | Default card / panel surface (a white card lifts off the grey page in light) |
-| `--color-surface-sunken` | `--neutral-200` | `--neutral-900` | Recessed wells, insets, thumbnails (a step below the card) |
-| `--color-text-primary` | `--neutral-950` | `--neutral-150` | Body and headings |
-| `--color-text-secondary` | `--neutral-700` | `--neutral-500` | Supporting copy |
-| `--color-border` | `--neutral-300` | `--neutral-800` | Hairline |
-| `--color-border-brand` | `--brand-lime` | `--brand-lime` | Brand-lime outline accent (theme-invariant) |
-| `--color-accent` | `--neutral-850` | `--green-500` | Primary accent (ink on light, brand lime on dark, a deliberate identity choice) |
-| `--color-focus-ring` | `--neutral-850` | `--green-500` | Focus outline (ink on light, lime on dark) |
+_Nine tokens shown here. The full set of surface, text, border, and accent tokens is on the live Under-the-Hood page._
+
+<!-- TOKENS:pub-semantics:start -->
+
+| Token | Light | Dark |
+|---|---|---|
+| `--color-bg` | `--neutral-100` | `--neutral-950` |
+| `--color-surface` | `--neutral-0` | `--neutral-850` |
+| `--color-surface-sunken` | `--neutral-200` | `--neutral-900` |
+| `--color-text-primary` | `--neutral-950` | `--neutral-150` |
+| `--color-text-secondary` | `--neutral-700` | `--neutral-500` |
+| `--color-border` | `--neutral-300` | `--neutral-800` |
+| `--color-border-brand` | `--brand-lime` | same |
+| `--color-accent` | `--neutral-850` | `--green-500` |
+| `--color-focus-ring` | `--neutral-850` | `--green-500` |
+
+<!-- TOKENS:pub-semantics:end -->
 
 **Brand identity aliases** sit alongside the role tokens: `--brand-lime` (`var(--green-500)`),
 `--brand-ink` (`var(--neutral-850)`), and the paired "on" tokens that name the correct text colour
@@ -154,13 +159,18 @@ numbers. PT Serif appears in exactly one place: the testimonial pull quotes.
 
 The lean semantic scale that new work consumes:
 
+<!-- TOKENS:pub-type-semantic:start -->
+
 | Token | Value | Used for |
 |---|---|---|
-| `--text-h1` | `clamp(34px, 5.8vw, 72px)` | Section headings and the hero |
-| `--text-h2` | `clamp(22px, 4vw, 32px)` | Card titles, ledes |
-| `--text-body` | `16px` | Reading text |
-| `--text-label` | `11px` | Uppercase mono labels and eyebrows |
-| `--text-caption` | `12px` | Captions and fine print |
+| `--text-h1` | `clamp(34px, 5.8vw, 72px)` | Page-level section headings (every section h2). The hero h1 is a documented exception with its own mobile-tuned clamp. |
+| `--text-h2` | `clamp(22px, 4vw, 32px)` | Card titles, ledes, sub-headings inside section bodies. |
+| `--text-body` | `16px` | Paragraphs, lists, default reading text, card body copy. |
+| `--text-label` | `11px` | Uppercase mono labels, eyebrows, stat labels, badges. |
+| `--text-caption` | `12px` | Tiny captions, footnotes, stat descriptions. |
+| `--text-nav` | `11px` | Header menu links; equals --text-label today, kept separate so nav can diverge. |
+
+<!-- TOKENS:pub-type-semantic:end -->
 
 Headings use fluid `clamp()` so type scales smoothly between a mobile floor and a desktop ceiling
 without per-breakpoint overrides. If you find yourself reaching for a media query to nudge a font
@@ -177,12 +187,24 @@ and leave visible dark spots at the letter joins).
 
 A doubling rhythm from 4 to 256 px, with two medium-tight additions for breaks that need them.
 
-```
---space-1  4px     --space-5  24px    --space-9   96px
---space-2  8px     --space-6  32px    --space-10  128px
---space-3  12px    --space-7  48px    --space-11  192px
---space-4  16px    --space-8  64px    --space-12  256px
-```
+<!-- TOKENS:pub-spacing:start -->
+
+| Token | Value | Description |
+|---|---|---|
+| `--space-1` | `4px` | Hairline gap. Icon-to-label, tight inline spacing. |
+| `--space-2` | `8px` | Tight gap. Chip padding, small stacks. |
+| `--space-3` | `12px` | Medium-tight break (added between 2 and 4). Heading-to-body, compact rows. |
+| `--space-4` | `16px` | Base unit. Default gap between related elements; the compact card-padding tier (--card-pad-compact). |
+| `--space-5` | `24px` | Medium break (added between 4 and 6). Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
+| `--space-6` | `32px` | Large gap. Between subsections and card to card; the spacious card-padding tier (--card-pad-spacious). |
+| `--space-7` | `48px` | Block spacing between stacked content blocks. |
+| `--space-8` | `64px` | Major block separation and section inner padding. |
+| `--space-9` | `96px` | Section rhythm. The lower bound of vertical section padding (--section-padding). |
+| `--space-10` | `128px` | Section rhythm. The upper bound of vertical section padding (--section-padding). |
+| `--space-11` | `192px` | Outsized spacing for full-bleed editorial breaks. |
+| `--space-12` | `256px` | Largest step. Rare, marquee-scale vertical space. |
+
+<!-- TOKENS:pub-spacing:end -->
 
 Never use raw px for spacing in a component. The whole point is one place to edit the rhythm.
 
@@ -190,17 +212,40 @@ Never use raw px for spacing in a component. The whole point is one place to edi
 
 ## 6. Radii, borders, shadows
 
-```
---radius-sm    8px     (inputs, chips, small controls)
---radius-lg    14px    (cards, modals; full scale is none / sm / md / lg / xl / full)
---radius-full  999px   (pills, tags, buttons)
+<!-- TOKENS:pub-radii-borders-shadows:start -->
 
---border-hairline  1px solid var(--color-border)
---border-focus     2px solid var(--color-focus-ring)
+**Radii**
 
---shadow-soft   subtle    (default lift)
---shadow-lift   stronger  (overlays and float-on-scroll chrome only)
-```
+| Token | Value | Description |
+|---|---|---|
+| `--radius-none` | `0` | Square. No rounding, for sharp-cornered surfaces and full-bleed media. |
+| `--radius-sm` | `8px` | Small radius. The workhorse for inputs, chips, and small controls. |
+| `--radius-md` | `10px` | Medium radius. Mid-size controls and insets, a touch rounder than sm. |
+| `--radius-lg` | `14px` | Large radius. The default for cards and modals. |
+| `--radius-xl` | `20px` | Extra-large radius. Prominent panels and feature surfaces. |
+| `--radius-full` | `999px` | Full round. Pills, tags, and circular buttons; forces a complete radius at any height. |
+
+**Borders**
+
+| Token | Value | Description |
+|---|---|---|
+| `--border-hairline` | `1px solid var(--color-border)` | Default 1px hairline border; reads --color-border so it follows the theme. The standard card edge and divider. |
+| `--border-strong` | `1px solid var(--color-border-strong)` | Heavier 1px border; reads --color-border-strong. For edges that need to read past a hairline, such as secondary-button outlines. |
+| `--border-focus` | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
+| `--focus-ring-offset` | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
+
+**Shadows**
+
+| Token | Value | Description |
+|---|---|---|
+| `--shadow-none` | `none` | No shadow. The default; the system favours borders over shadows. |
+| `--shadow-soft` | `0 1px 2px rgb(var(--brand-ink-rgb) / 0.04), 0 1px 3px rgb(var(--brand-ink-rgb) / 0.06)` | Subtle resting elevation, two stacked ink-alpha layers, for cards that lift just off the page. Dark mode swaps to deeper black-alpha. |
+| `--shadow-lift` | `0 4px 12px rgb(var(--brand-ink-rgb) / 0.06), 0 2px 4px rgb(var(--brand-ink-rgb) / 0.04)` | Stronger elevation for overlays and float-on-scroll chrome only, not resting cards. |
+| `--shadow-modal` | `0 24px 64px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.18)` | Modal and lightbox elevation. The deepest shadow, for surfaces floating above a scrim. |
+| `--accent-period-shadow` | `0 1px 2px rgba(0,0,0,0.42), 0 0 0 1px rgba(0,0,0,0.18)` | Depth under the lime period in section titles. Keeps the lime dot legible on light surfaces; resolves to none in dark, where lime already reads. |
+| `--accent-dot-shadow` | `0 1px 3px rgba(0,0,0,0.24)` | Depth under the active carousel pagination dot. Keeps the lime dot legible on light surfaces; resolves to none in dark. |
+
+<!-- TOKENS:pub-radii-borders-shadows:end -->
 
 The aesthetic is Swiss-minimal, so borders carry structure and shadows are rare. Two small
 accent-shadow tokens keep the lime accents legible on light backgrounds and resolve to `none` in

@@ -168,7 +168,7 @@
   --border-focus: 2px solid var(--color-focus-ring);
   --focus-ring-offset: 2px;
   --container-base: 960px;
-  --container-wide: clamp(1200px, 92vw, 1440px);
+  --container-wide: max(1200px, min(92vw, max(1440px, 66vw)));
   --bp-mobile: 375px;
   --bp-tablet: 768px;
   --bp-desktop: 1024px;

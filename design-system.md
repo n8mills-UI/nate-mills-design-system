@@ -410,25 +410,23 @@ The mistakes that have actually surfaced, kept here so they do not surface again
 ## 15. Content voice and tone
 
 Consistency is linguistic, not just visual. A system that governs pixels but lets copy wander still
-feels inconsistent. These are the registers that keep every surface sounding like one author.
+feels inconsistent. So the words follow one rule, the same way the colours do.
 
-### Voice A, body copy (Craftsman)
+### One voice
 
-Confident, evidence-led, quietly warm. Used in subheads, About, section subtitles, case study ledes.
-Sentences run 6 to 14 words. First person. Proof carries the brag: "18 hours back to the team," not
-"huge productivity gains." Warmth comes from honesty, not enthusiasm. No hedges.
+I write the way I'd talk to another designer over coffee: plain words, short sentences, say the
+thing. No jargon, no sales pitch, no fake excitement. First person. Proof carries the brag: "18
+hours back to the team," not "huge productivity gains." Warmth comes from honesty, not enthusiasm.
+No hedges.
 
-### Voice B, CTAs and microcopy (Confident)
+### Only the length changes
 
-Verb-first, outcome-specific, three to five words. "Read the case study," "Get in touch," "View on
-Figma." Never "Submit," "Click here," or "Learn more." Errors name the problem and the workaround
-with no apology preamble. Status pills are declarative present tense ("Available for work"), never
-aspirational.
-
-### Voice C, system docs (Engineering register)
-
-Drier than the site, which is why this document reads the way it does. Statements of fact in present
-tense. Decisions explained, not defended. Mostly third-person system-speak.
+The voice never changes; only the length does. Body copy gets whole sentences with room to breathe
+(6 to 14 words each). Buttons and microcopy compress to verb plus outcome: "Read the case study,"
+"Get in touch," never "Submit" or "Learn more." Errors name the problem and the workaround with no
+apology preamble. Status pills are declarative present tense ("Available for work"), never
+aspirational. Internal docs get the same voice at note length: present-tense facts, decisions
+explained, not defended.
 
 ### Word list
 

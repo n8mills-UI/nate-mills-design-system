@@ -1,0 +1,57 @@
+{
+  "name": "@n8mills/design-tokens",
+  "version": "1.0.0",
+  "description": "The design tokens behind natemills.me: W3C DTCG source, generated CSS custom properties, the component layer, and a resolved JS/TS export. Two-tier, OKLCH-authored, WCAG 2.2 AA.",
+  "license": "MIT",
+  "author": "Nate Mills <mail@natemills.me> (https://natemills.me)",
+  "homepage": "https://github.com/n8mills-UI/nate-mills-design-system#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n8mills-UI/nate-mills-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/n8mills-UI/nate-mills-design-system/issues"
+  },
+  "keywords": [
+    "design-tokens",
+    "design-system",
+    "dtcg",
+    "w3c-design-tokens",
+    "css-variables",
+    "custom-properties",
+    "oklch",
+    "style-dictionary",
+    "tokens",
+    "theme"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./tokens.js",
+  "module": "./tokens.js",
+  "types": "./tokens.d.ts",
+  "exports": {
+    ".": {
+      "types": "./tokens.d.ts",
+      "import": "./tokens.js",
+      "default": "./tokens.js"
+    },
+    "./css": "./tokens.css",
+    "./tokens.css": "./tokens.css",
+    "./components.css": "./components.css",
+    "./tokens.json": "./tokens.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "tokens.js",
+    "tokens.d.ts",
+    "tokens.css",
+    "tokens.json",
+    "components.css",
+    "design-system.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,7 +1,8 @@
 <div align="center">
 
-<img src="./assets/header-banner.png" alt="Nate Mills Design System. Authored once as DTCG tokens, generated to CSS, audited to WCAG 2.2 AA." width="860">
+<img src="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/header-banner.png" alt="Nate Mills Design System. Authored once as DTCG tokens, generated to CSS, audited to WCAG 2.2 AA." width="860">
 
+[![npm version](https://img.shields.io/npm/v/@n8mills/design-tokens?style=flat-square&labelColor=1c1c1f&color=d2ff37&logo=npm&logoColor=white)](https://www.npmjs.com/package/@n8mills/design-tokens)
 [![License: MIT](https://img.shields.io/badge/License-MIT-d2ff37?style=flat-square&labelColor=1c1c1f)](./LICENSE)
 [![Design Tokens: DTCG](https://img.shields.io/badge/Design_Tokens-DTCG-d2ff37?style=flat-square&labelColor=1c1c1f)](https://www.designtokens.org/)
 [![WCAG 2.2 AA](https://img.shields.io/badge/WCAG-2.2_AA-d2ff37?style=flat-square&labelColor=1c1c1f)](https://www.w3.org/WAI/WCAG22/quickref/)
@@ -22,10 +23,11 @@ I publish it because the discipline is the point. A design system is easy to cla
 
 ## What's inside
 
-Four files, and the discipline between them. That is the whole system.
+One source, three generated outputs, and the discipline between them. That is the whole system.
 
 - **`tokens.json`** : the single source of truth, in the [W3C Design Tokens Community Group](https://www.designtokens.org/) (DTCG) format. Two tiers: primitives (raw values) and semantics (roles).
-- **`tokens.css`** : the generated CSS custom properties, built from `tokens.json` by [Style Dictionary](https://styledictionary.com). Never hand-edited.
+- **`tokens.css`** : the generated CSS custom properties, built from `tokens.json` by [Style Dictionary](https://styledictionary.com). All three themes (light, dark, high-contrast) included. Never hand-edited.
+- **`tokens.js` / `tokens.d.ts`** : the same tokens as a typed JavaScript object, resolved to literal values for the default theme. For build tools that read tokens in JS, not CSS. Generated, never hand-edited.
 - **`components.css`** : the component layer. Buttons, cards, chips, and the section heading pattern, each reading semantic tokens only.
 - **[`design-system.md`](./design-system.md)** : the full write-up. Philosophy, the token model, the type and spacing scales, accessibility, contribution rules, and the content voice guide.
 
@@ -45,8 +47,8 @@ One way, top to bottom: components read semantics, semantics read primitives, pr
 
 <div align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/bento-foundations-dark.png">
-  <img src="./assets/bento-foundations-lime.png" alt="The design system foundations in one view: the lime and ink colour ramps, the Inter display face, the type ladder, the motion curve, and the 12-step spacing scale" width="860">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/bento-foundations-dark.png">
+  <img src="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/bento-foundations-lime.png" alt="The design system foundations in one view: the lime and ink colour ramps, the Inter display face, the type ladder, the motion curve, and the 12-step spacing scale" width="860">
 </picture>
 </div>
 
@@ -64,6 +66,44 @@ It is wired into the tokens, so you cannot opt out of it by accident:
 There is one honest carveout. The brand lime is a background and accent only. It fails as foreground text on the light surface, roughly 1.06 to 1, so the system refuses to let you use it there and hands you a theme-aware token instead. The full reasoning is in [`design-system.md`](./design-system.md#10-accessibility).
 
 ## Use it
+
+Install from npm:
+
+```bash
+npm install @n8mills/design-tokens
+```
+
+Pull in the CSS custom properties (light, dark, and high-contrast themes all included), through your bundler:
+
+```css
+@import "@n8mills/design-tokens/css";
+@import "@n8mills/design-tokens/components.css"; /* optional component layer */
+
+.cta {
+  background: var(--brand-lime);
+  color: var(--brand-ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+}
+```
+
+Or read the resolved values in JavaScript or TypeScript (the default theme, fully typed):
+
+```js
+import { tokens } from "@n8mills/design-tokens";
+
+tokens["brand-lime"];         // "#d2ff37"
+tokens["color-text-primary"]; // "#0a0a0b"
+tokens["space-5"];            // "24px"
+```
+
+The raw DTCG source ships too, for your own token pipeline:
+
+```js
+import dtcg from "@n8mills/design-tokens/tokens.json" with { type: "json" };
+```
+
+Prefer the source directly? Clone it:
 
 ```bash
 git clone https://github.com/n8mills-UI/nate-mills-design-system.git

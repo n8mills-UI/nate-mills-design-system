@@ -146,7 +146,7 @@ for a fixed-colour surface (`--brand-on-lime` resolves to ink, `--brand-on-ink` 
 **The one rule worth memorising.** The base accent is ink, not colour. Lime is a background and
 accent, never foreground text on a light surface. The contrast math forces it: `#d2ff37` on
 `#f5f5f5` is far below the 4.5 to 1 floor (see the live Under-the-Hood page for current ratio). So the system gives you the right tool instead:
-`--color-brand-emphasis` (theme-aware, resolves to ink on light and lime on dark) for brand-tinted
+`--color-accent-emphasis` (theme-aware, resolves to ink on light and lime on dark) for brand-tinted
 words in running copy, and the "on" tokens for text on fixed lime or ink surfaces. If you reach for
 `color: var(--brand-lime)` outside a known-dark scope, it is almost always the wrong token.
 

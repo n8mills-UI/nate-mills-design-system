@@ -1,6 +1,25 @@
 /* =========================================================================
    portfolio / design tokens (GENERATED from tokens.json via Style Dictionary)
-   Do not hand-edit. Edit tokens.json and rebuild. Two-tier: primitives -> semantics.
+   Do not hand-edit. Edit tokens.json and rebuild.
+
+   Architecture, three tiers:
+     1. Primitives   --neutral-* --green-* (raw ramps, never used in UI)
+     2. Semantics    --color-* --text-* (meaning; theming lives here)
+     3. Components   --btn-* --card-* --chip-* --badge-* (alias semantics only)
+   Brand identity (--brand-*) sits beside the primitives: fixed values (lime,
+   ink, gradient) that never theme-flip.
+
+   Conventions:
+     - Naming order: object-property-variant, general to specific; state
+       suffix last (-hover); rest state implicit (no -default)
+     - One theme-aware interactive role: accent (ink on light, lime on dark).
+       Deliberate exception: --color-border-brand stays fixed brand lime
+     - Foreground term: "text" at the semantic layer, "fg" at the component
+       layer; on-[x] tokens are contrast pairs for content sitting on [x]
+     - Prominence: text uses primary/secondary/tertiary; surfaces and borders
+       use subtle/strong/sunken
+     - Namespaces: ext-brand-* (third-party colours), fx-* (effects),
+       static-* (never themes)
    ========================================================================= */
 
 :root {
@@ -34,12 +53,12 @@
   --brand-lime: var(--green-500);
   --brand-lime-rgb: 210 255 55;
   --brand-lime-dim: var(--green-600);
+  --brand-lime-vivid: #eeff00;
   --brand-ink: var(--neutral-850);
   --brand-ink-rgb: 28 28 31;
   --brand-on-lime: var(--neutral-850);
   --brand-on-ink: var(--green-500);
-  --brand-emphasis-2: #eeff00;
-  --brand-gradient: linear-gradient(135deg, var(--brand-lime) 0%, var(--brand-emphasis-2) 100%);
+  --brand-gradient: linear-gradient(135deg, var(--brand-lime) 0%, var(--brand-lime-vivid) 100%);
   --ext-brand-anthropic-large: #d97757;
   --ext-brand-anthropic-body: #b85033;
   --ext-brand-linkedin: #0a66c2;
@@ -63,11 +82,11 @@
   --color-accent: var(--neutral-850);
   --color-accent-hover: var(--neutral-950);
   --color-accent-subtle: var(--neutral-150);
-  --color-accent-foreground: var(--neutral-0);
+  --color-on-accent: var(--neutral-0);
   --color-focus-ring: var(--neutral-850);
   --color-link: var(--neutral-850);
   --color-link-hover: var(--neutral-950);
-  --color-hero-text-primary: var(--neutral-0);
+  --color-on-ink-emphasis: var(--neutral-0);
   --color-on-ink-primary: rgba(255, 255, 255, 0.88);
   --color-on-ink-secondary: rgba(255, 255, 255, 0.66);
   --color-on-ink-muted: rgba(255, 255, 255, 0.4);
@@ -75,10 +94,10 @@
   --color-neutral-subtle: var(--neutral-50);
   --color-static-white: var(--neutral-0);
   --color-static-white-hover: var(--neutral-200);
-  --color-brand-emphasis: var(--neutral-850);
+  --color-accent-emphasis: var(--neutral-850);
   --color-dot-inactive: var(--neutral-600);
   --color-dot-active: var(--color-accent);
-  --color-text-muted-em: rgb(var(--brand-ink-rgb) / 0.55);
+  --color-text-muted-emphasis: rgb(var(--brand-ink-rgb) / 0.55);
   --color-on-ink-hover: rgba(255, 255, 255, 0.18);
   --color-overlay-soft: rgba(0, 0, 0, 0.35);
   --color-overlay-base: rgba(0, 0, 0, 0.62);
@@ -86,9 +105,9 @@
   --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --font-mono-metric: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --font-serif: "PT Serif", Georgia, serif;
   --font-feature-mono: "zero" 1;
+  --size-2xs: 11px;
   --size-xs: 12px;
   --size-sm: 14px;
   --size-base: 16px;
@@ -96,13 +115,12 @@
   --size-xl: 24px;
   --size-2xl: 32px;
   --size-3xl: 48px;
-  --size-2xs: 11px;
-  --size-meta: 13px;
   --text-h1: clamp(34px, 5.8vw, 72px);
   --text-h2: clamp(22px, 4vw, 32px);
   --text-body: var(--size-base);
   --text-label: var(--size-2xs);
   --text-caption: var(--size-xs);
+  --text-meta: 13px;
   --text-nav: var(--size-2xs);
   --display-hero: clamp(40px, 9vw, 118px);
   --display-section: clamp(28px, 5.8vw, 72px);
@@ -293,7 +311,7 @@
     --green-800: oklch(53.8% 0.134 124.1);
     --green-900: oklch(33.5% 0.082 122.9);
     --green-950: oklch(22.3% 0.054 122.4);
-    --brand-emphasis-2: oklch(95.5% 0.216 114.6);
+    --brand-lime-vivid: oklch(95.5% 0.216 114.6);
   }
 }
 
@@ -310,7 +328,7 @@
   --color-accent: var(--neutral-850);
   --color-accent-hover: var(--neutral-950);
   --color-accent-subtle: var(--neutral-150);
-  --color-accent-foreground: var(--neutral-0);
+  --color-on-accent: var(--neutral-0);
   --color-focus-ring: var(--neutral-850);
   --color-link: var(--neutral-850);
   --color-link-hover: var(--neutral-950);
@@ -337,16 +355,16 @@
   --color-accent: var(--green-500);
   --color-accent-hover: var(--brand-lime-dim);
   --color-accent-subtle: var(--green-950);
-  --color-accent-foreground: var(--neutral-950);
+  --color-on-accent: var(--neutral-950);
   --color-focus-ring: var(--green-500);
   --color-link: var(--green-500);
   --color-link-hover: var(--neutral-0);
-  --color-brand-emphasis: var(--green-500);
+  --color-accent-emphasis: var(--green-500);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-lift: 0 4px 12px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
   --accent-period-shadow: none;
   --accent-dot-shadow: none;
-  --color-text-muted-em: var(--brand-lime);
+  --color-text-muted-emphasis: var(--brand-lime);
   --color-dot-inactive: var(--neutral-500);
   --glass-tint: rgb(var(--brand-ink-rgb) / 0.5);
   --glass-edge-top: rgb(255 255 255 / 0.6);
@@ -373,16 +391,16 @@
     --color-accent: var(--green-500);
     --color-accent-hover: var(--brand-lime-dim);
     --color-accent-subtle: var(--green-950);
-    --color-accent-foreground: var(--neutral-950);
+    --color-on-accent: var(--neutral-950);
     --color-focus-ring: var(--green-500);
     --color-link: var(--green-500);
     --color-link-hover: var(--neutral-0);
-    --color-brand-emphasis: var(--green-500);
+    --color-accent-emphasis: var(--green-500);
     --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-lift: 0 4px 12px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
     --accent-period-shadow: none;
     --accent-dot-shadow: none;
-    --color-text-muted-em: var(--brand-lime);
+    --color-text-muted-emphasis: var(--brand-lime);
     --color-dot-inactive: var(--neutral-500);
     --glass-tint: rgb(var(--brand-ink-rgb) / 0.5);
     --glass-edge-top: rgb(255 255 255 / 0.6);
@@ -430,9 +448,9 @@
     --color-link-hover: var(--neutral-950);
     --color-accent: var(--neutral-950);
     --color-accent-hover: var(--neutral-850);
-    --color-accent-foreground: var(--neutral-0);
+    --color-on-accent: var(--neutral-0);
     --color-accent-subtle: var(--neutral-200);
-    --color-brand-emphasis: var(--neutral-950);
+    --color-accent-emphasis: var(--neutral-950);
   }
   [data-theme="dark"] {
     --color-bg: var(--neutral-950);
@@ -450,9 +468,9 @@
     --color-link-hover: var(--neutral-0);
     --color-accent: var(--green-500);
     --color-accent-hover: var(--brand-lime-dim);
-    --color-accent-foreground: var(--neutral-950);
+    --color-on-accent: var(--neutral-950);
     --color-accent-subtle: var(--green-950);
-    --color-brand-emphasis: var(--neutral-0);
+    --color-accent-emphasis: var(--neutral-0);
   }
 }
 @media (prefers-contrast: more) and (prefers-color-scheme: dark) {
@@ -472,8 +490,8 @@
     --color-link-hover: var(--neutral-0);
     --color-accent: var(--green-500);
     --color-accent-hover: var(--brand-lime-dim);
-    --color-accent-foreground: var(--neutral-950);
+    --color-on-accent: var(--neutral-950);
     --color-accent-subtle: var(--green-950);
-    --color-brand-emphasis: var(--neutral-0);
+    --color-accent-emphasis: var(--neutral-0);
   }
 }

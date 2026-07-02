@@ -164,11 +164,11 @@ The lean semantic scale that new work consumes:
 | Token | Value | Used for |
 |---|---|---|
 | `--text-h1` | `clamp(34px, 5.8vw, 72px)` | Page-level section headings (every section h2). The hero h1 is a documented exception with its own mobile-tuned clamp. |
-| `--text-h2` | `clamp(22px, 4vw, 32px)` | Card titles, ledes, sub-headings inside section bodies. |
-| `--text-body` | `16px` | Paragraphs, lists, default reading text, card body copy. |
-| `--text-label` | `11px` | Uppercase mono labels, eyebrows, stat labels, badges. |
-| `--text-caption` | `12px` | Tiny captions, footnotes, stat descriptions. |
-| `--text-nav` | `11px` | Header menu links; equals --text-label today, kept separate so nav can diverge. |
+| `--text-h2` | `clamp(22px, 4vw, 32px)` | Card titles, intro lines, sub-headings inside section bodies. |
+| `--text-body` | `--size-base` | Paragraphs, lists, default reading text, card body copy. |
+| `--text-label` | `--size-2xs` | Uppercase mono labels, eyebrows, stat labels, badges. |
+| `--text-caption` | `--size-xs` | Tiny captions, footnotes, stat descriptions. |
+| `--text-nav` | `--size-2xs` | Header menu links; equals --text-label today, kept separate so nav can diverge. |
 
 <!-- TOKENS:pub-type-semantic:end -->
 

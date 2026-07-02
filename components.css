@@ -40,22 +40,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
+  gap: var(--btn-gap);
   min-height: var(--touch-target-min);
-  padding: 10px 18px;
-  font-family: var(--font-body);
-  font-size: var(--size-sm);
-  font-weight: var(--weight-semibold);
+  padding: var(--btn-pad-y) var(--btn-pad-x);
+  font-family: var(--btn-font);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
   line-height: 1;
   white-space: nowrap;
-  border-radius: var(--radius-full);
+  border-radius: var(--btn-radius);
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  transition: background var(--duration-fast) var(--ease-default),
-              border-color var(--duration-fast) var(--ease-default),
-              color var(--duration-fast) var(--ease-default),
-              transform var(--duration-fast) var(--ease-default);
+  transition: var(--btn-transition);
 }
 /* M-07: btn focus uses positive 2px offset so the ring sits outside the
    button border instead of inset (was -2px, hard to see on small icon
@@ -63,30 +60,30 @@
    --focus-ring-offset (-2px) stays for the contexts that legitimately
    want an inset ring (carousel slides, gallery thumbs). */
 .btn:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: 2px;
+  outline: 2px solid var(--btn-focus-ring);
+  outline-offset: var(--focus-ring-offset);
 }
 .btn--primary {
-  background: var(--brand-lime);
-  color: var(--brand-ink);
-  border-color: var(--color-border-brand);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border-color: var(--btn-primary-border);
 }
 .btn--primary:hover,
 .btn--primary:focus-visible {
-  background: var(--brand-ink);
-  color: var(--brand-lime);
-  border-color: var(--color-border-brand);
+  background: var(--btn-primary-bg-hover);
+  color: var(--btn-primary-fg-hover);
+  border-color: var(--btn-primary-border);
   transform: translateY(-1px);
 }
 .btn--secondary {
   background: transparent;
-  color: var(--color-text-primary);
-  border-color: var(--color-border-strong);
+  color: var(--btn-secondary-fg);
+  border-color: var(--btn-secondary-border);
 }
 .btn--secondary:hover,
 .btn--secondary:focus-visible {
-  background: var(--color-surface-sunken);
-  border-color: var(--color-text-primary);
+  background: var(--btn-secondary-bg-hover);
+  border-color: var(--btn-secondary-border-hover);
 }
 /* Task #87: .btn--icon border bumped to --color-text-tertiary so it meets
    WCAG 2.2 SC 1.4.11 (3:1 non-text contrast minimum against bg).
@@ -104,36 +101,39 @@
   width: var(--touch-target-min);
   height: var(--touch-target-min);
   padding: 0;
-  border-radius: var(--radius-full);
-  border-color: var(--color-text-tertiary);
+  border-radius: var(--btn-radius);
+  border-color: var(--btn-icon-border);
   background: transparent;
-  color: var(--color-text-secondary);
+  color: var(--btn-icon-fg);
 }
 /* Mobile button rule (design-system.md section 9, Button behaviour).
-   Section-level primary CTAs (footer Get in touch, contact Email me,
-   featured-card Read the case study + View on Figma) expand to full
-   width on mobile for thumb-friendly tap area. Inline buttons (in-flow
-   inside paragraphs) stay auto-width. */
+   Section-level primary CTAs (featured-card Read the case study / View on
+   Figma, the under-the-hood teaser Explore the design system, and the
+   accessibility-card See the full design system) expand to full width on
+   mobile for a thumb-friendly tap area. Inline buttons (in-flow inside
+   paragraphs) stay auto-width. This list is the single registry the mobile
+   full-width gate checks (portfolio/tokens/mobile-consistency-lint.mjs); add
+   a new section CTA here and to that gate's registry together. */
 @media (max-width: 768px) {
   .feat-cta-corner .btn,
-  .contact-cta .btn,
-  .footer-actions .btn {
+  .dsc-cta,
+  .ap2-cta {
     width: 100%;
     justify-content: center;
   }
 }
 .btn--icon:hover,
 .btn--icon:focus-visible {
-  background: var(--brand-lime);
-  color: var(--brand-ink);
-  border-color: var(--color-border-brand);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border-color: var(--btn-primary-border);
 }
 /* Shared icon sizing for Lucide glyphs inside any .btn (arrow, external-link,
    download). Keeps icon-plus-text CTAs consistent without per-CTA overrides. */
 .btn i,
 .btn svg {
-  width: 16px;
-  height: 16px;
+  width: var(--btn-glyph);
+  height: var(--btn-glyph);
   flex-shrink: 0;
 }
 /* Size modifiers. Wire the --btn-* tokens. Base .btn is the 44px default (= md),
@@ -145,9 +145,9 @@
 .btn--md { min-height: var(--btn-md); padding: var(--space-2) var(--space-4); font-size: var(--size-sm); }
 .btn--lg { min-height: var(--btn-lg); padding: var(--space-3) var(--space-5); font-size: var(--size-base); }
 .btn--sm i,
-.btn--sm svg { width: 14px; height: 14px; }
+.btn--sm svg { width: var(--btn-glyph-sm); height: var(--btn-glyph-sm); }
 .btn--lg i,
-.btn--lg svg { width: 18px; height: 18px; }
+.btn--lg svg { width: var(--btn-glyph-lg); height: var(--btn-glyph-lg); }
 /* Icon-only buttons stay 1:1 at every size; the full radius keeps them circular. */
 .btn--icon.btn--sm { width: var(--btn-sm); height: var(--btn-sm); padding: 0; }
 .btn--icon.btn--md { width: var(--btn-md); height: var(--btn-md); padding: 0; }
@@ -179,17 +179,100 @@
    .card--dark          dark-surface variant for dark slabs (ink bg, on-ink text)
    ----------------------------------------------------------------------------- */
 .card {
-  background: var(--color-surface);
-  border: var(--border-hairline);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
-  color: var(--color-text-primary);
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  color: var(--card-fg);
 }
 
 .card--dark {
-  background: var(--brand-ink);
-  color: var(--color-on-ink-primary);
-  border-color: var(--color-on-ink-border);
+  background: var(--card-dark-bg);
+  color: var(--card-dark-fg);
+  border-color: var(--card-dark-border);
+}
+
+/* -----------------------------------------------------------------------------
+   Card variants (W48)
+   ---
+   The frame (surface, border, radius, padding) always renders; variants change
+   only the inset or the inner content. Hover lives ONLY on .card--interactive:
+   static cards keep the resting outline (the card hover taxonomy; guarded by
+   tokens/card-surface-lint.mjs rule 4).
+     .card--compact / --spacious   padding tiers (16 / 32; base is standard 24)
+     .card--interactive            clickable: pair with a real <a>/<button>
+     .card--empty / --error        a centred message, frame still renders
+     .card--loading                a skeleton matching card proportions
+   ----------------------------------------------------------------------------- */
+
+/* A card rendered as a link keeps the card's own foreground (so a theme-pinned
+   card stays readable) and drops the underline. Using `inherit` here let the link
+   pull the page text colour instead, which failed contrast on a light-pinned card
+   in dark mode (.card--interactive title/body, caught by the WCAG gate). */
+a.card { color: var(--card-fg); text-decoration: none; }
+
+/* Padding tiers: the --card-pad-* tokens as a modifier API (base = standard). */
+.card--compact  { padding: var(--card-pad-compact); }
+.card--spacious { padding: var(--card-pad-spacious); }
+
+/* Interactive: the one clickable-card hover, generalised from the role /
+   testimonial hover. Border strengthens; the card lifts 2px on a fine pointer,
+   dropped under reduced motion. */
+.card--interactive {
+  cursor: pointer;
+  transition: border-color var(--duration-base) var(--ease-default),
+              transform var(--duration-base) var(--ease-default);
+}
+.card--interactive:hover,
+.card--interactive:focus-within { border-color: var(--color-border-strong); }
+.card--interactive:focus-visible { outline: var(--border-focus); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .card--interactive:hover,
+  .card--interactive:focus-within { transform: translateY(-2px); }
+}
+
+/* Content states. Empty and error centre a message so the card is never a blank
+   box; loading shows a skeleton sized to the card. */
+.card--empty,
+.card--error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 132px;
+  text-align: center;
+}
+.card--empty i[data-lucide],
+.card--error i[data-lucide] { width: 24px; height: 24px; color: var(--color-text-tertiary); }
+.card-state-msg  { margin: 0; font-size: var(--size-sm); color: var(--color-text-secondary); }
+.card-state-hint { margin: 0; font-size: var(--text-caption); color: var(--color-text-tertiary); line-height: var(--line-body); }
+
+/* Loading skeleton: a media block plus title and body lines on the sunken
+   surface. The shimmer sweep auto-disables under reduced motion, leaving static
+   blocks that still read as loading. */
+.card--loading { display: flex; flex-direction: column; gap: var(--space-3); }
+.card-skel {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius-sm);
+}
+.card-skel--media { height: 92px; }
+.card-skel--title { height: 18px; width: 55%; }
+.card-skel--line  { height: 12px; }
+.card-skel--line.is-short { width: 78%; }
+.card-skel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgb(var(--brand-ink-rgb) / 0.06), transparent);
+  animation: card-skel-sweep 1.4s var(--ease-default) infinite;
+}
+@keyframes card-skel-sweep { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .card-skel::after { display: none; }
 }
 
 
@@ -203,26 +286,26 @@
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: 4px 10px;
-  font-family: var(--font-mono);
+  gap: var(--chip-gap);
+  padding: var(--chip-pad-y) var(--chip-pad-x);
+  font-family: var(--chip-font);
   font-feature-settings: var(--font-feature-mono);
-  font-size: var(--text-label);
-  line-height: 1.4;
-  font-weight: var(--weight-medium);
-  color: var(--color-text-primary);
-  background: var(--color-surface-sunken);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
+  font-size: var(--chip-font-size);
+  line-height: var(--chip-line);
+  font-weight: var(--chip-font-weight);
+  color: var(--chip-fg);
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  border-radius: var(--chip-radius);
 }
 .chip i[data-lucide],
 .chip svg[data-lucide],
 .chip svg.lucide {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
+  width: var(--chip-icon-size);
+  height: var(--chip-icon-size);
+  flex: 0 0 var(--chip-icon-size);
   display: block;
-  color: var(--color-text-primary);
+  color: var(--chip-fg);
   stroke-width: 2;
 }
 /* Sandbox cherry-pick: normalizer wrapper for chips that need a raster or
@@ -230,9 +313,9 @@
    it with `<span class="chip-icon"><img|svg ...></span>` so brand marks
    render at the same 14x14 footprint as Lucide icons. */
 .chip .chip-icon {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
+  width: var(--chip-icon-size);
+  height: var(--chip-icon-size);
+  flex: 0 0 var(--chip-icon-size);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -240,17 +323,61 @@
 }
 .chip .chip-icon > img,
 .chip .chip-icon > svg {
-  width: 14px;
-  height: 14px;
+  width: var(--chip-icon-size);
+  height: var(--chip-icon-size);
   display: block;
   object-fit: contain;
 }
 .chip:hover {
-  border-color: var(--color-border-strong);
+  border-color: var(--chip-border-hover);
 }
 .chip:active {
-  border-color: var(--color-border-strong);
-  background: var(--color-surface-sunken);
+  border-color: var(--chip-border-hover);
+  background: var(--chip-bg);
+}
+
+/* -----------------------------------------------------------------------------
+   Badge — a read-only status or count pill. Not interactive (no hover/focus).
+   ---
+   A badge reports a STATUS (In progress, Live at scale, In production) or a count;
+   a chip carries a LABEL. Quiet hairline outline, secondary mono text, sentence
+   case. An optional brand-lime status dot via .badge__dot, or a leading Lucide
+   icon. Consumed by the skills discipline statuses. (The hero "Available for work"
+   is a one-off, not a badge: it has no outline, just text and a pulsing dot.)
+     .badge            hairline ring, quiet secondary text, mono, sentence case
+     .badge__dot       leading brand-lime status dot
+   ----------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--badge-gap);
+  padding: var(--badge-pad-y) var(--badge-pad-x);
+  font-family: var(--badge-font);
+  font-feature-settings: var(--font-feature-mono);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
+  color: var(--badge-fg);
+  background: transparent;
+  border: 1px solid var(--badge-border);
+  border-radius: var(--badge-radius);
+  white-space: nowrap;
+}
+.badge i[data-lucide],
+.badge svg[data-lucide],
+.badge svg.lucide {
+  width: var(--badge-icon-size);
+  height: var(--badge-icon-size);
+  flex: 0 0 var(--badge-icon-size);
+  display: block;
+  color: var(--badge-fg);
+  stroke-width: 2;
+}
+.badge__dot {
+  width: var(--badge-dot-size);
+  height: var(--badge-dot-size);
+  flex: 0 0 var(--badge-dot-size);
+  border-radius: var(--radius-full);
+  background: var(--badge-dot);
 }
 
 
@@ -304,8 +431,8 @@
   margin: 0 0 var(--space-2);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  line-height: 1.4;
+  gap: var(--space-2);
+  line-height: var(--chip-line);
 }
 .section-label::before {
   content: '';
@@ -315,7 +442,7 @@
      ~1.4:1 on light surfaces, an invisible dash. Always-dark slabs keep
      explicit lime via the .section-dark override in sections.css. */
   background: var(--color-accent);
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   flex: 0 0 12px;
 }
 .section-label--no-bar::before { display: none; }
@@ -330,8 +457,8 @@
   font-family: var(--font-display);
   font-weight: var(--weight-extrabold);
   font-size: var(--text-h1);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
+  line-height: var(--line-display);
+  letter-spacing: var(--display-tight);
   margin: 0 0 var(--space-3);
   text-wrap: balance;
   max-width: 22ch;
@@ -521,13 +648,10 @@
   height: 9px;
   border-radius: var(--radius-full);
   background: var(--color-dot-inactive);
-  /* Active dot grows into a pill. Clean ease-out (no springy overshoot)
-     and a near-instant colour switch (0.1s) so the dot reads inactive or
-     accent, never a muddy in-between. The earlier springy overshoot + 0.25s
-     colour cross-fade was what smeared and went olive under fast jumps. Width
-     is a layout property, but the hero dvh-to-svh fix removed the
-     per-scroll-frame reflow that made animating it expensive. */
-  transition: width 0.28s cubic-bezier(0.22, 0.61, 0.36, 1), background 0.1s linear;
+  /* Active dot snaps to a pill (no width animation): the mid-grow frames read as a
+     half-formed / split pill on mobile when the active state moves mid-swipe. Colour
+     still cross-fades fast (0.1s) so the dot reads inactive or accent, never muddy. */
+  transition: background 0.1s linear;
 }
 .ds-dots button.is-active::before {
   width: 26px;
@@ -536,8 +660,8 @@
 .ds-dots button:focus-visible {
   /* Theme-aware ring (audit AX-06): the old hardcoded lime was 1.06:1 on the
      light page. Always-dark bands re-scope --color-focus-ring to lime. */
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: 2px;
+  outline: var(--border-focus);
+  outline-offset: var(--focus-ring-offset);
   border-radius: var(--radius-full);
 }
 @media (max-width: 768px) {
@@ -546,6 +670,122 @@
 @media (prefers-reduced-motion: reduce) {
   .ds-carousel { scroll-behavior: auto; }
   .ds-dots button::before { transition: none; }
+}
+
+/* ============================================================
+   Carousel nav (.ds-carousel-nav)
+   One shared desktop/tablet control for the Featured projects and
+   Testimonials carousels: a thin progress rail (position), a mono
+   "N / total" counter, and bare Lucide chevrons that flank the
+   counter. Replaces the old split arrows-left / dots-right bars.
+   The generic mobile .ds-dots component (disciplines, certifications,
+   compact testimonials) is separate and unchanged. Colours follow the
+   page theme via --color-dot-active (ink on light, lime on dark); the
+   always-dark testimonials band re-maps the tokens locally (sections.css),
+   the same way its dots already do. Rail + counter are decorative and
+   aria-hidden; position is announced via the carousels' live region.
+   ============================================================ */
+.ds-carousel-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  /* The track is a SUBTLE groove (a light line), not an inactive-dot grey:
+     a dot grey is dark enough to blur into the ink fill. The fill is the
+     accent. Both are re-mappable per band (see the testimonials override in
+     sections.css). */
+  --cn-rail-track: var(--color-border);
+  --cn-rail-fill: var(--color-dot-active);
+}
+.ds-carousel-nav__rail {
+  position: relative;
+  width: 96px;
+  height: 3px;
+  flex: 0 0 auto;
+  background: var(--cn-rail-track);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.ds-carousel-nav__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: var(--cn-rail-fill);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-base) var(--ease-default);
+}
+.ds-carousel-nav__pager {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+/* Bare chevron: visually small, no circle or border. A >=44px (WCAG 2.5.5
+   AAA) invisible tap area is centred on the glyph via ::before, so the arrow
+   stays an easy target without adding visible chrome. */
+.ds-carousel-nav__arrow {
+  position: relative;
+  width: var(--btn-glyph-lg);
+  height: var(--btn-glyph-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: color var(--duration-fast) var(--ease-default);
+}
+.ds-carousel-nav__arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
+  transform: translate(-50%, -50%);
+}
+.ds-carousel-nav__arrow:hover { color: var(--color-text-primary); }
+.ds-carousel-nav__arrow:focus-visible {
+  outline: var(--border-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+/* Boundary state: carousels that do not loop (Featured, mobile swipe) disable
+   the arrow at each end. Dimmed + non-interactive; disabled controls are exempt
+   from WCAG 1.4.3 contrast, so the low opacity is fine. */
+.ds-carousel-nav__arrow:disabled { opacity: 0.3; cursor: default; }
+.ds-carousel-nav__arrow i,
+.ds-carousel-nav__arrow svg {
+  width: var(--btn-glyph-lg);
+  height: var(--btn-glyph-lg);
+}
+.ds-carousel-nav__count {
+  font-family: var(--font-mono);
+  font-size: var(--size-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ds-carousel-nav__count b {
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-carousel-nav__fill { transition: none; }
+}
+/* Full-width variant for the mobile swipe carousels (disciplines, certifications,
+   compact testimonials), built by the ds-carousel init in index.html: the rail
+   stretches to fill the row, the counter + chevrons sit at the end, and the whole
+   nav is hidden on desktop where those carousels are an inert grid (the swipe
+   track only exists at <=768px). Replaces the old .ds-dots row for one nav pattern
+   site-wide. */
+.ds-carousel-nav--full { display: none; width: 100%; margin-top: var(--space-4); }
+.ds-carousel-nav--full .ds-carousel-nav__rail { flex: 1; width: auto; }
+@media (max-width: 768px) {
+  .ds-carousel-nav--full { display: flex; }
 }
 
 /* =========================================================================

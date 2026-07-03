@@ -30,6 +30,7 @@ One source, three generated outputs, and the discipline between them. That is th
 - **`tokens.js` / `tokens.d.ts`** : the same tokens as a typed JavaScript object, resolved to literal values for the default theme. For build tools that read tokens in JS, not CSS. Generated, never hand-edited.
 - **`components.css`** : the component layer. Buttons, cards, chips, and the section heading pattern, each reading semantic tokens only.
 - **[`design-system.md`](./design-system.md)** : the full write-up. Philosophy, the token model, the type and spacing scales, accessibility, contribution rules, and the content voice guide.
+- **[`DESIGN.md`](./DESIGN.md)** : the portable brand contract. One self-contained file that hands an AI coding agent (or a contractor) everything it needs to build on-brand without the repo: resolved colour, type, spacing and radius values in the frontmatter, a component recipe map, and the do's and don'ts. The value blocks are generated from `tokens.json` and drift-gated, so they never fall out of sync with the system.
 
 Prefer the guided tour to the raw source? The [live view](https://nate-mills-portfolio.netlify.app/#uth-colour) walks every section with the real values resolved.
 

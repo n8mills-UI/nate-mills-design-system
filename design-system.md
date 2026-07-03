@@ -230,7 +230,7 @@ Never use raw px for spacing in a component. The whole point is one place to edi
 | Token | Value | Description |
 |---|---|---|
 | `--border-hairline` | `1px solid var(--color-border)` | Default 1px hairline border; reads --color-border so it follows the theme. The standard card edge and divider. |
-| `--border-strong` | `1px solid var(--color-border-strong)` | Heavier 1px border; reads --color-border-strong. For edges that need to read past a hairline, such as secondary-button outlines. |
+| `--border-strong` | `1px solid var(--color-border-strong)` | Heavier 1px border; reads --color-border-strong. For edges that need to read past a hairline, such as interactive-card hover outlines. (Button borders moved to the btn.* component tokens in Task 87.) |
 | `--border-focus` | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
 | `--focus-ring-offset` | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
 

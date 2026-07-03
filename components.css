@@ -31,8 +31,12 @@
                        keeps 10px/18px, so the class is not a strict no-op (DC-03)
      .btn--lg   52px   hero CTAs, primary conversion (WCAG 2.5.5 AAA)
    States: hover lifts via translateY(-1px) on primary, lime tint on
-   icon; :disabled dims and blocks the pointer; prefers-reduced-motion collapses
-   the transform.
+   icon; :active is the touch-visible press (background step, no transform,
+   hover-independent); :disabled dims and blocks the pointer;
+   prefers-reduced-motion collapses the transform. Hover fills are gated
+   behind (hover: hover) because Chromium sticks :hover after a tap;
+   :focus-visible keeps ungated duplicates so keyboard styling never
+   changes.
    ----------------------------------------------------------------------------- */
 .btn {
   appearance: none;
@@ -54,11 +58,12 @@
   text-decoration: none;
   transition: var(--btn-transition);
 }
-/* M-07: btn focus uses positive 2px offset so the ring sits outside the
-   button border instead of inset (was -2px, hard to see on small icon
-   buttons and clipped behind taller adjacent content). The shared token
-   --focus-ring-offset (-2px) stays for the contexts that legitimately
-   want an inset ring (carousel slides, gallery thumbs). */
+/* M-07: btn focus uses a positive 2px offset (--focus-ring-offset, +2px) so
+   the ring sits OUTSIDE the button border instead of inset (an inset ring was
+   hard to see on small icon buttons and clipped behind taller adjacent
+   content). Contexts that legitimately want an INSET ring (carousel tabs,
+   gallery thumbs, ap2-flink) set a literal outline-offset: -2px, not this
+   token. */
 .btn:focus-visible {
   outline: 2px solid var(--btn-focus-ring);
   outline-offset: var(--focus-ring-offset);
@@ -68,21 +73,54 @@
   color: var(--btn-primary-fg);
   border-color: var(--btn-primary-border);
 }
-.btn--primary:hover,
+/* Hover gated to hover-capable pointers: on touch, a tap applies and
+   STICKS :hover (Chromium), freezing the ink fill on and swallowing the
+   press cue below. The :focus-visible duplicate stays ungated so
+   keyboard users keep the exact same styling (Tesla review Group 4). */
+@media (hover: hover) {
+  .btn--primary:hover {
+    background: var(--btn-primary-bg-hover);
+    color: var(--btn-primary-fg-hover);
+    border-color: var(--btn-primary-border);
+    transform: translateY(-1px);
+  }
+}
 .btn--primary:focus-visible {
   background: var(--btn-primary-bg-hover);
   color: var(--btn-primary-fg-hover);
   border-color: var(--btn-primary-border);
   transform: translateY(-1px);
 }
+/* Touch-visible press: distinct from BOTH the lime rest and the ink
+   hover. Background step only, transform none: primary CTAs sit inside
+   the Featured scroll-snap track, where a swipe-start brushes :active
+   and a transform would flash mid-swipe. Declared after hover/focus so
+   it wins while they apply. */
+.btn--primary:active {
+  background: var(--brand-lime-dim);
+  color: var(--brand-ink);
+  border-color: var(--btn-primary-border);
+  transform: none;
+}
 .btn--secondary {
   background: transparent;
   color: var(--btn-secondary-fg);
   border-color: var(--btn-secondary-border);
 }
-.btn--secondary:hover,
+@media (hover: hover) {
+  .btn--secondary:hover {
+    background: var(--btn-secondary-bg-hover);
+    border-color: var(--btn-secondary-border-hover);
+  }
+}
 .btn--secondary:focus-visible {
   background: var(--btn-secondary-bg-hover);
+  border-color: var(--btn-secondary-border-hover);
+}
+/* Press: one visible background step past the sunken hover (the press
+   grammar the old mobile-nav link used). */
+.btn--secondary:active {
+  background: var(--color-border);
   border-color: var(--btn-secondary-border-hover);
 }
 /* Task #87: .btn--icon border bumped to --color-text-tertiary so it meets
@@ -122,9 +160,23 @@
     justify-content: center;
   }
 }
-.btn--icon:hover,
+@media (hover: hover) {
+  .btn--icon:hover {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-fg);
+    border-color: var(--btn-primary-border);
+  }
+}
 .btn--icon:focus-visible {
   background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border-color: var(--btn-primary-border);
+}
+/* Press: lime-dim step so the tap reads even where the lime hover fill
+   never fires (touch). Scoped colour: the dark-header override in
+   sections.css carries the matching :active companion. */
+.btn--icon:active {
+  background: var(--brand-lime-dim);
   color: var(--btn-primary-fg);
   border-color: var(--btn-primary-border);
 }
@@ -226,6 +278,13 @@ a.card { color: var(--card-fg); text-decoration: none; }
 .card--interactive:hover,
 .card--interactive:focus-within { border-color: var(--color-border-strong); }
 .card--interactive:focus-visible { outline: var(--border-focus); outline-offset: 3px; }
+/* Touch-visible press: background step, no transform (cards can sit in
+   scroll-snap tracks where a swipe-start brushes :active). The hover
+   above is border-only (no fill flip), so it stays ungated. */
+.card--interactive:active {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-sunken);
+}
 @media (hover: hover) and (pointer: fine) {
   .card--interactive:hover,
   .card--interactive:focus-within { transform: translateY(-2px); }
@@ -331,10 +390,9 @@ a.card { color: var(--card-fg); text-decoration: none; }
 .chip:hover {
   border-color: var(--chip-border-hover);
 }
-.chip:active {
-  border-color: var(--chip-border-hover);
-  background: var(--chip-bg);
-}
+/* (No .chip:active: every chip in the site is a non-interactive <span>
+   label; the old :active here was a visual no-op that read as a press
+   precedent. Removed in the Tesla-review pressed-state pass.) */
 
 /* -----------------------------------------------------------------------------
    Badge — a read-only status or count pill. Not interactive (no hover/focus).
@@ -695,6 +753,9 @@ a.card { color: var(--card-fg); text-decoration: none; }
      sections.css). */
   --cn-rail-track: var(--color-border);
   --cn-rail-fill: var(--color-dot-active);
+  /* Press circle behind the chevron glyph; re-mapped per band like the
+     rail vars (testimonials + UTH stages in sections.css). */
+  --cn-arrow-press: var(--color-surface-sunken);
 }
 .ds-carousel-nav__rail {
   position: relative;
@@ -751,6 +812,13 @@ a.card { color: var(--card-fg); text-decoration: none; }
 .ds-carousel-nav__arrow:focus-visible {
   outline: var(--border-focus);
   outline-offset: var(--focus-ring-offset);
+}
+/* Touch-visible press: filled circle + full-strength glyph. Background
+   only, no transform: the arrows flank live scroll-snap tracks (Tesla
+   review Group 4). */
+.ds-carousel-nav__arrow:active:not(:disabled) {
+  background: var(--cn-arrow-press);
+  color: var(--color-text-primary);
 }
 /* Boundary state: carousels that do not loop (Featured, mobile swipe) disable
    the arrow at each end. Dimmed + non-interactive; disabled controls are exempt
@@ -836,4 +904,32 @@ a.card { color: var(--card-fg); text-decoration: none; }
 .glb-thumb:focus-visible,
 .full-track .f-card:focus-visible {
   outline-offset: -2px;
+}
+
+/* ============================================================
+   Fractional-DPR outline crispness (Tesla review Group 2, 2026-07-02).
+   On screens whose devicePixelRatio is fractional (Windows laptops at
+   125%/150% scaling report 1.25/1.5; the Tesla Model Y L 16in screen
+   measures 1.333 in-car), a 1px border maps onto one-and-a-fraction
+   physical pixels and anti-aliases into an uneven, fractured line.
+   A whole 2px keeps control outlines crisp in that window; true 1x
+   and integer 2x (Retina) screens are excluded and keep the 1px look.
+   Deliberate trade-offs:
+   - Desktop browser zoom (roughly 110-175% on a 1x screen) also lands
+     in the window, so outlines thicken while zoomed. Accepted.
+   - Controls only: cards and dividers stay 1px (the --border-hairline
+     composite is NOT touched; it has ~44 consumers).
+   - Bumping the BASE .btn is deliberate: border-box keeps geometry
+     stable, the primary's lime-on-lime border stays invisible, and
+     side-by-side primary + secondary CTAs keep identical text metrics.
+   - Any later `border:` SHORTHAND on these controls silently resets
+     the width inside this window; override with border-color /
+     border-style instead.
+   min/max-resolution dppx form (not range syntax) for Safari reach. */
+@media (min-resolution: 1.1dppx) and (max-resolution: 1.9dppx) {
+  .btn,
+  .chip,
+  .badge {
+    border-width: 2px;
+  }
 }

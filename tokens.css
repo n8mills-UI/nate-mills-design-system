@@ -225,11 +225,13 @@
   --duration-fast: 150ms;
   --duration-base: 220ms;
   --duration-slow: 400ms;
+  --duration-expressive: 1300ms;
   --duration-counter: 1400ms;
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-entrance: cubic-bezier(0, 0, 0.2, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
   --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-linear: cubic-bezier(0, 0, 1, 1);
   --motion-reveal-rise: 64px;
   --motion-reveal-shift: 48px;
   --motion-reveal-scale: 0.9;
@@ -418,6 +420,7 @@
     --duration-fast: 1ms;
     --duration-base: 1ms;
     --duration-slow: 1ms;
+    --duration-expressive: 1ms;
     --duration-counter: 1ms;
   }
   *,

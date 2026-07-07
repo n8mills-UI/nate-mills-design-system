@@ -709,7 +709,7 @@ a.card { color: var(--card-fg); text-decoration: none; }
   /* Active dot snaps to a pill (no width animation): the mid-grow frames read as a
      half-formed / split pill on mobile when the active state moves mid-swipe. Colour
      still cross-fades fast (0.1s) so the dot reads inactive or accent, never muddy. */
-  transition: background 0.1s linear;
+  transition: background 0.1s var(--ease-linear);
 }
 .ds-dots button.is-active::before {
   width: 26px;

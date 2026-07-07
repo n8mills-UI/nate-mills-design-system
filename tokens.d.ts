@@ -206,11 +206,13 @@ export interface DesignTokens {
   "duration-fast": string;
   "duration-base": string;
   "duration-slow": string;
+  "duration-expressive": string;
   "duration-counter": string;
   "ease-default": string;
   "ease-entrance": string;
   "ease-exit": string;
   "ease-emphasized": string;
+  "ease-linear": string;
   "motion-reveal-rise": string;
   "motion-reveal-shift": string;
   "motion-reveal-scale": string;

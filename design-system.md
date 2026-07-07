@@ -256,12 +256,19 @@ dark mode, where lime already reads cleanly.
 ## 7. Motion
 
 ```
---duration-fast  150ms   (hover, focus)
---duration-base  220ms   (reveal, swap)
---duration-slow  400ms   (context shift)
+--duration-fast        150ms    (hover, focus)
+--duration-base        220ms    (reveal, swap)
+--duration-slow        400ms    (context shift)
+--duration-expressive  1300ms   (one cinematic hero entrance)
 
---ease-default   cubic-bezier(0.4, 0, 0.2, 1)
+--ease-default      cubic-bezier(0.4, 0, 0.2, 1)    (workhorse)
+--ease-entrance     cubic-bezier(0, 0, 0.2, 1)      (decelerate, entering)
+--ease-exit         cubic-bezier(0.4, 0, 1, 1)      (accelerate, exiting)
+--ease-emphasized   cubic-bezier(0.16, 1, 0.3, 1)   (expressive settle)
+--ease-linear       cubic-bezier(0, 0, 1, 1)        (loops, tickers)
 ```
+
+A lean ladder: three general-purpose steps plus one `expressive` tier for a single large hero moment, and role-named easings.
 
 Every animation respects `prefers-reduced-motion`. A single override at the bottom of `tokens.css`
 collapses every duration to 1 ms and disables transforms, so honouring the preference is automatic,

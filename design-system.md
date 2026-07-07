@@ -255,18 +255,28 @@ dark mode, where lime already reads cleanly.
 
 ## 7. Motion
 
-```
---duration-fast        150ms    (hover, focus)
---duration-base        220ms    (reveal, swap)
---duration-slow        400ms    (context shift)
---duration-expressive  1300ms   (one cinematic hero entrance)
+<!-- TOKENS:pub-motion:start -->
 
---ease-default      cubic-bezier(0.4, 0, 0.2, 1)    (workhorse)
---ease-entrance     cubic-bezier(0, 0, 0.2, 1)      (decelerate, entering)
---ease-exit         cubic-bezier(0.4, 0, 1, 1)      (accelerate, exiting)
---ease-emphasized   cubic-bezier(0.16, 1, 0.3, 1)   (expressive settle)
---ease-linear       cubic-bezier(0, 0, 1, 1)        (loops, tickers)
-```
+**Durations**
+
+| Token | Value | Used for |
+|---|---|---|
+| `--duration-fast` | `150ms` | Hover, focus, and micro state feedback. |
+| `--duration-base` | `220ms` | Reveal, modal, and swap transitions. |
+| `--duration-slow` | `400ms` | Context shift and slide transitions. |
+| `--duration-expressive` | `1300ms` | Expressive tier: the slow, cinematic duration for a single large hero moment (the two-phone Spline scene scales in over this). Deliberately longer than the general-purpose slow tier and reserved for one large-surface entrance, never UI feedback. Collapsed to 1ms under reduced motion by the block in tokens/build.mjs. |
+
+**Easings**
+
+| Token | Value | Used for |
+|---|---|---|
+| `--ease-default` | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--ease-entrance` | `cubic-bezier(0, 0, 0.2, 1)` | Decelerate, for elements entering the screen. |
+| `--ease-exit` | `cubic-bezier(0.4, 0, 1, 1)` | Accelerate, for elements leaving the screen. |
+| `--ease-emphasized` | `cubic-bezier(0.16, 1, 0.3, 1)` | Pronounced ease-out for overlay and menu entrance motion (items rising into view). A stronger, slower-settling decelerate than --ease-entrance. |
+| `--ease-linear` | `cubic-bezier(0, 0, 1, 1)` | Constant rate, no acceleration. For continuous loop motion: the hero ticker, both marquees, the glass column scroll, and the loading-icon cycles. Authored as a cubic-bezier twin of the linear keyword so it lives in the ease group with its siblings. |
+
+<!-- TOKENS:pub-motion:end -->
 
 A lean ladder: three general-purpose steps plus one `expressive` tier for a single large hero moment, and role-named easings.
 

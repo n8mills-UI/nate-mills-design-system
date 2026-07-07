@@ -91,7 +91,7 @@
   --color-on-ink-secondary: rgba(255, 255, 255, 0.66);
   --color-on-ink-muted: rgba(255, 255, 255, 0.4);
   --color-on-ink-border: rgba(255, 255, 255, 0.08);
-  --color-neutral-subtle: var(--neutral-50);
+  --color-on-ink-subtle: var(--neutral-50);
   --color-static-white: var(--neutral-0);
   --color-static-white-hover: var(--neutral-200);
   --color-accent-emphasis: var(--neutral-850);
@@ -226,7 +226,6 @@
   --duration-base: 220ms;
   --duration-slow: 400ms;
   --duration-expressive: 1300ms;
-  --duration-counter: 1400ms;
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-entrance: cubic-bezier(0, 0, 0.2, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
@@ -421,7 +420,6 @@
     --duration-base: 1ms;
     --duration-slow: 1ms;
     --duration-expressive: 1ms;
-    --duration-counter: 1ms;
   }
   *,
   *::before,

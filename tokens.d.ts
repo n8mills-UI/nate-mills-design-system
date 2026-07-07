@@ -72,7 +72,7 @@ export interface DesignTokens {
   "color-on-ink-secondary": string;
   "color-on-ink-muted": string;
   "color-on-ink-border": string;
-  "color-neutral-subtle": string;
+  "color-on-ink-subtle": string;
   "color-static-white": string;
   "color-static-white-hover": string;
   "color-accent-emphasis": string;
@@ -207,7 +207,6 @@ export interface DesignTokens {
   "duration-base": string;
   "duration-slow": string;
   "duration-expressive": string;
-  "duration-counter": string;
   "ease-default": string;
   "ease-entrance": string;
   "ease-exit": string;

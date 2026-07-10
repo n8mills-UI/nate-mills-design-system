@@ -508,6 +508,14 @@ a.card { color: var(--card-fg); text-decoration: none; }
   display: flex;
   justify-content: center;
 }
+/* Variant: icon-led eyebrow (audit M-23, 2026-07-10). The decorative glyph is
+   sized to the label. Used by the accessibility proof card and the
+   design-system teaser, which previously each minted their own eyebrow class
+   (.ap2-eyebrow / .dsc-eyebrow) and had already drifted from the canon. */
+.section-label--icon i,
+.section-label--icon svg { width: 14px; height: 14px; flex: none; }
+/* Variant: accent-emphasis colour for eyebrows sitting on marquee cards. */
+.section-label--accent { color: var(--color-accent-emphasis); }
 
 /* Task #43: halve heading-to-body gap globally. Was var(--space-5) = 24px,
    now var(--space-3) = 12px. Tighter rhythm across every section. */
@@ -532,9 +540,9 @@ a.card { color: var(--card-fg); text-decoration: none; }
   color: var(--brand-lime);
   text-shadow: var(--accent-period-shadow);
 }
-/* Legacy inline <span class="dot"> kept styled in case any heading still
-   carries one; new headings use ::after above and omit the span. */
-.section-title .dot { color: var(--brand-lime); text-shadow: var(--accent-period-shadow); }
+/* (The legacy span.dot heading rule was deleted 2026-07-10, audit M-25: the
+   last two heading spans are gone; every heading period is the ::after above.
+   The hero ticker's separator dots are a different pattern in sections.css.) */
 
 /* Task #43: tighten subtitle-to-content gap from var(--space-7) = 48px down
    to var(--space-5) = 24px. Less wasted whitespace below every section's

@@ -193,9 +193,9 @@ A doubling rhythm from 4 to 256 px, with two medium-tight additions for breaks t
 |---|---|---|
 | `--space-1` | `4px` | Hairline gap. Icon-to-label, tight inline spacing. |
 | `--space-2` | `8px` | Tight gap. Chip padding, small stacks. |
-| `--space-3` | `12px` | Medium-tight break (added between 2 and 4). Heading-to-body, compact rows. |
+| `--space-3` | `12px` | Medium-tight break. Heading-to-body, compact rows. |
 | `--space-4` | `16px` | Base unit. Default gap between related elements; the compact card-padding tier (--card-pad-compact). |
-| `--space-5` | `24px` | Medium break (added between 4 and 6). Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
+| `--space-5` | `24px` | Medium break. Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
 | `--space-6` | `32px` | Large gap. Between subsections and card to card; the spacious card-padding tier (--card-pad-spacious). |
 | `--space-7` | `48px` | Block spacing between stacked content blocks. |
 | `--space-8` | `64px` | Major block separation and section inner padding. |

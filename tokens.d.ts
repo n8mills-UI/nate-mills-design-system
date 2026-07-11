@@ -138,6 +138,7 @@ export interface DesignTokens {
   "btn-secondary-border-hover": string;
   "btn-icon-border": string;
   "btn-icon-fg": string;
+  "header-control": string;
   "card-radius": string;
   "card-padding": string;
   "card-border": string;

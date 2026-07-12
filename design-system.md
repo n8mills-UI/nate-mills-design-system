@@ -243,7 +243,7 @@ Never use raw px for spacing in a component. The whole point is one place to edi
 | `--shadow-lift` | `0 4px 12px rgb(var(--brand-ink-rgb) / 0.06), 0 2px 4px rgb(var(--brand-ink-rgb) / 0.04)` | Stronger elevation for overlays and float-on-scroll chrome only, not resting cards. |
 | `--shadow-modal` | `0 24px 64px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.18)` | Modal and lightbox elevation. The deepest shadow, for surfaces floating above a scrim. |
 | `--accent-period-shadow` | `0 1px 2px rgba(0,0,0,0.42), 0 0 0 1px rgba(0,0,0,0.18)` | Depth under the lime period in section titles. Keeps the lime dot legible on light surfaces; resolves to none in dark, where lime already reads. |
-| `--accent-dot-shadow` | `0 1px 3px rgba(0,0,0,0.24)` | Depth under the active carousel pagination dot. Keeps the lime dot legible on light surfaces; resolves to none in dark. |
+| `--accent-dot-shadow` | `0 1px 3px rgba(0,0,0,0.24)` | Reserved depth for a lime indicator dot on light surfaces; no live consumer today; resolves to none in dark. |
 
 <!-- TOKENS:pub-radii-borders-shadows:end -->
 

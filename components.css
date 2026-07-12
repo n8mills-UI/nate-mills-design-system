@@ -682,60 +682,11 @@ a.card { color: var(--card-fg); text-decoration: none; }
   }
 }
 
-/* Pagination dots, built by the init. The dot styling is unconditional so the
-   under-the-hood showcase renders the real component at any width; live
-   carousel dot rows stay mobile-only via the display gate below (AR-01). */
-.ds-dots {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  flex-wrap: nowrap;
-  margin-top: var(--space-4);
-}
-/* WCAG 2.2 SC 2.5.8 Target Size: the visible dot stays 9px, but the button
-   itself is a 24x24 transparent hit area that centres the visual dot drawn
-   via ::before. Meets the 24px minimum without enlarging the dot visually. */
-.ds-dots button {
-  width: var(--touch-target-dot, 24px);
-  height: var(--touch-target-dot, 24px);
-  padding: 0;
-  border: 0;
-  background: transparent;
-  flex: none;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  -webkit-tap-highlight-color: transparent;
-}
-.ds-dots button::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-radius: var(--radius-full);
-  background: var(--color-dot-inactive);
-  /* Active dot snaps to a pill (no width animation): the mid-grow frames read as a
-     half-formed / split pill on mobile when the active state moves mid-swipe. Colour
-     still cross-fades fast (0.1s) so the dot reads inactive or accent, never muddy. */
-  transition: background 0.1s var(--ease-linear);
-}
-.ds-dots button.is-active::before {
-  width: 26px;
-  background: var(--color-dot-active);
-}
-.ds-dots button:focus-visible {
-  /* Theme-aware ring (audit AX-06): the old hardcoded lime was 1.06:1 on the
-     light page. Always-dark bands re-scope --color-focus-ring to lime. */
-  outline: var(--border-focus);
-  outline-offset: var(--focus-ring-offset);
-  border-radius: var(--radius-full);
-}
-@media (max-width: 768px) {
-  .ds-dots { display: flex; }
-}
+/* The .ds-dots pagination component was deleted 2026-07-12 (deep-audit M-08):
+   zero consumers since the unified .ds-carousel-nav shipped; the class names
+   are tombstoned in tokens/css-liveness-lint.mjs. */
 @media (prefers-reduced-motion: reduce) {
   .ds-carousel { scroll-behavior: auto; }
-  .ds-dots button::before { transition: none; }
 }
 
 /* ============================================================
@@ -864,47 +815,9 @@ a.card { color: var(--card-fg); text-decoration: none; }
   .ds-carousel-nav--full { display: flex; }
 }
 
-/* =========================================================================
-   Relocated from tokens.css (2026-06-02): these are COMPONENTS, not tokens.
-   tokens.css is now generated from tokens.json, so component rules live here.
-   ========================================================================= */
-.placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-3);
-  min-height: 200px;
-  padding: var(--space-6);
-  background: var(--color-surface);
-  border: 2px dashed var(--color-border);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-tertiary);
-  text-align: center;
-  font-family: var(--font-body);
-  font-size: var(--size-sm);
-}
-.placeholder i[data-lucide],
-.placeholder svg {
-  width: 48px;
-  height: 48px;
-  color: var(--color-text-tertiary);
-  opacity: 0.5;
-}
-.placeholder-label {
-  font-weight: var(--weight-medium);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-}
-.placeholder-hint {
-  font-size: var(--text-caption);
-  color: var(--color-text-tertiary);
-  opacity: 0.7;
-  max-width: 280px;
-  line-height: var(--line-body);
-}
-.placeholder--gallery { min-height: 320px; }
+/* The .placeholder component family was deleted 2026-07-12 (deep-audit n-29):
+   zero consumers, never documented; the four class names are tombstoned in
+   tokens/css-liveness-lint.mjs. */
 
 /* Audit M-49: contexts that need an INSET focus ring because their parent
    uses overflow:hidden. Negative offset keeps the 2px halo painted INSIDE

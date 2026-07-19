@@ -367,6 +367,18 @@ a.card { color: var(--card-fg); text-decoration: none; }
   color: var(--chip-fg);
   stroke-width: 2;
 }
+/* Outline variant (2026-07-19): the fill drops out for quieter contexts,
+   the treatment the portfolio's featured-project cards wear. Same anatomy
+   and tokens as the base chip; only the surface and ink change. */
+.chip--outline {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+.chip--outline i[data-lucide],
+.chip--outline svg[data-lucide],
+.chip--outline svg.lucide {
+  color: inherit;
+}
 /* Sandbox cherry-pick: normalizer wrapper for chips that need a raster or
    SVG-image icon instead of a Lucide stroke icon (e.g. brand logos). Pair
    it with `<span class="chip-icon"><img|svg ...></span>` so brand marks

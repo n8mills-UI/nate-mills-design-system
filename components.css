@@ -207,15 +207,34 @@
 
 /* Disabled. A real resting state (previously unstyled): dimmed, no pointer, no
    hover lift. Disabled controls are exempt from WCAG 1.4.3 contrast, so the
-   dimmed glyph is acceptable. Covers <button disabled> and the .is-disabled
-   hook for elements (links) that cannot carry the native attribute. */
+   dimmed glyph is acceptable. Covers <button disabled> and the .is-disabled /
+   [aria-disabled="true"] hook for elements (links) that cannot carry the
+   native attribute. CSS cannot DISABLE a link: pointer-events blocks the mouse
+   only, so an <a href> stays in the tab order and Enter still navigates
+   (SC 2.1.1, SC 4.1.2). The link case therefore has a MARKUP contract:
+     <a class="btn is-disabled" role="link" aria-disabled="true">label</a>
+   No href, so Enter has nothing to activate; role="link" because an href-less
+   <a> has no implicit role; aria-disabled="true" so assistive tech announces
+   the state. The attribute selector below styles identically to the class, so
+   the ARIA state and the styling cannot drift apart. */
 .btn:disabled,
 .btn[disabled],
-.btn.is-disabled {
+.btn.is-disabled,
+.btn[aria-disabled="true"] {
   opacity: 0.45;
   cursor: not-allowed;
   pointer-events: none;
   transform: none;
+}
+/* Link-case extra cue (SC 1.4.1): dimming alone is a single-channel signal, and
+   the not-allowed cursor never renders on this rule anyway (pointer-events:
+   none makes the element non-hit-testable, so the surface underneath supplies
+   the cursor). The strike-through carries the disabled state visually and
+   survives greyscale and forced-colors. :not(:disabled) keeps the native
+   button-board specimen (a real <button disabled>) on its unchanged look. */
+.btn.is-disabled:not(:disabled),
+.btn[aria-disabled="true"]:not(:disabled) {
+  text-decoration: line-through;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn { transition: none; }

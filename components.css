@@ -563,11 +563,12 @@ a.card { color: var(--card-fg); text-decoration: none; }
   font-style: normal;
 }
 /* Brand period accent. Rendered as generated content (not a DOM node) so it
-   is correctly treated as decoration: visible on screen, but invisible to the
-   accessibility tree and to scanners (which otherwise mis-flag a lime period
-   as low-contrast "text"). WCAG-clean across axe, Pa11y, IBM and WAVE. */
+   is treated as decoration on screen. Generated content IS exposed to the
+   accessibility tree by default (measured in Chromium: the bare "." was
+   appended to every .section-title accessible name), so the / "" alternative
+   text below explicitly empties it for assistive tech. */
 .section-title::after {
-  content: ".";
+  content: "." / "";
   color: var(--brand-lime);
   text-shadow: var(--accent-period-shadow);
 }

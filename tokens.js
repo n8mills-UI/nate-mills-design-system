@@ -39,7 +39,7 @@ export const tokens = {
   "brand-ink-rgb": "28 28 31",
   "brand-on-lime": "#1c1c1f",
   "brand-on-ink": "#d2ff37",
-  "brand-gradient": "linear-gradient(135deg, #d2ff37 0%, #eeff00 100%)",
+  "brand-gradient": "linear-gradient(135deg in oklab, #d2ff37 0%, #eeff00 100%)",
   "ext-brand-anthropic-large": "#d97757",
   "ext-brand-anthropic-body": "#b85033",
   "ext-brand-linkedin": "#0a66c2",

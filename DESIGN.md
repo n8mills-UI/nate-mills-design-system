@@ -17,53 +17,53 @@ description: >
 colors:
   # DESIGN:colors:start
   # Brand identity (fixed, never theme-flips)
-  brand-lime: "#d2ff37"                                                # --brand-lime
-  brand-lime-dim: "#b8e030"                                            # --brand-lime-dim
-  brand-lime-vivid: "#eeff00"                                          # --brand-lime-vivid
-  brand-ink: "#1c1c1f"                                                 # --brand-ink
-  brand-gradient: "linear-gradient(135deg, #d2ff37 0%, #eeff00 100%)"  # --brand-gradient
+  brand-lime: "#d2ff37"                                                         # --brand-lime
+  brand-lime-dim: "#b8e030"                                                     # --brand-lime-dim
+  brand-lime-vivid: "#eeff00"                                                   # --brand-lime-vivid
+  brand-ink: "#1c1c1f"                                                          # --brand-ink
+  brand-gradient: "linear-gradient(135deg in oklab, #d2ff37 0%, #eeff00 100%)"  # --brand-gradient
 
   # Light theme semantics (the default page)
-  bg: "#f5f5f5"                                                        # --color-bg
-  surface: "#ffffff"                                                   # --color-surface
-  surface-sunken: "#ececec"                                            # --color-surface-sunken
-  surface-inverse: "#0a0a0b"                                           # --color-surface-inverse (always-dark, both themes)
-  text-primary: "#0a0a0b"                                              # --color-text-primary
-  text-secondary: "#3f3f46"                                            # --color-text-secondary
-  text-tertiary: "#67676f"                                             # --color-text-tertiary
-  border: "#e4e4e7"                                                    # --color-border
-  border-strong: "#d4d4d8"                                             # --color-border-strong
-  border-brand: "#d2ff37"                                              # --color-border-brand (lime, fixed both themes)
-  accent: "#1c1c1f"                                                    # --color-accent (theme-aware: ink light, lime dark)
-  accent-hover: "#0a0a0b"                                              # --color-accent-hover
-  on-accent: "#ffffff"                                                 # --color-on-accent
-  focus-ring: "#1c1c1f"                                                # --color-focus-ring (theme-aware)
-  link: "#1c1c1f"                                                      # --color-link (theme-aware)
-  link-hover: "#0a0a0b"                                                # --color-link-hover
+  bg: "#f5f5f5"                                                                 # --color-bg
+  surface: "#ffffff"                                                            # --color-surface
+  surface-sunken: "#ececec"                                                     # --color-surface-sunken
+  surface-inverse: "#0a0a0b"                                                    # --color-surface-inverse (always-dark, both themes)
+  text-primary: "#0a0a0b"                                                       # --color-text-primary
+  text-secondary: "#3f3f46"                                                     # --color-text-secondary
+  text-tertiary: "#67676f"                                                      # --color-text-tertiary
+  border: "#e4e4e7"                                                             # --color-border
+  border-strong: "#d4d4d8"                                                      # --color-border-strong
+  border-brand: "#d2ff37"                                                       # --color-border-brand (lime, fixed both themes)
+  accent: "#1c1c1f"                                                             # --color-accent (theme-aware: ink light, lime dark)
+  accent-hover: "#0a0a0b"                                                       # --color-accent-hover
+  on-accent: "#ffffff"                                                          # --color-on-accent
+  focus-ring: "#1c1c1f"                                                         # --color-focus-ring (theme-aware)
+  link: "#1c1c1f"                                                               # --color-link (theme-aware)
+  link-hover: "#0a0a0b"                                                         # --color-link-hover
 
   # Text on always-dark slabs (theme-invariant)
-  on-ink-primary: "rgba(255, 255, 255, 0.88)"                          # --color-on-ink-primary
-  on-ink-secondary: "rgba(255, 255, 255, 0.66)"                        # --color-on-ink-secondary
-  on-ink-muted: "rgba(255, 255, 255, 0.4)"                             # --color-on-ink-muted
-  on-ink-border: "rgba(255, 255, 255, 0.08)"                           # --color-on-ink-border
+  on-ink-primary: "rgba(255, 255, 255, 0.88)"                                   # --color-on-ink-primary
+  on-ink-secondary: "rgba(255, 255, 255, 0.66)"                                 # --color-on-ink-secondary
+  on-ink-muted: "rgba(255, 255, 255, 0.4)"                                      # --color-on-ink-muted
+  on-ink-border: "rgba(255, 255, 255, 0.08)"                                    # --color-on-ink-border
 
   # Dark theme semantics (data-theme="dark" or OS dark)
-  dark-bg: "#0a0a0b"                                                   # --darkTheme-color-bg
-  dark-surface: "#1c1c1f"                                              # --darkTheme-color-surface
-  dark-surface-sunken: "#141416"                                       # --darkTheme-color-surface-sunken
-  dark-text-primary: "#f4f4f5"                                         # --darkTheme-color-text-primary
-  dark-text-secondary: "#a1a1aa"                                       # --darkTheme-color-text-secondary
-  dark-text-tertiary: "#909096"                                        # --darkTheme-color-text-tertiary
-  dark-border: "#27272a"                                               # --darkTheme-color-border
-  dark-accent: "#d2ff37"                                               # --darkTheme-color-accent (brand lime, deliberate)
-  dark-accent-hover: "#b8e030"                                         # --darkTheme-color-accent-hover
-  dark-focus-ring: "#d2ff37"                                           # --darkTheme-color-focus-ring
-  dark-link: "#d2ff37"                                                 # --darkTheme-color-link
+  dark-bg: "#0a0a0b"                                                            # --darkTheme-color-bg
+  dark-surface: "#1c1c1f"                                                       # --darkTheme-color-surface
+  dark-surface-sunken: "#141416"                                                # --darkTheme-color-surface-sunken
+  dark-text-primary: "#f4f4f5"                                                  # --darkTheme-color-text-primary
+  dark-text-secondary: "#a1a1aa"                                                # --darkTheme-color-text-secondary
+  dark-text-tertiary: "#909096"                                                 # --darkTheme-color-text-tertiary
+  dark-border: "#27272a"                                                        # --darkTheme-color-border
+  dark-accent: "#d2ff37"                                                        # --darkTheme-color-accent (brand lime, deliberate)
+  dark-accent-hover: "#b8e030"                                                  # --darkTheme-color-accent-hover
+  dark-focus-ring: "#d2ff37"                                                    # --darkTheme-color-focus-ring
+  dark-link: "#d2ff37"                                                          # --darkTheme-color-link
 
   # Scrims
-  overlay-soft: "rgba(0, 0, 0, 0.35)"                                  # --color-overlay-soft
-  overlay-base: "rgba(0, 0, 0, 0.62)"                                  # --color-overlay-base
-  overlay-strong: "rgba(0, 0, 0, 0.88)"                                # --color-overlay-strong
+  overlay-soft: "rgba(0, 0, 0, 0.35)"                                           # --color-overlay-soft
+  overlay-base: "rgba(0, 0, 0, 0.62)"                                           # --color-overlay-base
+  overlay-strong: "rgba(0, 0, 0, 0.88)"                                         # --color-overlay-strong
   # DESIGN:colors:end
 
 typography:

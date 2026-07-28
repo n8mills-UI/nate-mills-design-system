@@ -527,9 +527,10 @@ a.card { color: var(--card-fg); text-decoration: none; }
   content: '';
   width: 12px;
   height: 2px;
-  /* W39: theme-aware accent (ink in light, lime in dark). Raw lime was
-     ~1.4:1 on light surfaces, an invisible dash. Always-dark slabs keep
-     explicit lime via the .section-dark override in sections.css. */
+  /* W39: theme-aware accent (ink in light, lime in dark). Raw lime is
+     1.06:1 on light surfaces (computed 2026-06-10), an invisible dash.
+     Always-dark slabs keep explicit lime via the .section-dark override
+     in sections.css. */
   background: var(--color-accent);
   border-radius: var(--radius-sm);
   flex: 0 0 12px;

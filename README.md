@@ -8,7 +8,7 @@
 [![WCAG 2.2 AA](https://img.shields.io/badge/WCAG-2.2_AA-d2ff37?style=flat-square&labelColor=1c1c1f)](https://www.w3.org/WAI/WCAG22/quickref/)
 [![Built with Style Dictionary](https://img.shields.io/badge/Built_with-Style_Dictionary-1c1c1f?style=flat-square)](https://styledictionary.com)
 
-[![Design system, live](https://img.shields.io/badge/Design_system-Live-d2ff37?style=flat-square&labelColor=1c1c1f)](https://nate-mills-portfolio.netlify.app/#uth-colour)
+[![Design system, live](https://img.shields.io/badge/Design_system-Live-d2ff37?style=flat-square&labelColor=1c1c1f)](https://natemills.me/#uth-colour)
 [![Live site](https://img.shields.io/badge/Live-natemills.me-1c1c1f?style=flat-square)](https://natemills.me)
 [![Case study](https://img.shields.io/badge/Case_study-Bupa-1c1c1f?style=flat-square)](https://bupa.natemills.me)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-millsdesign-0a66c2?style=flat-square&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2EyLjA2MiAyLjA2MiAwIDAxLTIuMDYzLTIuMDY1IDIuMDY0IDIuMDY0IDAgMTEyLjA2MyAyLjA2NXptMS43ODIgMTMuMDE5SDMuNTU1VjloMy41NjR2MTEuNDUyek0yMi4yMjUgMEgxLjc3MUMuNzkyIDAgMCAuNzc0IDAgMS43Mjl2MjAuNTQyQzAgMjMuMjI3Ljc5MiAyNCAxLjc3MSAyNGgyMC40NTFDMjMuMiAyNCAyNCAyMy4yMjcgMjQgMjIuMjcxVjEuNzI5QzI0IC43NzQgMjMuMiAwIDIyLjIyNSAweiIvPjwvc3ZnPg==&logoColor=white)](https://www.linkedin.com/in/millsdesign)
@@ -19,7 +19,7 @@ This is the real design system behind my portfolio, opened up so you can see how
 
 I publish it because the discipline is the point. A design system is easy to claim and hard to govern. This repo is the audit trail for the claims: the token source, the generated CSS, the component layer, and the written rules that keep them honest.
 
-> **See it live.** The [under-the-hood design system](https://nate-mills-portfolio.netlify.app/#uth-colour) resolves every token in real time, in light and dark, section by section. This repo is the source it runs on.
+> **See it live.** The [under-the-hood design system](https://natemills.me/#uth-colour) resolves every token in real time, in light and dark, section by section. This repo is the source it runs on.
 
 ## What's inside
 
@@ -32,7 +32,7 @@ One source, three generated outputs, and the discipline between them. That is th
 - **[`design-system.md`](./design-system.md)** : the full write-up. Philosophy, the token model, the type and spacing scales, accessibility, contribution rules, and the content voice guide.
 - **[`DESIGN.md`](./DESIGN.md)** : the portable brand contract. One self-contained file that hands an AI coding agent (or a contractor) everything it needs to build on-brand without the repo: resolved colour, type, spacing and radius values in the frontmatter, a component recipe map, and the do's and don'ts. The value blocks are generated from `tokens.json` and drift-gated, so they never fall out of sync with the system.
 
-Prefer the guided tour to the raw source? The [live view](https://nate-mills-portfolio.netlify.app/#uth-colour) walks every section with the real values resolved.
+Prefer the guided tour to the raw source? The [live view](https://natemills.me/#uth-colour) walks every section with the real values resolved.
 
 ## The model in one breath
 
@@ -61,7 +61,7 @@ It is wired into the tokens, so you cannot opt out of it by accident:
 
 - Every text token is contrast-checked for WCAG 2.2 AA: a blocking CI lint over the token source in both themes, plus live ratio computation on the Under-the-Hood page.
 - Focus rings are never removed without a replacement.
-- Touch targets clear 44 by 44 px.
+- Default control height is 44 by 44 px. Two documented dense sizes sit below it on purpose, a 32px small button and a 24px dot; both clear the WCAG 2.5.8 AA 24px floor and carry a larger pointer target than their painted box.
 - Every animation is gated behind `prefers-reduced-motion`, collapsed in one place, not per component.
 
 There is one honest carveout. The brand lime is a background and accent only. It fails as foreground text on the light surface, roughly 1.06 to 1, so the system refuses to let you use it there and hands you a theme-aware token instead. The full reasoning is in [`design-system.md`](./design-system.md#10-accessibility).

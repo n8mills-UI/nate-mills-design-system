@@ -418,8 +418,9 @@ When building a new page or prototype with this system:
 ## Known gaps
 
 - This contract carries resolved values for portability; the source of truth authors every colour in
-  OKLCH as well, used automatically where the browser supports it. The values here are exact
-  round-trips of those OKLCH colours.
+  OKLCH as well, and the values here are exact round-trips of those OKLCH colours. The shipped CSS
+  emits the sRGB hex only, deliberately: the round-trip is exact, so emitting OKLCH changed no pixel,
+  and it made computed colours unreadable to sRGB-only accessibility scanners.
 - The system has no semantic status colours (success/warning/danger); a portfolio has no such UI. If a
   consumer needs them, add at the token layer first, then route a semantic.
 - Fonts are Inter, JetBrains Mono, and PT Serif. Open-source substitutes if unavailable: Inter is

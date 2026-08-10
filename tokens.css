@@ -153,8 +153,6 @@
   --btn-primary-fg-hover: var(--brand-lime);
   --btn-secondary-fg: var(--color-text-primary);
   --btn-secondary-border: var(--color-text-tertiary);
-  --btn-secondary-bg-hover: var(--color-surface-sunken);
-  --btn-secondary-border-hover: var(--color-text-primary);
   --btn-icon-border: var(--color-text-tertiary);
   --btn-icon-fg: var(--color-text-secondary);
   --header-control: 36px;

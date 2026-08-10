@@ -134,8 +134,6 @@ export const tokens = {
   "btn-primary-fg-hover": "#d2ff37",
   "btn-secondary-fg": "#0a0a0b",
   "btn-secondary-border": "#67676f",
-  "btn-secondary-bg-hover": "#ececec",
-  "btn-secondary-border-hover": "#0a0a0b",
   "btn-icon-border": "#67676f",
   "btn-icon-fg": "#3f3f46",
   "header-control": "36px",

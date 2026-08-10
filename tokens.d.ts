@@ -134,8 +134,6 @@ export interface DesignTokens {
   "btn-primary-fg-hover": string;
   "btn-secondary-fg": string;
   "btn-secondary-border": string;
-  "btn-secondary-bg-hover": string;
-  "btn-secondary-border-hover": string;
   "btn-icon-border": string;
   "btn-icon-fg": string;
   "header-control": string;

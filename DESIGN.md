@@ -345,6 +345,12 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
 - **Footer** is a fixed lime slab with ink text, lime in both themes.
 - **Links** are underlined, `{colors.link}` (ink on light, lime on dark). External links open a new
   tab, set `rel`, and carry a trailing up-right arrow glyph plus a screen-reader cue.
+- **Standing call-to-action links** use a real 1.5px `border-bottom` in `{colors.borderBrand}` rather
+  than `text-decoration`, so the rule can be coloured and animated independently of the text. Exactly
+  ONE of the two underline mechanisms is ever active on a given link: a border and a text-decoration
+  underline together render as a visible double line. A component that draws its own border must also
+  cancel `text-decoration` in its `:hover` and `:focus-visible`, not only at rest, or the global link
+  hover puts the second line back.
 
 ## Layout principles
 

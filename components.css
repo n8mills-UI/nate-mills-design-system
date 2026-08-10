@@ -637,6 +637,98 @@ a.card { color: var(--card-fg); text-decoration: none; }
 
 
 /* -----------------------------------------------------------------------------
+   LinkUnderline
+   ---
+   The standing text link whose underline is a real border rather than
+   text-decoration: semibold label, lime rule beneath, optional arrow that
+   travels on hover and on keyboard focus. Consolidated 2026-08-10 from three
+   hand-authored copies that had drifted to two widths and two hover
+   behaviours ([id="insights"] .faq-cta a, [id="recent-work"] .hc-cta, and the
+   shared cert-credential-link / faq-see-also rule).
+
+   Deliberately tag agnostic. It lands on <a>, on <button> (three certification
+   links are real buttons that open a modal), and on a non-focusable <span>
+   inside a card link, where the CARD owns the hover and this element never
+   fires its own.
+
+   TWO declarations here are load-bearing and must not be tidied away:
+
+   1. `position: relative` in the base. The shared 44px hit-area ::after over
+      in sections.css positions against it, and used to inherit it from the
+      section rules this component replaced.
+
+   2. `text-decoration: none` inside the :hover/:focus-visible companion. The
+      global `a:hover, a:focus-visible` rule in sections.css sets
+      text-decoration: underline at (0,1,1), which BEATS a bare .link-underline
+      at (0,1,0). Without a (0,2,0) companion every link here would render its
+      border AND a text underline the moment you hover or Tab to it: the same
+      doubled-line defect this component exists to end, relocated into the
+      hover state. Compare the doubled FAQ hairline noted above; this file has
+      met this bug class before.
+
+   Do NOT give this component an ::after. SUP-121 records that a second
+   ::after merged in the cascade with the shared hit-area ::after and rendered
+   two icons per link. Use ::before if generated content is ever needed.
+
+   Font size is deliberately NOT set here: the prose consumer sits at body size
+   mid-sentence while the others sit at --text-meta. Size stays with context.
+   ----------------------------------------------------------------------------- */
+.link-underline {
+  position: relative;
+  border: none;
+  border-bottom: 1.5px solid var(--color-border-brand);
+  border-radius: 0;
+  padding-bottom: 1px;
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-text-primary);
+  background: none;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* Icon variant: label plus trailing arrow. Held off the base so the prose
+   consumer stays a plain inline box and its baseline, and the full stop after
+   it, do not shift mid-sentence. */
+.link-underline--icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.link-underline--icon .icon-size-xs {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+.link-underline--icon:hover .icon-size-xs,
+.link-underline--icon:focus-visible .icon-size-xs {
+  transform: translate(3px, -3px);
+}
+
+/* Prose variant: the single instance living mid-sentence inside a <p>, with no
+   arrow. Its underline is the ONLY hover signal it has, so it keeps the
+   ink-on-light / white-on-dark border flip instead of the accent hover. In
+   dark, --color-accent resolves to the same lime as --color-border-brand, so
+   the accent hover would leave this link's rule visually unchanged and the
+   hover would read as dead. Every other consumer has a travelling arrow as a
+   second signal, so accent is enough for them. */
+.link-underline--prose:hover,
+.link-underline--prose:focus-visible {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
+
+
+/* -----------------------------------------------------------------------------
    Visually hidden (utility, not a component but used everywhere)
    ----------------------------------------------------------------------------- */
 .sr-only:not(:focus):not(:active) {

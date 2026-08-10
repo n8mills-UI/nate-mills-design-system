@@ -110,7 +110,7 @@ Prefer the source directly? Clone it:
 git clone https://github.com/n8mills-UI/nate-mills-design-system.git
 ```
 
-Read [`design-system.md`](./design-system.md) for the why. Read `tokens.json` and `components.css` for the how. Fork it for another brand by changing `--green-500` and watching every consumer follow. That is the system working as designed.
+Read [`design-system.md`](./design-system.md) for the why. Read `tokens.json` and `components.css` for the how. Fork it for another brand by changing `--lime-500` and watching every consumer follow. That is the system working as designed.
 
 ## License
 

@@ -3,7 +3,7 @@
    Do not hand-edit. Edit tokens.json and rebuild.
 
    Architecture, three tiers:
-     1. Primitives   --neutral-* --green-* (raw ramps, never used in UI)
+     1. Primitives   --neutral-* --lime-* (raw ramps, never used in UI)
      2. Semantics    --color-* --text-* (meaning; theming lives here)
      3. Components   --btn-* --card-* --chip-* --badge-* (alias semantics only)
    Brand identity (--brand-*) sits beside the primitives: fixed values (lime,
@@ -38,26 +38,26 @@
   --neutral-850: #1c1c1f;
   --neutral-900: #141416;
   --neutral-950: #0a0a0b;
-  --green-50: #faffeb;
-  --green-100: #f5ffd6;
-  --green-200: #ecffad;
-  --green-300: #e2ff85;
-  --green-400: #daff61;
-  --green-500: #d2ff37;
-  --green-550: #c0fa00;
-  --green-600: #b8e030;
-  --green-700: #8db800;
-  --green-800: #5e7a00;
-  --green-900: #2f3d00;
-  --green-950: #171f00;
-  --brand-lime: var(--green-500);
+  --lime-50: #faffeb;
+  --lime-100: #f5ffd6;
+  --lime-200: #ecffad;
+  --lime-300: #e2ff85;
+  --lime-400: #daff61;
+  --lime-500: #d2ff37;
+  --lime-550: #c0fa00;
+  --lime-600: #b8e030;
+  --lime-700: #8db800;
+  --lime-800: #5e7a00;
+  --lime-900: #2f3d00;
+  --lime-950: #171f00;
+  --brand-lime: var(--lime-500);
   --brand-lime-rgb: 210 255 55;
-  --brand-lime-dim: var(--green-600);
+  --brand-lime-dim: var(--lime-600);
   --brand-lime-vivid: #eeff00;
   --brand-ink: var(--neutral-850);
   --brand-ink-rgb: 28 28 31;
   --brand-on-lime: var(--neutral-850);
-  --brand-on-ink: var(--green-500);
+  --brand-on-ink: var(--lime-500);
   --brand-gradient: linear-gradient(135deg in oklab, var(--brand-lime) 0%, var(--brand-lime-vivid) 100%);
   --ext-brand-anthropic-large: #d97757;
   --ext-brand-anthropic-body: #b85033;
@@ -319,14 +319,14 @@
   --color-border: var(--neutral-800);
   --color-border-strong: var(--neutral-700);
   --color-border-hover: var(--brand-lime);
-  --color-accent: var(--green-500);
+  --color-accent: var(--lime-500);
   --color-accent-hover: var(--brand-lime-dim);
-  --color-accent-subtle: var(--green-950);
+  --color-accent-subtle: var(--lime-950);
   --color-on-accent: var(--neutral-950);
-  --color-focus-ring: var(--green-500);
-  --color-link: var(--green-500);
+  --color-focus-ring: var(--lime-500);
+  --color-link: var(--lime-500);
   --color-link-hover: var(--neutral-0);
-  --color-accent-emphasis: var(--green-500);
+  --color-accent-emphasis: var(--lime-500);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-lift: 0 4px 12px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
   --accent-period-shadow: none;
@@ -355,14 +355,14 @@
     --color-border: var(--neutral-800);
     --color-border-strong: var(--neutral-700);
     --color-border-hover: var(--brand-lime);
-    --color-accent: var(--green-500);
+    --color-accent: var(--lime-500);
     --color-accent-hover: var(--brand-lime-dim);
-    --color-accent-subtle: var(--green-950);
+    --color-accent-subtle: var(--lime-950);
     --color-on-accent: var(--neutral-950);
-    --color-focus-ring: var(--green-500);
-    --color-link: var(--green-500);
+    --color-focus-ring: var(--lime-500);
+    --color-link: var(--lime-500);
     --color-link-hover: var(--neutral-0);
-    --color-accent-emphasis: var(--green-500);
+    --color-accent-emphasis: var(--lime-500);
     --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-lift: 0 4px 12px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4);
     --accent-period-shadow: none;
@@ -428,15 +428,15 @@
     --color-text-tertiary: var(--neutral-150);
     --color-border: var(--neutral-0);
     --color-border-strong: var(--neutral-0);
-    --color-border-hover: var(--green-500);
-    --color-border-brand: var(--green-500);
-    --color-focus-ring: var(--green-500);
-    --color-link: var(--green-500);
+    --color-border-hover: var(--lime-500);
+    --color-border-brand: var(--lime-500);
+    --color-focus-ring: var(--lime-500);
+    --color-link: var(--lime-500);
     --color-link-hover: var(--neutral-0);
-    --color-accent: var(--green-500);
+    --color-accent: var(--lime-500);
     --color-accent-hover: var(--brand-lime-dim);
     --color-on-accent: var(--neutral-950);
-    --color-accent-subtle: var(--green-950);
+    --color-accent-subtle: var(--lime-950);
     --color-accent-emphasis: var(--neutral-0);
   }
 }
@@ -450,15 +450,15 @@
     --color-text-tertiary: var(--neutral-150);
     --color-border: var(--neutral-0);
     --color-border-strong: var(--neutral-0);
-    --color-border-hover: var(--green-500);
-    --color-border-brand: var(--green-500);
-    --color-focus-ring: var(--green-500);
-    --color-link: var(--green-500);
+    --color-border-hover: var(--lime-500);
+    --color-border-brand: var(--lime-500);
+    --color-focus-ring: var(--lime-500);
+    --color-link: var(--lime-500);
     --color-link-hover: var(--neutral-0);
-    --color-accent: var(--green-500);
+    --color-accent: var(--lime-500);
     --color-accent-hover: var(--brand-lime-dim);
     --color-on-accent: var(--neutral-950);
-    --color-accent-subtle: var(--green-950);
+    --color-accent-subtle: var(--lime-950);
     --color-accent-emphasis: var(--neutral-0);
   }
 }

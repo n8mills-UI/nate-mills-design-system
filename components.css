@@ -3,7 +3,7 @@
    ---------------------------------------------------------------------------
    The component layer of the three-tier token system. Reads SEMANTIC tokens
    from tokens.css (--color-*, --brand-*, --font-*, --space-*, --radius-*,
-   --duration-*) and never raw primitives (--neutral-*, --green-*).
+   --duration-*) and never raw primitives (--neutral-*, --lime-*).
 
    Every component below has:
      - A base class with semantic naming.

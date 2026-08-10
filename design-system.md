@@ -101,7 +101,7 @@ rendered design actually lands on but that do not fall on a clean grid.
 | `--neutral-850` | `#1c1c1f` | Brand ink, accent (light), subtle surface (dark) |
 | `--neutral-950` | `#0a0a0b` | Page background (dark), primary text (light) |
 
-**Green (lime).** The only colour primitive the brand needs. `--green-500 #d2ff37` is the brand
+**Lime.** The only colour primitive the brand needs. `--lime-500 #d2ff37` is the brand
 lime; the rest are derived for hover and dim states.
 
 **Authored in OKLCH, emitted as sRGB.** The colour primitives are written in OKLCH, the perceptual
@@ -138,12 +138,12 @@ _Nine tokens shown here. The full set of surface, text, border, and accent token
 | `--color-text-secondary` | `--neutral-700` | `--neutral-500` |
 | `--color-border` | `--neutral-300` | `--neutral-800` |
 | `--color-border-brand` | `--brand-lime` | same |
-| `--color-accent` | `--neutral-850` | `--green-500` |
-| `--color-focus-ring` | `--neutral-850` | `--green-500` |
+| `--color-accent` | `--neutral-850` | `--lime-500` |
+| `--color-focus-ring` | `--neutral-850` | `--lime-500` |
 
 <!-- TOKENS:pub-semantics:end -->
 
-**Brand identity aliases** sit alongside the role tokens: `--brand-lime` (`var(--green-500)`),
+**Brand identity aliases** sit alongside the role tokens: `--brand-lime` (`var(--lime-500)`),
 `--brand-ink` (`var(--neutral-850)`), and the paired "on" tokens that name the correct text colour
 for a fixed-colour surface (`--brand-on-lime` resolves to ink, `--brand-on-ink` resolves to lime).
 
@@ -389,7 +389,7 @@ mirror existed early on; it was removed when the tokens moved to the generated e
 ## 12. Contribution rules
 
 1. Never write raw hex outside `tokens.css`. Define a primitive or use a semantic.
-2. Brand tokens are aliases, not duplicates: `--brand-lime: var(--green-500)`, not the hex.
+2. Brand tokens are aliases, not duplicates: `--brand-lime: var(--lime-500)`, not the hex.
 3. Components read semantics only, never a raw primitive.
 4. Test in light and dark. Every semantic has both.
 5. WCAG 2.2 AA for every text colour, against every surface it could land on.
@@ -410,7 +410,7 @@ mirror existed early on; it was removed when the tokens moved to the generated e
 - Not theme-able beyond light and dark. The Bupa case study scopes blue back inside its own section;
   that is the only third theme, and it is section-scoped, never global.
 
-Fork it for another brand by changing `--green-500` and watching every consumer follow. That is the
+Fork it for another brand by changing `--lime-500` and watching every consumer follow. That is the
 system working as designed.
 
 ---

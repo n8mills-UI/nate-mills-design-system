@@ -508,6 +508,15 @@ a.card { color: var(--card-fg); text-decoration: none; }
    stray placeholder h2 appears in the source.)
    Light and dark surfaces share the same scale and weight; only colours
    flip via .section-dark on the parent or the element itself.
+
+   The eyebrow is TEXT ONLY: no leading accent bar and no section number.
+   Both were removed 2026-08-10. The bar was a 12x2px ::before that resolved
+   to ink in light and lime in dark; the number was a JS-injected span. The
+   numbers counted section-labels in document order, which did not match the
+   hand-typed menu numbering (the same section read 03 in its eyebrow and 02
+   in the menu), so they contradicted the navigation they appeared to index.
+   With the bar gone the .section-label--no-bar variant went with it. The
+   flex row stays: the --icon variant still needs the gap.
    ----------------------------------------------------------------------------- */
 .section-label {
   font-family: var(--font-mono);
@@ -523,22 +532,22 @@ a.card { color: var(--card-fg); text-decoration: none; }
   gap: var(--space-2);
   line-height: var(--chip-line);
 }
-.section-label::before {
-  content: '';
-  width: 12px;
-  height: 2px;
-  /* W39: theme-aware accent (ink in light, lime in dark). Raw lime is
-     1.06:1 on light surfaces (computed 2026-06-10), an invisible dash.
-     Always-dark slabs keep explicit lime via the .section-dark override
-     in sections.css. */
-  background: var(--color-accent);
-  border-radius: var(--radius-sm);
-  flex: 0 0 12px;
-}
-.section-label--no-bar::before { display: none; }
 .section-label--center {
   display: flex;
   justify-content: center;
+}
+/* Variant: heading ROW rather than an inline tag. Fills its container so a
+   trailing count ("12 stops", "8 tokens") can be pushed to the right edge with
+   margin-left: auto. Added 2026-08-10 when the two Under-the-Hood sub-heading
+   classes (.uth-doc-subhead, .uthc-cg-sub) stopped hand-copying this recipe and
+   started composing it. Those copies are why the text-only ruling above had to
+   be applied three times by hand; consumers now inherit it once. Each keeps
+   only its genuinely local values (rhythm, muted ink, tier weight) in
+   sections.css, and the eyebrow-lookalike lint keeps a fourth copy from
+   appearing. */
+.section-label--row {
+  display: flex;
+  width: 100%;
 }
 /* Variant: icon-led eyebrow (audit M-23, 2026-07-10). The decorative glyph is
    sized to the label. Used by the accessibility proof card and the

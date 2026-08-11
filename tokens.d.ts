@@ -80,6 +80,8 @@ export interface DesignTokens {
   "color-dot-active": string;
   "color-text-muted-emphasis": string;
   "color-on-ink-hover": string;
+  "color-on-lime-strong": string;
+  "color-on-lime-muted": string;
   "color-overlay-soft": string;
   "color-overlay-base": string;
   "color-overlay-strong": string;
@@ -249,6 +251,12 @@ export interface DesignTokens {
   "shadow-modal": string;
   "accent-period-shadow": string;
   "accent-dot-shadow": string;
+  "alpha-100": string;
+  "alpha-200": string;
+  "alpha-300": string;
+  "alpha-400": string;
+  "alpha-500": string;
+  "alpha-600": string;
   "glass-tint": string;
   "glass-edge-top": string;
   "glass-edge-bottom": string;

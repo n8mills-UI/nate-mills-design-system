@@ -3,7 +3,7 @@
 # tokens.json by tokens/designmd.mjs and drift-gated on deploy. Do not hand-edit between the
 # `# DESIGN:*:start` / `# DESIGN:*:end` markers; edit tokens.json and regenerate. The prose, the
 # component recipe map, and everything outside the markers is hand-authored.
-version: 1.0.1
+version: 2.0.0
 name: Nate Mills Portfolio
 description: >
   A design-systems consultant's portfolio where the system IS the pitch. The voltage is a single

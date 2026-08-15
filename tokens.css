@@ -158,6 +158,7 @@
   --btn-icon-border: var(--color-text-tertiary);
   --btn-icon-fg: var(--color-text-secondary);
   --header-control: 36px;
+  --header-clearance: 80px;
   --card-radius: var(--radius-lg);
   --card-padding: var(--space-5);
   --card-border: var(--border-hairline);

@@ -291,6 +291,15 @@
    pull the page text colour instead, which failed contrast on a light-pinned card
    in dark mode (.card--interactive title/body, caught by the WCAG gate). */
 a.card { color: var(--card-fg); text-decoration: none; }
+/* State companion, load bearing. The global `a:hover, a:focus-visible` in
+   sections.css sets text-decoration: underline at (0,1,1); `a.card` is also
+   (0,1,1) and LOSES on source order, so without this every card link grew an
+   underline across its whole content the moment you hovered or tabbed to it.
+   Same bug class as the .link-underline and .fab-chip notes. Ungated on
+   purpose: the global rule is ungated, and a sticky :hover after a tap would
+   otherwise leave phones underlined. */
+a.card:hover,
+a.card:focus-visible { text-decoration: none; }
 
 /* Padding tiers: the --card-pad-* tokens as a modifier API (base = standard). */
 .card--compact  { padding: var(--card-pad-compact); }

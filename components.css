@@ -517,12 +517,17 @@ a.card:focus-visible { text-decoration: none; }
 
 
 /* -----------------------------------------------------------------------------
-   Eyebrow + SectionHead triplet
+   SectionHead + label
    ---
-   Every top-level section uses the same heading pattern:
-     p.section-label  : "Eyebrow text"
+   Every top-level section leads with the heading; the label sits a tier DOWN:
      h2.section-title : "Main heading."
-     p.section-subtitle : "Optional supporting line."
+     p.section-subtitle : "Optional supporting line." (only where it carries
+                          real information; most sections have none)
+     .section-label   : sub-section label ("Degree", "Top skills and tools")
+                        and the design-system view's doc subheads.
+   The EYEBROW use of .section-label (a label ABOVE the section h2) was
+   retired 2026-08-16: it restated the heading or the nav. The class and its
+   variants live on in the sub-tier roles listed above.
    (Audit C-07: example markup re-expressed as selector + text so no
    stray placeholder h2 appears in the source.)
    Light and dark surfaces share the same scale and weight; only colours

@@ -156,7 +156,7 @@
   --btn-secondary-fg: var(--color-text-primary);
   --btn-secondary-border: var(--color-text-tertiary);
   --btn-icon-border: var(--color-text-tertiary);
-  --btn-icon-fg: var(--color-text-secondary);
+  --btn-icon-fg: var(--color-text-primary);
   --header-control: 36px;
   --header-clearance: 80px;
   --card-radius: var(--radius-lg);

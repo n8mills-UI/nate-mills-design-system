@@ -99,7 +99,7 @@ typography:
     weight: 600                     # --display-weight
     lineHeight: 1.15                # --line-heading
     tracking: "-0.04em"             # --display-tight
-  stat-num:  # stat callout numerals
+  stat-num:  # key-metrics numerals
     family: display
     size: "clamp(40px, 7vw, 88px)"  # --display-stat-num
     weight: 600                     # --display-weight

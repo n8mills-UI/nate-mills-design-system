@@ -432,5 +432,13 @@ When building a new page or prototype with this system:
 - Fonts are Inter, JetBrains Mono, and PT Serif. Open-source substitutes if unavailable: Inter is
   itself open source; fall back to a neutral grotesque for display and body, any monospace with a
   slashed zero for labels, and a transitional serif (Georgia) for quotes.
+- The mono zero is SLASHED, and it does not come for free. JetBrains Mono's default zero has a dot
+  in it; the slash is the OpenType `zero` feature, applied once at `:root` via
+  `font-feature-settings: var(--font-feature-mono)` rather than per rule. The build served by
+  Google Fonts has that feature subsetted out, so consuming the font from a CDN gives dotted zeros
+  no matter what the token says. Self-host the full release, and if you subset it, retain the
+  feature explicitly (`pyftsubset --layout-features+=zero`) because it is not in the default
+  retained set. Never let a component set its own `font-feature-settings`: the property replaces
+  rather than merges, so one component-level declaration silently restores the dot.
 - Exact computed contrast ratios are verified in a live specimen; the floors above (4.5:1 text, 3:1
   non-text) are the targets to design to.

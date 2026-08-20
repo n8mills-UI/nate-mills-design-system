@@ -209,6 +209,7 @@ export const tokens = {
   "duration-base": "220ms",
   "duration-slow": "400ms",
   "duration-expressive": "1300ms",
+  "duration-marquee": "36000ms",
   "ease-default": "cubic-bezier(0.4, 0, 0.2, 1)",
   "ease-entrance": "cubic-bezier(0, 0, 0.2, 1)",
   "ease-exit": "cubic-bezier(0.4, 0, 1, 1)",

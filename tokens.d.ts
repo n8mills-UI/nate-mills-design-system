@@ -209,6 +209,7 @@ export interface DesignTokens {
   "duration-base": string;
   "duration-slow": string;
   "duration-expressive": string;
+  "duration-marquee": string;
   "ease-default": string;
   "ease-entrance": string;
   "ease-exit": string;

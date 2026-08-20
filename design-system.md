@@ -269,6 +269,7 @@ dark mode, where lime already reads cleanly.
 | `--duration-base` | `220ms` | Reveal, modal, and swap transitions. |
 | `--duration-slow` | `400ms` | Context shift and slide transitions. |
 | `--duration-expressive` | `1300ms` | Expressive tier: the slow, cinematic duration for a single large hero moment (the two-phone Spline scene scales in over this). Deliberately longer than the general-purpose slow tier and reserved for one large-surface entrance, never UI feedback. Collapsed to 1ms under reduced motion by the block in tokens/build.mjs. |
+| `--duration-marquee` | `36000ms` | Ambient tier: one full traverse of a continuously looping marquee (the hero pillar ticker). Two orders of magnitude above the expressive tier because it is not a transition, it is a background rhythm nobody is meant to time. The only member of this tier; add here rather than hand-typing a raw duration in the component. |
 
 **Easings**
 

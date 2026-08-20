@@ -303,6 +303,7 @@
   --sbtn-min-h: var(--touch-target-min);
   --sbtn-radius: var(--radius-lg);
   --sbtn-mark: 28px;
+  --sbtn-mark-figma: 24px;
   --sbtn-label-size: var(--size-base);
   --sbtn-label-weight: var(--weight-bold);
   --sbtn-eyebrow-size: var(--text-label);

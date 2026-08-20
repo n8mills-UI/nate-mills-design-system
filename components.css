@@ -1149,11 +1149,14 @@ a.card:focus-visible { text-decoration: none; }
   outline-offset: var(--focus-ring-offset);
   border-color: var(--color-border-brand);
 }
-/* Marks. One optical target for all three; Figma's is 2:3 so it locks to height
-   the way any logo lockup does. The [in] bug is cropped to its rounded square
-   (the (R) sat outside it and made the mark render ~15% short of the others). */
+/* Marks. One optical target for all three. The [in] bug is cropped to its rounded
+   square (the (R) sat outside it and made the mark render ~15% short of the
+   others). Figma is the exception and carries its own height: it is the only
+   portrait mark here (2:3), and a tower matched by HEIGHT to a square glyph and
+   a circular one reads a size larger than both, so it takes the optical step
+   down --sbtn-mark-figma instead of the shared --sbtn-mark. */
 .sbtn-m svg { width: var(--sbtn-mark); height: var(--sbtn-mark); display: block; }
-.sbtn-m svg.sbtn-fg { width: auto; }
+.sbtn-m svg.sbtn-fg { width: auto; height: var(--sbtn-mark-figma); }
 .sbtn-gh { color: var(--sbtn-gh-fg); }
 .sbtn-li { display: none; width: auto; height: var(--sbtn-mark); flex: none; }
 .sbtn-li--blue { display: block; }

@@ -284,6 +284,7 @@ export interface DesignTokens {
   "sbtn-min-h": string;
   "sbtn-radius": string;
   "sbtn-mark": string;
+  "sbtn-mark-figma": string;
   "sbtn-label-size": string;
   "sbtn-label-weight": string;
   "sbtn-eyebrow-size": string;

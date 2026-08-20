@@ -284,6 +284,7 @@ export const tokens = {
   "sbtn-min-h": "44px",
   "sbtn-radius": "14px",
   "sbtn-mark": "28px",
+  "sbtn-mark-figma": "24px",
   "sbtn-label-size": "16px",
   "sbtn-label-weight": "700",
   "sbtn-eyebrow-size": "11px",

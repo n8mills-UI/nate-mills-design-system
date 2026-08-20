@@ -238,6 +238,8 @@ export interface DesignTokens {
   "bp-ultrawide": string;
   "touch-target-min": string;
   "touch-target-dot": string;
+  "logo-tile": string;
+  "logo-tile-lg": string;
   "z-base": string;
   "z-dropdown": string;
   "z-sticky": string;

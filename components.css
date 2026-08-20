@@ -873,11 +873,15 @@ a.card:focus-visible { text-decoration: none; }
   /* Press circle behind the chevron glyph; re-mapped per band like the
      rail vars (testimonials + UTH stages in sections.css). */
   --cn-arrow-press: var(--color-surface-sunken);
+  /* Chevron size, shared by the button box and the glyph inside it. Sits
+     between --btn-glyph-lg (18px) and the 36px header icon circles; see the
+     note on the one-size rule further down. */
+  --cn-glyph: 24px;
 }
 .ds-carousel-nav__rail {
   position: relative;
-  width: 96px;
-  height: 3px;
+  width: var(--space-11);
+  height: var(--space-1);
   flex: 0 0 auto;
   background: var(--cn-rail-track);
   border-radius: var(--radius-full);
@@ -903,8 +907,8 @@ a.card:focus-visible { text-decoration: none; }
    stays an easy target without adding visible chrome. */
 .ds-carousel-nav__arrow {
   position: relative;
-  width: var(--btn-glyph-lg);
-  height: var(--btn-glyph-lg);
+  width: var(--cn-glyph);
+  height: var(--cn-glyph);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -943,12 +947,12 @@ a.card:focus-visible { text-decoration: none; }
 .ds-carousel-nav__arrow:disabled { opacity: 0.3; cursor: default; }
 .ds-carousel-nav__arrow i,
 .ds-carousel-nav__arrow svg {
-  width: var(--btn-glyph-lg);
-  height: var(--btn-glyph-lg);
+  width: var(--cn-glyph);
+  height: var(--cn-glyph);
 }
 .ds-carousel-nav__count {
   font-family: var(--font-mono);
-  font-size: var(--size-xs);
+  font-size: var(--size-sm);
   letter-spacing: var(--tracking-wide);
   color: var(--color-text-secondary);
   font-variant-numeric: tabular-nums;
@@ -972,29 +976,24 @@ a.card:focus-visible { text-decoration: none; }
 @media (max-width: 768px) {
   .ds-carousel-nav--full { display: flex; }
 }
-/* Desktop/tablet comfort scale (2026-08-10): the compact nav read too quiet
-   next to the cards it paginates, so >=769px (pairing the --full swap above)
-   steps every part up while mobile keeps the compact metrics. The visual size
-   varies over a CONSTANT 44px pointer target (the ::before ghost is untouched),
-   the sanctioned refinement from design-system.md Section 3, here in the
-   enlarge direction. Deliberately NOT a literal 2x: a 36px glyph would out-size
-   the 36px header icon circles and a 24px counter would be the largest mono
-   text on the page. */
+/* ONE size at every width (2026-08-17). This used to be a split: a compact
+   18px glyph with a 12px counter on phones, stepping up to 24/14 at >=769px.
+   Reviewing on a phone, Nathan read the compact end as too quiet to find, and
+   he is right that it was the odd one out: the nav is the only control on the
+   page that got SMALLER on the device where it matters most. Rather than add a
+   third size, the comfort scale (already reasoned about and shipped for
+   desktop) now applies everywhere, so the component has one set of numbers.
+   Still deliberately NOT a literal 2x: a 36px glyph would out-size the 36px
+   header icon circles, and a 24px counter would be the largest mono text on
+   the page, ahead of the 22px card stat.
+   The visual size varies over a CONSTANT 44px pointer target (the ::before
+   ghost is untouched), the sanctioned refinement from design-system.md
+   Section 3, here in the enlarge direction.
+   `--cn-glyph` is a component token rather than a raw px because it now has
+   two consumers (the box and the glyph) at every width instead of one inside
+   a media query. */
 @media (min-width: 769px) {
   .ds-carousel-nav { gap: var(--space-5); }
-  .ds-carousel-nav__rail {
-    width: var(--space-11);
-    height: var(--space-1);
-  }
-  /* 24px glyph: one consumer, so no --btn-glyph-xl yet (rule of three);
-     revisit if a second large-glyph control appears. */
-  .ds-carousel-nav__arrow,
-  .ds-carousel-nav__arrow i,
-  .ds-carousel-nav__arrow svg {
-    width: 24px;
-    height: 24px;
-  }
-  .ds-carousel-nav__count { font-size: var(--size-sm); }
 }
 
 /* The .placeholder component family was deleted 2026-07-12 (deep-audit n-29):

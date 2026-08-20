@@ -238,6 +238,8 @@ export const tokens = {
   "bp-ultrawide": "1600px",
   "touch-target-min": "44px",
   "touch-target-dot": "24px",
+  "logo-tile": "64px",
+  "logo-tile-lg": "80px",
   "z-base": "0",
   "z-dropdown": "1000",
   "z-sticky": "1100",

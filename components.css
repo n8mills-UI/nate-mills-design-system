@@ -1035,3 +1035,162 @@ a.card:focus-visible { text-decoration: none; }
     border-width: 2px;
   }
 }
+
+
+/* -----------------------------------------------------------------------------
+   Social badge (.sbtn)
+   ---
+   The hero's three outbound links: LinkedIn, GitHub, Figma. Replaces the round
+   .btn--icon row that used Lucide's redrawn brand glyphs. Two reasons for the
+   change, one legal and one editorial. LinkedIn's brand policy forbids modifying
+   the [in] mark, and a stroke redraw is a modification; and a bare icon says
+   nothing about what is on the other side, where "CONNECT ON / LinkedIn" does.
+
+   Anatomy follows the app-store badge convention: official mark on the left, a
+   small mono eyebrow over a bold wordmark on the right. The plate FOLLOWS the
+   page (surface in both themes) rather than opposing it, so the row sits with
+   the WCAG mark beside it instead of shouting over the hero.
+
+   Namespaced --sbtn-* because --badge-* already belongs to the mono pill above.
+   Marks live in assets/logos/ as official artwork; the [in] bug ships in three
+   colourways because it is a FILE swap, not a tint.
+   ----------------------------------------------------------------------------- */
+.sbtn-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sbtn-row-gap);
+}
+.sbtn {
+  /* Hover repoints these three; every child reads them, so the eyebrow, the
+     octocat and the arrow all follow without enumerating combinations. */
+  --sbtn-bg: var(--color-surface);
+  --sbtn-fg: var(--color-text-primary);
+  --sbtn-eyebrow-fg: var(--color-text-tertiary);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sbtn-gap);
+  padding: var(--sbtn-pad-y) var(--sbtn-pad-x);
+  min-height: var(--sbtn-min-h);
+  border-radius: var(--sbtn-radius);
+  background: var(--sbtn-bg);
+  color: var(--sbtn-fg);
+  /* Task #87's finding applies here too: --color-border and --color-border-strong
+     measure ~1.3:1 and ~1.6:1 and fail SC 1.4.11's 3:1 for a control boundary.
+     The tertiary token is the one that passes, and the boundary is load bearing
+     because a surface plate on a surface-adjacent page has no edge without it. */
+  border: 1px solid var(--color-text-tertiary);
+  text-decoration: none;
+  transition: var(--btn-transition);
+}
+.sbtn-m { display: grid; place-items: center; flex: none; }
+.sbtn-t {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sbtn-stack-gap);
+  line-height: 1;
+  text-align: left;
+}
+.sbtn-t small {
+  font-family: var(--font-mono);
+  font-size: var(--sbtn-eyebrow-size);
+  font-weight: var(--sbtn-eyebrow-weight);
+  letter-spacing: var(--tracking-wide);
+  color: var(--sbtn-eyebrow-fg);
+}
+.sbtn-t strong {
+  font-family: var(--font-display);
+  font-size: var(--sbtn-label-size);
+  font-weight: var(--sbtn-label-weight);
+  letter-spacing: var(--tracking-tight);
+}
+/* Visible new-tab cue. aria-describedby="new-tab-note" carries this for screen
+   readers; sighted users get the same arrow every other external link uses. */
+.sbtn-arr {
+  width: var(--btn-glyph-sm);
+  height: var(--btn-glyph-sm);
+  flex: none;
+  align-self: flex-start;
+  opacity: 0.5;
+  transition: transform var(--duration-fast) var(--ease-default),
+              opacity var(--duration-fast) var(--ease-default);
+}
+/* One hover grammar, the same lime fill every transparent-at-rest control on the
+   site answers with (see .btn--secondary, 2026-08-10). Gated to hover-capable
+   pointers because Chromium sticks :hover after a tap. */
+@media (hover: hover) {
+  .sbtn:hover {
+    --sbtn-bg: var(--brand-lime);
+    --sbtn-fg: var(--brand-ink);
+    --sbtn-eyebrow-fg: var(--brand-ink);
+    --sbtn-gh-fg: var(--brand-ink);
+    border-color: var(--color-border-brand);
+  }
+  .sbtn:hover .sbtn-arr { opacity: 1; transform: translate(2px, -2px); }
+}
+/* The global a:hover in sections.css sets colour AND an underline at (0,1,1),
+   which outranks .sbtn at (0,1,0) and repainted the label with --color-link-hover
+   mid-hover. Re-asserting at (0,2,1) takes the component's own colour back. That
+   rule's own comment says affordances which already signal interactivity should
+   not be double-marked, so dropping the underline here is the intended behaviour. */
+.sbtn:hover,
+.sbtn:focus-visible {
+  color: var(--sbtn-fg);
+  text-decoration: none;
+}
+.sbtn:focus-visible {
+  --sbtn-bg: var(--brand-lime);
+  --sbtn-fg: var(--brand-ink);
+  --sbtn-eyebrow-fg: var(--brand-ink);
+  --sbtn-gh-fg: var(--brand-ink);
+  outline: 2px solid var(--btn-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-color: var(--color-border-brand);
+}
+/* Marks. One optical target for all three; Figma's is 2:3 so it locks to height
+   the way any logo lockup does. The [in] bug is cropped to its rounded square
+   (the (R) sat outside it and made the mark render ~15% short of the others). */
+.sbtn-m svg { width: var(--sbtn-mark); height: var(--sbtn-mark); display: block; }
+.sbtn-m svg.sbtn-fg { width: auto; }
+.sbtn-gh { color: var(--sbtn-gh-fg); }
+.sbtn-li { display: none; width: auto; height: var(--sbtn-mark); flex: none; }
+.sbtn-li--blue { display: block; }
+[data-theme="dark"] .sbtn-li--blue { display: none; }
+[data-theme="dark"] .sbtn-li--white { display: block; }
+@media (hover: hover) {
+  .sbtn:hover .sbtn-li--blue,
+  .sbtn:hover .sbtn-li--white,
+  [data-theme="dark"] .sbtn:hover .sbtn-li--white { display: none; }
+  .sbtn:hover .sbtn-li--black,
+  [data-theme="dark"] .sbtn:hover .sbtn-li--black { display: block; }
+}
+.sbtn:focus-visible .sbtn-li--blue,
+.sbtn:focus-visible .sbtn-li--white { display: none; }
+.sbtn:focus-visible .sbtn-li--black { display: block; }
+/* Mobile: mark only. Three labelled badges ate the fold, and a logo already says
+   which service it is. The label stays in the DOM, clipped rather than removed,
+   so the accessible name survives independently of the aria-label. Square, so
+   the 44px target is met on both axes. */
+@media (max-width: 768px) {
+  .sbtn {
+    padding: 0;
+    width: var(--touch-target-min);
+    height: var(--touch-target-min);
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+  .sbtn-t,
+  .sbtn-arr {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sbtn:hover .sbtn-arr { transform: none; }
+}

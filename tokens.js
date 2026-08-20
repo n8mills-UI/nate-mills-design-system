@@ -46,6 +46,7 @@ export const tokens = {
   "ext-brand-bupa-blue": "#0079c8",
   "ext-brand-bupa-blue-dark": "#00609f",
   "ext-brand-bupa-blue-subtle": "#e6f2fa",
+  "ext-brand-github": "#181717",
   "fx-glitch-magenta": "#ff2bd6",
   "fx-glitch-cyan": "#00d4ff",
   "color-bg": "#f5f5f5",
@@ -274,6 +275,19 @@ export const tokens = {
   "glass-saturate": "170%",
   "glass-dim": "1",
   "glass-dim-scrolled": "1.15",
+  "sbtn-pad-y": "8px",
+  "sbtn-pad-x": "12px",
+  "sbtn-gap": "8px",
+  "sbtn-stack-gap": "4px",
+  "sbtn-row-gap": "12px",
+  "sbtn-min-h": "44px",
+  "sbtn-radius": "14px",
+  "sbtn-mark": "28px",
+  "sbtn-label-size": "16px",
+  "sbtn-label-weight": "700",
+  "sbtn-eyebrow-size": "11px",
+  "sbtn-eyebrow-weight": "500",
+  "sbtn-gh-fg": "#181717",
 };
 
 export default tokens;

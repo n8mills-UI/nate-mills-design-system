@@ -46,6 +46,7 @@ export interface DesignTokens {
   "ext-brand-bupa-blue": string;
   "ext-brand-bupa-blue-dark": string;
   "ext-brand-bupa-blue-subtle": string;
+  "ext-brand-github": string;
   "fx-glitch-magenta": string;
   "fx-glitch-cyan": string;
   "color-bg": string;
@@ -274,6 +275,19 @@ export interface DesignTokens {
   "glass-saturate": string;
   "glass-dim": string;
   "glass-dim-scrolled": string;
+  "sbtn-pad-y": string;
+  "sbtn-pad-x": string;
+  "sbtn-gap": string;
+  "sbtn-stack-gap": string;
+  "sbtn-row-gap": string;
+  "sbtn-min-h": string;
+  "sbtn-radius": string;
+  "sbtn-mark": string;
+  "sbtn-label-size": string;
+  "sbtn-label-weight": string;
+  "sbtn-eyebrow-size": string;
+  "sbtn-eyebrow-weight": string;
+  "sbtn-gh-fg": string;
 }
 
 export declare const tokens: DesignTokens;

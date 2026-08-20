@@ -65,6 +65,7 @@
   --ext-brand-bupa-blue: #0079c8;
   --ext-brand-bupa-blue-dark: #00609f;
   --ext-brand-bupa-blue-subtle: #e6f2fa;
+  --ext-brand-github: #181717;
   --fx-glitch-magenta: #ff2bd6;
   --fx-glitch-cyan: #00d4ff;
   --color-bg: var(--neutral-100);
@@ -293,6 +294,19 @@
   --glass-saturate: 170%;
   --glass-dim: 1;
   --glass-dim-scrolled: 1.15;
+  --sbtn-pad-y: var(--space-2);
+  --sbtn-pad-x: var(--space-3);
+  --sbtn-gap: var(--space-2);
+  --sbtn-stack-gap: var(--space-1);
+  --sbtn-row-gap: var(--space-3);
+  --sbtn-min-h: var(--touch-target-min);
+  --sbtn-radius: var(--radius-lg);
+  --sbtn-mark: 28px;
+  --sbtn-label-size: var(--size-base);
+  --sbtn-label-weight: var(--weight-bold);
+  --sbtn-eyebrow-size: var(--text-label);
+  --sbtn-eyebrow-weight: var(--weight-medium);
+  --sbtn-gh-fg: var(--ext-brand-github);
 }
 
 [data-theme="light"] {
@@ -356,6 +370,7 @@
   --glass-blur: 7px;
   --glass-blur-webkit: 11px;
   --glass-dim-scrolled: 1.05;
+  --sbtn-gh-fg: var(--neutral-150);
 }
 
 /* OS dark derives from the SAME darkTheme group as the toggle (TK-02). */
@@ -393,6 +408,7 @@
     --glass-blur: 7px;
     --glass-blur-webkit: 11px;
     --glass-dim-scrolled: 1.05;
+    --sbtn-gh-fg: var(--neutral-150);
   }
 }
 

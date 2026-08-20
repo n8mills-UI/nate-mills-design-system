@@ -1124,6 +1124,7 @@ a.card:focus-visible { text-decoration: none; }
     --sbtn-fg: var(--brand-ink);
     --sbtn-eyebrow-fg: var(--brand-ink);
     --sbtn-gh-fg: var(--brand-ink);
+    --sbtn-li-fg: var(--brand-ink);
     border-color: var(--color-border-brand);
   }
   .sbtn:hover .sbtn-arr { opacity: 1; transform: translate(2px, -2px); }
@@ -1143,6 +1144,7 @@ a.card:focus-visible { text-decoration: none; }
   --sbtn-fg: var(--brand-ink);
   --sbtn-eyebrow-fg: var(--brand-ink);
   --sbtn-gh-fg: var(--brand-ink);
+  --sbtn-li-fg: var(--brand-ink);
   outline: 2px solid var(--btn-focus-ring);
   outline-offset: var(--focus-ring-offset);
   border-color: var(--color-border-brand);
@@ -1167,6 +1169,76 @@ a.card:focus-visible { text-decoration: none; }
 .sbtn:focus-visible .sbtn-li--blue,
 .sbtn:focus-visible .sbtn-li--white { display: none; }
 .sbtn:focus-visible .sbtn-li--black { display: block; }
+/* The boxless glyph is mobile only, see the mark-only block below. Its mask
+   image lives in the portfolio's sections.css, not here: this sheet is shared
+   with other projects and must not reach for an asset only the portfolio
+   ships. */
+.sbtn-li-set { display: contents; }
+.sbtn-li-glyph { display: none; }
+/* -----------------------------------------------------------------------------
+   WCAG conformance mark (.wcagm)
+   ---
+   Was a flat SVG export, so it could not agree with anything around it: its
+   corner radius and its height were baked into the artwork, and next to the
+   social badges at the foot of the hero it read as a different kind of object
+   (Nathan 2026-08-20). Rebuilt as two cells in a shell that takes its geometry
+   from the SOCIAL BADGE tokens rather than numbers of its own, so the two are
+   the same height and the same radius by construction and cannot drift apart:
+   change --sbtn-radius and both move together.
+   The W3C mark stays vector artwork; "WCAG 2.2 AA" is real text on the same
+   type tokens as a badge's eyebrow and wordmark, which is what makes the two
+   text stacks resolve to the same height.
+   The plate stays light in both themes, exactly like the artwork it replaces:
+   this is a conformance mark, not a themed surface.
+   ----------------------------------------------------------------------------- */
+.wcagm {
+  display: inline-flex;
+  align-items: stretch;
+  min-height: var(--sbtn-min-h);
+  border-radius: var(--sbtn-radius);
+  /* Same boundary token and the same reason as .sbtn above: the softer border
+     tokens measure under SC 1.4.11's 3:1 for a control edge. */
+  border: 1px solid var(--color-text-tertiary);
+  overflow: hidden;
+}
+.wcagm-w3c {
+  display: grid;
+  place-items: center;
+  padding-inline: var(--sbtn-pad-x);
+  background: var(--color-on-ink-emphasis);
+}
+/* Bigger than a social badge's mark on purpose: the W3C lockup is dense, and
+   the artwork this replaces let it fill the plate. Still under the text cell's
+   height, so the badge keeps taking its overall height from the badge tokens. */
+.wcagm-w3c svg { height: var(--wcagm-mark); width: auto; display: block; }
+.wcagm-txt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sbtn-stack-gap);
+  padding: var(--sbtn-pad-y) var(--sbtn-pad-x);
+  background: var(--ext-brand-wcag-amber);
+  color: var(--brand-ink);
+  line-height: 1;
+}
+.wcagm-txt b {
+  font-family: var(--font-display);
+  font-size: var(--sbtn-label-size);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-tight);
+}
+/* Display face and bold, not the mono eyebrow the social badges use: on the
+   artwork this replaces the second line carries almost as much weight as the
+   first, and a light mono line read as a caption hanging off the mark. The SIZE
+   still comes from the badge's eyebrow token, which is what keeps the two line
+   stacks the same height and therefore the two objects the same height. */
+.wcagm-txt span {
+  font-family: var(--font-display);
+  font-size: var(--sbtn-eyebrow-size);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+}
+
 /* Mobile: mark only. Three labelled badges ate the fold, and a logo already says
    which service it is. The label stays in the DOM, clipped rather than removed,
    so the accessible name survives independently of the aria-label. Square, so
@@ -1188,6 +1260,19 @@ a.card:focus-visible { text-decoration: none; }
     clip-path: inset(50%);
     white-space: nowrap;
     border: 0;
+  }
+  /* The box comes off (Nathan 2026-08-20). With the wordmark clipped away, a
+     solid blue tile sits next to a bare GitHub glyph and a bare Figma glyph and
+     reads as the odd one out; the "in" on its own matches them.
+     display: block on the SET, not on each image: the per-theme and per-hover
+     rules above reach (0,4,0) and a media query adds no specificity of its own,
+     so hiding the three files individually would mean out-specifying every one
+     of those states. The wrapper has no competing rule at all. */
+  .sbtn-li-set { display: none; }
+  .sbtn-li-glyph {
+    display: block;
+    width: var(--sbtn-mark);
+    height: var(--sbtn-mark);
   }
 }
 

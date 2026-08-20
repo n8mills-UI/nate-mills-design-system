@@ -66,6 +66,7 @@
   --ext-brand-bupa-blue-dark: #00609f;
   --ext-brand-bupa-blue-subtle: #e6f2fa;
   --ext-brand-github: #181717;
+  --ext-brand-wcag-amber: #ffcc66;
   --fx-glitch-magenta: #ff2bd6;
   --fx-glitch-cyan: #00d4ff;
   --color-bg: var(--neutral-100);
@@ -307,6 +308,8 @@
   --sbtn-eyebrow-size: var(--text-label);
   --sbtn-eyebrow-weight: var(--weight-medium);
   --sbtn-gh-fg: var(--ext-brand-github);
+  --sbtn-li-fg: var(--ext-brand-linkedin);
+  --wcagm-mark: 36px;
 }
 
 [data-theme="light"] {
@@ -371,6 +374,7 @@
   --glass-blur-webkit: 11px;
   --glass-dim-scrolled: 1.05;
   --sbtn-gh-fg: var(--neutral-150);
+  --sbtn-li-fg: var(--neutral-150);
 }
 
 /* OS dark derives from the SAME darkTheme group as the toggle (TK-02). */
@@ -409,6 +413,7 @@
     --glass-blur-webkit: 11px;
     --glass-dim-scrolled: 1.05;
     --sbtn-gh-fg: var(--neutral-150);
+    --sbtn-li-fg: var(--neutral-150);
   }
 }
 

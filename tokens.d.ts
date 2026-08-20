@@ -47,6 +47,7 @@ export interface DesignTokens {
   "ext-brand-bupa-blue-dark": string;
   "ext-brand-bupa-blue-subtle": string;
   "ext-brand-github": string;
+  "ext-brand-wcag-amber": string;
   "fx-glitch-magenta": string;
   "fx-glitch-cyan": string;
   "color-bg": string;
@@ -288,6 +289,8 @@ export interface DesignTokens {
   "sbtn-eyebrow-size": string;
   "sbtn-eyebrow-weight": string;
   "sbtn-gh-fg": string;
+  "sbtn-li-fg": string;
+  "wcagm-mark": string;
 }
 
 export declare const tokens: DesignTokens;

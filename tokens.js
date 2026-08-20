@@ -47,6 +47,7 @@ export const tokens = {
   "ext-brand-bupa-blue-dark": "#00609f",
   "ext-brand-bupa-blue-subtle": "#e6f2fa",
   "ext-brand-github": "#181717",
+  "ext-brand-wcag-amber": "#ffcc66",
   "fx-glitch-magenta": "#ff2bd6",
   "fx-glitch-cyan": "#00d4ff",
   "color-bg": "#f5f5f5",
@@ -288,6 +289,8 @@ export const tokens = {
   "sbtn-eyebrow-size": "11px",
   "sbtn-eyebrow-weight": "500",
   "sbtn-gh-fg": "#181717",
+  "sbtn-li-fg": "#0a66c2",
+  "wcagm-mark": "36px",
 };
 
 export default tokens;

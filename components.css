@@ -2250,7 +2250,10 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
      interfering with things" (2026-09-16). 1.25 is 160px, a 29% smaller footprint
      at the same rest size, which is the ~30% he asked for. */
   --orbit-swell: 1.25;
-  --orbit-type: 18px;
+  /* 16, not 18. Four phrases of different lengths need it to fit the rim at a
+     readable size; 18 only ever fitted one phrase repeated. Below about 16 the
+     type stops reading at 128px and becomes texture. */
+  --orbit-type: 16px;
   position: relative;
   z-index: 2;
   display: block;
@@ -2312,6 +2315,155 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
   stroke: currentColor;
 }
 
+/* ---------------------------------------------------------------------------
+   THE ORBIT'S FOIL (2026-09-20)
+
+   The disc is the same material as the award plaques. Every gradient, size,
+   blend and filter below is the one in sections.css, copied rather than
+   re-derived, so the two surfaces cannot drift apart. The engine is
+   assets/orbit-foil.js, fetched at idle, and without it none of this paints:
+   the layers only exist once that file has added them.
+
+   Two things differ from the award rules, both forced by the host. There is no
+   plate mask, because a disc has no artwork to cut one from and IS the shape.
+   And there is no background and no isolation on the host: the award tile
+   isolates because the mark's pixels are painted inside it for the shine to
+   blend with, and this one has nothing inside, so it blends with the drawn disc
+   underneath instead. Giving it a ground of its own put an opaque circle over
+   the real one and the whole effect read as a dark tint.
+   ------------------------------------------------------------------------- */
+.nm-orbit.af-host {
+  --af-opacity: 0;
+  --af-x: 50%; --af-y: 50%;
+  --af-bx: 50%; --af-by: 50%;
+  --af-sx: 50%; --af-sy: 50%;
+  --af-fx: 0%; --af-fy: 0%; --af-fscale: 1;
+  --af-left: .5;
+}
+.nm-orbit-foil {
+  position: absolute;
+  /* r 43 in a 200 viewBox is 43% of the control, centred on the drawn disc. */
+  left: 50%;
+  top: 50%;
+  width: 43%;
+  height: 43%;
+  margin: -21.5% 0 0 -21.5%;
+  /* The shape tier, not the primitive: this plate has to stay exactly as round
+     as the disc it sits on, and --dot-radius is the tier that means "a circle
+     whatever the radius scale does". */
+  border-radius: var(--dot-radius);
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+  --af-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.34' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23g)' opacity='.85'/><rect width='140' height='140' fill='white' opacity='.45'/></svg>");
+  /* Spectrum, Nathan's pick. Like the award palette these six are a MATERIAL
+     and not brand colour, which is why they are rgb() and not tokens: they
+     appear in one effect on one component and a theme must never repaint them. */
+  --af-c1: rgb(255 84 112); --af-c2: rgb(255 209 102); --af-c3: rgb(140 233 154);
+  --af-c4: rgb(99 230 226);  --af-c5: rgb(122 162 255); --af-c6: rgb(209 139 255);
+}
+.nm-orbit-foil > .af-shine,
+.nm-orbit-foil > .af-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  display: none;
+}
+.nm-orbit-foil[data-af-tone] > .af-shine,
+.nm-orbit-foil[data-af-tone] > .af-glare { display: block; }
+
+.nm-orbit-foil > .af-shine {
+  z-index: 2;
+  overflow: hidden;
+  /* .75 is the award's own value; the 3 is Nathan's brightness. */
+  opacity: calc(var(--af-opacity) * .75 * 3);
+  -webkit-mask-image: var(--af-grain); mask-image: var(--af-grain);
+  -webkit-mask-size: 140px; mask-size: 140px;
+  -webkit-mask-repeat: repeat; mask-repeat: repeat;
+}
+.nm-orbit-foil > .af-shine::before,
+.nm-orbit-foil > .af-shine::after { content: ""; position: absolute; inset: 0; }
+
+/* The operator follows the GROUND, and the ground is not the theme: the hero
+   disc is ink in light and lime in dark, the footer's is ink in both. */
+.nm-orbit-foil[data-af-tone="light"] > .af-shine {
+  mix-blend-mode: multiply;
+  filter: saturate(1.9) contrast(1.15);
+}
+.nm-orbit-foil[data-af-tone="deep"] > .af-shine {
+  mix-blend-mode: screen;
+  filter: saturate(1.35) contrast(1.15);
+}
+
+.nm-orbit-foil > .af-shine::before {
+  background:
+    radial-gradient(circle at 30% 30%, rgb(255 255 255) 0 22%, transparent 24%),
+    radial-gradient(circle at 70% 68%, rgb(255 255 255) 0 18%, transparent 20%),
+    conic-gradient(from calc(var(--af-left) * 120deg) at 50% 50%,
+      var(--af-c6), var(--af-c2), var(--af-c4), var(--af-c5), var(--af-c6));
+  background-size: 14px 14px, 14px 14px, cover;
+  background-position: 45% 45%, 55% 55%, center;
+  background-blend-mode: soft-light, hard-light, normal;
+}
+.nm-orbit-foil > .af-shine::after {
+  background:
+    linear-gradient(100deg, transparent 34%, rgb(255 255 255 / var(--alpha-500)) 48%, var(--af-c3) 52%, transparent 68%),
+    radial-gradient(circle at 0 100%, transparent 8%, var(--af-c5) 22%, var(--af-c1) 38%, var(--af-c3) 52%, transparent 64%);
+  background-size: 240% 240%,
+                   calc(300% * var(--af-fscale, 1)) calc(300% * var(--af-fscale, 1));
+  background-position: var(--af-sx, var(--af-bx)) var(--af-sy, var(--af-by)),
+                       calc(var(--af-bx) + var(--af-fx, 0%)) calc(var(--af-by) + var(--af-fy, 0%));
+  background-blend-mode: overlay;
+  mix-blend-mode: soft-light;
+}
+
+.nm-orbit-foil > .af-glare {
+  z-index: 3;
+  opacity: calc(var(--af-opacity) * .6 * 3);
+  background: radial-gradient(farthest-corner circle at var(--af-x) var(--af-y),
+    rgb(255 253 247 / var(--alpha-700)) 8%, rgb(255 248 238 / var(--alpha-500)) 22%, rgb(0 0 0 / var(--alpha-600)) 92%);
+  mix-blend-mode: overlay;
+}
+.nm-orbit-foil[data-af-tone="light"] > .af-glare {
+  background: radial-gradient(farthest-corner circle at var(--af-x) var(--af-y),
+    rgb(255 255 255 / var(--alpha-700)) 4%, rgb(255 255 255 / var(--alpha-500)) 26%, rgb(255 255 255 / 0) 62%);
+  mix-blend-mode: soft-light;
+}
+.nm-orbit-foil[data-af-tone="deep"] > .af-glare {
+  /* Nothing to model on black, and overlay's dark end only darkens it further,
+     so this adds a highlight and nothing else. */
+  background: radial-gradient(farthest-corner circle at var(--af-x) var(--af-y),
+    rgb(255 253 247 / var(--alpha-600)) 6%, rgb(255 248 238 / var(--alpha-400)) 30%, rgb(255 255 255 / 0) 70%);
+  mix-blend-mode: screen;
+}
+
+/* ------------------------------------------------------------- THE GLYPH --
+   The envelope is still the resting glyph and still what anyone without the
+   engine sees. It steps aside for a drawn hand rather than being replaced. */
+.nm-orbit-swap {
+  transition: opacity 180ms linear, scale 320ms var(--ease-emphasized);
+}
+.nm-orbit-swap[data-orbit-out="1"] { opacity: 0; scale: 0.7; }
+
+.nm-orbit-anim {
+  position: absolute;
+  /* The animations carry their own transparent margin, so the box is bled out
+     past the glyph's to land the drawing at the size the envelope sits at. */
+  inset: -40%;
+  opacity: 0;
+  scale: 0.8;
+  transition: opacity 200ms linear, scale 320ms var(--ease-emphasized);
+  pointer-events: none;
+}
+.nm-orbit-anim[data-orbit-in="1"] { opacity: 1; scale: 1; }
+.nm-orbit-anim img { display: block; width: 100%; height: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nm-orbit-swap, .nm-orbit-anim { transition: none; }
+  .nm-orbit-foil > .af-shine, .nm-orbit-foil > .af-glare { display: none; }
+}
+
 /* The footer slab is flat lime in BOTH themes, so --color-accent (ink in light,
    lime in dark) cannot be trusted there: in dark mode it would put lime on
    lime. The footer's own identity is ink carrying lime, the same as its pill,
@@ -2354,8 +2506,9 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
 [data-motion-paused="1"] .nm-orbit-ring { animation-play-state: paused; }
 
 /* The control swells under the pointer so the type is legible at reading size
-   without holding that footprint at rest. contact-cta.js eases the disc's
-   turbulence over the same moment. */
+   without holding that footprint at rest. The disc's own movement is the light
+   crossing it, from assets/orbit-foil.js; the turbulence that used to warp its
+   edge here was removed 2026-09-20. */
 @media (hover: hover) {
   .nm-orbit:hover { transform: scale(var(--orbit-swell)); }
 }

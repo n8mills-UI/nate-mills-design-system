@@ -68,6 +68,17 @@
   outline: 2px solid var(--btn-focus-ring);
   outline-offset: var(--focus-ring-offset);
 }
+/* A button never wears an underline, in any state. It lived in the page sheet
+   until 2026-09-08 (audit n-13), which this file is not: design-system.html and
+   the npm package load components.css alone, so anyone taking the published
+   button got the global a:hover underline back on a .btn wrapping a link. Held
+   at (0,2,0), which beats a:hover at (0,1,1). */
+.btn:hover,
+.btn:focus,
+.btn:focus-visible,
+.btn:active {
+  text-decoration: none;
+}
 .btn--primary {
   background: var(--btn-primary-bg);
   color: var(--btn-primary-fg);
@@ -97,7 +108,7 @@
    and a transform would flash mid-swipe. Declared after hover/focus so
    it wins while they apply. */
 .btn--primary:active {
-  background: var(--brand-lime-dim);
+  background: var(--brand-primary-dim);
   color: var(--brand-ink);
   border-color: var(--btn-primary-border);
   transform: none;
@@ -129,7 +140,7 @@
 }
 /* Press: lime-dim step, same as .btn--icon:active, opaque for the gate. */
 .btn--secondary:active {
-  background: var(--brand-lime-dim);
+  background: var(--brand-primary-dim);
   color: var(--btn-primary-fg);
   border-color: var(--btn-primary-border);
 }
@@ -157,15 +168,20 @@
 /* Mobile button rule (design-system.md section 9, Button behaviour).
    Section-level primary CTAs (featured-card Read the case study / View on
    Figma, the under-the-hood teaser Explore the design system, and the
-   accessibility-card See the full design system) expand to full width on
-   mobile for a thumb-friendly tap area. Inline buttons (in-flow inside
-   paragraphs) stay auto-width. This list is the single registry the mobile
-   full-width gate checks (portfolio/tokens/mobile-consistency-lint.mjs); add
-   a new section CTA here and to that gate's registry together. */
-@media (max-width: 768px) {
+   accessibility-card See the full design system, and the nav drawer's Get in
+   touch) expand to full width on mobile for a thumb-friendly tap area. Inline
+   buttons (in-flow inside paragraphs) stay auto-width. This list is the single
+   registry the mobile full-width gate checks (portfolio/tokens/mobile-consistency-lint.mjs);
+   add a new section CTA here and to that gate's registry together.
+   The 768 ceiling is the whole point of the list, not a detail of it: a CTA
+   written full width with no upper bound keeps spanning on tablet, where the
+   thumb argument does not hold and the button just reads broken. The drawer CTA
+   joined on 2026-08-23 after doing exactly that, measured at 1155px wide. */
+@media (max-width: 767.98px) {
   .feat-cta-corner .btn,
   .dsc-cta,
-  .ap2-cta {
+  .ap2-cta,
+  .overlay-cta {
     width: 100%;
     justify-content: center;
   }
@@ -186,7 +202,7 @@
    never fires (touch). Scoped colour: the dark-header override in
    sections.css carries the matching :active companion. */
 .btn--icon:active {
-  background: var(--brand-lime-dim);
+  background: var(--brand-primary-dim);
   color: var(--btn-primary-fg);
   border-color: var(--btn-primary-border);
 }
@@ -197,6 +213,110 @@
   width: var(--btn-glyph);
   height: var(--btn-glyph);
   flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+/* ONE icon-motion rule for every button on the site (moved here from
+   sections.css, 2026-08-23). It has to live WITH the component: this file is
+   what design-system.html loads and what the npm package publishes, so while
+   the rule sat in the page stylesheet the shipped button had no arrow motion
+   at all, and every new outbound control had to hand-copy the movement or
+   silently go without it (the Kind words LinkedIn pill did exactly that).
+   Nothing scales; only the external-link arrow moves, up and to the right,
+   because that movement means something: this goes somewhere else. Target the
+   element CARRYING data-lucide, never a descendant, since Lucide REPLACES the
+   <i> tag rather than nesting an icon inside it. */
+.btn:focus-visible [data-lucide="arrow-up-right"] {
+  transform: translate(2px, -2px);
+}
+/* Hover half behind the capability query: on touch a tap synthesises hover and
+   the arrow would stay nudged after the finger lifts. focus-visible stays
+   OUTSIDE, keyboard focus is real on every device. */
+@media (hover: hover) {
+  .btn:hover [data-lucide="arrow-up-right"] {
+    transform: translate(2px, -2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn i,
+  .btn svg { transition: none; }
+  .btn:hover [data-lucide="arrow-up-right"],
+  .btn:focus-visible [data-lucide="arrow-up-right"] { transform: none; }
+}
+/* Mail glyph, the letter rise (2026-09-15, Nathan, from the contact-CTA
+   review). REPLACES the 2026-09-06 shake, it does not join it: the rule
+   directly above says one icon-motion rule per glyph, site-wide, and running a
+   wobble and a rise on the same envelope would have been two. A letter lifts
+   out of the envelope and drops back, which says the same thing the wobble
+   said, that this is where a message starts, and says it in the shape of the
+   thing being sent.
+
+   The letter is not part of Lucide's mail icon. contact-cta.js adds it to every
+   mail glyph inside a .btn, clipped to the band ABOVE the envelope's top edge
+   so at rest it is genuinely inside and only the part that rises is ever seen.
+   PROGRESSIVE ENHANCEMENT: with that script absent the button still renders
+   Lucide's envelope exactly as authored and simply does not move.
+
+   Same shape as the arrow nudge above: the element CARRYING data-lucide, the
+   hover half behind the capability query, focus-visible outside it, reduced
+   motion cancels. Held by tokens/component-behaviour-lint.mjs. */
+@keyframes btn-mail-letter {
+  0% { transform: translateY(0); }
+  45% { transform: translateY(-9px); }
+  100% { transform: translateY(0); }
+}
+/* fill-box, so the origin is the letter's own bottom edge rather than the
+   whole 24-unit canvas, and the rise reads as the sheet leaving the envelope. */
+.btn-mail-letter {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  fill: none;
+  stroke: currentColor;
+}
+.btn:focus-visible [data-lucide="mail"] .btn-mail-letter,
+.btn.is-pressed [data-lucide="mail"] .btn-mail-letter { animation: btn-mail-letter var(--duration-flourish) var(--ease-emphasized); }
+@media (hover: hover) {
+  .btn:hover [data-lucide="mail"] .btn-mail-letter { animation: btn-mail-letter var(--duration-flourish) var(--ease-emphasized); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover [data-lucide="mail"] .btn-mail-letter,
+  .btn.is-pressed [data-lucide="mail"] .btn-mail-letter,
+  .btn:focus-visible [data-lucide="mail"] .btn-mail-letter { animation: none; }
+}
+
+/* The address stage (.btn--reveal). A contact button says its words at rest and
+   opens to show the address on hover or keyboard focus. Desktop only by
+   consequence, not by breakpoint: a touch screen has no hover, so the stage
+   simply never opens there and the button keeps its resting width.
+
+   Two things here are load bearing:
+   1. the stage rides a grid track from 0fr to 1fr, so it animates to its
+      intrinsic width with no per-frame reflow and nothing is clipped mid-word;
+   2. the opening gap sits on an element INSIDE the clipped span. Padding on the
+      grid item itself occupies its track even at 0fr and peeks out from under
+      the label at rest, which is exactly what it did before this shape. */
+.btn-say { display: inline-flex; align-items: center; }
+.btn-say-more {
+  display: grid;
+  grid-template-columns: 0fr;
+  transition: grid-template-columns var(--duration-base) var(--ease-emphasized);
+}
+.btn-say-more > span { overflow: hidden; white-space: nowrap; }
+/* A <span>, never an <i>: the shared rule above sizes every <i> inside a .btn
+   to --btn-glyph, which collapsed this address to 16px wide and made the stage
+   look like it opened by nothing at all. */
+.btn-say-addr {
+  display: block;
+  padding-left: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+}
+@media (hover: hover) {
+  .btn--reveal:hover .btn-say-more { grid-template-columns: 1fr; }
+}
+.btn--reveal:focus-visible .btn-say-more { grid-template-columns: 1fr; }
+@media (prefers-reduced-motion: reduce) {
+  .btn-say-more { transition: none; }
 }
 /* Size modifiers. Wire the --btn-* tokens. Base .btn is the 44px default (= md),
    so unmodified buttons are unchanged; opt in to --sm for dense UI or --lg for
@@ -305,13 +425,17 @@ a.card:focus-visible { text-decoration: none; }
 .card--compact  { padding: var(--card-pad-compact); }
 .card--spacious { padding: var(--card-pad-spacious); }
 
-/* Interactive: the one clickable-card hover, generalised from the role /
-   testimonial hover. Border strengthens; the card lifts 2px on a fine pointer,
-   dropped under reduced motion. */
+/* Interactive: THE clickable-card hover for the whole site. Border strengthens;
+   the card lifts 2px on a fine pointer, dropped under reduced motion.
+   Live consumers: the two award cards (#awards .award-card), plus the
+   Component Playground specimen. Card-shaped surfaces lift; full-width LIST
+   ROWS (the experience rows, the About discipline rows) answer with a
+   background wash instead and are deliberately NOT on this variant. That
+   two-family split is the card hover taxonomy in design-system.md Section 9. */
 .card--interactive {
   cursor: pointer;
   transition: border-color var(--duration-base) var(--ease-default),
-              transform var(--duration-base) var(--ease-default);
+              translate var(--duration-base) var(--ease-default);
 }
 .card--interactive:hover,
 .card--interactive:focus-within { border-color: var(--color-border-strong); }
@@ -323,9 +447,29 @@ a.card:focus-visible { text-decoration: none; }
   border-color: var(--color-border-strong);
   background: var(--color-surface-sunken);
 }
+/* The LIFT answers :hover only, never :focus-within, and it is written as
+   `translate`, not `transform`. Both halves of that are load bearing.
+
+   :hover only, because :focus-within fires on a MOUSE click as well as a
+   keyboard tab, and these cards hold a .disclosure-toggle chip, so every click
+   on the chip shoved the whole card up 2px while its panel was opening. That
+   is the reason the award cards forked this variant instead of using it. The
+   border half above still answers :focus-within (a colour change moves
+   nothing) and the keyboard ring is on :focus-visible, so nothing is lost.
+
+   `translate`, because a clickable card can also be a scroll-reveal subject,
+   and .nm-sr animates `transform` off a view() timeline. A running animation
+   beats a normal declaration, so a transform-based lift on such a card is dead
+   on arrival: it computes, it just never renders, which is the worst kind of
+   dead code because it reads as working. `translate` is an INDEPENDENT
+   transform property, so it composes with the animation instead of losing to
+   it. Measured on #awards .award-card, which is exactly that case. */
 @media (hover: hover) and (pointer: fine) {
-  .card--interactive:hover,
-  .card--interactive:focus-within { transform: translateY(-2px); }
+  .card--interactive:hover { translate: 0 -2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card--interactive { transition: none; }
+  .card--interactive:hover { translate: none; }
 }
 
 /* Content states. Empty and error centre a message so the card is never a blank
@@ -340,8 +484,23 @@ a.card:focus-visible { text-decoration: none; }
   min-height: 132px;
   text-align: center;
 }
-.card--empty i[data-lucide],
-.card--error i[data-lucide] { width: 24px; height: 24px; color: var(--color-text-tertiary); }
+/* Attribute only, never `i[data-lucide]`. The boot script REPLACES the authored
+   <i data-lucide="x"> with an <svg data-lucide="x">, so a selector that pins the
+   tag name matches only the split second before hydration and silently stops
+   applying after it. That is why these icons had been rendering at the
+   inherited text colour rather than the tertiary grey this rule asks for. */
+.card--empty [data-lucide],
+.card--error [data-lucide] { width: 24px; height: 24px; color: var(--color-text-tertiary); }
+/* Error carries the feedback colour; empty stays neutral. The two states were
+   byte-identical greys, so "nothing here yet" and "this failed to load" looked
+   like the same event: only the sentence told them apart. Empty is not a fault
+   and must stay quiet; an error is, and gets the one feedback pair the system
+   owns. Colour is never the only signal, the message still says what happened,
+   and the tinted edge is mixed with --color-border so it reads as the same
+   hairline family rather than a second border weight. */
+.card--error { border-color: color-mix(in srgb, var(--color-feedback-background-error) 55%, var(--color-border)); }
+.card--error [data-lucide] { color: var(--color-feedback-background-error); }
+.card--error .card-state-msg { color: var(--color-text-primary); }
 .card-state-msg  { margin: 0; font-size: var(--size-sm); color: var(--color-text-secondary); }
 .card-state-hint { margin: 0; font-size: var(--text-caption); color: var(--color-text-tertiary); line-height: var(--line-body); }
 
@@ -484,7 +643,7 @@ a.card:focus-visible { text-decoration: none; }
   width: var(--badge-dot-size);
   height: var(--badge-dot-size);
   flex: 0 0 var(--badge-dot-size);
-  border-radius: var(--radius-full);
+  border-radius: var(--dot-radius);
   background: var(--badge-dot);
 }
 
@@ -492,7 +651,7 @@ a.card:focus-visible { text-decoration: none; }
 /* -----------------------------------------------------------------------------
    Avatar
    ---
-   .avatar              round, sized via --size class, lime ring on hover
+   .avatar              identity shape (--avatar-radius, a circle by default), sized via --size class, lime ring on hover
    ----------------------------------------------------------------------------- */
 .avatar {
   display: inline-flex;
@@ -500,7 +659,7 @@ a.card:focus-visible { text-decoration: none; }
   justify-content: center;
   width: var(--touch-target-min);
   height: var(--touch-target-min);
-  border-radius: 50%;
+  border-radius: var(--avatar-radius);
   overflow: hidden;
   background: var(--color-surface-sunken);
   border: 2px solid var(--color-border);
@@ -512,7 +671,144 @@ a.card:focus-visible { text-decoration: none; }
 .avatar:hover,
 .avatar:focus-visible {
   border-color: var(--color-border-brand);
+}
+/* Only the LIFT splits out; the border colour stays on both states. */
+.avatar:focus-visible {
   transform: scale(1.04);
+}
+@media (hover: hover) {
+  .avatar:hover {
+    transform: scale(1.04);
+  }
+}
+
+
+/* -----------------------------------------------------------------------------
+   Profile mark
+   ---
+   .profile-mark        the brand portrait, composed live instead of flattened
+   ---
+   The header portrait used to be one baked 252px PNG with the lime baked in.
+   It is now the same three parts the original was made of: the brand gradient,
+   the transparent head, and a white rim. Two wins. The background is a token
+   again, so a brand re-point moves it; and the head can be addressed on its
+   own, which is what the hover echo needs.
+
+   The geometry is measured off the old composite (Frame_225_isos63.png), not
+   eyeballed: rebuilding with these numbers reproduces it to a mean 1.3/255, so
+   the resting state is indistinguishable from what shipped before.
+
+   Layers, bottom up: the gradient (on the box), the head, the two echo copies,
+   then the rim on top. The rim being opaque and last is what clips the head, so
+   the head needs no second circle of its own.
+   ----------------------------------------------------------------------------- */
+.profile-mark {
+  /* Rim as a share of the RADIUS (3.208% of the diameter). It has to be a
+     percentage because the mark renders at four sizes (44 mobile, 36 desktop,
+     38/32 in the design-system pills) and the rim must scale with all of them.
+     border-width rejects percentages, hence the radial-gradient below rather
+     than the border you would reach for first. */
+  --profile-mark-rim: 93.583%;
+  /* How hard the glitch jumps. One number; the keyframes below multiply the
+     house engine's own px figures by it. */
+  --profile-mark-glitch: 4px;
+  position: relative;
+  /* Self-contained on purpose. In the header it sits on .avatar, which would
+     supply these anyway, but the splash mark carries no .avatar and any future
+     use should not have to know that. Size is the caller's business; the shape
+     is the component's: --avatar-radius, full by default (a circle), and the
+     one circle token the theme lab's corner tier drives, so the portrait
+     squares with the icon buttons beside it (2026-09-02). */
+  border-radius: var(--avatar-radius);
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--brand-primary) 0%, var(--brand-primary-vivid) 100%);
+}
+/* Beats .avatar img (which forces 100%/cover for the testimonial portraits)
+   and .ld-av img, which did the same for the splash. */
+.profile-mark .profile-mark__head {
+  position: absolute;
+  width: 124.7024%;
+  height: auto;
+  left: -0.873%;
+  top: 4.0873%;
+  object-fit: fill;
+}
+.profile-mark__glitch {
+  position: absolute;
+  /* Overhangs left and right so the jump never uncovers the disc edge. */
+  inset: 0 -24%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-linear);
+  /* Bands, not a wash. Two half-transparent discs of magenta and cyan simply
+     stack into flat teal and the lime is gone; opaque strips keep both chromas
+     true and leave the lime reading between them. Explicit stops rather than a
+     repeating gradient so the two colours interleave instead of lining up. */
+}
+.profile-mark__glitch--magenta {
+  background: linear-gradient(180deg,
+    transparent 0 14%, var(--fx-glitch-magenta) 14% 23%,
+    transparent 23% 46%, var(--fx-glitch-magenta) 46% 57%,
+    transparent 57% 74%, var(--fx-glitch-magenta) 74% 82%,
+    transparent 82% 100%);
+}
+.profile-mark__glitch--cyan {
+  background: linear-gradient(180deg,
+    transparent 0 28%, var(--fx-glitch-cyan) 28% 36%,
+    transparent 36% 60%, var(--fx-glitch-cyan) 60% 70%,
+    transparent 70% 88%, var(--fx-glitch-cyan) 88% 95%,
+    transparent 95% 100%);
+}
+/* The same six-step 0.7s rhythm the .glitch-tgt engine already runs on the
+   footer CTA and on "vibe coding". The px figures are that engine's own, times
+   --profile-mark-glitch so one number drives how hard it jumps. steps(6) is
+   what makes it jump rather than glide; an eased version reads as a wobble. */
+@keyframes profile-mark-chroma-top {
+  0%, 100% { transform: translate(calc(var(--profile-mark-glitch) * -2), 0); }
+  18% { transform: translate(calc(var(--profile-mark-glitch) * -5), calc(var(--profile-mark-glitch) * -1)); }
+  36% { transform: translate(calc(var(--profile-mark-glitch) * 1), calc(var(--profile-mark-glitch) * 1)); }
+  54% { transform: translate(calc(var(--profile-mark-glitch) * -3), 0); }
+  72% { transform: translate(calc(var(--profile-mark-glitch) * -1), calc(var(--profile-mark-glitch) * -2)); }
+  88% { transform: translate(calc(var(--profile-mark-glitch) * -4), calc(var(--profile-mark-glitch) * 1)); }
+}
+@keyframes profile-mark-chroma-bottom {
+  0%, 100% { transform: translate(calc(var(--profile-mark-glitch) * 2), 0); }
+  18% { transform: translate(calc(var(--profile-mark-glitch) * 5), calc(var(--profile-mark-glitch) * 1)); }
+  36% { transform: translate(calc(var(--profile-mark-glitch) * -1), calc(var(--profile-mark-glitch) * -1)); }
+  54% { transform: translate(calc(var(--profile-mark-glitch) * 3), 0); }
+  72% { transform: translate(calc(var(--profile-mark-glitch) * 1), calc(var(--profile-mark-glitch) * 2)); }
+  88% { transform: translate(calc(var(--profile-mark-glitch) * 4), calc(var(--profile-mark-glitch) * -1)); }
+}
+.profile-mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  /* The rim follows the mark's own shape (2026-09-02). It was a radial
+     gradient ring, which can only ever draw a circle; now that the corner
+     tier can square the portrait through --avatar-radius, the ring is the
+     pseudo painted solid white with its content box masked away. Percentage
+     padding resolves against the mark's width, so the ring stays the same
+     3.208% of the diameter the radial version drew, at every size, and
+     border-radius: inherit keeps it on the mark's own corners. Only the
+     mask's alpha matters, so the white token stands in for "opaque". */
+  background: var(--color-static-white);
+  box-sizing: border-box;
+  padding: calc((100% - var(--profile-mark-rim)) / 2);
+  -webkit-mask-image: linear-gradient(var(--color-static-white) 0 0), linear-gradient(var(--color-static-white) 0 0);
+  -webkit-mask-clip: content-box, border-box;
+  -webkit-mask-composite: xor;
+  mask-image: linear-gradient(var(--color-static-white) 0 0), linear-gradient(var(--color-static-white) 0 0);
+  mask-clip: content-box, border-box;
+  mask-composite: exclude;
+}
+/* The glitch IS the movement, so reduced motion drops it rather than slowing
+   it down. Same ruling as .heading-glitch and the .glitch-tgt engine. */
+@media (prefers-reduced-motion: reduce) {
+  .profile-mark__glitch { transition: none; animation: none !important; }
+  .header-brand-link:hover .profile-mark__glitch,
+  .header-brand-link:focus-visible .profile-mark__glitch { opacity: 0; }
 }
 
 
@@ -582,14 +878,41 @@ a.card:focus-visible { text-decoration: none; }
 /* Variant: accent-emphasis colour for eyebrows sitting on marquee cards. */
 .section-label--accent { color: var(--color-accent-emphasis); }
 
+/* The section header block, and the ONE owner of the gap from a section heading
+   to the first thing under it (2026-08-23). Before this, that gap was hand-typed
+   as a margin-top on whatever container happened to come next: five classes
+   across three files, which measured 12 / 24 / 32 / 40 / 48px on the same page.
+   Two mechanics make this rule the single source rather than a sixth opinion:
+     - PADDING, not margin. A margin here would collapse against the next
+       container's own margin-top and the LARGER value would win, which is the
+       exact failure being replaced.
+     - flow-root, so the h2's own margin-bottom cannot escape the block and
+       collapse through into that gap.
+   Consumers must therefore declare NO margin-top on the content that follows a
+   .section-head; tokens/section-head-lint.mjs fails the build if one reappears. */
+.section-head {
+  display: flow-root;
+  padding-block-end: var(--section-head-gap);
+}
+.section-head > .section-title { margin-block-end: 0; }
+
 /* Task #43: halve heading-to-body gap globally. Was var(--space-5) = 24px,
-   now var(--space-3) = 12px. Tighter rhythm across every section. */
+   now var(--space-3) = 12px. Tighter rhythm across every section.
+   NOTE: inside a .section-head this margin is zeroed above; it still applies to
+   the card-level .section-title consumers (featured cards, Under-the-Hood). */
 .section-title {
   font-family: var(--font-display);
   font-weight: var(--weight-extrabold);
-  font-size: var(--text-h1);
+  /* display-section is 1.5x the text-h1 base: Nathan's pick from the
+     in-context type editor, 2026-08-21. The About heading opts down to 1.25x
+     in sections.css; the featured-card override below this file keeps card
+     titles on their own scale. */
+  font-size: var(--display-section);
   line-height: var(--line-display);
-  letter-spacing: var(--display-tight);
+  /* --tl-track-display: the portfolio theme lab's per-pairing override,
+     unset everywhere else, so other consumers of this file always get the
+     --display-tight fallback. */
+  letter-spacing: var(--tl-track-display, var(--display-tight));
   margin: 0 0 var(--space-3);
   text-wrap: balance;
   max-width: 22ch;
@@ -601,10 +924,36 @@ a.card:focus-visible { text-decoration: none; }
    accessibility tree by default (measured in Chromium: the bare "." was
    appended to every .section-title accessible name), so the / "" alternative
    text below explicitly empties it for assistive tech. */
+/* DRAWN, not typed (2026-08-24). This was `content: "."` in brand lime, which
+   worked while the display face was Inter: Inter's full stop is a rounded square
+   and passes as a dot. Anton's is a hard RECTANGLE, measured 1.20 wide to tall
+   against Inter's 1.01, and its right sidebearing is tight enough that in "Work."
+   the mark touched the k.
+   The brand shape was always a circle anyway, the wordmark's dot and the portrait
+   are both circles, so the glyph was only ever standing in for one. Drawing it in
+   em keeps it tracking the heading at every clamp step, and its own left gap means
+   it can never touch the last letter whatever the face does.
+   content: "" / "" keeps the empty alt so assistive tech still skips it, exactly
+   as the glyph version did; generated content IS exposed to the accessibility
+   tree by default.
+   NO LIFT (Nathan, 2026-08-25). The period is flat brand lime on every ground.
+   The old --accent-period-shadow was authored for a text-shadow and carried a
+   spread radius, which text-shadow rejects, so it had silently computed to none
+   for the whole time the period was a typed glyph. Moving to a drawn box in the
+   Anton migration made it render for the first time, and what it rendered was a
+   hard 1px ring: zero offset, zero blur, one pixel of spread reads as a stroke on
+   a drawn shape, not a shadow. The site had looked correct without it for three
+   months, so it comes off rather than gets retuned. The token is deleted, not left
+   at none, so nothing can reach for it again. */
 .section-title::after {
-  content: "." / "";
-  color: var(--brand-lime);
-  text-shadow: var(--accent-period-shadow);
+  content: "" / "";
+  display: inline-block;
+  width: 0.15em;
+  height: 0.15em;
+  margin-left: 0.07em;
+  border-radius: var(--dot-radius);
+  background: var(--brand-primary);
+  vertical-align: baseline;
 }
 /* (The legacy span.dot heading rule was deleted 2026-07-10, audit M-25: the
    last two heading spans are gone; every heading period is the ::after above.
@@ -733,9 +1082,14 @@ a.card:focus-visible { text-decoration: none; }
   flex-shrink: 0;
   transition: transform var(--duration-fast) var(--ease-default);
 }
-.link-underline--icon:hover .icon-size-xs,
 .link-underline--icon:focus-visible .icon-size-xs {
   transform: translate(3px, -3px);
+}
+/* Hover half capability-gated; focus-visible stays outside. */
+@media (hover: hover) {
+  .link-underline--icon:hover .icon-size-xs {
+    transform: translate(3px, -3px);
+  }
 }
 
 /* Prose variant: the single instance living mid-sentence inside a <p>, with no
@@ -779,7 +1133,7 @@ a.card:focus-visible { text-decoration: none; }
    attribute (0,2,0), which also outranks the container layout rule
    `main > section.container-* > *` (0,1,2). No !important needed.
    ============================================================ */
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   /* Base carousel chrome at the component's natural specificity, so
      section-scoped rules (now [id=...] class-tier) can still tune margins
      and spacing the way they always did. */
@@ -851,28 +1205,25 @@ a.card:focus-visible { text-decoration: none; }
    Carousel nav (.ds-carousel-nav)
    One shared desktop/tablet control for the Featured projects and
    Testimonials carousels: a thin progress rail (position), a mono
-   "N / total" counter, and bare Lucide chevrons that flank the
+   "N/total" counter, and bare Lucide chevrons that flank the
    counter. Replaces the old split arrows-left / dots-right bars.
-   The generic mobile .ds-dots component (disciplines, certifications,
-   compact testimonials) is separate and unchanged. Colours follow the
-   page theme via --color-dot-active (ink on light, lime on dark); the
-   always-dark testimonials band re-maps the tokens locally (sections.css),
-   the same way its dots already do. Rail + counter are decorative and
-   aria-hidden; position is announced via the carousels' live region.
+   Colours follow the page theme via --color-dot-active (ink on light,
+   lime on dark); the testimonials band re-maps the rail tokens locally
+   (sections.css). Rail + counter are decorative and aria-hidden;
+   position is announced via the carousels' live region.
    ============================================================ */
 .ds-carousel-nav {
   display: flex;
   align-items: center;
   gap: var(--space-4);
+  max-width: 100%;
+  min-width: 0;
   /* The track is a SUBTLE groove (a light line), not an inactive-dot grey:
      a dot grey is dark enough to blur into the ink fill. The fill is the
      accent. Both are re-mappable per band (see the testimonials override in
      sections.css). */
   --cn-rail-track: var(--color-border);
   --cn-rail-fill: var(--color-dot-active);
-  /* Press circle behind the chevron glyph; re-mapped per band like the
-     rail vars (testimonials + UTH stages in sections.css). */
-  --cn-arrow-press: var(--color-surface-sunken);
   /* Chevron size, shared by the button box and the glyph inside it. Sits
      between --btn-glyph-lg (18px) and the 36px header icon circles; see the
      note on the one-size rule further down. */
@@ -882,9 +1233,15 @@ a.card:focus-visible { text-decoration: none; }
   position: relative;
   width: var(--space-11);
   height: var(--space-1);
-  flex: 0 0 auto;
+  /* 0 1 auto, not 0 0 auto (2026-08-23, deploy overflow gate): Kind words is
+     the first band to show this nav at 320, where the fixed 192px rail plus
+     the pager measures 315px and pokes 11px past the viewport. The rail is
+     the one part with nothing inside it, so it alone gives way; every wider
+     band still gets the full 192. min-width: 0 on the nav below is the other
+     half, a flex item's default min-width: auto refuses the shrink. */
+  flex: 0 1 auto;
   background: var(--cn-rail-track);
-  border-radius: var(--radius-full);
+  border-radius: var(--bar-radius);
   overflow: hidden;
 }
 .ds-carousel-nav__fill {
@@ -894,8 +1251,14 @@ a.card:focus-visible { text-decoration: none; }
   height: 100%;
   width: 0;
   background: var(--cn-rail-fill);
-  border-radius: var(--radius-full);
-  transition: width var(--duration-base) var(--ease-default);
+  border-radius: var(--bar-radius);
+  /* Spring, not a linear slide (2026-09-07, Nathan picked P2 from the motion
+     mockup). The fill runs a little past the new position and settles back, so
+     a step reads as the bar CATCHING UP with you rather than a value being
+     set. --ease-spring overshoots by design; the rail's overflow: hidden
+     clips the last card's overshoot past 100%, and a backwards step cannot
+     undershoot below 0. Reduced motion drops the transition entirely below. */
+  transition: width var(--duration-slow) var(--ease-spring);
 }
 .ds-carousel-nav__pager {
   display: flex;
@@ -917,8 +1280,9 @@ a.card:focus-visible { text-decoration: none; }
   background: transparent;
   color: var(--color-text-secondary);
   cursor: pointer;
-  border-radius: var(--radius-full);
-  transition: color var(--duration-fast) var(--ease-default);
+  border-radius: var(--btn-radius);
+  transition: color var(--duration-fast) var(--ease-default),
+              transform var(--duration-fast) var(--ease-default);
 }
 .ds-carousel-nav__arrow::before {
   content: "";
@@ -929,37 +1293,66 @@ a.card:focus-visible { text-decoration: none; }
   height: var(--touch-target-min);
   transform: translate(-50%, -50%);
 }
-.ds-carousel-nav__arrow:hover { color: var(--color-text-primary); }
+/* Grows in place. It replaces the directional nudge the chevron used to run
+   (see the glyph-moments block below): a bare arrow that slides toward the
+   edge of its own 44px target reads as the control moving away from the
+   cursor, and Nathan called it out on 2026-09-07. A scale has no direction to
+   get wrong, and it is the same gesture on both arrows. Transform on the
+   BUTTON, not the glyph, so the whole control answers as one thing. */
+.ds-carousel-nav__arrow:hover:not(:disabled) { color: var(--color-text-primary); }
+/* The MOTION half sits behind the capability gate while the colour above does
+   not: a touch tap synthesises hover, and a latched colour is invisible where a
+   latched scale leaves the arrow sitting enlarged after the finger lifts. */
+@media (hover: hover) {
+  .ds-carousel-nav__arrow:hover:not(:disabled) { transform: scale(1.22); }
+}
 .ds-carousel-nav__arrow:focus-visible {
   outline: var(--border-focus);
   outline-offset: var(--focus-ring-offset);
 }
-/* Touch-visible press: filled circle + full-strength glyph. Background
-   only, no transform: the arrows flank live scroll-snap tracks (Tesla
-   review Group 4). */
+/* Press: the glyph snaps small under the finger, full-strength ink, and no
+   circle behind it (2026-09-07, Nathan picked A3 from the motion mockup).
+   This REVERSES the earlier "background only, no transform" ruling (Tesla
+   review Group 4), which was written to keep the arrows still beside a live
+   scroll-snap track. A scale is not a translate: nothing changes position, so
+   the press cannot be mistaken for the track moving, and it is the one press
+   signal that survives on touch where there is no hover. The filled circle it
+   replaces was the only consumer of --cn-arrow-press, so that token and its
+   per-band re-maps went with it. */
 .ds-carousel-nav__arrow:active:not(:disabled) {
-  background: var(--cn-arrow-press);
   color: var(--color-text-primary);
+  transform: scale(0.9);
 }
-/* Boundary state: carousels that do not loop (Featured, mobile swipe) disable
-   the arrow at each end. Dimmed + non-interactive; disabled controls are exempt
-   from WCAG 1.4.3 contrast, so the low opacity is fine. */
+/* Boundary state. Only the BACKWARD arrow reaches it now: forward rewinds to
+   the first card instead of dead-ending (2026-09-07, see the carousel engine in
+   index.html). Dimmed + non-interactive; disabled controls are exempt from
+   WCAG 1.4.3 contrast, so the low opacity is fine. */
 .ds-carousel-nav__arrow:disabled { opacity: 0.3; cursor: default; }
 .ds-carousel-nav__arrow i,
 .ds-carousel-nav__arrow svg {
   width: var(--cn-glyph);
   height: var(--cn-glyph);
 }
+/* One tight lockup, not three loose words (2026-09-07). The counter used to
+   read "3 / 8": semibold current, regular total, wide tracking, and a literal
+   space either side of the slash. At 14px mono that is four gaps inside a
+   three-glyph number and it drifted apart from the rail it belongs to. Now the
+   whole count is bold at normal tracking and the markup carries no spaces, so
+   it reads as one object. The slash and total keep the secondary ink, which is
+   the only thing still separating "where you are" from "how many there are";
+   dropping that too would flatten the pair into one grey number. */
 .ds-carousel-nav__count {
   font-family: var(--font-mono);
   font-size: var(--size-sm);
-  letter-spacing: var(--tracking-wide);
+  letter-spacing: var(--tracking-normal);
+  font-weight: var(--weight-bold);
   color: var(--color-text-secondary);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+/* Colour only; the weight comes from the parent so the three parts cannot
+   drift to different weights again. */
 .ds-carousel-nav__count b {
-  font-weight: var(--weight-semibold);
   color: var(--color-text-primary);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -973,7 +1366,7 @@ a.card:focus-visible { text-decoration: none; }
    site-wide. */
 .ds-carousel-nav--full { display: none; width: 100%; margin-top: var(--space-4); }
 .ds-carousel-nav--full .ds-carousel-nav__rail { flex: 1; width: auto; }
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
   .ds-carousel-nav--full { display: flex; }
 }
 /* ONE size at every width (2026-08-17). This used to be a split: a compact
@@ -1000,41 +1393,12 @@ a.card:focus-visible { text-decoration: none; }
    zero consumers, never documented; the four class names are tombstoned in
    tokens/css-liveness-lint.mjs. */
 
-/* Audit M-49: contexts that need an INSET focus ring because their parent
-   uses overflow:hidden. Negative offset keeps the 2px halo painted INSIDE
-   the element rather than clipped away. */
-.glb-thumb:focus-visible,
-.full-track .f-card:focus-visible {
-  outline-offset: -2px;
-}
-
-/* ============================================================
-   Fractional-DPR outline crispness (Tesla review Group 2, 2026-07-02).
-   On screens whose devicePixelRatio is fractional (Windows laptops at
-   125%/150% scaling report 1.25/1.5; the Tesla Model Y L 16in screen
-   measures 1.333 in-car), a 1px border maps onto one-and-a-fraction
-   physical pixels and anti-aliases into an uneven, fractured line.
-   A whole 2px keeps control outlines crisp in that window; true 1x
-   and integer 2x (Retina) screens are excluded and keep the 1px look.
-   Deliberate trade-offs:
-   - Desktop browser zoom (roughly 110-175% on a 1x screen) also lands
-     in the window, so outlines thicken while zoomed. Accepted.
-   - Controls only: cards and dividers stay 1px (the --border-hairline
-     composite is NOT touched; it has ~44 consumers).
-   - Bumping the BASE .btn is deliberate: border-box keeps geometry
-     stable, the primary's lime-on-lime border stays invisible, and
-     side-by-side primary + secondary CTAs keep identical text metrics.
-   - Any later `border:` SHORTHAND on these controls silently resets
-     the width inside this window; override with border-color /
-     border-style instead.
-   min/max-resolution dppx form (not range syntax) for Safari reach. */
-@media (min-resolution: 1.1dppx) and (max-resolution: 1.9dppx) {
-  .btn,
-  .chip,
-  .badge {
-    border-width: 2px;
-  }
-}
+/* (Audit M-49's inset focus rule deleted 2026-09-08, audit n-17: it named
+   .glb-thumb, which went with the photo lightbox, and .full-track .f-card,
+   which went with the testimonials rebuild to .kw-*. Zero consumers for either;
+   both names are tombstoned in tokens/css-liveness-lint.mjs. The technique is
+   still right where it is needed: negative outline-offset paints the halo
+   inside an overflow:hidden parent instead of letting it be clipped.) */
 
 
 /* -----------------------------------------------------------------------------
@@ -1097,6 +1461,10 @@ a.card:focus-visible { text-decoration: none; }
   font-weight: var(--sbtn-eyebrow-weight);
   letter-spacing: var(--tracking-wide);
   color: var(--sbtn-eyebrow-fg);
+  /* Caps are a STYLE, not the content (audit n-11, 2026-09-08). Typed in
+     capitals the source read CONNECT ON, which some screen readers spell out
+     letter by letter. */
+  text-transform: uppercase;
 }
 .sbtn-t strong {
   font-family: var(--font-display);
@@ -1120,7 +1488,7 @@ a.card:focus-visible { text-decoration: none; }
    pointers because Chromium sticks :hover after a tap. */
 @media (hover: hover) {
   .sbtn:hover {
-    --sbtn-bg: var(--brand-lime);
+    --sbtn-bg: var(--brand-primary);
     --sbtn-fg: var(--brand-ink);
     --sbtn-eyebrow-fg: var(--brand-ink);
     --sbtn-gh-fg: var(--brand-ink);
@@ -1140,13 +1508,37 @@ a.card:focus-visible { text-decoration: none; }
   text-decoration: none;
 }
 .sbtn:focus-visible {
-  --sbtn-bg: var(--brand-lime);
+  --sbtn-bg: var(--brand-primary);
   --sbtn-fg: var(--brand-ink);
   --sbtn-eyebrow-fg: var(--brand-ink);
   --sbtn-gh-fg: var(--brand-ink);
   --sbtn-li-fg: var(--brand-ink);
   outline: 2px solid var(--btn-focus-ring);
   outline-offset: var(--focus-ring-offset);
+  border-color: var(--color-border-brand);
+}
+/* Press: the lime-dim step, the same one .btn--secondary:active and
+   .btn--icon:active take, for the same stated reason: it is the cue that reads
+   on TOUCH, where the lime hover fill above never fires. This component was the
+   only interactive family on the site without one (2026-09-07). Every .btn had
+   it; .sbtn shipped hover, focus and rest and simply stopped there, so the three
+   hero badges were the one place a finger got no paint back. Found while giving
+   the LinkedIn mark its moment: the mark moved and the plate under it did not.
+
+   Declared AFTER the hover and focus blocks so it wins the (0,2,0) tie while
+   they apply, exactly as the note on .btn--primary:active says. It repoints the
+   same five custom properties the other two states do rather than setting
+   background and color directly, which is what carries the eyebrow, the octocat
+   and the [in] glyph with it without enumerating combinations. Dim, not full
+   lime: a press is a step DOWN from the hover fill, not a second copy of it,
+   and the value is opaque because the state-contrast gate's background walk
+   cannot composite alpha. */
+.sbtn:active {
+  --sbtn-bg: var(--brand-primary-dim);
+  --sbtn-fg: var(--brand-ink);
+  --sbtn-eyebrow-fg: var(--brand-ink);
+  --sbtn-gh-fg: var(--brand-ink);
+  --sbtn-li-fg: var(--brand-ink);
   border-color: var(--color-border-brand);
 }
 /* Marks. One optical target for all three. The [in] bug is cropped to its rounded
@@ -1169,9 +1561,17 @@ a.card:focus-visible { text-decoration: none; }
   .sbtn:hover .sbtn-li--black,
   [data-theme="dark"] .sbtn:hover .sbtn-li--black { display: block; }
 }
+/* The mark's colourway follows every lit state, press included. Above 768 a
+   touch device shows the PNG set and gets no hover, so without the press pair
+   here a tap would paint brand blue on the lime-dim fill, which is the one
+   pairing the three files exist to avoid. (0,3,0) clears the per-theme rules
+   at (0,2,0); the hover half needs its (0,4,0) dark twin, these do not. */
 .sbtn:focus-visible .sbtn-li--blue,
-.sbtn:focus-visible .sbtn-li--white { display: none; }
-.sbtn:focus-visible .sbtn-li--black { display: block; }
+.sbtn:focus-visible .sbtn-li--white,
+.sbtn:active .sbtn-li--blue,
+.sbtn:active .sbtn-li--white { display: none; }
+.sbtn:focus-visible .sbtn-li--black,
+.sbtn:active .sbtn-li--black { display: block; }
 /* The boxless glyph is mobile only, see the mark-only block below. Its mask
    image lives in the portfolio's sections.css, not here: this sheet is shared
    with other projects and must not reach for an asset only the portfolio
@@ -1242,17 +1642,91 @@ a.card:focus-visible { text-decoration: none; }
   letter-spacing: var(--tracking-tight);
 }
 
-/* Mobile: mark only. Three labelled badges ate the fold, and a logo already says
-   which service it is. The label stays in the DOM, clipped rather than removed,
+/* Phone: mark only, below 600. Three labelled badges ate the fold, and a logo
+   already says which service it is. The label stays in the DOM, clipped rather than removed,
    so the accessible name survives independently of the aria-label. Square, so
-   the 44px target is met on both axes. */
-@media (max-width: 768px) {
+   the 44px target is met on both axes.
+   36px visual + ghost target (Nathan 2026-08-27): the row plus the WCAG badge
+   measured roughly 292px against roughly 288px available at 320px wide, which
+   wrapped the third icon to its own line. --sbtn-min-h-sm buys the space back;
+   --touch-target-min never moves, restored by the centred ::after below (same
+   C42 pattern as the header icon buttons, gate-checked by touch-target-lint).
+   nowrap on the row is a second, independent guard: even a future fourth icon
+   should never internally wrap this row again.
+   First pass shrank the icons to 32 and collapsed the badge to a bare W3C mark;
+   Nathan rejected both (rectangles, not squares, because the mobile override
+   set height but left the base rule's min-height:44 standing over it; and a
+   redesigned badge rather than the same one at a smaller size). Corrected:
+   min-height is overridden alongside height everywhere below, and the badge
+   keeps its full mark+text composition, uniformly scaled to the SAME 36px
+   the icons use via the wcagm.*-sm token group, never simplified. */
+/* Interim tier: name + arrow, no lead line (Nathan 2026-09-12).
+   Between the full pill and the mark-only badge there was a cliff: at 769 the
+   row is three labelled pills 482px wide, and one pixel narrower all three
+   labels vanish at once, while 736px of the hero foot sits empty. The lead
+   line ("Connect on" / "Plugins on" / "View code on") is the half that carries
+   no information a logo and a wordmark do not already carry, so it is the half
+   that goes first. Measured on the page, both themes: the row drops 482 -> 390.
+   600 and not the 560 the first sketch suggested. 560 is where the row fits
+   EXACTLY: 390 + 126 badge + 12 gap = 528, the whole width of the hero foot,
+   with the gap already at its floor. Re-measured with the web fonts blocked (a
+   real first paint, before Anton and Work Sans arrive) the row is 397 and the
+   badge wants 131, and at 560 the badge is squeezed to 119 to make room. A tier
+   whose only slack is a font that has not loaded yet is not a tier. At 600 that
+   same fallback pass leaves 40px spare and the badge keeps its full width.
+   align-self on the arrow is the whole second half of the change. The base
+   rule pins it to flex-start so it sits level with the small line; with that
+   line gone, flex-start leaves it floating above a single centred wordmark.
+   center puts it beside the name, which is what the two-line version was
+   aiming at all along.
+   Nothing else moves: padding, plate height, radius, mark size and the hover,
+   focus and press states are the desktop ones, because this is the SAME pill
+   with one line fewer, not a third design.
+   600 is a raw number because a media query cannot read a custom property. It
+   is registered in tokens/breakpoints.shared.mjs with this reasoning, which is
+   the gate that checks it. */
+@media (min-width: 600px) and (max-width: 768px) {
+  /* Same second guard as the mark-only tier below: a labelled row that has
+     just lost a line must still never wrap internally. */
+  .sbtn-row { flex-wrap: nowrap; }
+  .sbtn-t small { display: none; }
+  .sbtn-arr { align-self: center; }
+  /* Pin the mark cell to the shared mark height. With two lines of text the
+     stack is the tallest thing in the pill and every plate resolves to the same
+     49px; with one line the MARK becomes the tallest thing, and Figma's mark is
+     deliberately a size down (it is the only portrait mark here, see .sbtn-m svg
+     above). Measured without this line: LinkedIn and GitHub 46px, Figma 44px,
+     three pills at two heights in one row. The cell takes --sbtn-mark so the
+     Figma tower keeps its optical step down INSIDE a cell that agrees with the
+     other two. */
+  .sbtn-m { height: var(--sbtn-mark); }
+}
+
+@media (max-width: 599.98px) {
+  .sbtn-row { flex-wrap: nowrap; }
   .sbtn {
     padding: 0;
-    width: var(--touch-target-min);
-    height: var(--touch-target-min);
+    width: var(--sbtn-min-h-sm);
+    height: var(--sbtn-min-h-sm);
+    min-height: var(--sbtn-min-h-sm);
+    /* The corner gets its own phone value (2026-09-06, Nathan). A radius does not
+       scale with its box: the shared 14px is 29% of the 49px plate on tablet, and
+       was 39% of the old 36px square here, which read as a circle rather than as
+       the same component one breakpoint down. --sbtn-radius-sm restores the
+       PROPORTION rather than repeating the number. */
+    border-radius: var(--sbtn-radius-sm);
     justify-content: center;
     flex: 0 0 auto;
+    position: relative;
+  }
+  .sbtn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--touch-target-min);
+    height: var(--touch-target-min);
+    transform: translate(-50%, -50%);
   }
   .sbtn-t,
   .sbtn-arr {
@@ -1274,11 +1748,623 @@ a.card:focus-visible { text-decoration: none; }
   .sbtn-li-set { display: none; }
   .sbtn-li-glyph {
     display: block;
-    width: var(--sbtn-mark);
-    height: var(--sbtn-mark);
+    width: var(--sbtn-mark-sm);
+    height: var(--sbtn-mark-sm);
   }
+  /* Figma and GitHub stay plain <svg> at every width (only LinkedIn swaps to the
+     boxless glyph above), so their size lives on the shared .sbtn-m svg rule. The
+     phone override that used to sit here was deleted 2026-09-06: with the phone box
+     back at the full 44px, --sbtn-mark-sm now aliases --sbtn-mark and the rule
+     restated the base value. The tokens stay separate names so the phone mark can
+     diverge again; the rule does not, because a rule that changes nothing is a rule
+     someone later has to prove is dead. */
+
+  /* WCAG badge shrinks to the SAME 36px height as the icons beside it (Nathan
+     2026-08-27), keeping its exact desktop composition: W3C mark cell + amber
+     "WCAG / 2.2 AA" text cell, side by side, nothing hidden. Every property
+     that drives its size gets an explicit *-sm counterpart (mark height,
+     padding, stack gap, both type sizes) rather than a single scale factor, so
+     the badge stays crisp text at every size instead of a blurry CSS zoom.
+     Width is left alone: unlike the square icons, this badge stays a rectangle
+     at every size, so only height/min-height are pinned to match the icons. */
+  .wcagm {
+    height: var(--sbtn-min-h-sm);
+    min-height: var(--sbtn-min-h-sm);
+    /* Same phone corner as the icons beside it, for the same reason. The badge
+       takes its geometry from the social-badge tokens by construction, so the two
+       cannot drift apart: change --sbtn-radius-sm and both move. */
+    border-radius: var(--sbtn-radius-sm);
+  }
+  .wcagm-w3c { padding-inline: var(--wcagm-pad-x-sm); }
+  .wcagm-w3c svg { height: var(--wcagm-mark-sm); }
+  .wcagm-txt {
+    gap: var(--wcagm-stack-gap-sm);
+    padding: var(--wcagm-pad-y-sm) var(--wcagm-pad-x-sm);
+  }
+  .wcagm-txt b { font-size: var(--wcagm-label-size-sm); }
+  .wcagm-txt span { font-size: var(--wcagm-eyebrow-size-sm); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .sbtn:hover .sbtn-arr { transform: none; }
+}
+
+
+/* ---------------------------------------------------------------------------
+   THIS BLOCK MUST STAY LAST IN THE FILE.
+   It sets border-WIDTH only, at the same (0,1,0) specificity as the component
+   rules it covers, so anything declaring a `border:` SHORTHAND after it wins
+   and silently resets the width back to 1px. That is not hypothetical: the
+   .sbtn section was appended below this block, so adding .sbtn to the list
+   above changed nothing until the block moved down here (measured 2026-08-25:
+   .sbtn still computed 1px at 1.25/1.333/1.5 with the selector added but the
+   block still sitting mid-file). If you add a component below this point, move
+   this block down again rather than adding a second copy.
+   --------------------------------------------------------------------------- */
+/* ============================================================
+   Fractional-DPR outline crispness (Tesla review Group 2, 2026-07-02).
+   On screens whose devicePixelRatio is fractional (Windows laptops at
+   125%/150% scaling report 1.25/1.5; the Tesla Model Y L 16in screen
+   measures 1.333 in-car), a 1px border maps onto one-and-a-fraction
+   physical pixels and anti-aliases into an uneven, fractured line.
+   A whole 2px keeps control outlines crisp in that window; true 1x
+   and integer 2x (Retina) screens are excluded and keep the 1px look.
+   Deliberate trade-offs:
+   - Desktop browser zoom (roughly 110-175% on a 1x screen) also lands
+     in the window, so outlines thicken while zoomed. Accepted.
+   - Controls only: cards and dividers stay 1px (the --border-hairline
+     composite is NOT touched; it has ~44 consumers).
+   - Bumping the BASE .btn is deliberate: border-box keeps geometry
+     stable, the primary's lime-on-lime border stays invisible, and
+     side-by-side primary + secondary CTAs keep identical text metrics.
+   - Any later `border:` SHORTHAND on these controls silently resets
+     the width inside this window; override with border-color /
+     border-style instead.
+   - .sbtn joined 2026-08-25. It carries a load-bearing 1px control
+     boundary of its own and used to be covered here as the portfolio's
+     `.icon-row a`; PR #396 rebuilt that row as .sbtn, which carries no
+     .btn class, so the bump quietly stopped applying to the hero social
+     badges. Measured on the live page before the fix: .btn--secondary
+     (same border token) read 2px at 1.25/1.333/1.5 while .sbtn read 1px
+     at every one of them.
+   min/max-resolution dppx form (not range syntax) for Safari reach. */
+@media (min-resolution: 1.1dppx) and (max-resolution: 1.9dppx) {
+  .btn,
+  .chip,
+  .badge,
+  .sbtn {
+    border-width: 2px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Glyph moments
+   ---
+   TWO TIERS (2026-09-07). Every interactive glyph moves; how much it moves
+   depends on whether its own shape has something to say.
+
+   1. The shared default, gm-perk: a quick scale up with a tilt, settling past
+      centre. Inherited by every glyph with no signature of its own, so no
+      icon on the site is ever silent and a NEW icon needs no decision to feel
+      alive. It is the safety net, not the ambition. A glyph opts out by
+      setting --gm-perk: none on itself, which is how the signature list below
+      declines it; keep the opt-out next to the signature that replaces it.
+   2. A signature, told by the glyph's own parts, 300 to 500ms, back to rest
+      on leave: the back arrow draws a bow, a carousel chevron nudges in its
+      direction of travel, the chip's sparkles twinkle, a document's
+      text lines write themselves in, the download arrow bobs into a dipping
+      tray, Figma's five pieces burst and reassemble, the octocat nods,
+      LinkedIn's dot drops onto its bar, and the design system's four parts
+      take a quarter turn into each other's places. Picked by Nathan from the
+      glyph-lab mockup (2026-09-06) and the icon-motion lab (2026-09-07),
+      after the theme-lab flask set the bar.
+
+   The external arrow keeps its nudge above and the mail glyph keeps its
+   shake, so both decline the default too. The WCAG mark and the book glyph
+   deliberately stay still. Logos move, never recolour.
+
+   The hamburger is the one STATE morph rather than a hover moment: the button
+   used to hold a menu glyph and an x glyph and swap which was visible, so
+   opening the drawer had nothing to animate and the click read as a glitch.
+   Now the three bars ARE the X. It is driven by the button's own
+   aria-expanded, so what a screen reader hears and what the eye sees cannot
+   drift apart, and it kept its Lucide glyph (no hand-drawn svg) because
+   translate and rotate are separate properties and can carry their own delay
+   on one element. Its old hover wave is deleted: a second, unrelated hover
+   move competed with the morph that is the actual interaction.
+
+   Mechanism: any hovered, focused or PRESSED link or button sets one custom
+   property per moment; each glyph part declares its animation ONCE and reads
+   that property for its name. Leave the host and the property is gone, the
+   animation is removed, the part is back on its rest frame. Parts are
+   addressed by their position inside the Lucide svg (checked against the
+   vendored 0.474.0 build), so the site's icon re-render needs no re-wiring.
+   The hover setter sits behind the capability gate (a tap must not latch
+   it); focus-visible sits outside it, and so does .is-pressed.
+
+   .is-pressed is the TOUCH way in, and it is why this block was half dead
+   (2026-09-07, Nathan, from a phone). A phone has no hover, so the capability
+   gate correctly withholds the hover setter; it also does not fire
+   focus-visible on a tap, because a tap is not keyboard navigation. Between
+   the two, every moment below had NO trigger on the device most people read
+   the site on: the theme-lab flask sat still when it was tapped while doing
+   the full shake-and-bubble on a desktop an arm's length away. The hamburger
+   was the only header control that answered a tap, and only because it is a
+   state morph off aria-expanded rather than a pointer moment, which is
+   exactly why Nathan reads it as the one that works.
+
+   The class is added on pointerdown and removed one beat later by the
+   press-moment script in index.html. It is a script and not plain :active
+   because :active is only true while the finger is DOWN: a tap is over in
+   under 100ms, the property vanishes with the state, and the animation is
+   removed mid-flight and snaps to its rest frame. What you see is a twitch,
+   which is worse than nothing. Latching for one beat is what makes a press
+   read as the same moment a hover gives, and it cannot stick the way a
+   hover does, because nothing waits on the finger coming back off.
+
+   Every duration is a multiple of --duration-slow, so reduced motion
+   collapses the lot with the site. Overshoots are written into the keyframes
+   rather than a spring curve, so the timing stays on the tokenised curves.
+   ----------------------------------------------------------------------------- */
+:root {
+  --gm-t1: calc(var(--duration-slow) * 0.75);
+  --gm-t2: var(--duration-slow);
+  --gm-t3: calc(var(--duration-slow) * 1.25);
+  --gm-beat: calc(var(--duration-fast) * 0.4);
+  /* The gap between the hamburger's two beats: travel, then rotate. */
+  --gm-menu-stage: calc(var(--gm-t1) * 0.45);
+}
+@media (hover: hover) {
+  :is(a, button):not(:disabled):hover {
+    --gm-perk: gm-perk;
+    --gm-back: gm-bow; --gm-back-shaft: gm-stretch;
+    --gm-spark: gm-pop; --gm-spark-small: gm-blink;
+    --gm-doc: gm-write; --gm-doc-page: gm-lift;
+    --gm-dl: gm-bob; --gm-dl-tray: gm-dip;
+    --gm-fig: gm-burst;
+    --gm-gh: gm-nod;
+    --gm-li-dot: gm-ping-dot; --gm-li-bar: gm-ping-bar; --gm-li-arch: gm-ping-arch;
+    --gm-li-mark: gm-li-mark;
+    --gm-ds: gm-index;
+  }
+}
+:is(a, button):not(:disabled):focus-visible,
+:is(a, button):not(:disabled).is-pressed {
+  --gm-perk: gm-perk;
+  --gm-back: gm-bow; --gm-back-shaft: gm-stretch;
+  --gm-spark: gm-pop; --gm-spark-small: gm-blink;
+  --gm-doc: gm-write; --gm-doc-page: gm-lift;
+  --gm-dl: gm-bob; --gm-dl-tray: gm-dip;
+  --gm-fig: gm-burst;
+  --gm-gh: gm-nod;
+  --gm-li-dot: gm-ping-dot; --gm-li-bar: gm-ping-bar; --gm-li-arch: gm-ping-arch;
+  --gm-li-mark: gm-li-mark;
+  --gm-ds: gm-index;
+}
+
+/* A root <svg> clips to its viewBox by default, and these glyphs are drawn
+   right up to that edge: LinkedIn's dot has its stroke at y=1 with a 3.5px
+   lift to make, and Figma's top pieces sit at y=1 and travel 2px up. So the
+   moment a part moves outward it gets sliced off mid-gesture, which reads as
+   a rendering fault rather than motion. Every glyph with a moving part opts
+   out of the clip. Nothing here travels more than a few px, so the parts stay
+   well inside the 44px button around them. */
+[data-lucide="arrow-left"],
+[data-lucide="component"],
+[data-lucide="download"],
+[data-lucide="figma"],
+[data-lucide="file-text"],
+[data-lucide="github"],
+[data-lucide="linkedin"],
+[data-lucide="sparkles"],
+.sbtn-fg, .sbtn-gh { overflow: visible; }
+
+/* SVG children pivot on the icon's top-left corner unless told otherwise;
+   every animated part states its origin in view-box units. */
+[data-lucide="arrow-left"] > path,
+[data-lucide="menu"] > line,
+[data-lucide="sparkles"] > path,
+[data-lucide="file-text"] > path,
+[data-lucide="download"] > *,
+[data-lucide="figma"] > path,
+[data-lucide="linkedin"] > *,
+[data-lucide="component"] > path,
+.sbtn-fg > path { transform-box: view-box; }
+
+/* TIER 1, the shared default. Every glyph reads it; the ones with a signature
+   or an existing moment of their own decline it on the next line. The root
+   <svg> is a replaced element in HTML flow, so it takes the usual 50% 50%
+   origin and needs no transform-box. */
+[data-lucide] { animation: var(--gm-perk, none) var(--gm-t2) var(--ease-default) both; }
+[data-lucide="arrow-left"],
+[data-lucide="arrow-up-right"],
+[data-lucide="chevron-left"],
+[data-lucide="chevron-right"],
+[data-lucide="component"],
+[data-lucide="download"],
+[data-lucide="figma"],
+[data-lucide="file-text"],
+[data-lucide="github"],
+[data-lucide="linkedin"],
+[data-lucide="mail"],
+[data-lucide="menu"],
+/* moon + sun decline it because they already have a moment, and the perk was
+   EATING it (2026-09-07). Both glyphs live in the theme toggle's cross-fade,
+   which animates transform (a rotate and a scale) through a transition; the
+   perk is an animation on the same element and the same property, and a
+   running animation beats a transition outright. With `both` fill it also
+   holds its last frame for as long as the host is hovered, so the toggle's
+   rotation was suppressed for the whole hover rather than just during the
+   perk. What was left was an opacity-and-blur cross-fade, which is precisely
+   the "it does it, but it's very quick" Nathan reported. The swap is their
+   signature; see .theme-toggle-swap .theme-toggle-icon in sections.css. */
+[data-lucide="moon"],
+[data-lucide="sun"],
+[data-lucide="sparkles"] { --gm-perk: none; }
+@keyframes gm-perk {
+  0%   { transform: scale(1) rotate(0); }
+  40%  { transform: scale(1.14) rotate(-8deg); }
+  72%  { transform: scale(0.98) rotate(3deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+/* A press runs the shared default one tier longer than a hover does. A finger
+   COVERS the glyph it is pressing and lifts around 100ms in, so a --gm-t2
+   moment is mostly spent under the fingertip and the tap reads as dead: this
+   is Nathan's "if it's too quick, your finger's still there and you don't see
+   it". --gm-t3 is the hamburger's own rotate beat, the one control he reads as
+   landing right on a phone, so the whole set now answers a press on that beat.
+   Only the root svg is touched, which is where the shared perk lives; every
+   signature is declared on the glyph's PARTS and already runs at t1 to t3. */
+:is(a, button):not(:disabled).is-pressed [data-lucide] { animation-duration: var(--gm-t3); }
+
+/* Back arrow: pulled back while its shaft stretches, released past rest.
+   The floating back chip keeps its own wind-and-shoot on the svg; the shaft
+   stretch below rides on top of it. */
+[data-lucide="arrow-left"] { animation: var(--gm-back, none) var(--gm-t3) var(--ease-default) both; }
+[data-lucide="arrow-left"] > path:nth-child(2) { transform-origin: 5px 12px; animation: var(--gm-back-shaft, none) var(--gm-t3) var(--ease-default) both; }
+@keyframes gm-bow     { 0% { transform: translateX(0); } 30% { transform: translateX(3px); } 62% { transform: translateX(-4px); } 100% { transform: translateX(0); } }
+@keyframes gm-stretch { 0% { transform: scaleX(1); } 30% { transform: scaleX(1.28); } 62% { transform: scaleX(0.92); } 100% { transform: scaleX(1); } }
+
+/* Carousel chevrons have NO glyph-level moment. They shipped with a nudge in
+   the direction of travel (2026-09-06), lost a drop-shadow ghost on
+   2026-09-07 because the smear read as a rendering fault, and lost the nudge
+   itself the same day: a bare arrow travelling toward the edge of its own tap
+   target reads as the control backing away from the cursor. The whole button
+   now scales instead, in .ds-carousel-nav__arrow above, so the moment belongs
+   to the control rather than to the glyph inside it. They keep the --gm-perk
+   opt-out below: the shared default adds an 8deg tilt, and a tilted chevron
+   stops pointing where it points. */
+
+/* Hamburger, the cross fold. The middle bar dissolves while the outer two
+   travel to the centre, then rotate into the X; closing runs the beats
+   backwards. Lucide draws the middle bar first, then the top, then the
+   bottom, and each bar pivots on its OWN midpoint so the rotate happens in
+   place before the travel moves it.
+
+   translate and rotate are individual transform properties, not a transform
+   list, for two reasons. They compose as translate * rotate, so the rotate
+   lands first and pivots in place; and each takes its own transition-delay,
+   which is what buys the two beats on a single element and keeps this a
+   Lucide glyph instead of a hand-drawn svg with wrapper groups.
+
+   Reversal is the delay list, not a second animation: the base rule is the
+   CLOSING state (rotate unwinds first, then the bars travel home) and the
+   open rule swaps the two delays. The state comes from the button's own
+   aria-expanded, already set by Alpine, so the visual and the announced
+   state are the same fact and there is no second flag to keep in step. */
+[data-lucide="menu"] > line {
+  transition: translate var(--gm-t1) var(--ease-emphasized) var(--gm-menu-stage),
+              rotate var(--gm-t3) var(--ease-emphasized) 0ms,
+              opacity var(--gm-t1) var(--ease-default) var(--gm-menu-stage),
+              scale var(--gm-t1) var(--ease-default) var(--gm-menu-stage);
+}
+[data-lucide="menu"] > line:nth-child(1) { transform-origin: 12px 12px; }
+[data-lucide="menu"] > line:nth-child(2) { transform-origin: 12px 6px; }
+[data-lucide="menu"] > line:nth-child(3) { transform-origin: 12px 18px; }
+button[aria-expanded="true"] [data-lucide="menu"] > line {
+  transition-delay: 0ms, var(--gm-menu-stage), 0ms, 0ms;
+}
+button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(1) { opacity: 0; scale: 0.15 1; }
+button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(2) { translate: 0 6px; rotate: 45deg; }
+button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translate: 0 -6px; rotate: -45deg; }
+
+/* Sparkles: the big star shrinks, then pops back past size with a small
+   twist; the two little sparks blink off and on after it, a beat apart. */
+[data-lucide="sparkles"] > path:nth-child(1) { transform-origin: 12px 12px; animation: var(--gm-spark, none) var(--gm-t3) var(--ease-default) both; }
+[data-lucide="sparkles"] > path:nth-child(2),
+[data-lucide="sparkles"] > path:nth-child(3) { transform-origin: 20px 5px; animation: var(--gm-spark-small, none) var(--gm-t2) var(--ease-emphasized) both; animation-delay: calc(var(--gm-beat) * 2); }
+[data-lucide="sparkles"] > path:nth-child(4),
+[data-lucide="sparkles"] > path:nth-child(5) { transform-origin: 4px 18px; animation: var(--gm-spark-small, none) var(--gm-t2) var(--ease-emphasized) both; animation-delay: calc(var(--gm-beat) * 4); }
+@keyframes gm-pop   { 0% { transform: scale(1) rotate(0); } 28% { transform: scale(0.68) rotate(-10deg); } 66% { transform: scale(1.16) rotate(5deg); } 100% { transform: scale(1) rotate(0); } }
+@keyframes gm-blink { 0% { transform: scale(1); } 25% { transform: scale(0); } 65% { transform: scale(1.4); } 100% { transform: scale(1); } }
+
+/* Document: the three text lines write themselves in from the left, one
+   after another, while the page lifts a hair. Dash lengths are the lines'
+   real lengths in view-box units (2, 8, 8), so no pathLength is needed. At
+   the 13px certificate links the glyph grows a fifth for the moment instead
+   of taking the shared up-right nudge, which belongs to the arrow. */
+[data-lucide="file-text"] > path:nth-child(1) { transform-origin: 4px 22px; animation: var(--gm-doc-page, none) var(--gm-t3) var(--ease-default) both; }
+[data-lucide="file-text"] > path:nth-child(n+3) { stroke-dasharray: var(--gm-len); animation: var(--gm-doc, none) var(--gm-t1) var(--ease-exit) both; }
+[data-lucide="file-text"] > path:nth-child(3) { --gm-len: 2; }
+[data-lucide="file-text"] > path:nth-child(4) { --gm-len: 8; animation-delay: calc(var(--gm-beat) * 1.5); }
+[data-lucide="file-text"] > path:nth-child(5) { --gm-len: 8; animation-delay: calc(var(--gm-beat) * 3); }
+@keyframes gm-write { 0% { stroke-dashoffset: calc(var(--gm-len) * -1); } 100% { stroke-dashoffset: 0; } }
+@keyframes gm-lift  { 0% { transform: translateY(0); } 45% { transform: translateY(-1px); } 100% { transform: translateY(0); } }
+.link-underline--icon:focus-visible [data-lucide="file-text"] { transform: scale(1.2); }
+@media (hover: hover) {
+  .link-underline--icon:hover [data-lucide="file-text"] { transform: scale(1.2); }
+}
+
+/* Download: the arrow bobs toward the tray and springs back; the tray dips
+   under it a beat later. */
+[data-lucide="download"] > polyline,
+[data-lucide="download"] > line { animation: var(--gm-dl, none) var(--gm-t2) var(--ease-default) both; }
+[data-lucide="download"] > path { animation: var(--gm-dl-tray, none) var(--gm-t2) var(--ease-default) both; }
+@keyframes gm-bob { 0% { transform: translateY(0); } 40% { transform: translateY(3px); } 72% { transform: translateY(-0.6px); } 100% { transform: translateY(0); } }
+@keyframes gm-dip { 0%, 30% { transform: translateY(0); } 55% { transform: translateY(1.2px); } 80% { transform: translateY(-0.4px); } 100% { transform: translateY(0); } }
+
+/* Figma: the five pieces move apart along their own axes and snap back
+   together. Each piece keeps its shape and colour. The official mark on the
+   hero badge is the same five pieces in a different order and a 300-unit
+   view box, hence the role mapping and --gm-u (units per px). */
+[data-lucide="figma"] { --gm-u: 1; }
+.sbtn-fg { --gm-u: 12.5; }
+[data-lucide="figma"] > path, .sbtn-fg > path { animation: var(--gm-fig, none) var(--gm-t3) var(--ease-default) both; }
+[data-lucide="figma"] > path:nth-child(1), .sbtn-fg > path:nth-child(3) { --gm-bx: -2; --gm-by: -2; }
+[data-lucide="figma"] > path:nth-child(2), .sbtn-fg > path:nth-child(4) { --gm-bx: 2;  --gm-by: -2; }
+[data-lucide="figma"] > path:nth-child(3), .sbtn-fg > path:nth-child(5) { --gm-bx: 2;  --gm-by: 0; }
+[data-lucide="figma"] > path:nth-child(4), .sbtn-fg > path:nth-child(1) { --gm-bx: -2; --gm-by: 2; }
+[data-lucide="figma"] > path:nth-child(5), .sbtn-fg > path:nth-child(2) { --gm-bx: -2; --gm-by: 0; }
+@keyframes gm-burst {
+  0%   { transform: translate(0, 0); }
+  38%  { transform: translate(calc(var(--gm-bx) * var(--gm-u) * 1px), calc(var(--gm-by) * var(--gm-u) * 1px)); }
+  70%  { transform: translate(calc(var(--gm-bx) * var(--gm-u) * -0.25px), calc(var(--gm-by) * var(--gm-u) * -0.25px)); }
+  100% { transform: translate(0, 0); }
+}
+
+/* GitHub: the octocat nods, whether it is Lucide's outline or the official
+   one-path mark on the hero badge. */
+[data-lucide="github"], .sbtn-gh { transform-origin: 50% 100%; animation: var(--gm-gh, none) var(--gm-t3) var(--ease-default) both; }
+@keyframes gm-nod { 0% { transform: rotate(0) translateY(0); } 35% { transform: rotate(-16deg) translateY(-2px); } 70% { transform: rotate(7deg); } 100% { transform: rotate(0) translateY(0); } }
+
+/* LinkedIn: the dot lifts and drops, the bar squashes under the landing, and
+   the arch answers a beat later. The mark's own three parts, the way Figma's
+   burst uses its five. Lucide draws the arch path, then the bar rect, then
+   the dot circle. Until now this glyph was the only one in the footer row
+   that did nothing at all. */
+[data-lucide="linkedin"] > path   { transform-origin: 16px 21px; animation: var(--gm-li-arch, none) var(--gm-t3) var(--ease-default) both; animation-delay: var(--gm-beat); }
+[data-lucide="linkedin"] > rect   { transform-origin: 4px 21px;  animation: var(--gm-li-bar, none) var(--gm-t3) var(--ease-default) both; }
+[data-lucide="linkedin"] > circle { transform-origin: 4px 4px;   animation: var(--gm-li-dot, none) var(--gm-t3) var(--ease-default) both; }
+@keyframes gm-ping-dot {
+  0%   { transform: translateY(0) scale(1); }
+  36%  { transform: translateY(-3.5px) scale(1.08); }
+  64%  { transform: translateY(0) scale(0.86); }
+  82%  { transform: translateY(-0.6px) scale(1.04); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes gm-ping-bar {
+  0%, 46% { transform: scaleY(1); }
+  66%     { transform: scaleY(0.9); }
+  86%     { transform: scaleY(1.03); }
+  100%    { transform: scaleY(1); }
+}
+@keyframes gm-ping-arch {
+  0%   { transform: translateY(0); }
+  44%  { transform: translateY(-1.4px); }
+  100% { transform: translateY(0); }
+}
+/* The hero badge's LinkedIn mark takes the same ping WHOLE (2026-09-07). It was
+   the last mark on the site that did nothing on any device, and after the press
+   moment landed it was the only one of the three hero badges that stayed still
+   under a finger: Figma bursts and the octocat nods, both inline svg with parts
+   to move, and LinkedIn had none to move.
+
+   It has none because it is not a drawing here, and deliberately so. Above 768
+   the mark is one of three official PNG colourways swapped by display; at 768
+   and below it is a single masked box painted with --sbtn-li-fg (the boxless
+   glyph, see .sbtn-li-glyph in the portfolio's sections.css). Both are real
+   boxes, so both take a transform even though neither has parts, and one
+   selector covers the two: only ever one of them is displayed at a time.
+
+   No squash and no scale, unlike the dot this borrows its timing from. The
+   house rule is that logos move but are never recoloured, squashed or
+   mirrored, and squashing an official mark is exactly what that forbids; the
+   keyframes here are the 36/64/82 rhythm of gm-ping-dot with the scale terms
+   dropped, so the hero badge and the footer's Lucide glyph read as one idea
+   (a notification landing) without the trademark being deformed to say it.
+   3px on a 28px mark, well inside the 44px plate around it, so nothing clips. */
+.sbtn-li,
+.sbtn-li-glyph { animation: var(--gm-li-mark, none) var(--gm-t3) var(--ease-default) both; }
+@keyframes gm-li-mark {
+  0%   { transform: translateY(0); }
+  36%  { transform: translateY(-3px); }
+  64%  { transform: translateY(0); }
+  82%  { transform: translateY(-0.8px); }
+  100% { transform: translateY(0); }
+}
+
+/* Design system: the four parts take a quarter turn around the centre,
+   gathering in and fanning back out, and land in each other's places.
+   Interchangeable parts, one shape, which is the whole argument for a system
+   and the reason this glyph earns a signature rather than the default.
+   The glyph has 4-fold symmetry about 12,12, so a 90deg landing is the rest
+   frame again and the animation can drop cleanly on leave. Lucide draws the
+   parts right, left, bottom, top, so the stagger below runs them clockwise
+   from the top rather than in document order, which would jump across the
+   glyph and read as noise. */
+[data-lucide="component"] > path { transform-origin: 12px 12px; animation: var(--gm-ds, none) var(--gm-t3) var(--ease-emphasized) both; }
+[data-lucide="component"] > path:nth-child(4) { animation-delay: 0ms; }
+[data-lucide="component"] > path:nth-child(1) { animation-delay: var(--gm-beat); }
+[data-lucide="component"] > path:nth-child(3) { animation-delay: calc(var(--gm-beat) * 2); }
+[data-lucide="component"] > path:nth-child(2) { animation-delay: calc(var(--gm-beat) * 3); }
+@keyframes gm-index {
+  0%   { transform: rotate(0) scale(1); }
+  46%  { transform: rotate(50deg) scale(0.82); }
+  100% { transform: rotate(90deg) scale(1); }
+}
+
+/* Reduced motion: the durations already collapse to 1ms with the tokens;
+   this holds every part on its rest frame outright. */
+@media (prefers-reduced-motion: reduce) {
+  [data-lucide],
+  :is(a, button):not(:disabled).is-pressed [data-lucide],
+  [data-lucide="arrow-left"], [data-lucide="arrow-left"] > path,
+  [data-lucide="menu"] > line, [data-lucide="sparkles"] > path,
+  [data-lucide="file-text"] > path, [data-lucide="download"] > *,
+  [data-lucide="figma"] > path, .sbtn-fg > path,
+  [data-lucide="linkedin"] > *, [data-lucide="component"] > path,
+  .sbtn-li, .sbtn-li-glyph,
+  [data-lucide="github"], .sbtn-gh { animation: none; transition: none; }
+  .link-underline--icon:hover [data-lucide="file-text"],
+  .link-underline--icon:focus-visible [data-lucide="file-text"] { transform: none; }
+  /* The hamburger still has to READ as open, it just gets there in one
+     frame: the transition above is gone, these are the landed positions. */
+  button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(1) { opacity: 0; scale: 0.15 1; }
+  button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(2) { translate: 0 6px; rotate: 45deg; }
+  button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translate: 0 -6px; rotate: -45deg; }
+}
+
+/* ===========================================================================
+   ORBIT, the contact circle (2026-09-15)
+
+   The one bespoke contact control, and deliberately the only one. Everywhere a
+   button will do, the site uses .btn; the orbit exists for the two places with
+   room for a piece of drawn type: the hero, beside the WCAG badge, and the
+   footer slab on a desktop. Below 1024 both of those compositions stack and the
+   orbit is not rendered at all, so there is no small-screen variant to design.
+
+   It is a real <a href="mailto:">, not a styled div, and it carries a visually
+   hidden label because its visible type rides an SVG path.
+
+   Structure, outside in: the rotating rim of type and separators, a hairline
+   ring, the ink disc, a plate under the glyph, then the mail glyph itself. The
+   plate is load bearing on the footer, where a lime glyph on a lime slab would
+   otherwise vanish.
+   ========================================================================= */
+.nm-orbit {
+  --orbit-size: var(--space-10);
+  /* HOW FAR IT SWELLS, in one place, because the pointer half and the keyboard
+     half have to agree and they are declared apart (the pointer one sits behind
+     @media (hover: hover), the keyboard one must not). Was 1.75, which took the
+     128px control to 224px and, in Nathan's words, "expands too large and it's
+     interfering with things" (2026-09-16). 1.25 is 160px, a 29% smaller footprint
+     at the same rest size, which is the ~30% he asked for. */
+  --orbit-swell: 1.25;
+  --orbit-type: 18px;
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  border-radius: var(--btn-radius);
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--duration-slow) var(--ease-emphasized);
+}
+.nm-orbit,
+.nm-orbit:hover,
+.nm-orbit:focus,
+.nm-orbit:active { text-decoration: none; }
+/* The focus half of the swell lives HERE, in the one :focus-visible rule, not
+   beside its hover twin further down: the swell is a transform, so the pointer
+   half has to sit behind @media (hover: hover) and the keyboard half must not.
+   Written as two rules it was the same selector twice, which is a lint error
+   and, more to the point, two places to change one state. */
+.nm-orbit:focus-visible {
+  outline: var(--border-focus);
+  outline-offset: var(--space-2);
+  transform: scale(var(--orbit-swell));
+}
+.nm-orbit-svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+.nm-orbit-type {
+  fill: var(--color-text-primary);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: var(--orbit-type);
+}
+.nm-orbit-sep { fill: var(--brand-primary-dim); }
+.nm-orbit-rim { fill: none; stroke: var(--color-text-tertiary); }
+.nm-orbit-core { fill: var(--color-accent); stroke: var(--color-accent); }
+.nm-orbit-pad { fill: var(--color-accent); }
+.nm-orbit-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: calc(var(--orbit-size) * 0.21);
+  height: calc(var(--orbit-size) * 0.21);
+  margin: calc(var(--orbit-size) * -0.105) 0 0 calc(var(--orbit-size) * -0.105);
+  color: var(--color-on-accent);
+  pointer-events: none;
+}
+.nm-orbit-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  stroke-width: 2;
+  fill: none;
+  stroke: currentColor;
+}
+
+/* The footer slab is flat lime in BOTH themes, so --color-accent (ink in light,
+   lime in dark) cannot be trusted there: in dark mode it would put lime on
+   lime. The footer's own identity is ink carrying lime, the same as its pill,
+   so the orbit is pinned to brand values rather than theme-reactive ones. This
+   is the same reasoning as the documented lime-on-lime ban for .btn--primary. */
+[id="site-footer"] .nm-orbit-type { fill: var(--brand-ink); }
+[id="site-footer"] .nm-orbit-sep { fill: var(--brand-ink); }
+[id="site-footer"] .nm-orbit-rim { stroke: var(--color-on-primary-muted); }
+[id="site-footer"] .nm-orbit-core,
+[id="site-footer"] .nm-orbit-pad { fill: var(--brand-ink); stroke: var(--brand-ink); }
+[id="site-footer"] .nm-orbit-icon { color: var(--brand-primary); }
+[id="site-footer"] .nm-orbit:focus-visible { outline-color: var(--brand-ink); }
+
+/* The rim turns forever and settles under the pointer, which is the point: the
+   words are decorative while it spins and readable the moment you reach for it.
+   --duration-marquee is the site's existing forever-loop duration, shared with
+   the experience marquee, so the two never drift apart. */
+@keyframes nm-orbit-turn {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.nm-orbit-ring {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+  animation: nm-orbit-turn var(--duration-marquee) var(--ease-linear) infinite;
+}
+@media (hover: hover) {
+  .nm-orbit:hover .nm-orbit-ring { animation-play-state: paused; }
+}
+.nm-orbit:focus-visible .nm-orbit-ring { animation-play-state: paused; }
+
+/* THE HOUSE PAUSE CONTRACT. A region with a pause toggle carries
+   data-motion-paused="1" while it is pressed, and everything looping inside it
+   has to answer to that. The ring turns forever and #678 put one inside #hero,
+   whose toggle reads "Pause the skill pillars ticker", and one in the footer:
+   neither toggle knew about it, so both buttons said they had stopped their
+   region while this kept turning. Measured by motion-truth-gate: PASS at #677,
+   FAIL at #678, two findings, one per instance. A pause control that lies is
+   worse than none. */
+[data-motion-paused="1"] .nm-orbit-ring { animation-play-state: paused; }
+
+/* The control swells under the pointer so the type is legible at reading size
+   without holding that footprint at rest. contact-cta.js eases the disc's
+   turbulence over the same moment. */
+@media (hover: hover) {
+  .nm-orbit:hover { transform: scale(var(--orbit-swell)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nm-orbit-ring,
+  .nm-orbit:hover .nm-orbit-ring,
+  .nm-orbit:focus-visible .nm-orbit-ring { animation: none; }
+  .nm-orbit,
+  .nm-orbit:hover,
+  .nm-orbit:focus-visible { transform: none; transition: none; }
 }

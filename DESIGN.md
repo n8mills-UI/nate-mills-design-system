@@ -1,11 +1,16 @@
 ---
-# The value blocks below (colors, typography, rounded, spacing, elevation) are GENERATED from
+# The value blocks below (colors, typography, rounded, spacing) are GENERATED from
 # tokens.json by tokens/designmd.mjs and drift-gated on deploy. Do not hand-edit between the
 # `# DESIGN:*:start` / `# DESIGN:*:end` markers; edit tokens.json and regenerate. The prose, the
 # component recipe map, and everything outside the markers is hand-authored.
 version: 2.0.0
 name: Nate Mills Portfolio
 description: >
+  Design, build, or substantially improve any page, prototype, or document that has to look like it
+  came from natemills.me: portfolio sections, case-study pages, one-pagers, decks, and on-brand
+  artifacts built with no access to the repo. Carries the resolved tokens, the published CSS class
+  API to link against, and the rules that keep the result from looking generated.
+about: >
   A design-systems consultant's portfolio where the system IS the pitch. The voltage is a single
   high-chroma lime held as a scarce accent against warm off-white and warm near-black, with honest
   hairline borders instead of decorative shadows or gradients. It counter-positions against the
@@ -17,9 +22,9 @@ description: >
 colors:
   # DESIGN:colors:start
   # Brand identity (fixed, never theme-flips)
-  brand-lime: "#d2ff37"                                                         # --brand-lime
-  brand-lime-dim: "#b8e030"                                                     # --brand-lime-dim
-  brand-lime-vivid: "#eeff00"                                                   # --brand-lime-vivid
+  brand-lime: "#d2ff37"                                                         # --brand-primary
+  brand-lime-dim: "#b8e030"                                                     # --brand-primary-dim
+  brand-lime-vivid: "#eeff00"                                                   # --brand-primary-vivid
   brand-ink: "#1c1c1f"                                                          # --brand-ink
   brand-gradient: "linear-gradient(135deg in oklab, #d2ff37 0%, #eeff00 100%)"  # --brand-gradient
 
@@ -69,24 +74,24 @@ colors:
 typography:
   families:
     # DESIGN:type-families:start
-    display: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'  # --font-display
-    body: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'  # --font-body
+    display: '"Anton", Impact, "Haettenschweiler", sans-serif'  # --font-display
+    body: '"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'  # --font-body
     mono: '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace'  # --font-mono
     serif: '"PT Serif", Georgia, serif'  # --font-serif
     # DESIGN:type-families:end
   # DESIGN:type-styles:start
-  hero:  # hero headline only
+  hero:  # display specimen; a consuming site’s own hero may set bespoke clamps
     family: display
     size: "clamp(40px, 9vw, 118px)"  # --display-hero
     weight: 600                      # --display-weight
     lineHeight: 1.05                 # --line-display
-    tracking: "-0.04em"              # --display-tight
+    tracking: "-0.0176em"            # --display-tight
   h1:  # every section heading
     family: display
     size: "clamp(34px, 5.8vw, 72px)"  # --text-h1
     weight: 600                       # --display-weight
     lineHeight: 1.05                  # --line-display
-    tracking: "-0.04em"               # --display-tight
+    tracking: "-0.0176em"             # --display-tight
   h2:  # card titles, sub-heads
     family: display
     size: "clamp(22px, 4vw, 32px)"  # --text-h2
@@ -98,13 +103,13 @@ typography:
     size: "clamp(22px, 4vw, 44px)"  # --display-card-title
     weight: 600                     # --display-weight
     lineHeight: 1.15                # --line-heading
-    tracking: "-0.04em"             # --display-tight
+    tracking: "-0.0176em"           # --display-tight
   stat-num:  # stat callout numerals
     family: display
     size: "clamp(40px, 7vw, 88px)"  # --display-stat-num
     weight: 600                     # --display-weight
     lineHeight: 1.05                # --line-display
-    tracking: "-0.04em"             # --display-tight
+    tracking: "-0.0176em"           # --display-tight
   intro:  # section intro line
     family: body
     size: "clamp(20px, 5vw, 24px)"  # --display-intro
@@ -139,8 +144,8 @@ rounded:
   none: 0        # --radius-none (square)
   sm: "8px"      # --radius-sm (inputs, small controls)
   md: "10px"     # --radius-md (mid-size controls, insets)
-  lg: "14px"     # --radius-lg (DEFAULT for cards and modals)
-  xl: "20px"     # --radius-xl (prominent panels)
+  lg: "14px"     # --radius-lg (social badges and other mid-weight containers)
+  xl: "20px"     # --radius-xl (DEFAULT for cards and modals, prominent panels)
   full: "999px"  # --radius-full (pills, chips, badges, buttons, icon buttons)
   # DESIGN:rounded:end
 
@@ -164,14 +169,10 @@ spacing:
   card-pad-spacious: "32px"                    # --card-pad-spacious
   # DESIGN:spacing:end
 
-elevation:
-  # DESIGN:elevation:start
-  none: "none"                                                             # --shadow-none (default; borders carry depth)
-  soft: "0 1px 2px rgb(28 28 31 / 0.04), 0 1px 3px rgb(28 28 31 / 0.06)"   # --shadow-soft (rare resting lift)
-  lift: "0 4px 12px rgb(28 28 31 / 0.06), 0 2px 4px rgb(28 28 31 / 0.04)"  # --shadow-lift (overlays / float-on-scroll only)
-  modal: "0 24px 64px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.18)"  # --shadow-modal (lightboxes above a scrim)
-  # DESIGN:elevation:end
-  focus: "0 0 0 2px {colors.focus-ring}"   # 2px keyboard-focus outline, offset 2px
+# There is no elevation scale. Depth is the surface ladder plus hairline borders (see "Depth and
+# elevation" below). The focus ring is the one ring-shaped value, and it is an outline, not a step.
+focus:
+  ring: "0 0 0 2px {colors.focus-ring}"   # 2px keyboard-focus outline, offset 2px
 
 # Component recipes reference {token} names that resolve against the blocks above, so a value change
 # propagates automatically and no raw value can drift here. Each variant is its own entry.
@@ -217,7 +218,7 @@ components:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.text-primary}"
     border: "1px solid {colors.border}"
-    rounded: "{rounded.lg}"
+    rounded: "{rounded.xl}"
     padding: "{spacing.card-pad-standard}"
     hover: "outline and slight lift, NOT a fill"
   card-dark:
@@ -263,14 +264,126 @@ everything needed to build a page that feels like natemills.me: no repo, no buil
 file. Every colour, size, radius, and spacing value in the frontmatter above is resolved to a literal
 and generated straight from the design token source, so it cannot drift from the real system.
 
+## Use the published CSS
+
+Link the foundation. Do not rebuild it from the values above.
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+<link href="https://natemills.me/assets/fonts.css" rel="stylesheet">
+<link href="https://natemills.me/assets/tokens.css" rel="stylesheet">
+<link href="https://natemills.me/assets/components.css" rel="stylesheet">
+```
+
+`tokens.css` carries every custom property in all three themes (light, dark, high-contrast) and
+`components.css` reads them, so tokens must load first. `fonts.css` is separate and required: it
+declares the self-hosted JetBrains Mono and turns on the slashed zero. Anton, Work Sans and PT Serif
+come from Google Fonts, which is why that request is in the list too. Drop any one of the six and the
+type silently falls back.
+
+Rules for using it:
+
+- **Use the exact class names below.** Do not invent synonyms. There is no `.button`, no `.btn-primary`
+  with one dash, and no `.card-dark`.
+- **Do not read the stylesheet into context.** It is 75KB of implementation you do not need. The table
+  below is the whole public API.
+- **Never `@import`, never `file://`, never a placeholder URL.** Link the absolute URLs above, or copy
+  the files into the project and link them relatively.
+- **Reach for a class before a value.** The resolved colours, type, radii and spacing in the frontmatter
+  are for things the class layer does not cover, and for the offline case where you cannot link at all.
+  If a class exists, use it.
+- **Do not restyle a published class.** Compose around it. If you need a page-specific variation, write
+  your own class next to it; never redefine `.btn` or `.card`.
+
+<!-- DESIGN:classes:start -->
+**Buttons:** Base .btn is the 44px default. Size modifiers wire the --btn-* tokens.
+
+| Class | Use |
+| --- | --- |
+| `.btn` | base; always pair with a variant |
+| `.btn--primary` | lime fill, ink label; inverts on hover |
+| `.btn--secondary` | transparent, tertiary-grey outline |
+| `.btn--icon` | the one canonical icon button: 44px circle, never a labelled pill |
+| `.btn--sm` | 32px |
+| `.btn--md` | 44px, same as base |
+| `.btn--lg` | 52px |
+
+**Cards:** Surface step plus a hairline border. Never a drop shadow.
+
+| Class | Use |
+| --- | --- |
+| `.card` | base |
+| `.card--dark` | on an always-dark slab; switches to the on-ink-* text family |
+| `.card--interactive` | THE clickable-card hover: border strengthens and lifts, no fill |
+| `.card--compact` | 16px padding |
+| `.card--spacious` | 32px padding |
+| `.card--empty` | centred empty state |
+| `.card--error` | centred error state, carries the feedback colour |
+| `.card--loading` | skeleton state |
+
+**Chips and badges:** Resolve by job: a label is a chip, a status is a badge. A badge is read-only, never interactive.
+
+| Class | Use |
+| --- | --- |
+| `.chip` | sunken fill, mono label |
+| `.chip--outline` | fill drops out for quieter contexts |
+| `.badge` | transparent, hairline border |
+| `.badge__dot` | lime status dot; always pair it with a word, never colour alone |
+
+**Section heading:** The section-head block owns the gap from heading to body. Do not add your own margin.
+
+| Class | Use |
+| --- | --- |
+| `.section-head` | wrapper |
+| `.section-label` | uppercase mono eyebrow |
+| `.section-label--accent` | accent-emphasis colour, for eyebrows on marquee cards |
+| `.section-label--center` | centred |
+| `.section-label--icon` | icon-led; the glyph is decorative |
+| `.section-label--row` | heading ROW rather than an inline tag |
+| `.section-title` | h1/h2, carries the drawn brand period |
+| `.section-subtitle` | intro line under the title |
+
+**Links:** A border-bottom underline, so the rule colours and animates independently of the text.
+
+| Class | Use |
+| --- | --- |
+| `.link-underline` | base |
+| `.link-underline--prose` | inside body copy |
+| `.link-underline--icon` | carries a trailing glyph |
+
+**Carousel navigation:** Bare chevrons plus a mono counter on a rail BELOW the cards. One nav, site-wide.
+
+| Class | Use |
+| --- | --- |
+| `.ds-carousel-nav` | wrapper |
+| `.ds-carousel-nav--full` | full-width rail |
+| `.ds-carousel-nav__rail` | the track |
+| `.ds-carousel-nav__arrow` | prev / next |
+| `.ds-carousel-nav__pager` | dots |
+| `.ds-carousel-nav__fill` | progress fill |
+| `.ds-carousel-nav__count` | mono counter |
+
+**Other**
+
+| Class | Use |
+| --- | --- |
+| `.avatar` | round portrait |
+| `.sr-only` | visually hidden, still announced |
+<!-- DESIGN:classes:end -->
+
+Anything not in that table is a portfolio internal, not public API. Build it yourself from the tokens.
+
 ## Overview
 
 This is the portfolio of a Senior Product Designer (Design Systems). The site is the argument: a
 calm, Swiss-minimal editorial surface where a single high-chroma lime does all the talking and
 everything else stays quiet. The atmosphere is warm off-white paper in light mode and warm near-black
 in dark mode, never pure white and never pure black. Depth is built from a surface ladder and honest
-1px hairlines, not from drop shadows or decorative gradients. Type is Inter, set large and tight for
-display, with JetBrains Mono for eyebrows and labels and PT Serif reserved for editorial quotes only.
+1px hairlines, not from drop shadows or decorative gradients. Display type is Anton, set large and
+tight; body copy and controls are Work Sans; JetBrains Mono carries eyebrows and labels; PT Serif is
+reserved for editorial quotes only.
 
 The counter-position is deliberate: most portfolios scatter accent colour across whole sections and
 lean on soft shadows to fake hierarchy. This one refuses both. Colour is scarce, borders are honest,
@@ -282,7 +395,9 @@ make it look composed, restrained, and inevitable.
 - Warm off-white canvas (`{colors.bg}`), not white. Ink is warm near-black, not pure black.
 - One accent, one lime (`{colors.brand-lime}`), used scarcely. Never a section fill or body text.
 - Borders over shadows. Shadows are rare and reserved for overlays.
-- Display type is Inter at weight 600, tight tracking. Never italic as a whole heading.
+- Display type is Anton, tight tracking. Anton draws one weight (400) and no italic, and font
+  synthesis is off, so a rule asking for 600 or 800 renders the real 400. Never ask this face for a
+  bold or an italic it does not have, and never italicise a whole heading.
 - Mono (JetBrains Mono) is for uppercase eyebrows, chips, and badges only.
 - Both themes are first-class. In dark mode the accent IS the lime, by design.
 - WCAG 2.2 AA in both themes is a floor, not a feature.
@@ -327,7 +442,7 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
 
 ## Component stylings
 
-- **Buttons** are full pills, Inter semibold at 14px, padding 10px/18px, default height 44px. The
+- **Buttons** are full pills, Work Sans semibold at 14px, padding 10px/18px, default height 44px. The
   primary button is a lime fill with ink label; on hover it inverts to an ink fill with a lime label.
   The secondary button is transparent with a `{colors.text-tertiary}` outline (that outline colour is
   chosen to clear the 3:1 non-text contrast floor).
@@ -366,10 +481,21 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
 
 Depth is carried by the surface ladder plus hairline borders, not by shadows. The ladder, light to
 recessed: `{colors.bg}` (page) to `{colors.surface}` (card, a genuine lift) to
-`{colors.surface-sunken}` (wells and insets). Dark mode runs the same three steps in near-blacks. The
-generated `elevation` values above are the light-theme shadows; dark mode swaps `soft` and `lift` to
-deeper black-alpha. Radii: cards and modals use `{rounded.lg}`; small controls use `{rounded.sm}`;
-pills, chips, badges, and buttons use `{rounded.full}`.
+`{colors.surface-sunken}` (wells and insets). Dark mode runs the same three steps in near-blacks.
+
+There is no shadow scale, and no drop shadow on any card, panel, modal or floating control. A card
+is a surface step plus a hairline; a selected or open card moves its border, never its elevation; a
+lightbox is separated by its scrim, not by a shadow cast onto that scrim. This was always the written
+rule, and until 2026-08-29 the code did not match it: a four-step ramp had accumulated on seven
+resting surfaces, entering as a token-leak fix that replaced a stray hardcoded shadow with a
+sanctioned-looking one instead of deleting it. The ramp is gone and a lint gate now holds the line.
+
+Two scoped effects survive and are deliberately not tokens: the bottom edge of `main` during the
+footer parallax reveal, where a shadow is the only way to say one layer is passing over another, and
+the floating theme-lab panel, which is instrument chrome rather than a page surface.
+
+Radii: cards and modals use `{rounded.xl}`; small controls use `{rounded.sm}`; pills, chips, badges,
+and buttons use `{rounded.full}`.
 
 ## Do's and Don'ts
 
@@ -390,6 +516,57 @@ Don't:
 - Don't justify body text, and don't drop below the 11px mono label floor.
 - Don't leak an external client brand colour into general UI; those are locked constants for their
   own case-study context only.
+
+## Reject generated-design reflexes
+
+These are the defaults an agent reaches for when it is not thinking. None of them belong to this
+system. The Don'ts above are brand rules; these are the house rules that keep the work from looking
+generated.
+
+**Copy**
+
+- No em dashes and no en dashes, anywhere. Use a comma, a colon, a semicolon, or two sentences. This
+  one has no exceptions.
+- No AI copy tells: "elevate", "seamless", "unleash", "next-gen", "game-changing", "delve",
+  "cutting-edge", "supercharge", "harness the power", "it's not just".
+- Never ship placeholder content as if it were real: no lorem ipsum, no Jane Doe, no Acme Corp.
+
+**Colour and surface**
+
+- No AI-default gradient palette. The indigo, violet, fuchsia and cyan family (`#4f46e5`, `#6366f1`,
+  `#7c3aed`, `#8b5cf6`, `#a855f7`, `#06b6d4`, `#d946ef` and relatives) is the single loudest tell.
+  This system has two colour families: a warm neutral ramp and one lime.
+- No gradient text, glows, blobs, mesh backgrounds, glass, noise overlays, or fake depth. The one
+  gradient in the system is `{colors.brand-gradient}`, and it is brand identity, not decoration.
+- No decorative surface to fill space. A border is earned by grouping or interaction.
+
+**Layout**
+
+- No hero followed by three equal cards. Do not force unequal content into equal cells; rank it,
+  group it, or rebalance it.
+- No metric boxes as ornament, no icon tiles, no card nested inside a card to fix spacing.
+- No badge on everything. A badge is a status, not a garnish.
+- Do not give every section the same silhouette.
+
+**Type and icons**
+
+- No emoji as icons. Icons are Lucide: `<i data-lucide="name" aria-hidden="true">`.
+- Anton is the display face. Never set a heading in Inter, Roboto, Arial, Helvetica or system-ui: a
+  default UI face used as a display face reads as a demo, not a design.
+
+**Motion**
+
+- No `transition: all`. Name the properties you are animating.
+- No `ease-in` on UI motion. Use ease-out or a named curve, and make exits faster than entrances.
+- Gate every hover effect behind `@media (hover: hover)`. On a touch screen a tap latches hover and
+  the effect sticks with no way to dismiss it.
+- Every animation answers `prefers-reduced-motion`. Design the still frame first.
+- No scroll-jacking, no parallax, no revealing every section on scroll.
+
+**Mechanics**
+
+- `100dvh`, never `100vh`. The mobile viewport unit is wrong under a browser chrome bar.
+- No `href="#"` placeholder links, and no `<img>` without an `alt`.
 
 ## Responsive behavior
 
@@ -429,9 +606,10 @@ When building a new page or prototype with this system:
   and it made computed colours unreadable to sRGB-only accessibility scanners.
 - The system has no semantic status colours (success/warning/danger); a portfolio has no such UI. If a
   consumer needs them, add at the token layer first, then route a semantic.
-- Fonts are Inter, JetBrains Mono, and PT Serif. Open-source substitutes if unavailable: Inter is
-  itself open source; fall back to a neutral grotesque for display and body, any monospace with a
-  slashed zero for labels, and a transitional serif (Georgia) for quotes.
+- Fonts are Anton (display), Work Sans (body and controls), JetBrains Mono (labels and numbers) and
+  PT Serif (quotes). All four are open source. If one is unavailable, fall back to a condensed
+  grotesque for display, a neutral grotesque for body, any monospace with a slashed zero for labels,
+  and a transitional serif (Georgia) for quotes.
 - The mono zero is SLASHED, and it does not come for free. JetBrains Mono's default zero has a dot
   in it; the slash is the OpenType `zero` feature, applied once at `:root` via
   `font-feature-settings: var(--font-feature-mono)` rather than per rule. The build served by

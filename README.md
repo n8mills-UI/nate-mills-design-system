@@ -2,7 +2,6 @@
 
 <img src="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/header-banner.png" alt="Nate Mills Design System. Authored once as DTCG tokens, generated to CSS, audited to WCAG 2.2 AA." width="860">
 
-[![npm version](https://img.shields.io/npm/v/@n8mills/design-tokens?style=flat-square&labelColor=1c1c1f&color=d2ff37&logo=npm&logoColor=white)](https://www.npmjs.com/package/@n8mills/design-tokens)
 [![License: MIT](https://img.shields.io/badge/License-MIT-d2ff37?style=flat-square&labelColor=1c1c1f)](./LICENSE)
 [![Design Tokens: DTCG](https://img.shields.io/badge/Design_Tokens-DTCG-d2ff37?style=flat-square&labelColor=1c1c1f)](https://www.designtokens.org/)
 [![WCAG 2.2 AA](https://img.shields.io/badge/WCAG-2.2_AA-d2ff37?style=flat-square&labelColor=1c1c1f)](https://www.w3.org/WAI/WCAG22/quickref/)
@@ -39,7 +38,7 @@ Prefer the guided tour to the raw source? The [live view](https://natemills.me/#
 ```
 PRIMITIVES   raw values, named by hue and stop      -->  e.g. --neutral-850: #1c1c1f
 SEMANTICS    roles, reference primitives via var()   -->  e.g. --color-accent: var(--neutral-850)
-COMPONENTS   classes that read semantics only        -->  e.g. .btn--primary { background: var(--brand-lime) }
+COMPONENTS   classes that read semantics only        -->  e.g. .btn--primary { background: var(--brand-primary) }
 ```
 
 One way, top to bottom: components read semantics, semantics read primitives, primitives are literals. Nothing reaches back up. So one edit at the top, a new brand hue, propagates through every semantic and component that uses it. No find-and-replace, no drift. That propagation is the whole point.
@@ -49,11 +48,11 @@ One way, top to bottom: components read semantics, semantics read primitives, pr
 <div align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/bento-foundations-dark.png">
-  <img src="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/bento-foundations-lime.png" alt="The design system foundations in one view: the lime and ink colour ramps, the Inter display face, the type ladder, the motion curve, and the 12-step spacing scale" width="860">
+  <img src="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/bento-foundations-lime.png" alt="The design system foundations in one view: the lime and neutral colour ramps with their stop numbers, the Anton display specimen, the Work Sans, JetBrains Mono and PT Serif faces, and the spacing scale drawn at true width" width="860">
 </picture>
 </div>
 
-Colour, type, motion, and spacing, all generated from `tokens.json`. The type is Inter for everything, JetBrains Mono for labels and numbers, and PT Serif for the one place that earns it: the pull quotes.
+Colour, type, and spacing, all generated from `tokens.json`. Display type is Anton, set large and tight; Work Sans carries body copy and controls; JetBrains Mono is for labels and numbers, with the slashed zero the system insists on; and PT Serif is kept for the one place that earns it: the pull quotes.
 
 ## Accessibility is a constraint, not a feature
 
@@ -68,47 +67,50 @@ There is one honest carveout. The brand lime is a background and accent only. It
 
 ## Use it
 
-Install from npm:
+The fastest route is to link the live foundation. No install, no build step, and it is the same CSS
+the site runs on, so it cannot fall behind.
 
-```bash
-npm install @n8mills/design-tokens
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+<link href="https://natemills.me/assets/fonts.css" rel="stylesheet">
+<link href="https://natemills.me/assets/tokens.css" rel="stylesheet">
+<link href="https://natemills.me/assets/components.css" rel="stylesheet">
 ```
 
-Pull in the CSS custom properties (light, dark, and high-contrast themes all included), through your bundler:
+Then compose with the published classes and tokens:
+
+```html
+<button class="btn btn--primary">Get in touch</button>
+```
 
 ```css
-@import "@n8mills/design-tokens/css";
-@import "@n8mills/design-tokens/components.css"; /* optional component layer */
-
 .cta {
-  background: var(--brand-lime);
+  background: var(--brand-primary);
   color: var(--brand-ink);
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-5);
 }
 ```
 
-Or read the resolved values in JavaScript or TypeScript (the default theme, fully typed):
+`tokens.css` carries every custom property in all three themes and `components.css` reads them, so
+tokens must load first. `fonts.css` declares the self-hosted mono and its slashed zero.
 
-```js
-import { tokens } from "@n8mills/design-tokens";
+**Building with an AI agent?** Point it at [`DESIGN.md`](./DESIGN.md), or at
+`https://natemills.me/DESIGN.md`. It is a self-contained brief: the resolved values, the class API
+to link against, and the rules that keep the result from looking generated.
 
-tokens["brand-lime"];         // "#d2ff37"
-tokens["color-text-primary"]; // "#0a0a0b"
-tokens["space-5"];            // "24px"
-```
-
-The raw DTCG source ships too, for your own token pipeline:
-
-```js
-import dtcg from "@n8mills/design-tokens/tokens.json" with { type: "json" };
-```
-
-Prefer the source directly? Clone it:
+Prefer the source? Clone it and take what you need, including the raw DTCG token file and the typed
+JS export:
 
 ```bash
 git clone https://github.com/n8mills-UI/nate-mills-design-system.git
 ```
+
+> **Note on npm.** `@n8mills/design-tokens` was published in 2026 and is no longer maintained. The
+> registry copy is frozen at an old version and does not match this repo. Link the CSS above or
+> clone the source instead.
 
 Read [`design-system.md`](./design-system.md) for the why. Read `tokens.json` and `components.css` for the how. Fork it for another brand by changing `--lime-500` and watching every consumer follow. That is the system working as designed.
 

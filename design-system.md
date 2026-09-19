@@ -137,29 +137,30 @@ _Nine tokens shown here. The full set of surface, text, border, and accent token
 | `--color-text-primary` | `--neutral-950` | `--neutral-150` |
 | `--color-text-secondary` | `--neutral-700` | `--neutral-500` |
 | `--color-border` | `--neutral-300` | `--neutral-800` |
-| `--color-border-brand` | `--brand-lime` | same |
+| `--color-border-brand` | `--brand-primary` | same |
 | `--color-accent` | `--neutral-850` | `--lime-500` |
 | `--color-focus-ring` | `--neutral-850` | `--lime-500` |
 
 <!-- TOKENS:pub-semantics:end -->
 
-**Brand identity aliases** sit alongside the role tokens: `--brand-lime` (`var(--lime-500)`),
+**Brand identity aliases** sit alongside the role tokens: `--brand-primary` (`var(--lime-500)`),
 `--brand-ink` (`var(--neutral-850)`), and the paired "on" tokens that name the correct text colour
-for a fixed-colour surface (`--brand-on-lime` resolves to ink, `--brand-on-ink` resolves to lime).
+for a fixed-colour surface (`--brand-on-primary` resolves to ink, `--brand-on-ink` resolves to lime).
 
 **The one rule worth memorising.** The base accent is ink, not colour. Lime is a background and
 accent, never foreground text on a light surface. The contrast math forces it: `#d2ff37` on
 `#f5f5f5` is far below the 4.5 to 1 floor (see the live Under-the-Hood page for current ratio). So the system gives you the right tool instead:
 `--color-accent-emphasis` (theme-aware, resolves to ink on light and lime on dark) for brand-tinted
 words in running copy, and the "on" tokens for text on fixed lime or ink surfaces. If you reach for
-`color: var(--brand-lime)` outside a known-dark scope, it is almost always the wrong token.
+`color: var(--brand-primary)` outside a known-dark scope, it is almost always the wrong token.
 
 ---
 
 ## 4. Typography
 
-**Two fonts, no more.** Inter for everything; JetBrains Mono for labels, eyebrows, code, and tabular
-numbers. PT Serif appears in exactly one place: the testimonial pull quotes.
+**Two workhorses, two specialists.** Anton for display, every heading from h1 to h6. Work Sans for
+body copy and controls. JetBrains Mono for labels, eyebrows, code, and tabular numbers. PT Serif
+appears in exactly one place: the testimonial pull quotes.
 
 The lean semantic scale that new work consumes:
 
@@ -167,12 +168,12 @@ The lean semantic scale that new work consumes:
 
 | Token | Value | Used for |
 |---|---|---|
-| `--text-h1` | `clamp(34px, 5.8vw, 72px)` | Page-level section headings (every section h2). The hero h1 is a documented exception with its own mobile-tuned clamp. |
+| `--text-h1` | `clamp(34px, 5.8vw, 72px)` | The base display size every other heading size is derived from. |
 | `--text-h2` | `clamp(22px, 4vw, 32px)` | Card titles, intro lines, sub-headings inside section bodies. |
 | `--text-body` | `--size-base` | Paragraphs, lists, default reading text, card body copy. |
 | `--text-label` | `--size-2xs` | Uppercase mono labels, eyebrows, stat labels, badges. |
 | `--text-caption` | `--size-xs` | Tiny captions, footnotes, stat descriptions. |
-| `--text-nav` | `--size-2xs` | Header menu links; equals --text-label today, kept separate so nav can diverge. |
+| `--text-nav` | `--size-sm` | Header menu links. Body font, sentence case, 14px. |
 
 <!-- TOKENS:pub-type-semantic:end -->
 
@@ -180,7 +181,9 @@ Headings use fluid `clamp()` so type scales smoothly between a mobile floor and 
 without per-breakpoint overrides. If you find yourself reaching for a media query to nudge a font
 size, the floor or the ceiling is wrong; fix the clamp, not the breakpoint.
 
-Five weights are loaded from Inter (400 to 800). One emphasis rule matters: a full italic display
+Anton ships a single 400 and no italic, so font synthesis is switched off site-wide: a heading rule
+that asks for 800 gets Anton's real drawn 400 rather than a smeared fake. Work Sans carries the
+weight range (400 to 800) for body and controls. One emphasis rule matters: a full italic display
 heading is banned. Italic on a single word inside a heading is allowed, paired with a solid muted
 token, never an alpha-modified colour (overlapping italic glyphs at tight tracking double the alpha
 and leave visible dark spots at the letter joins).
@@ -225,8 +228,8 @@ Never use raw px for spacing in a component. The whole point is one place to edi
 | `--radius-none` | `0` | Square. No rounding, for sharp-cornered surfaces and full-bleed media. Emitted as a bare 0 (identical CSS length, and what tokens.css has always carried). |
 | `--radius-sm` | `8px` | Small radius. The workhorse for inputs, chips, and small controls. |
 | `--radius-md` | `10px` | Medium radius. Mid-size controls and insets, a touch rounder than sm. |
-| `--radius-lg` | `14px` | Large radius. The default for cards and modals. |
-| `--radius-xl` | `20px` | Extra-large radius. Prominent panels and feature surfaces. |
+| `--radius-lg` | `14px` | Large radius. The social badges (--sbtn-radius) and other mid-weight containers. |
+| `--radius-xl` | `20px` | Extra-large radius. The default for cards and modals (--card-radius), prominent panels and feature surfaces. |
 | `--radius-full` | `999px` | Full round. Pills, tags, and circular buttons; forces a complete radius at any height. |
 
 **Borders**
@@ -234,20 +237,14 @@ Never use raw px for spacing in a component. The whole point is one place to edi
 | Token | Value | Description |
 |---|---|---|
 | `--border-hairline` | `1px solid var(--color-border)` | Default 1px hairline border; reads --color-border so it follows the theme. The standard card edge and divider. |
-| `--border-strong` | `1px solid var(--color-border-strong)` | Heavier 1px border; reads --color-border-strong. For edges that need to read past a hairline, such as interactive-card hover outlines. (Button borders moved to the btn.* component tokens in Task 87.) |
+| `--border-strong` | `1px solid var(--color-border-strong)` | Heavier 1px border; reads --color-border-strong. For edges that need to read past a hairline, such as interactive-card hover outlines. |
 | `--border-focus` | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
-| `--focus-ring-offset` | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
 
-**Shadows**
+**Focus ring**
 
 | Token | Value | Description |
 |---|---|---|
-| `--shadow-none` | `none` | No shadow. The default; the system favours borders over shadows. |
-| `--shadow-soft` | `0 1px 2px rgb(var(--brand-ink-rgb) / 0.04), 0 1px 3px rgb(var(--brand-ink-rgb) / 0.06)` | Subtle resting elevation, two stacked ink-alpha layers, for cards that lift just off the page. Dark mode swaps to deeper black-alpha. |
-| `--shadow-lift` | `0 4px 12px rgb(var(--brand-ink-rgb) / 0.06), 0 2px 4px rgb(var(--brand-ink-rgb) / 0.04)` | Stronger elevation for overlays and float-on-scroll chrome only, not resting cards. |
-| `--shadow-modal` | `0 24px 64px rgba(0, 0, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.18)` | Modal and lightbox elevation. The deepest shadow, for surfaces floating above a scrim. |
-| `--accent-period-shadow` | `0 1px 2px rgba(0,0,0,0.42), 0 0 0 1px rgba(0,0,0,0.18)` | Depth under the lime period in section titles. Keeps the lime dot legible on light surfaces; resolves to none in dark, where lime already reads. |
-| `--accent-dot-shadow` | `0 1px 3px rgba(0,0,0,0.24)` | Reserved depth for a lime indicator dot on light surfaces; no live consumer today; resolves to none in dark. |
+| `--focus-ring-offset` | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
 
 <!-- TOKENS:pub-radii-borders-shadows:end -->
 
@@ -265,11 +262,14 @@ dark mode, where lime already reads cleanly.
 
 | Token | Value | Used for |
 |---|---|---|
+| `--duration-stagger` | `24ms` | The gap between one item's entrance and the next in a group. |
+| `--duration-beat` | `240ms` | The gap between one part of a view's opening and the next. |
 | `--duration-fast` | `150ms` | Hover, focus, and micro state feedback. |
 | `--duration-base` | `220ms` | Reveal, modal, and swap transitions. |
 | `--duration-slow` | `400ms` | Context shift and slide transitions. |
-| `--duration-expressive` | `1300ms` | Expressive tier: the slow, cinematic duration for a single large hero moment (the two-phone Spline scene scales in over this). Deliberately longer than the general-purpose slow tier and reserved for one large-surface entrance, never UI feedback. Collapsed to 1ms under reduced motion by the block in tokens/build.mjs. |
-| `--duration-marquee` | `36000ms` | Ambient tier: one full traverse of a continuously looping marquee (the hero pillar ticker). Two orders of magnitude above the expressive tier because it is not a transition, it is a background rhythm nobody is meant to time. The only member of this tier; add here rather than hand-typing a raw duration in the component. |
+| `--duration-flourish` | `600ms` | One playful beat on a small icon: a shake, a roll, a pour. |
+| `--duration-expressive` | `1300ms` | The slow, cinematic entrance for one large hero moment. |
+| `--duration-marquee` | `36000ms` | One full lap of a marquee that loops without stopping. |
 
 **Easings**
 
@@ -279,7 +279,8 @@ dark mode, where lime already reads cleanly.
 | `--ease-entrance` | `cubic-bezier(0, 0, 0.2, 1)` | Decelerate, for elements entering the screen. |
 | `--ease-exit` | `cubic-bezier(0.4, 0, 1, 1)` | Accelerate, for elements leaving the screen. |
 | `--ease-emphasized` | `cubic-bezier(0.16, 1, 0.3, 1)` | Pronounced ease-out for overlay and menu entrance motion (items rising into view). A stronger, slower-settling decelerate than --ease-entrance. |
-| `--ease-linear` | `cubic-bezier(0, 0, 1, 1)` | Constant rate, no acceleration. For continuous loop motion: the hero ticker, both marquees, the glass column scroll, and the loading-icon cycles. Authored as a cubic-bezier twin of the linear keyword so it lives in the ease group with its siblings. |
+| `--ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Overshoot and settle, so a move reads as a bounce. Micro-moments only. |
+| `--ease-linear` | `cubic-bezier(0, 0, 1, 1)` | Constant rate, no acceleration. For motion that loops forever. |
 
 <!-- TOKENS:pub-motion:end -->
 
@@ -314,7 +315,7 @@ are worth showing in full, because they carry most of the system's decisions.
 
 | Variant | Background | Text | Use on |
 |---|---|---|---|
-| `.btn--primary` | `--brand-lime` | `--brand-ink` | Off-white surfaces |
+| `.btn--primary` | `--brand-primary` | `--brand-ink` | Off-white surfaces |
 | `.btn--secondary` | transparent | `--color-text-primary` | Lime surfaces |
 | `.btn--icon` | transparent | `--color-text-secondary` | Chrome (toggles, controls) |
 
@@ -390,7 +391,7 @@ mirror existed early on; it was removed when the tokens moved to the generated e
 ## 12. Contribution rules
 
 1. Never write raw hex outside `tokens.css`. Define a primitive or use a semantic.
-2. Brand tokens are aliases, not duplicates: `--brand-lime: var(--lime-500)`, not the hex.
+2. Brand tokens are aliases, not duplicates: `--brand-primary: var(--lime-500)`, not the hex.
 3. Components read semantics only, never a raw primitive.
 4. Test in light and dark. Every semantic has both.
 5. WCAG 2.2 AA for every text colour, against every surface it could land on.
@@ -421,7 +422,8 @@ system working as designed.
 The mistakes that have actually surfaced, kept here so they do not surface again.
 
 - No blue outside the Bupa case study. The base accent is ink.
-- Inter only. PT Serif for pull quotes, JetBrains Mono for labels and numbers.
+- Anton for display, Work Sans for body. PT Serif for pull quotes, JetBrains Mono for labels and numbers.
+- Never ask a face for a weight or an italic it does not draw. Font synthesis is off.
 - No full italic display headings.
 - Surfaces are off-white or near-black only. No cream, no tinted "warm" backgrounds.
 - Lime is never foreground text on a light surface.

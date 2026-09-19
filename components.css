@@ -87,7 +87,7 @@
 /* Hover gated to hover-capable pointers: on touch, a tap applies and
    STICKS :hover (Chromium), freezing the ink fill on and swallowing the
    press cue below. The :focus-visible duplicate stays ungated so
-   keyboard users keep the exact same styling (Tesla review Group 4). */
+   keyboard users keep the exact same styling (2026-07-02 review, group 4). */
 @media (hover: hover) {
   .btn--primary:hover {
     background: var(--btn-primary-bg-hover);
@@ -601,7 +601,7 @@ a.card:focus-visible { text-decoration: none; }
 }
 /* (No .chip:active: every chip in the site is a non-interactive <span>
    label; the old :active here was a visual no-op that read as a press
-   precedent. Removed in the Tesla-review pressed-state pass.) */
+   precedent. Removed in the 2026-07-02 pressed-state pass.) */
 
 /* -----------------------------------------------------------------------------
    Badge — a read-only status or count pill. Not interactive (no hover/focus).
@@ -1312,8 +1312,8 @@ a.card:focus-visible { text-decoration: none; }
 }
 /* Press: the glyph snaps small under the finger, full-strength ink, and no
    circle behind it (2026-09-07, Nathan picked A3 from the motion mockup).
-   This REVERSES the earlier "background only, no transform" ruling (Tesla
-   review Group 4), which was written to keep the arrows still beside a live
+   This REVERSES the earlier "background only, no transform" ruling
+   (2026-07-02 review, group 4), which was written to keep the arrows still beside a live
    scroll-snap track. A scale is not a translate: nothing changes position, so
    the press cannot be mistaken for the track moving, and it is the one press
    signal that survives on touch where there is no hover. The filled circle it
@@ -1802,10 +1802,10 @@ a.card:focus-visible { text-decoration: none; }
    this block down again rather than adding a second copy.
    --------------------------------------------------------------------------- */
 /* ============================================================
-   Fractional-DPR outline crispness (Tesla review Group 2, 2026-07-02).
+   Fractional-DPR outline crispness (2026-07-02 review, group 2).
    On screens whose devicePixelRatio is fractional (Windows laptops at
-   125%/150% scaling report 1.25/1.5; the Tesla Model Y L 16in screen
-   measures 1.333 in-car), a 1px border maps onto one-and-a-fraction
+   125%/150% scaling report 1.25/1.5; a 16in in-car display measured
+   1.333), a 1px border maps onto one-and-a-fraction
    physical pixels and anti-aliases into an uneven, fractured line.
    A whole 2px keeps control outlines crisp in that window; true 1x
    and integer 2x (Retina) screens are excluded and keep the 1px look.

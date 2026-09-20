@@ -2310,6 +2310,13 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
 }
 .nm-orbit-svg { width: 100%; height: 100%; display: block; overflow: visible; }
 
+/* NO will-change HERE, deliberately. A `will-change: transform` on :hover was
+   tried as a fix for the rim type and is gone again: it promotes a layer at the
+   moment the pointer arrives, which is itself a repaint, so it risks causing
+   the very thing it was meant to cure, and nothing measured it as a win. The
+   swell alone was measured at 0.064 degrees of angular jitter per frame at rest
+   against 0.057 while swelling, so the scale was never the cause. */
+
 .nm-orbit-type {
   fill: var(--color-text-primary);
   font-family: var(--font-display);
@@ -2520,6 +2527,10 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
   .nm-orbit:hover .nm-orbit-ring { animation-play-state: paused; }
 }
 .nm-orbit:focus-visible .nm-orbit-ring { animation-play-state: paused; }
+/* Held through the shrink, so the rim does not restart while the control is
+   still moving. orbit-foil.js carries the attribute for the transition's own
+   length; see the note on `leave` there. */
+.nm-orbit[data-orbit-settling] .nm-orbit-ring { animation-play-state: paused; }
 
 /* THE HOUSE PAUSE CONTRACT. A region with a pause toggle carries
    data-motion-paused="1" while it is pressed, and everything looping inside it
@@ -2546,4 +2557,184 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
   .nm-orbit,
   .nm-orbit:hover,
   .nm-orbit:focus-visible { transform: none; transition: none; }
+}
+
+/* -----------------------------------------------------------------------------
+   PILL, the contact pill (2026-09-20)
+   The orbit's small twin. The circle needs room for drawn type and only has it
+   on desktop; below 1024 both circles are hidden and this carries the same job
+   in the two places a phone actually has one, the about section's closing line
+   and the footer slab. Only ever one of the pair is rendered, so neither the
+   accessibility tree nor the tab order sees a duplicate mail link.
+
+   Shape, all measured off the approved review build rather than re-derived:
+     height   42px
+     art      44px, its centre 12px in, so it hangs 10px past the leading edge
+     hand     offset 7px right and 8px up INSIDE that box; the letter is not
+              offset at all, which is the whole reason the two are separate
+     label    starts clear of the art, which sets the leading padding
+
+   No hologram and no disc. The foil belongs to the circle, where there is a
+   plate wide enough to show it; at this size the drawing covers the plate
+   almost entirely, so the material would be paid for and never seen.
+   -------------------------------------------------------------------------- */
+.nm-pill {
+  --pill-h: 42px;
+  --pill-art: 44px;
+  --pill-art-x: 11px;   /* from the padding box, so 12px from the border box */
+  /* How far the drawing hangs past the leading edge. Named because it is not
+     just decoration: it eats into whatever gap sits to the left of the button,
+     and anything spacing this control has to pay it back. */
+  --pill-bleed: calc(var(--pill-art) / 2 - var(--pill-art-x));
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--pill-h);
+  padding-block: 0;
+  /* Both sides written as LONGHANDS, on purpose. This was a `padding-inline`
+     shorthand whose two values are start then end; it was carrying the review
+     build's physical `0 16px 0 4px`, whose 16px is the RIGHT side, so the port
+     put 16 on the start and ZERO on the end and the word ran to the edge of the
+     button on every instance. A shorthand plus an override of one of its own
+     sides is the shape that hid it: the start looked deliberate, the end was
+     never mentioned again. Nothing to reverse if there is no shorthand. */
+  padding-inline-start: calc(var(--pill-art-x) + var(--pill-art) / 2 + var(--space-3));
+  padding-inline-end: var(--space-4);
+  border-radius: var(--btn-radius);
+  /* OUTLINE is the resting shape, because the about section is the home this
+     lives in at every width and a light page wants the quieter control there.
+     The footer slab fills, below. */
+  border: 1px solid var(--btn-secondary-border);
+  background: none;
+  color: var(--btn-secondary-fg);
+  transition: var(--btn-transition);
+}
+
+/* THE TARGET IS 44, THE SHAPE IS 42. Nathan picked 42 for the look and both
+   controls this replaces were 44 (--touch-target-min), so the difference is
+   carried by a centred ghost rather than by making him live with a smaller
+   button. touch-target-lint cannot see this rule, because it reads .btn and the
+   size tokens and the pill is neither, which is why the ghost is spelled out
+   here instead of being left implied. */
+.nm-pill::before {
+  content: '';
+  position: absolute;
+  inset: -1px 0;            /* 42 + 1 + 1 = 44 */
+  border-radius: inherit;
+}
+
+/* The global `a:hover, a:focus-visible { text-decoration: underline }` sits at
+   (0,1,1) and beats a bare class at (0,1,0), so cancelling this only at rest
+   hands the underline straight back on hover or Tab. Invisible in the resting
+   page, which is why a11y/underline-run.sh drives both. */
+.nm-pill,
+.nm-pill:hover,
+.nm-pill:focus-visible,
+.nm-pill:active { text-decoration: none; }
+
+.nm-pill-label {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* The two drawings, stacked and cross-faded. Absolute, so the art is free to be
+   taller than the button and to hang past its leading edge. */
+.nm-pill-art {
+  position: absolute;
+  left: var(--pill-art-x);
+  top: 50%;
+  translate: -50% -50%;
+  width: var(--pill-art);
+  height: var(--pill-art);
+  pointer-events: none;
+}
+.nm-pill-art img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: opacity var(--duration-slow) var(--ease-default);
+}
+.nm-pill-art img[data-off] { opacity: 0; }
+/* The hand alone carries the offset. It sat on the box holding BOTH drawings
+   once, which dragged the letter off a position that was already signed off. */
+.nm-pill-hand { translate: 7px -8px; }
+
+/* States, and they differ BY HOME, because the two homes start from opposite
+   places and sit on opposite grounds.
+
+   THE ABOUT SECTION is the .btn--secondary this replaces, so it takes that
+   button's exact grammar: transparent at rest, and the site has ONE hover
+   answer for a transparent button, which is to fill lime with ink on top
+   (components.css, "one hover grammar", 2026-08-10). Press steps to the
+   lime-dim. Nothing bespoke, so it answers like every other button beside it.
+
+   THE FOOTER sits on the lime slab and fills ink at rest, because lime on lime
+   is banned there, the same reason .btn--primary is. It cannot use the lime
+   hover for the same reason, so it answers in a fixed white and presses to that
+   white's darker twin, both theme-invariant because the footer never changes.
+
+   The white pair was briefly the answer for BOTH homes. On the about section's
+   --color-bg (#f5f5f5 in light) white measures 1.09:1, so the fill and the 1px
+   border both vanished and the button dissolved with the word left floating.
+   That is the same defect as the padding was: a value settled in one home and
+   carried into a second it was never checked against. Scoped by home now. */
+@media (hover: hover) {
+  .nm-pill:hover {
+    background: var(--btn-primary-bg);
+    border-color: var(--btn-primary-border);
+    color: var(--btn-primary-fg);
+  }
+}
+.nm-pill:focus-visible {
+  background: var(--btn-primary-bg);
+  border-color: var(--btn-primary-border);
+  color: var(--btn-primary-fg);
+  outline: var(--border-focus);
+  outline-offset: var(--space-2);
+}
+.nm-pill:active {
+  background: var(--brand-primary-dim);
+  border-color: var(--brand-primary-dim);
+  color: var(--btn-primary-fg);
+  scale: .975;
+}
+
+[id="site-footer"] .nm-pill {
+  background: var(--brand-ink);
+  border-color: var(--brand-ink);
+  color: var(--brand-primary);
+}
+@media (hover: hover) {
+  [id="site-footer"] .nm-pill:hover {
+    background: var(--color-static-white);
+    border-color: var(--color-static-white);
+    color: var(--brand-ink);
+  }
+}
+[id="site-footer"] .nm-pill:focus-visible {
+  background: var(--color-static-white);
+  border-color: var(--color-static-white);
+  color: var(--brand-ink);
+  /* An ink ring on the lime slab, the same adaptation the icon row makes: the
+     theme-flipping focus ring would vanish against lime in dark. */
+  outline: 2px solid var(--brand-ink);
+  outline-offset: var(--focus-ring-offset);
+}
+[id="site-footer"] .nm-pill:active {
+  background: var(--color-static-white-hover);
+  border-color: var(--color-static-white-hover);
+  color: var(--brand-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nm-pill,
+  .nm-pill-art img { transition: none; }
+  .nm-pill:active { scale: none; }
 }

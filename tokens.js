@@ -212,7 +212,7 @@ export const tokens = {
   "space-10": "128px",
   "space-11": "192px",
   "space-12": "256px",
-  "section-padding": "clamp(96px, 12vw, 128px)",
+  "section-padding": "clamp(96px, min(14.2vh, 12vw), 256px)",
   "section-head-gap": "clamp(24px, 3.5vw, 48px)",
   "card-pad-compact": "16px",
   "card-pad-standard": "24px",

@@ -151,22 +151,22 @@ rounded:
 
 spacing:
   # DESIGN:spacing:start
-  s1: "4px"                                    # --space-1
-  s2: "8px"                                    # --space-2
-  s3: "12px"                                   # --space-3
-  s4: "16px"                                   # --space-4
-  s5: "24px"                                   # --space-5
-  s6: "32px"                                   # --space-6
-  s7: "48px"                                   # --space-7
-  s8: "64px"                                   # --space-8
-  s9: "96px"                                   # --space-9 (section padding lower bound)
-  s10: "128px"                                 # --space-10 (section padding upper bound)
-  s11: "192px"                                 # --space-11
-  s12: "256px"                                 # --space-12
-  section-padding: "clamp(96px, 12vw, 128px)"  # --section-padding
-  card-pad-compact: "16px"                     # --card-pad-compact
-  card-pad-standard: "24px"                    # --card-pad-standard
-  card-pad-spacious: "32px"                    # --card-pad-spacious
+  s1: "4px"                                                 # --space-1
+  s2: "8px"                                                 # --space-2
+  s3: "12px"                                                # --space-3
+  s4: "16px"                                                # --space-4
+  s5: "24px"                                                # --space-5
+  s6: "32px"                                                # --space-6
+  s7: "48px"                                                # --space-7
+  s8: "64px"                                                # --space-8
+  s9: "96px"                                                # --space-9 (section padding lower bound)
+  s10: "128px"                                              # --space-10 (section padding upper bound)
+  s11: "192px"                                              # --space-11
+  s12: "256px"                                              # --space-12
+  section-padding: "clamp(96px, min(14.2vh, 12vw), 256px)"  # --section-padding
+  card-pad-compact: "16px"                                  # --card-pad-compact
+  card-pad-standard: "24px"                                 # --card-pad-standard
+  card-pad-spacious: "32px"                                 # --card-pad-spacious
   # DESIGN:spacing:end
 
 # There is no elevation scale. Depth is the surface ladder plus hairline borders (see "Depth and

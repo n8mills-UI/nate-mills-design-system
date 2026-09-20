@@ -242,82 +242,108 @@
   .btn:hover [data-lucide="arrow-up-right"],
   .btn:focus-visible [data-lucide="arrow-up-right"] { transform: none; }
 }
-/* Mail glyph, the letter rise (2026-09-15, Nathan, from the contact-CTA
-   review). REPLACES the 2026-09-06 shake, it does not join it: the rule
-   directly above says one icon-motion rule per glyph, site-wide, and running a
-   wobble and a rise on the same envelope would have been two. A letter lifts
-   out of the envelope and drops back, which says the same thing the wobble
-   said, that this is where a message starts, and says it in the shape of the
-   thing being sent.
+/* MAIL GLYPH, THE FOLD AND FLY (2026-09-20, Nathan, picked from a four
+   direction bench).
 
-   The letter is not part of Lucide's mail icon. contact-cta.js adds it to every
-   mail glyph inside a .btn, clipped to the band ABOVE the envelope's top edge
-   so at rest it is genuinely inside and only the part that rises is ever seen.
-   PROGRESSIVE ENHANCEMENT: with that script absent the button still renders
-   Lucide's envelope exactly as authored and simply does not move.
+   REPLACES the 2026-09-15 letter rise entirely; it does not join it, because
+   the rule directly above says one icon-motion rule per glyph, site-wide.
+   The letter rise had a fault nobody could see: it lifted the letter to four
+   user units ABOVE the glyph's own 24 unit box and an SVG clips to its
+   viewBox, so 40 percent of the letter was cut flat on every hover, on all
+   three controls, for the life of the rule. Deleting the rule deletes the
+   bug; there is nothing left to clip.
 
-   Same shape as the arrow nudge above: the element CARRYING data-lucide, the
-   hover half behind the capability query, focus-visible outside it, reduced
-   motion cancels. Held by tokens/component-behaviour-lint.mjs. */
-@keyframes btn-mail-letter {
-  0% { transform: translateY(0); }
-  45% { transform: translateY(-9px); }
-  100% { transform: translateY(0); }
+   On hover or keyboard focus the envelope FOLDS into a paper plane, the
+   plane banks, pulls back for a beat and flies out up and to the right, and
+   the envelope fades back in. One gesture, one shot, and it RETURNS: a
+   button left with no icon at the end of a hover looks broken.
+
+   FOUR THINGS ARE LOAD BEARING.
+   1. The two shapes have the SAME COMMAND STRUCTURE, body M,L,L,L,Z and
+      fold M,L,L. That is the condition for a browser to interpolate `d` at
+      all; without it the paths jump. The point ORDER is what makes the fold
+      a fold: the envelope's top right corner becomes the plane's tip, its
+      top left becomes the far wing, its bottom left folds in to the notch
+      and its bottom right becomes the tail, while the flap's V straightens
+      into the crease.
+   2. The plane's four points are read off LUCIDE'S OWN send path, not drawn
+      by hand. A hand drawn dart shipped to review with its lower wing at 2
+      units against Lucide's 3.6 and read as pinched at 16px.
+   3. EVERY SEGMENT CARRIES ITS OWN CURVE. --ease-emphasized is a spring: it
+      covers nearly all its distance in the first fraction of its time, so
+      running the whole cycle on it put the plane at 1 percent opacity before
+      the flight was half over. A thing leaving accelerates, so the departure
+      is --ease-exit and only the fold and the return get the spring.
+   4. overflow: visible on the glyph. The plane leaves its own 24 unit box,
+      and without this it is clipped at the edge exactly as the old letter
+      was.
+
+   The paths are not in the markup: contact-cta.js swaps them into every mail
+   glyph inside a .btn, the same way it used to add the letter. PROGRESSIVE
+   ENHANCEMENT: with that script absent the button renders Lucide's envelope
+   exactly as authored and simply does not move. The inline-SVG ruling is
+   satisfied for the same reason it was before.
+
+   Same shape as the arrow nudge above: the hover half behind the capability
+   query, focus-visible outside it, reduced motion cancels. Held by
+   tokens/component-behaviour-lint.mjs. */
+.btn [data-lucide="mail"] {
+  overflow: visible;
+  /* --duration-expressive, the scale's "slow, cinematic entrance for one
+     large hero moment". Nathan asked for about 1200ms and the token sits
+     100ms away, so this follows the motion scale instead of drifting off it. */
+  --btn-fly-dur: var(--duration-expressive);
 }
-/* fill-box, so the origin is the letter's own bottom edge rather than the
-   whole 24-unit canvas, and the rise reads as the sheet leaving the envelope. */
-.btn-mail-letter {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  fill: none;
-  stroke: currentColor;
+@keyframes btn-mail-fold {
+  0%        { d: path("M22 4 L2 4 L2 20 L22 20 Z"); animation-timing-function: var(--ease-emphasized); }
+  26%, 70%  { d: path("M21.5 2.5 L2 9.1 L10.9 12.4 L14.5 21.7 Z"); }
+  71%, 100% { d: path("M22 4 L2 4 L2 20 L22 20 Z"); }
 }
-.btn:focus-visible [data-lucide="mail"] .btn-mail-letter,
-.btn.is-pressed [data-lucide="mail"] .btn-mail-letter { animation: btn-mail-letter var(--duration-flourish) var(--ease-emphasized); }
+@keyframes btn-mail-crease {
+  0%        { d: path("M22 7 L12 12.9 L2 7"); animation-timing-function: var(--ease-emphasized); }
+  26%, 70%  { d: path("M21.5 2.5 L16.2 7.8 L10.9 13.1"); }
+  71%, 100% { d: path("M22 7 L12 12.9 L2 7"); }
+}
+@keyframes btn-mail-fly {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1;
+         animation-timing-function: var(--ease-emphasized); }
+  26%  { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1;
+         animation-timing-function: var(--ease-default); }
+  36%  { transform: translate(-2px, 2px) rotate(-16deg) scale(0.95); opacity: 1;
+         animation-timing-function: var(--ease-exit); }
+  70%  { transform: translate(30px, -30px) rotate(26deg) scale(0.62); opacity: 0; }
+  71%  { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0;
+         animation-timing-function: var(--ease-entrance); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 1; }
+}
+/* Resting shapes live here rather than on the element, because `d` is only
+   animatable as a CSS property. The script writes them as attributes too, so
+   a browser without CSS `d` still draws the envelope. */
+.btn-mail-body { d: path("M22 4 L2 4 L2 20 L22 20 Z"); }
+.btn-mail-crease { d: path("M22 7 L12 12.9 L2 7"); }
+.btn:focus-visible [data-lucide="mail"],
+.btn.is-pressed [data-lucide="mail"] { animation: btn-mail-fly var(--btn-fly-dur) var(--ease-linear); }
+.btn:focus-visible [data-lucide="mail"] .btn-mail-body,
+.btn.is-pressed [data-lucide="mail"] .btn-mail-body { animation: btn-mail-fold var(--btn-fly-dur) var(--ease-linear); }
+.btn:focus-visible [data-lucide="mail"] .btn-mail-crease,
+.btn.is-pressed [data-lucide="mail"] .btn-mail-crease { animation: btn-mail-crease var(--btn-fly-dur) var(--ease-linear); }
 @media (hover: hover) {
-  .btn:hover [data-lucide="mail"] .btn-mail-letter { animation: btn-mail-letter var(--duration-flourish) var(--ease-emphasized); }
+  .btn:hover [data-lucide="mail"] { animation: btn-mail-fly var(--btn-fly-dur) var(--ease-linear); }
+  .btn:hover [data-lucide="mail"] .btn-mail-body { animation: btn-mail-fold var(--btn-fly-dur) var(--ease-linear); }
+  .btn:hover [data-lucide="mail"] .btn-mail-crease { animation: btn-mail-crease var(--btn-fly-dur) var(--ease-linear); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn:hover [data-lucide="mail"] .btn-mail-letter,
-  .btn.is-pressed [data-lucide="mail"] .btn-mail-letter,
-  .btn:focus-visible [data-lucide="mail"] .btn-mail-letter { animation: none; }
+  .btn:hover [data-lucide="mail"],
+  .btn.is-pressed [data-lucide="mail"],
+  .btn:focus-visible [data-lucide="mail"],
+  .btn:hover [data-lucide="mail"] .btn-mail-body,
+  .btn.is-pressed [data-lucide="mail"] .btn-mail-body,
+  .btn:focus-visible [data-lucide="mail"] .btn-mail-body,
+  .btn:hover [data-lucide="mail"] .btn-mail-crease,
+  .btn.is-pressed [data-lucide="mail"] .btn-mail-crease,
+  .btn:focus-visible [data-lucide="mail"] .btn-mail-crease { animation: none; }
 }
 
-/* The address stage (.btn--reveal). A contact button says its words at rest and
-   opens to show the address on hover or keyboard focus. Desktop only by
-   consequence, not by breakpoint: a touch screen has no hover, so the stage
-   simply never opens there and the button keeps its resting width.
-
-   Two things here are load bearing:
-   1. the stage rides a grid track from 0fr to 1fr, so it animates to its
-      intrinsic width with no per-frame reflow and nothing is clipped mid-word;
-   2. the opening gap sits on an element INSIDE the clipped span. Padding on the
-      grid item itself occupies its track even at 0fr and peeks out from under
-      the label at rest, which is exactly what it did before this shape. */
-.btn-say { display: inline-flex; align-items: center; }
-.btn-say-more {
-  display: grid;
-  grid-template-columns: 0fr;
-  transition: grid-template-columns var(--duration-base) var(--ease-emphasized);
-}
-.btn-say-more > span { overflow: hidden; white-space: nowrap; }
-/* A <span>, never an <i>: the shared rule above sizes every <i> inside a .btn
-   to --btn-glyph, which collapsed this address to 16px wide and made the stage
-   look like it opened by nothing at all. */
-.btn-say-addr {
-  display: block;
-  padding-left: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--tracking-label);
-}
-@media (hover: hover) {
-  .btn--reveal:hover .btn-say-more { grid-template-columns: 1fr; }
-}
-.btn--reveal:focus-visible .btn-say-more { grid-template-columns: 1fr; }
-@media (prefers-reduced-motion: reduce) {
-  .btn-say-more { transition: none; }
-}
 /* Size modifiers. Wire the --btn-* tokens. Base .btn is the 44px default (= md),
    so unmodified buttons are unchanged; opt in to --sm for dense UI or --lg for
    hero CTAs. min-height sets the height, padding scales the hit area, and the

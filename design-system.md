@@ -228,7 +228,7 @@ Never use raw px for spacing in a component. The whole point is one place to edi
 | `--radius-none` | `0` | Square. No rounding, for sharp-cornered surfaces and full-bleed media. Emitted as a bare 0 (identical CSS length, and what tokens.css has always carried). |
 | `--radius-sm` | `8px` | Small radius. The workhorse for inputs, chips, and small controls. |
 | `--radius-md` | `10px` | Medium radius. Mid-size controls and insets, a touch rounder than sm. |
-| `--radius-lg` | `14px` | Large radius. The social badges (--sbtn-radius) and other mid-weight containers. |
+| `--radius-lg` | `14px` | Large radius. The social links (--sbtn-radius) and other mid-weight containers. |
 | `--radius-xl` | `20px` | Extra-large radius. The default for cards and modals (--card-radius), prominent panels and feature surfaces. |
 | `--radius-full` | `999px` | Full round. Pills, tags, and circular buttons; forces a complete radius at any height. |
 

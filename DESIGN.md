@@ -144,7 +144,7 @@ rounded:
   none: 0        # --radius-none (square)
   sm: "8px"      # --radius-sm (inputs, small controls)
   md: "10px"     # --radius-md (mid-size controls, insets)
-  lg: "14px"     # --radius-lg (social badges and other mid-weight containers)
+  lg: "14px"     # --radius-lg (social links and other mid-weight containers)
   xl: "20px"     # --radius-xl (DEFAULT for cards and modals, prominent panels)
   full: "999px"  # --radius-full (pills, chips, badges, buttons, icon buttons)
   # DESIGN:rounded:end

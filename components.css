@@ -425,7 +425,7 @@
    The frame (surface, border, radius, padding) always renders; variants change
    only the inset or the inner content. Hover lives ONLY on .card--interactive:
    static cards keep the resting outline (the card hover taxonomy; guarded by
-   tokens/card-surface-lint.mjs rule 4).
+   the card rules in tokens/mobile-consistency-lint.mjs, rule 4).
      .card--compact / --spacious   padding tiers (16 / 32; base is standard 24)
      .card--interactive            clickable: pair with a real <a>/<button>
      .card--empty / --error        a centred message, frame still renders

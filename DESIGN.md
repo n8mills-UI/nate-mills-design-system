@@ -455,7 +455,7 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
   chosen to clear the 3:1 non-text contrast floor).
 - **Icon button** is the one canonical circle: a `{colors.text-tertiary}` hairline ring,
   `{colors.text-secondary}` glyph, 44px, `{rounded.full}`. Never a pill with a label.
-- **Cards** sit on `{colors.surface}` with a 1px `{colors.border}` hairline and `{rounded.lg}`, padded
+- **Cards** sit on `{colors.surface}` with a 1px `{colors.border}` hairline and `{rounded.xl}`, padded
   24px (compact 16, spacious 32). Interaction is outline-plus-lift, not a background fill. Cards on a
   dark slab use the `card-dark` recipe, whose fixed ink and `on-ink-*` tokens keep it dark in both
   themes. Never pin `data-theme` on an element to force a look: the pin survives when the element is
@@ -472,7 +472,7 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
 - **Action icons** name what the link does: `mail` for a `mailto:` link, `download` for a file
   download, `arrow-up-right` for an external link. Never the `external-link` box glyph, and no icon
   on a same-page anchor, because it never leaves the page.
-- **Standing call-to-action links** use a real 1.5px `border-bottom` in `{colors.borderBrand}` rather
+- **Standing call-to-action links** use a real 1.5px `border-bottom` in `{colors.border-brand}` rather
   than `text-decoration`, so the rule can be coloured and animated independently of the text. Exactly
   ONE of the two underline mechanisms is ever active on a given link: a border and a text-decoration
   underline together render as a visible double line. A component that draws its own border must also

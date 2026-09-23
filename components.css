@@ -1221,8 +1221,7 @@ a.card:focus-visible { text-decoration: none; }
 }
 
 /* The .ds-dots pagination component was deleted 2026-07-12 (deep-audit M-08):
-   zero consumers since the unified .ds-carousel-nav shipped; the class names
-   are tombstoned in tokens/css-liveness-lint.mjs. */
+   zero consumers since the unified .ds-carousel-nav shipped. */
 @media (prefers-reduced-motion: reduce) {
   .ds-carousel { scroll-behavior: auto; }
 }
@@ -1416,13 +1415,12 @@ a.card:focus-visible { text-decoration: none; }
 }
 
 /* The .placeholder component family was deleted 2026-07-12 (deep-audit n-29):
-   zero consumers, never documented; the four class names are tombstoned in
-   tokens/css-liveness-lint.mjs. */
+   zero consumers, never documented. */
 
 /* (Audit M-49's inset focus rule deleted 2026-09-08, audit n-17: it named
    .glb-thumb, which went with the photo lightbox, and .full-track .f-card,
-   which went with the testimonials rebuild to .kw-*. Zero consumers for either;
-   both names are tombstoned in tokens/css-liveness-lint.mjs. The technique is
+   which went with the testimonials rebuild to .kw-*. Zero consumers for
+   either. The technique is
    still right where it is needed: negative outline-offset paints the halo
    inside an overflow:hidden parent instead of letting it be clipped.) */
 

@@ -3,11 +3,11 @@
    Do not hand-edit. Edit tokens.json and rebuild.
 
    Architecture, three tiers:
-     1. Primitives   --neutral-* --lime-* (raw ramps, never used in UI)
+     1. Primitives   --neutral-* --lime-* --yellow-* (raw ramps, never used in UI)
      2. Semantics    --color-* --text-* (meaning; theming lives here)
      3. Components   --btn-* --card-* --chip-* --badge-* (alias semantics only)
    Brand identity (--brand-*) sits beside the primitives: fixed values (lime,
-   ink, gradient) that never theme-flip.
+   yellow, ink, gradient) that never theme-flip.
 
    Conventions:
      - Naming order: object-property-variant, general to specific; state
@@ -50,10 +50,23 @@
   --lime-800: #5e7a00;
   --lime-900: #2f3d00;
   --lime-950: #171f00;
+  --yellow-50: #fdfee9;
+  --yellow-100: #fbfed4;
+  --yellow-200: #f9ffa9;
+  --yellow-300: #f5ff7e;
+  --yellow-400: #f2ff53;
+  --yellow-500: #eeff00;
+  --yellow-550: #dff900;
+  --yellow-600: #d1e002;
+  --yellow-700: #a4b700;
+  --yellow-800: #6d7900;
+  --yellow-900: #363c00;
+  --yellow-950: #1b1e00;
   --brand-primary: var(--lime-500);
   --brand-primary-rgb: 210 255 55;
   --brand-primary-dim: var(--lime-600);
-  --brand-primary-vivid: #eeff00;
+  --brand-primary-vivid: var(--yellow-500);
+  --brand-secondary: var(--yellow-500);
   --brand-spot: var(--brand-primary-vivid);
   --brand-ink: var(--neutral-850);
   --brand-ink-rgb: 28 28 31;

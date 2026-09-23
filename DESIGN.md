@@ -25,6 +25,7 @@ colors:
   brand-lime: "#d2ff37"                                                         # --brand-primary
   brand-lime-dim: "#b8e030"                                                     # --brand-primary-dim
   brand-lime-vivid: "#eeff00"                                                   # --brand-primary-vivid
+  brand-secondary: "#eeff00"                                                    # --brand-secondary (the yellow beside lime)
   brand-ink: "#1c1c1f"                                                          # --brand-ink
   brand-gradient: "linear-gradient(135deg in oklab, #d2ff37 0%, #eeff00 100%)"  # --brand-gradient
 

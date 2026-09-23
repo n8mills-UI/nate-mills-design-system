@@ -287,13 +287,8 @@
   --z-toast: 1500;
   --z-skip-link: 1600;
   --portrait-fade: linear-gradient(180deg, rgb(var(--brand-ink-rgb) / 0) 40%, rgb(var(--brand-ink-rgb) / 0.92) 100%);
-  --hero-glow-falloff: 11%;
-  --hero-glow: radial-gradient(closest-side, rgb(255 255 255 / 0.425) 0%, rgb(255 255 255 / 0.33) var(--hero-glow-falloff, 11%), rgb(255 255 255 / 0.225) calc(var(--hero-glow-falloff, 11%) * 2.2), rgb(255 255 255 / 0.13) 44%, rgb(255 255 255 / 0.055) 68%, transparent 100%);
-  --hero-light-wash: radial-gradient(closest-side, rgb(255 255 255 / 0.38) 0%, rgb(255 255 255 / 0.30) 26%, rgb(255 255 255 / 0.12) 52%, rgb(255 255 255 / 0.05) 74%, transparent 100%);
-  --hero-light-overhead: radial-gradient(closest-side, rgb(255 255 255 / 0.40) 0%, rgb(255 255 255 / 0.28) 18%, rgb(255 255 255 / 0.14) 46%, rgb(255 255 255 / 0.05) 72%, transparent 100%);
-  --hero-light-warm: radial-gradient(closest-side, rgb(255 226 190 / 0.425) 0%, rgb(255 226 190 / 0.33) 11%, rgb(255 226 190 / 0.225) 24%, rgb(255 226 190 / 0.13) 44%, rgb(255 226 190 / 0.055) 68%, transparent 100%);
-  --hero-light-trees: radial-gradient(ellipse 17% 13% at 14% 24%, rgb(255 255 255 / 0.30), transparent 66%), radial-gradient(ellipse 10% 19% at 33% 61%, rgb(255 255 255 / 0.25), transparent 64%), radial-gradient(ellipse 22% 10% at 56% 20%, rgb(255 255 255 / 0.28), transparent 68%), radial-gradient(ellipse 9% 15% at 70% 74%, rgb(255 255 255 / 0.23), transparent 62%), radial-gradient(ellipse 19% 16% at 85% 40%, rgb(255 255 255 / 0.26), transparent 66%), radial-gradient(ellipse 13% 9% at 45% 88%, rgb(255 255 255 / 0.22), transparent 64%);
-  --hero-light-glass: linear-gradient(112deg, transparent 30%, rgb(90 150 255 / 0.085) 40%, rgb(120 230 230 / 0.10) 46%, color-mix(in srgb, var(--brand-primary) 11%, transparent) 50%, rgb(255 190 110 / 0.10) 54%, rgb(255 120 190 / 0.08) 60%, transparent 70%);
+  --hero-light-warm: radial-gradient(closest-side, rgb(255 196 132 / 0.620) 0%, rgb(255 196 132 / 0.612) 6.25%, rgb(255 196 132 / 0.588) 12.5%, rgb(255 196 132 / 0.551) 18.75%, rgb(255 196 132 / 0.501) 25%, rgb(255 196 132 / 0.442) 31.25%, rgb(255 196 132 / 0.377) 37.5%, rgb(255 196 132 / 0.309) 43.75%, rgb(255 196 132 / 0.243) 50%, rgb(255 196 132 / 0.181) 56.25%, rgb(255 196 132 / 0.127) 62.5%, rgb(255 196 132 / 0.081) 68.75%, rgb(255 196 132 / 0.046) 75%, rgb(255 196 132 / 0.022) 81.25%, rgb(255 196 132 / 0.008) 87.5%, rgb(255 196 132 / 0.001) 93.75%, transparent 100%);
+  --hero-light-fill: radial-gradient(closest-side, rgb(140 178 240 / 0.220) 0%, rgb(140 178 240 / 0.218) 6.25%, rgb(140 178 240 / 0.212) 12.5%, rgb(140 178 240 / 0.201) 18.75%, rgb(140 178 240 / 0.188) 25%, rgb(140 178 240 / 0.171) 31.25%, rgb(140 178 240 / 0.152) 37.5%, rgb(140 178 240 / 0.131) 43.75%, rgb(140 178 240 / 0.110) 50%, rgb(140 178 240 / 0.089) 56.25%, rgb(140 178 240 / 0.068) 62.5%, rgb(140 178 240 / 0.049) 68.75%, rgb(140 178 240 / 0.032) 75%, rgb(140 178 240 / 0.019) 81.25%, rgb(140 178 240 / 0.008) 87.5%, rgb(140 178 240 / 0.002) 93.75%, transparent 100%);
   --alpha-100: 0.04;
   --alpha-200: 0.08;
   --alpha-300: 0.12;

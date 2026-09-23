@@ -268,13 +268,8 @@ export interface DesignTokens {
   "z-toast": string;
   "z-skip-link": string;
   "portrait-fade": string;
-  "hero-glow-falloff": string;
-  "hero-glow": string;
-  "hero-light-wash": string;
-  "hero-light-overhead": string;
   "hero-light-warm": string;
-  "hero-light-trees": string;
-  "hero-light-glass": string;
+  "hero-light-fill": string;
   "alpha-100": string;
   "alpha-200": string;
   "alpha-300": string;

@@ -390,6 +390,10 @@ lean on soft shadows to fake hierarchy. This one refuses both. Colour is scarce,
 and hierarchy comes from weight and scale. If you are building a new page, the system is the pitch:
 make it look composed, restrained, and inevitable.
 
+It is not a component library, not Tailwind-driven, and not CSS-in-JS. There is no DaisyUI, Material
+or utility framework underneath: just CSS custom properties and one hand-built class layer, shipped
+as static stylesheets. The custom build is the point, so do not reach for a framework to fill a gap.
+
 ### Key characteristics
 
 - Warm off-white canvas (`{colors.bg}`), not white. Ink is warm near-black, not pure black.
@@ -401,6 +405,9 @@ make it look composed, restrained, and inevitable.
 - Mono (JetBrains Mono) is for uppercase eyebrows, chips, and badges only.
 - Both themes are first-class. In dark mode the accent IS the lime, by design.
 - WCAG 2.2 AA in both themes is a floor, not a feature.
+- Token names match the scale: words for small fixed sets (`--radius-sm`), numbers for open ramps
+  (`--space-4`, `--neutral-850`), intent for roles (`--color-text-primary`). Name a new token the
+  same way.
 
 ## Color roles
 
@@ -450,7 +457,9 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
   `{colors.text-secondary}` glyph, 44px, `{rounded.full}`. Never a pill with a label.
 - **Cards** sit on `{colors.surface}` with a 1px `{colors.border}` hairline and `{rounded.lg}`, padded
   24px (compact 16, spacious 32). Interaction is outline-plus-lift, not a background fill. Cards on a
-  dark slab use the `card-dark` recipe.
+  dark slab use the `card-dark` recipe, whose fixed ink and `on-ink-*` tokens keep it dark in both
+  themes. Never pin `data-theme` on an element to force a look: the pin survives when the element is
+  cloned and silently breaks dark mode.
 - **Chips vs badges vs counters** resolve by job: a label is a chip, a status is a badge, a count is
   the carousel counter. A badge is read-only and never interactive; its dot stays lime in both themes
   but colour is never the only signal, every status also carries a word.
@@ -460,6 +469,9 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
 - **Footer** is a fixed lime slab with ink text, lime in both themes.
 - **Links** are underlined, `{colors.link}` (ink on light, lime on dark). External links open a new
   tab, set `rel`, and carry a trailing up-right arrow glyph plus a screen-reader cue.
+- **Action icons** name what the link does: `mail` for a `mailto:` link, `download` for a file
+  download, `arrow-up-right` for an external link. Never the `external-link` box glyph, and no icon
+  on a same-page anchor, because it never leaves the page.
 - **Standing call-to-action links** use a real 1.5px `border-bottom` in `{colors.borderBrand}` rather
   than `text-decoration`, so the rule can be coloured and animated independently of the text. Exactly
   ONE of the two underline mechanisms is ever active on a given link: a border and a text-decoration
@@ -471,6 +483,8 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
 
 - Content sits in a wide band that stays proportional on normal screens and caps at 1680px so
   ultrawide layouts do not stretch without earning it.
+- One container width per section: the 960px prose column (`--container-base`) or that wide band
+  (`--container-wide`, for grids). No middle ground, so every section's gutter lines up.
 - Vertical rhythm is `{spacing.section-padding}` between sections.
 - Spacing is a strict 4px scale. Never use raw px for spacing; reach for a scale step.
 - Full-bleed inverse bands (testimonials, contact) break out to the screen edge and stay near-black in
@@ -516,6 +530,36 @@ Don't:
 - Don't justify body text, and don't drop below the 11px mono label floor.
 - Don't leak an external client brand colour into general UI; those are locked constants for their
   own case-study context only.
+
+## Voice and tone
+
+The words follow one rule, the same way the colours do. A page that governs its pixels but lets its
+copy wander still feels inconsistent.
+
+- Write in the first person, in plain words, the way one designer talks to another over coffee.
+- Let proof carry the brag. Numbers, not superlatives: "18 hours back to the team", never "huge
+  productivity gains".
+- No hedges. Say it or don't.
+- Body sentences run 6 to 14 words, one idea each.
+- Headings are sentence case, everywhere.
+
+The voice never changes; only the length does. Short copy compresses it:
+
+- **Buttons:** verb plus outcome. "Read the case study", "Get in touch".
+- **Errors:** name the problem and the workaround. No apology.
+- **Status pills:** declarative present tense, "Available for work". Never aspirational.
+- **Section subtitle:** one sentence that sets the stake, 18 words or fewer.
+- **Empty state:** what is missing, then what to do.
+- **Loading state:** copy only if the wait runs over a second, and then it sets the expectation.
+
+| Use | Avoid |
+|---|---|
+| system, token, governance, pipeline, foundation | passionate, world-class |
+| ship, scale, adoption, contribution | amazing, incredible, excited |
+| multi-brand, cross-platform, token-driven | we believe, we think, arguably |
+| let's talk, get in touch | click here, learn more, submit |
+
+The AI copy tells under **Copy** below are on the avoid list too.
 
 ## Reject generated-design reflexes
 
@@ -566,7 +610,10 @@ generated.
 **Mechanics**
 
 - `100dvh`, never `100vh`. The mobile viewport unit is wrong under a browser chrome bar.
-- No `href="#"` placeholder links, and no `<img>` without an `alt`.
+- No `href="#"` placeholder links. Every `<img>` carries an `alt` plus a `width` and `height` that
+  match the file's own shape, so the browser reserves the right box and the page does not jump.
+- Semantic HTML first (`<header>`, `<nav>`, `<main>`, `<section>`, `<button>`). ARIA only where
+  HTML cannot carry the meaning.
 
 ## Responsive behavior
 
@@ -620,3 +667,8 @@ When building a new page or prototype with this system:
   rather than merges, so one component-level declaration silently restores the dot.
 - Exact computed contrast ratios are verified in a live specimen; the floors above (4.5:1 text, 3:1
   non-text) are the targets to design to.
+- The accessibility claim is WCAG 2.2 AA, and it is a self-assessment backed by automated gates, not
+  a certification. APCA was explored as a sharper readability ceiling above that floor, never as a
+  compliance claim: it is not a conformance standard. Do not cite an APCA score as proof.
+- The token source is DTCG-format. DTCG is a W3C Community Group format, not a W3C Recommendation,
+  so "DTCG-format" is the accurate claim and "fully spec-compliant" would not be.

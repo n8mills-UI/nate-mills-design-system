@@ -28,8 +28,7 @@ One source, three generated outputs, and the discipline between them. That is th
 - **`tokens.css`** : the generated CSS custom properties, built from `tokens.json` by [Style Dictionary](https://styledictionary.com). All three themes (light, dark, high-contrast) included. Never hand-edited.
 - **`tokens.js` / `tokens.d.ts`** : the same tokens as a typed JavaScript object, resolved to literal values for the default theme. For build tools that read tokens in JS, not CSS. Generated, never hand-edited.
 - **`components.css`** : the component layer. Buttons, cards, chips, and the section heading pattern, each reading semantic tokens only.
-- **[`design-system.md`](./design-system.md)** : the full write-up. Philosophy, the token model, the type and spacing scales, accessibility, contribution rules, and the content voice guide.
-- **[`DESIGN.md`](./DESIGN.md)** : the portable brand contract. One self-contained file that hands an AI coding agent (or a contractor) everything it needs to build on-brand without the repo: resolved colour, type, spacing and radius values in the frontmatter, a component recipe map, and the do's and don'ts. The value blocks are generated from `tokens.json` and drift-gated, so they never fall out of sync with the system.
+- **[`DESIGN.md`](./DESIGN.md)** : the portable brand contract and the written rules. One self-contained file that hands an AI coding agent (or a contractor) everything it needs to build on-brand without the repo: resolved colour, type, spacing and radius values in the frontmatter, a component recipe map, the do's and don'ts, and the voice guide for copy. The value blocks are generated from `tokens.json` and drift-gated, so they never fall out of sync with the system.
 
 Prefer the guided tour to the raw source? The [live view](https://natemills.me/#uth-colour) walks every section with the real values resolved.
 
@@ -63,7 +62,7 @@ It is wired into the tokens, so you cannot opt out of it by accident:
 - Default control height is 44 by 44 px. Two documented dense sizes sit below it on purpose, a 32px small button and a 24px dot; both clear the WCAG 2.5.8 AA 24px floor and carry a larger pointer target than their painted box.
 - Every animation is gated behind `prefers-reduced-motion`, collapsed in one place, not per component.
 
-There is one honest carveout. The brand lime is a background and accent only. It fails as foreground text on the light surface, roughly 1.06 to 1, so the system refuses to let you use it there and hands you a theme-aware token instead. The full reasoning is in [`design-system.md`](./design-system.md#10-accessibility).
+There is one honest carveout. The brand lime is a background and accent only. It fails as foreground text on the light surface, roughly 1.06 to 1, so the system refuses to let you use it there and hands you a theme-aware token instead. The full reasoning is in [`DESIGN.md`](./DESIGN.md#color-roles).
 
 ## Use it
 
@@ -112,7 +111,7 @@ git clone https://github.com/n8mills-UI/nate-mills-design-system.git
 > registry copy is frozen at an old version and does not match this repo. Link the CSS above or
 > clone the source instead.
 
-Read [`design-system.md`](./design-system.md) for the why. Read `tokens.json` and `components.css` for the how. Fork it for another brand by changing `--lime-500` and watching every consumer follow. That is the system working as designed.
+See the [live design system](https://natemills.me/#under-the-hood) for the why. Read [`DESIGN.md`](./DESIGN.md), `tokens.json` and `components.css` for the how. Fork it for another brand by changing `--lime-500` and watching every consumer follow. That is the system working as designed.
 
 ## License
 

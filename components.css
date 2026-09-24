@@ -2548,7 +2548,10 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
   .nm-orbit:hover { transform: scale(var(--orbit-swell)); }
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* Also still with scripting off: the ring turns for ever and the pause control
+   over its region is script-driven, so nothing could stop it (2026-09-24,
+   held by a11y/noscript-gate.mjs). */
+@media (prefers-reduced-motion: reduce), (scripting: none) {
   .nm-orbit-ring,
   .nm-orbit:hover .nm-orbit-ring,
   .nm-orbit:focus-visible .nm-orbit-ring { animation: none; }

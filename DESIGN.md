@@ -78,7 +78,6 @@ typography:
     display: '"Anton", Impact, "Haettenschweiler", sans-serif'  # --font-display
     body: '"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'  # --font-body
     mono: '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace'  # --font-mono
-    serif: '"PT Serif", Georgia, serif'  # --font-serif
     # DESIGN:type-families:end
   # DESIGN:type-styles:start
   hero:  # display specimen; a consuming site’s own hero may set bespoke clamps
@@ -152,18 +151,20 @@ rounded:
 
 spacing:
   # DESIGN:spacing:start
-  s1: "4px"                                                 # --space-1
-  s2: "8px"                                                 # --space-2
-  s3: "12px"                                                # --space-3
-  s4: "16px"                                                # --space-4
-  s5: "24px"                                                # --space-5
-  s6: "32px"                                                # --space-6
-  s7: "48px"                                                # --space-7
-  s8: "64px"                                                # --space-8
-  s9: "96px"                                                # --space-9 (section padding lower bound)
-  s10: "128px"                                              # --space-10 (section padding upper bound)
-  s11: "192px"                                              # --space-11
-  s12: "256px"                                              # --space-12
+  s50: "2px"                                                # --space-50
+  s100: "4px"                                               # --space-100
+  s200: "8px"                                               # --space-200
+  s250: "10px"                                              # --space-250
+  s300: "12px"                                              # --space-300
+  s400: "16px"                                              # --space-400
+  s500: "24px"                                              # --space-500
+  s600: "32px"                                              # --space-600
+  s700: "48px"                                              # --space-700
+  s800: "64px"                                              # --space-800
+  s900: "96px"                                              # --space-900 (section padding lower bound)
+  s1000: "128px"                                            # --space-1000 (section padding upper bound)
+  s1100: "192px"                                            # --space-1100
+  s1200: "256px"                                            # --space-1200
   section-padding: "clamp(96px, min(14.2vh, 12vw), 256px)"  # --section-padding
   card-pad-compact: "16px"                                  # --card-pad-compact
   card-pad-standard: "24px"                                 # --card-pad-standard
@@ -272,7 +273,7 @@ Link the foundation. Do not rebuild it from the values above.
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 <link href="https://natemills.me/assets/fonts.css" rel="stylesheet">
 <link href="https://natemills.me/assets/tokens.css" rel="stylesheet">
 <link href="https://natemills.me/assets/components.css" rel="stylesheet">
@@ -280,7 +281,7 @@ Link the foundation. Do not rebuild it from the values above.
 
 `tokens.css` carries every custom property in all three themes (light, dark, high-contrast) and
 `components.css` reads them, so tokens must load first. `fonts.css` is separate and required: it
-declares the self-hosted JetBrains Mono and turns on the slashed zero. Anton, Work Sans and PT Serif
+declares the self-hosted JetBrains Mono and turns on the slashed zero. Anton and Work Sans
 come from Google Fonts, which is why that request is in the list too. Drop any one of the six and the
 type silently falls back.
 
@@ -383,8 +384,7 @@ calm, Swiss-minimal editorial surface where a single high-chroma lime does all t
 everything else stays quiet. The atmosphere is warm off-white paper in light mode and warm near-black
 in dark mode, never pure white and never pure black. Depth is built from a surface ladder and honest
 1px hairlines, not from drop shadows or decorative gradients. Display type is Anton, set large and
-tight; body copy and controls are Work Sans; JetBrains Mono carries eyebrows and labels; PT Serif is
-reserved for editorial quotes only.
+tight; body copy and controls are Work Sans; JetBrains Mono carries eyebrows and labels.
 
 The counter-position is deliberate: most portfolios scatter accent colour across whole sections and
 lean on soft shadows to fake hierarchy. This one refuses both. Colour is scarce, borders are honest,
@@ -407,7 +407,7 @@ as static stylesheets. The custom build is the point, so do not reach for a fram
 - Both themes are first-class. In dark mode the accent IS the lime, by design.
 - WCAG 2.2 AA in both themes is a floor, not a feature.
 - Token names match the scale: words for small fixed sets (`--radius-sm`), numbers for open ramps
-  (`--space-4`, `--neutral-850`), intent for roles (`--color-text-primary`). Name a new token the
+  (`--space-400`, `--neutral-850`), intent for roles (`--color-text-primary`). Name a new token the
   same way.
 
 ## Color roles
@@ -654,10 +654,9 @@ When building a new page or prototype with this system:
   and it made computed colours unreadable to sRGB-only accessibility scanners.
 - The system has no semantic status colours (success/warning/danger); a portfolio has no such UI. If a
   consumer needs them, add at the token layer first, then route a semantic.
-- Fonts are Anton (display), Work Sans (body and controls), JetBrains Mono (labels and numbers) and
-  PT Serif (quotes). All four are open source. If one is unavailable, fall back to a condensed
-  grotesque for display, a neutral grotesque for body, any monospace with a slashed zero for labels,
-  and a transitional serif (Georgia) for quotes.
+- Fonts are Anton (display), Work Sans (body and controls) and JetBrains Mono (labels and numbers).
+  All three are open source. If one is unavailable, fall back to a condensed grotesque for display,
+  a neutral grotesque for body, and any monospace with a slashed zero for labels.
 - The mono zero is SLASHED, and it does not come for free. JetBrains Mono's default zero has a dot
   in it; the slash is the OpenType `zero` feature, applied once at `:root` via
   `font-feature-settings: var(--font-feature-mono)` rather than per rule. The build served by

@@ -47,11 +47,11 @@ One way, top to bottom: components read semantics, semantics read primitives, pr
 <div align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/bento-foundations-dark.png">
-  <img src="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/bento-foundations-lime.png" alt="The design system foundations in one view: the lime and neutral colour ramps with their stop numbers, the Anton display specimen, the Work Sans, JetBrains Mono and PT Serif faces, and the spacing scale drawn at true width" width="860">
+  <img src="https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/assets/bento-foundations-lime.png" alt="The design system foundations in one view: the lime and neutral colour ramps with their stop numbers, the Anton display specimen, the Work Sans and JetBrains Mono faces, and the spacing scale drawn at true width" width="860">
 </picture>
 </div>
 
-Colour, type, and spacing, all generated from `tokens.json`. Display type is Anton, set large and tight; Work Sans carries body copy and controls; JetBrains Mono is for labels and numbers, with the slashed zero the system insists on; and PT Serif is kept for the one place that earns it: the pull quotes.
+Colour, type, and spacing, all generated from `tokens.json`. Display type is Anton, set large and tight; Work Sans carries body copy and controls; and JetBrains Mono is for labels and numbers, with the slashed zero the system insists on.
 
 ## Accessibility is a constraint, not a feature
 
@@ -72,7 +72,7 @@ the site runs on, so it cannot fall behind.
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 <link href="https://natemills.me/assets/fonts.css" rel="stylesheet">
 <link href="https://natemills.me/assets/tokens.css" rel="stylesheet">
 <link href="https://natemills.me/assets/components.css" rel="stylesheet">
@@ -89,7 +89,7 @@ Then compose with the published classes and tokens:
   background: var(--brand-primary);
   color: var(--brand-ink);
   border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-5);
+  padding: var(--space-300) var(--space-500);
 }
 ```
 

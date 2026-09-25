@@ -79,7 +79,7 @@
 .btn:active {
   text-decoration: none;
 }
-.btn--primary {
+.btn--primary, .btn--primary:hover {
   background: var(--btn-primary-bg);
   color: var(--btn-primary-fg);
   border-color: var(--btn-primary-border);
@@ -1294,6 +1294,7 @@ a.card:focus-visible { text-decoration: none; }
    stays an easy target without adding visible chrome. */
 .ds-carousel-nav__arrow {
   position: relative;
+  z-index: 1;
   width: var(--cn-glyph);
   height: var(--cn-glyph);
   display: inline-flex;
@@ -2621,7 +2622,9 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
 .nm-pill::before {
   content: '';
   position: absolute;
-  inset: -1px 0;            /* 42 + 1 + 1 = 44 */
+  /* An absolute child is placed against the PADDING box, 40 inside the 1px
+     borders, so the ghost reaches 1px past the border edge: 40 + 2 + 2 = 44. */
+  inset: calc((var(--pill-h) - var(--touch-target-min)) / 2 - 1px) 0;
   border-radius: inherit;
 }
 

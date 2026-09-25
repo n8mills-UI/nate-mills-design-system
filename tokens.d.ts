@@ -70,6 +70,7 @@ export interface DesignTokens {
   "fx-spectrum-4": string;
   "fx-spectrum-5": string;
   "fx-spectrum-6": string;
+  "fx-spectrum-spin": string;
   "glitch-burst": string;
   "glitch-shift": string;
   "glitch-strength": string;

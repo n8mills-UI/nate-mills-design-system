@@ -89,6 +89,7 @@
   --fx-spectrum-4: #32d74b;
   --fx-spectrum-5: #0a84ff;
   --fx-spectrum-6: #bf5af2;
+  --fx-spectrum-spin: 3600ms;
   --glitch-burst: 700ms;
   --glitch-shift: 3px;
   --glitch-strength: 0.78;

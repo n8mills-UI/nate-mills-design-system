@@ -300,6 +300,8 @@ export interface DesignTokens {
   "glass-shadow": string;
   "glass-blur": string;
   "glass-blur-webkit": string;
+  "glass-blur-frost": string;
+  "glass-blur-dim": string;
   "glass-saturate": string;
   "glass-dim": string;
   "glass-dim-scrolled": string;

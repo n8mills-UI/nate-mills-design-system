@@ -319,6 +319,8 @@
   --glass-shadow: 0 10px 30px rgb(0 0 0 / 0.18);
   --glass-blur: 10px;
   --glass-blur-webkit: 14px;
+  --glass-blur-frost: 26px;
+  --glass-blur-dim: 10px;
   --glass-saturate: 170%;
   --glass-dim: 1;
   --glass-dim-scrolled: 1.15;

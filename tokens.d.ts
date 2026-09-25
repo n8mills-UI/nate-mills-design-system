@@ -64,6 +64,12 @@ export interface DesignTokens {
   "ext-brand-wcag-amber": string;
   "fx-glitch-magenta": string;
   "fx-glitch-cyan": string;
+  "fx-spectrum-1": string;
+  "fx-spectrum-2": string;
+  "fx-spectrum-3": string;
+  "fx-spectrum-4": string;
+  "fx-spectrum-5": string;
+  "fx-spectrum-6": string;
   "glitch-burst": string;
   "glitch-shift": string;
   "glitch-strength": string;

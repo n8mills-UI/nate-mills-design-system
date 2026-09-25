@@ -982,8 +982,7 @@ a.card:focus-visible { text-decoration: none; }
   vertical-align: baseline;
 }
 /* (The legacy span.dot heading rule was deleted 2026-07-10, audit M-25: the
-   last two heading spans are gone; every heading period is the ::after above.
-   The hero ticker's separator dots are a different pattern in sections.css.) */
+   last two heading spans are gone; every heading period is the ::after above.) */
 
 /* Task #43: tighten subtitle-to-content gap from var(--space-700) = 48px down
    to var(--space-500) = 24px. Less wasted whitespace below every section's
@@ -2533,8 +2532,9 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
 /* THE HOUSE PAUSE CONTRACT. A region with a pause toggle carries
    data-motion-paused="1" while it is pressed, and everything looping inside it
    has to answer to that. The ring turns forever and #678 put one inside #hero,
-   whose toggle reads "Pause the skill pillars ticker", and one in the footer:
-   neither toggle knew about it, so both buttons said they had stopped their
+   whose toggle then read "Pause the skill pillars ticker" (the ticker and its
+   toggle were removed 2026-09-25), and one in the footer: neither toggle knew
+   about it, so both buttons said they had stopped their
    region while this kept turning. Measured by motion-truth-gate: PASS at #677,
    FAIL at #678, two findings, one per instance. A pause control that lies is
    worse than none. */

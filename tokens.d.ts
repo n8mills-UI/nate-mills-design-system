@@ -289,6 +289,8 @@ export interface DesignTokens {
   "z-toast": string;
   "z-skip-link": string;
   "portrait-fade": string;
+  "hero-gel-key": string;
+  "hero-gel-fill": string;
   "hero-light-warm": string;
   "hero-light-fill": string;
   "alpha-100": string;

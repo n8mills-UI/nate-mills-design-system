@@ -82,59 +82,59 @@ typography:
   # DESIGN:type-styles:start
   hero:  # display specimen; a consuming site’s own hero may set bespoke clamps
     family: display
-    size: "clamp(40px, 9vw, 118px)"  # --display-hero
-    weight: 600                      # --display-weight
-    lineHeight: 1.05                 # --line-display
-    tracking: "-0.0176em"            # --display-tight
+    size: "clamp(2.5rem, 9vw, 7.375rem)"  # --display-hero
+    weight: 600                           # --display-weight
+    lineHeight: 1.05                      # --line-display
+    tracking: "-0.0176em"                 # --display-tight
   h1:  # every section heading
     family: display
-    size: "clamp(34px, 5.8vw, 72px)"  # --text-h1
-    weight: 600                       # --display-weight
-    lineHeight: 1.05                  # --line-display
-    tracking: "-0.0176em"             # --display-tight
+    size: "clamp(2.125rem, 5.8vw, 4.5rem)"  # --text-h1
+    weight: 600                             # --display-weight
+    lineHeight: 1.05                        # --line-display
+    tracking: "-0.0176em"                   # --display-tight
   h2:  # card titles, sub-heads
     family: display
-    size: "clamp(22px, 4vw, 32px)"  # --text-h2
-    weight: 600                     # --display-weight
-    lineHeight: 1.15                # --line-heading
-    tracking: "-0.02em"             # --tracking-tight
+    size: "clamp(1.375rem, 4vw, 2rem)"  # --text-h2
+    weight: 600                         # --display-weight
+    lineHeight: 1.15                    # --line-heading
+    tracking: "-0.02em"                 # --tracking-tight
   card-title:  # large feature-card titles
     family: display
-    size: "clamp(22px, 4vw, 44px)"  # --display-card-title
-    weight: 600                     # --display-weight
-    lineHeight: 1.15                # --line-heading
-    tracking: "-0.0176em"           # --display-tight
+    size: "clamp(1.375rem, 4vw, 2.75rem)"  # --display-card-title
+    weight: 600                            # --display-weight
+    lineHeight: 1.15                       # --line-heading
+    tracking: "-0.0176em"                  # --display-tight
   stat-num:  # stat callout numerals
     family: display
-    size: "clamp(40px, 7vw, 88px)"  # --display-stat-num
-    weight: 600                     # --display-weight
-    lineHeight: 1.05                # --line-display
-    tracking: "-0.0176em"           # --display-tight
+    size: "clamp(2.5rem, 7vw, 5.5rem)"  # --display-stat-num
+    weight: 600                         # --display-weight
+    lineHeight: 1.05                    # --line-display
+    tracking: "-0.0176em"               # --display-tight
   intro:  # section intro line
     family: body
-    size: "clamp(20px, 5vw, 24px)"  # --display-intro
-    weight: 400                     # --weight-regular
-    lineHeight: 1.45                # --line-snug
-    tracking: "-0.02em"             # --tracking-tight
+    size: "clamp(1.25rem, 5vw, 1.5rem)"  # --display-intro
+    weight: 400                          # --weight-regular
+    lineHeight: 1.45                     # --line-snug
+    tracking: "-0.02em"                  # --tracking-tight
   body:  # paragraphs
     family: body
-    size: "16px"     # --text-body
+    size: "1rem"     # --text-body
     weight: 400      # --weight-regular
     lineHeight: 1.5  # --line-body
     tracking: 0      # --tracking-normal
   body-compact:  # footer, card bullets, dense UI
     family: body
-    size: "14px"     # --size-sm
-    weight: 400      # --weight-regular
-    lineHeight: 1.5  # --line-body
+    size: "0.875rem"  # --size-sm
+    weight: 400       # --weight-regular
+    lineHeight: 1.5   # --line-body
   caption:  # captions, footnotes
     family: body
-    size: "12px"     # --text-caption
+    size: "0.75rem"  # --text-caption
     weight: 400      # --weight-regular
     lineHeight: 1.5  # --line-body
   label:  # uppercase eyebrows, chips, badges; line-height 1.4
     family: mono
-    size: "11px"        # --text-label
+    size: "0.6875rem"   # --text-label
     weight: 500         # --weight-medium
     tracking: "0.08em"  # --tracking-label
   # DESIGN:type-styles:end

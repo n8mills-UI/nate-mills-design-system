@@ -51,7 +51,14 @@
   font-size: var(--btn-font-size);
   font-weight: var(--btn-font-weight);
   line-height: 1;
-  white-space: nowrap;
+  /* A label wraps only when the button is narrower than it: a stretched
+     button (width: 100%, flex: 1) in a narrow column at a large browser text
+     size. Every button fits its label at the default size, so nothing wraps
+     there; with nowrap the overflow was clipped by the card around it
+     ("See my design system" lost 139px at 320 under a 200% text size, WCAG
+     1.4.4, 2026-09-28). The tight line-height is the single-line one; a
+     wrapped label is the exception, not the design. */
+  white-space: normal;
   border-radius: var(--btn-radius);
   border: 1px solid transparent;
   cursor: pointer;

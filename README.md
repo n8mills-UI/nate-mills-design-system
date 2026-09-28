@@ -27,7 +27,7 @@ One source, three generated outputs, and the discipline between them. That is th
 - **`tokens.json`** : the single source of truth, in the [W3C Design Tokens Community Group](https://www.designtokens.org/) (DTCG) format. Three tiers: primitives (raw values), semantics (roles), and component tokens (btn/card/chip/badge, aliasing semantics only).
 - **`tokens.css`** : the generated CSS custom properties, built from `tokens.json` by [Style Dictionary](https://styledictionary.com). All three themes (light, dark, high-contrast) included. Never hand-edited.
 - **`tokens.js` / `tokens.d.ts`** : the same tokens as a typed JavaScript object, resolved to literal values for the default theme. For build tools that read tokens in JS, not CSS. Generated, never hand-edited.
-- **Units:** type sizes are `rem` (`1rem` is 16px at the browser's default), so text follows the reader's own text-size setting; spacing, radius, borders and control sizes stay `px`. Since 4.0.0 the type values in `tokens.js` read `"1rem"` where they used to read `"16px"`: code that parses the number needs the unit change.
+- **Units:** type sizes are `rem` (`1rem` is 16px at the browser's default), so text follows the reader's own text-size setting; spacing, radius, borders and control sizes stay `px`.
 - **`components.css`** : the component layer. Buttons, cards, chips, and the section heading pattern, each reading semantic tokens only.
 - **[`DESIGN.md`](./DESIGN.md)** : the portable brand contract and the written rules. One self-contained file that hands an AI coding agent (or a contractor) everything it needs to build on-brand without the repo: resolved colour, type, spacing and radius values in the frontmatter, a component recipe map, the do's and don'ts, and the voice guide for copy. The value blocks are generated from `tokens.json` and drift-gated, so they never fall out of sync with the system.
 
@@ -108,7 +108,7 @@ JS export:
 git clone https://github.com/n8mills-UI/nate-mills-design-system.git
 ```
 
-> **Note on npm.** `@n8mills/design-tokens` was published in 2026 and is no longer maintained. The
+> **Note on npm.** `@n8mills/design-tokens` was published in 2026 and is now retired. The
 > registry copy is frozen at an old version and does not match this repo. Link the CSS above or
 > clone the source instead.
 

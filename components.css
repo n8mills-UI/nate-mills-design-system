@@ -1821,6 +1821,40 @@ a.card:focus-visible { text-decoration: none; }
   .wcagm-txt span { font-size: var(--wcagm-eyebrow-size-sm); }
 }
 
+/* Labelled variant (.sbtn--labelled): the full pill at EVERY width (Nathan,
+   2026-09-28). The two tiers above exist because the hero and footer rows must
+   fit three badges and the WCAG mark on one line; a badge that is a card's only
+   action has its column to itself, so it keeps its lead line and its name on a
+   phone rather than collapsing to the bare mark. It hugs its words like the
+   base pill, and max-width keeps a long line inside a narrow column.
+   Declared after both tiers so it wins their ties at the same specificity. */
+.sbtn--labelled { max-width: 100%; }
+.sbtn--labelled .sbtn-t { min-width: 0; }
+@media (min-width: 600px) and (max-width: 768px) {
+  .sbtn--labelled .sbtn-t small { display: block; }
+  .sbtn--labelled .sbtn-arr { align-self: flex-start; }
+}
+@media (max-width: 599.98px) {
+  .sbtn.sbtn--labelled {
+    width: auto;
+    height: auto;
+    min-height: var(--sbtn-min-h);
+    padding: var(--sbtn-pad-y) var(--sbtn-pad-x);
+    border-radius: var(--sbtn-radius);
+    justify-content: flex-start;
+  }
+  /* Undo the tier's visually-hidden clip on the words and the arrow. */
+  .sbtn--labelled :is(.sbtn-t, .sbtn-arr) {
+    position: static;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: nowrap;
+  }
+  .sbtn--labelled .sbtn-t { display: flex; width: auto; height: auto; }
+  .sbtn--labelled .sbtn-arr { width: var(--btn-glyph-sm); height: var(--btn-glyph-sm); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sbtn:hover .sbtn-arr { transform: none; }
 }

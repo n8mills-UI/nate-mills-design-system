@@ -486,7 +486,9 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
   ultrawide layouts do not stretch without earning it.
 - One container width per section: the 960px prose column (`--container-base`) or that wide band
   (`--container-wide`, for grids). No middle ground, so every section's gutter lines up.
-- Vertical rhythm is `{spacing.section-padding}` between sections.
+- Vertical rhythm: every section pads top and bottom by `{spacing.section-padding}`, so a gap is two
+  units at every width. Beside a colour band, the plain-side neighbour doubles its own edge so the
+  plain side still reads as two units. Never halve a gap for phones; the unit already shrinks.
 - Spacing is a strict 4px scale. Never use raw px for spacing; reach for a scale step.
 - Full-bleed inverse bands (testimonials, contact) break out to the screen edge and stay near-black in
   both themes.

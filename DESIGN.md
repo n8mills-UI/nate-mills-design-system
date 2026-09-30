@@ -76,7 +76,7 @@ typography:
   families:
     # DESIGN:type-families:start
     display: '"Anton", Impact, "Haettenschweiler", sans-serif'  # --font-display
-    body: '"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'  # --font-body
+    body: '"Work Sans", "Work Sans Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'  # --font-body
     mono: '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace'  # --font-mono
     # DESIGN:type-families:end
   # DESIGN:type-styles:start

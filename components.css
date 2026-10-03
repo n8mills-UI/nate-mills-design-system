@@ -936,10 +936,10 @@ a.card:focus-visible { text-decoration: none; }
 .section-title {
   font-family: var(--font-display);
   font-weight: var(--weight-extrabold);
-  /* display-section is 1.5x the text-h1 base: Nathan's pick from the
-     in-context type editor, 2026-08-21. The About heading opts down to 1.25x
-     in sections.css; the featured-card override below this file keeps card
-     titles on their own scale. */
+  /* display-section: Nathan's pick from the in-context type editor,
+     2026-08-21, floor and cap raised 2026-10-01. The two About headings
+     size themselves in sections.css; the featured-card override below this
+     file keeps card titles on their own scale. */
   font-size: var(--display-section);
   line-height: var(--line-display);
   /* --tl-track-display: the portfolio theme lab's per-pairing override,

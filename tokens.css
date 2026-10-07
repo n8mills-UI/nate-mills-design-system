@@ -383,6 +383,7 @@
   --color-text-muted-emphasis: var(--neutral-600);
   --color-feedback-background-error: #961010;
   --color-on-feedback-error: var(--neutral-0);
+  --hero-gel-key: #ffc484;
   --glass-tint: rgb(250 250 252 / 0.4);
   --glass-tint-scrolled: rgb(250 250 252 / 0.7);
   --glass-tint-strong: rgb(250 250 252 / 0.9);
@@ -431,6 +432,7 @@
   --glass-dim-scrolled: 1.05;
   --sbtn-gh-fg: var(--color-text-primary);
   --sbtn-li-fg: var(--color-text-primary);
+  --hero-gel-key: #c1a9ee;
 }
 
 /* Theme-pin re-declaration. A custom property substitutes its var()s where it
@@ -458,6 +460,7 @@
   --border-hairline: 1px solid var(--color-border);
   --border-strong: 1px solid var(--color-border-strong);
   --border-focus: 2px solid var(--color-focus-ring);
+  --hero-light-warm: radial-gradient(closest-side, color-mix(in srgb, var(--hero-gel-key) 62%, transparent) 0%, color-mix(in srgb, var(--hero-gel-key) 61.2%, transparent) 6.25%, color-mix(in srgb, var(--hero-gel-key) 58.8%, transparent) 12.5%, color-mix(in srgb, var(--hero-gel-key) 55.1%, transparent) 18.75%, color-mix(in srgb, var(--hero-gel-key) 50.1%, transparent) 25%, color-mix(in srgb, var(--hero-gel-key) 44.2%, transparent) 31.25%, color-mix(in srgb, var(--hero-gel-key) 37.7%, transparent) 37.5%, color-mix(in srgb, var(--hero-gel-key) 30.9%, transparent) 43.75%, color-mix(in srgb, var(--hero-gel-key) 24.3%, transparent) 50%, color-mix(in srgb, var(--hero-gel-key) 18.1%, transparent) 56.25%, color-mix(in srgb, var(--hero-gel-key) 12.7%, transparent) 62.5%, color-mix(in srgb, var(--hero-gel-key) 8.1%, transparent) 68.75%, color-mix(in srgb, var(--hero-gel-key) 4.6%, transparent) 75%, color-mix(in srgb, var(--hero-gel-key) 2.2%, transparent) 81.25%, color-mix(in srgb, var(--hero-gel-key) 0.8%, transparent) 87.5%, color-mix(in srgb, var(--hero-gel-key) 0.1%, transparent) 93.75%, transparent 100%);
 }
 
 /* OS dark derives from the SAME darkTheme group as the toggle (TK-02). */
@@ -496,6 +499,7 @@
     --glass-dim-scrolled: 1.05;
     --sbtn-gh-fg: var(--color-text-primary);
     --sbtn-li-fg: var(--color-text-primary);
+    --hero-gel-key: #c1a9ee;
   }
 }
 

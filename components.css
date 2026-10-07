@@ -922,7 +922,8 @@ a.card:focus-visible { text-decoration: none; }
      - flow-root, so the h2's own margin-bottom cannot escape the block and
        collapse through into that gap.
    Consumers must therefore declare NO margin-top on the content that follows a
-   .section-head; tokens/section-head-lint.mjs fails the build if one reappears. */
+   .section-head; a11y/section-head-gate.mjs (a browser gate, run by the deploy)
+   fails if one reappears. */
 .section-head {
   display: flow-root;
   padding-block-end: var(--section-head-gap);

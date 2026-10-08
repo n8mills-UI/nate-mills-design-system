@@ -64,6 +64,14 @@ export interface DesignTokens {
   "ext-brand-wcag-amber": string;
   "fx-glitch-magenta": string;
   "fx-glitch-cyan": string;
+  "fx-swap-1": string;
+  "fx-swap-2": string;
+  "fx-swap-3": string;
+  "fx-swap-4": string;
+  "fx-swap-5": string;
+  "fx-swap-6": string;
+  "fx-swap-7": string;
+  "fx-swap-8": string;
   "fx-spectrum-1": string;
   "fx-spectrum-2": string;
   "fx-spectrum-3": string;
@@ -71,9 +79,6 @@ export interface DesignTokens {
   "fx-spectrum-5": string;
   "fx-spectrum-6": string;
   "fx-spectrum-spin": string;
-  "glitch-burst": string;
-  "glitch-shift": string;
-  "glitch-strength": string;
   "color-bg": string;
   "color-surface": string;
   "color-surface-sunken": string;
@@ -105,6 +110,7 @@ export interface DesignTokens {
   "color-dot-inactive": string;
   "color-dot-active": string;
   "color-text-muted-emphasis": string;
+  "color-text-emphasis": string;
   "color-on-ink-hover": string;
   "color-on-primary-strong": string;
   "color-on-primary-muted": string;

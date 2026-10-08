@@ -83,6 +83,14 @@
   --ext-brand-wcag-amber: #ffcc66;
   --fx-glitch-magenta: #ff2bd6;
   --fx-glitch-cyan: #00d4ff;
+  --fx-swap-1: #ff00bb;
+  --fx-swap-2: #00e5ff;
+  --fx-swap-3: #ff5c00;
+  --fx-swap-4: #7c3aff;
+  --fx-swap-5: #00ff85;
+  --fx-swap-6: #ffe600;
+  --fx-swap-7: #ff2d55;
+  --fx-swap-8: #00b3ff;
   --fx-spectrum-1: #ff3b30;
   --fx-spectrum-2: #ff9f0a;
   --fx-spectrum-3: #ffd60a;
@@ -90,9 +98,6 @@
   --fx-spectrum-5: #0a84ff;
   --fx-spectrum-6: #bf5af2;
   --fx-spectrum-spin: 3600ms;
-  --glitch-burst: 700ms;
-  --glitch-shift: 3px;
-  --glitch-strength: 0.78;
   --color-bg: var(--neutral-100);
   --color-surface: var(--neutral-0);
   --color-surface-sunken: var(--neutral-200);
@@ -124,6 +129,7 @@
   --color-dot-inactive: var(--neutral-600);
   --color-dot-active: var(--color-accent);
   --color-text-muted-emphasis: var(--neutral-600);
+  --color-text-emphasis: var(--color-text-primary);
   --color-on-ink-hover: rgba(255, 255, 255, 0.18);
   --color-on-primary-strong: #444e24;
   --color-on-primary-muted: #566527;
@@ -381,6 +387,7 @@
   --color-accent-emphasis: var(--neutral-850);
   --color-dot-inactive: var(--neutral-600);
   --color-text-muted-emphasis: var(--neutral-600);
+  --color-text-emphasis: var(--color-text-primary);
   --color-feedback-background-error: #961010;
   --color-on-feedback-error: var(--neutral-0);
   --btn-secondary-border: var(--color-border);
@@ -420,6 +427,7 @@
   --color-feedback-background-error: #ff8f8f;
   --color-on-feedback-error: #2a0000;
   --color-text-muted-emphasis: var(--brand-primary);
+  --color-text-emphasis: var(--brand-primary);
   --color-dot-inactive: var(--neutral-500);
   --glass-tint: rgb(var(--brand-ink-rgb) / 0.5);
   --glass-tint-scrolled: rgb(var(--brand-ink-rgb) / 0.7);
@@ -487,6 +495,7 @@
     --color-feedback-background-error: #ff8f8f;
     --color-on-feedback-error: #2a0000;
     --color-text-muted-emphasis: var(--brand-primary);
+    --color-text-emphasis: var(--brand-primary);
     --color-dot-inactive: var(--neutral-500);
     --glass-tint: rgb(var(--brand-ink-rgb) / 0.5);
     --glass-tint-scrolled: rgb(var(--brand-ink-rgb) / 0.7);

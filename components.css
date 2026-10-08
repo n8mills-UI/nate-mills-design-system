@@ -1010,6 +1010,51 @@ a.card:focus-visible { text-decoration: none; }
 }
 
 /* -----------------------------------------------------------------------------
+   Lede
+   ---
+   How a block's opening line is shaped (W60 E, Nathan's picks 2026-10-04). The
+   block stays ONE <p>, so a screen reader hears one paragraph: the first
+   sentence in .lede-lead, the rest in .lede-body. The look is set ONCE per slot,
+   by data-lede on the slot's container, never per block, so a pick reaches every
+   block of that kind:
+     accent   the lead in bold accent ink, one running paragraph
+              (section intros: .section-head; Top skills: .idx)
+     marker   the lead on the brand strip, the rest on its own line
+              (Roles write-ups: .xp-list)
+   Without data-lede the spans are plain text. tokens/lede-lint.mjs holds each
+   slot to its look and lists blocks that still need a lead. Marker repeats the
+   About "Hi, I'm Nate" strip (.about-hi-names in sections.css) until that
+   section gets its own pass; fold the two then.
+   ----------------------------------------------------------------------------- */
+[data-lede="accent"] .lede-lead {
+  color: var(--color-accent-emphasis);
+  font-weight: var(--weight-semibold);
+}
+[data-lede="marker"] .lede-lead {
+  font-family: var(--font-display);
+  font-weight: var(--weight-extrabold);
+  font-size: var(--display-intro);
+  line-height: 1.9; /* lint-ok: the strip's own leading, as About's .about-hi-names; a second use, not yet a token */
+  letter-spacing: var(--tl-track-tight, var(--display-tight));
+  padding: 0.04em 0.3em; /* lint-ok: hugs the words like a highlighter, as About's strip */
+  background: var(--brand-primary);
+  color: var(--brand-on-primary);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+[data-lede="marker"] .lede-body {
+  display: block;
+  margin-top: var(--space-300);
+  text-wrap: balance;
+}
+/* Room for the strip at a soft wrap. Each cloned fragment carries its own end
+   padding AFTER the space the line breaks on, and neither counts when the line is
+   fitted, so a full first line ran up to 0.3em plus a space (about 11px) past the
+   column (measured 2026-10-04: Bupa's lead, 2px past its panel at 320 wide). The
+   paragraph keeps that much clear at its end. */
+[data-lede="marker"] p { padding-inline-end: var(--space-300); }
+
+/* -----------------------------------------------------------------------------
    RoleCard
    ---
    Timeline entry: company logo, role title, dates, bullets, tags. Light

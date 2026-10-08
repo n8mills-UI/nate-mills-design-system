@@ -151,13 +151,13 @@
   color: var(--btn-primary-fg);
   border-color: var(--btn-primary-border);
 }
-/* Task #87: .btn--icon border bumped to --color-text-tertiary so it meets
-   WCAG 2.2 SC 1.4.11 (3:1 non-text contrast minimum against bg).
-   --color-border (~1.27:1) and --color-border-strong (~1.48:1) both fail.
-   --color-text-tertiary (--neutral-600 in light) gives ~5:1 on --color-bg.
-   Auto-flips appropriately in dark mode via the token system. The icon
-   itself is at ~10:1, so the border + icon together clearly demarcate
-   each control. */
+/* The outline is a soft edge, not a contrast boundary (Nathan, W60 F,
+   2026-10-08). --btn-icon-border aliases --btn-secondary-border, the border
+   grey in light and the stronger border grey in dark. The glyph names the
+   control, so the edge needs no 3:1 (W3C Understanding SC 1.4.11: a control
+   identified by its text or icon needs no visible boundary); the glyph holds
+   its own contrast, and hover, focus and press fill lime. This replaces the
+   Task #87 rule that held the edge on --color-text-tertiary. */
 /* Round is the canonical icon-button shape: every real consumer (header theme /
    menu / back controls, and the footer social marks) is a circle. This used to
    default to a rounded square that rendered nowhere but the under-the-hood demo,
@@ -1521,15 +1521,20 @@ a.card:focus-visible { text-decoration: none; }
   border-radius: var(--sbtn-radius);
   background: var(--sbtn-bg);
   color: var(--sbtn-fg);
-  /* Task #87's finding applies here too: --color-border and --color-border-strong
-     measure ~1.3:1 and ~1.6:1 and fail SC 1.4.11's 3:1 for a control boundary.
-     The tertiary token is the one that passes, and the boundary is load bearing
-     because a surface plate on a surface-adjacent page has no edge without it. */
-  border: 1px solid var(--color-text-tertiary);
+  /* The secondary button's outline, so the badges, the buttons and the WCAG
+     badge share one soft edge (Nathan, W60 F, 2026-10-08). The name and the
+     brand mark identify the link, so the edge needs no 3:1 (see .btn--icon). */
+  border: 1px solid var(--btn-secondary-border);
   text-decoration: none;
   transition: var(--btn-transition);
 }
-.sbtn-m { display: grid; place-items: center; flex: none; }
+/* The mark cell takes the shared mark height. With one line of text the MARK
+   is the tallest thing in the pill, and Figma's mark is deliberately a size
+   down (the only portrait mark, see .sbtn-m svg below). Measured without the
+   height: LinkedIn and GitHub 46px, Figma 44px, three pills at two heights in
+   one row. The Figma tower keeps its optical step down INSIDE a cell that
+   agrees with the other two. */
+.sbtn-m { display: grid; place-items: center; flex: none; height: var(--sbtn-mark); }
 .sbtn-t {
   display: flex;
   flex-direction: column;
@@ -1556,11 +1561,14 @@ a.card:focus-visible { text-decoration: none; }
 }
 /* Visible new-tab cue. aria-describedby="new-tab-note" carries this for screen
    readers; sighted users get the same arrow every other external link uses. */
+/* Centred beside the name. The row badges are the name alone (Nathan, W60 F,
+   2026-10-08: no Connect / View code / My plugin line); only the labelled
+   variant keeps a lead line, and it lifts the arrow level with it below. */
 .sbtn-arr {
   width: var(--btn-glyph-sm);
   height: var(--btn-glyph-sm);
   flex: none;
-  align-self: flex-start;
+  align-self: center;
   opacity: 0.5;
   transition: transform var(--duration-fast) var(--ease-default),
               opacity var(--duration-fast) var(--ease-default);
@@ -1681,9 +1689,8 @@ a.card:focus-visible { text-decoration: none; }
   align-items: stretch;
   min-height: var(--sbtn-min-h);
   border-radius: var(--sbtn-radius);
-  /* Same boundary token and the same reason as .sbtn above: the softer border
-     tokens measure under SC 1.4.11's 3:1 for a control edge. */
-  border: 1px solid var(--color-text-tertiary);
+  /* The same soft edge as .sbtn beside it (Nathan, W60 F, 2026-10-08). */
+  border: 1px solid var(--btn-secondary-border);
   overflow: hidden;
 }
 .wcagm-w3c {
@@ -1715,8 +1722,8 @@ a.card:focus-visible { text-decoration: none; }
 /* Display face and bold, not the mono eyebrow the social badges use: on the
    artwork this replaces the second line carries almost as much weight as the
    first, and a light mono line read as a caption hanging off the mark. The SIZE
-   still comes from the badge's eyebrow token, which is what keeps the two line
-   stacks the same height and therefore the two objects the same height. */
+   still comes from the badge's eyebrow token, the one the labelled badge's lead
+   line uses, so the two-line stacks in the system share one second-line size. */
 .wcagm-txt span {
   font-family: var(--font-display);
   font-size: var(--sbtn-eyebrow-size);
@@ -1742,46 +1749,17 @@ a.card:focus-visible { text-decoration: none; }
    min-height is overridden alongside height everywhere below, and the badge
    keeps its full mark+text composition, uniformly scaled to the SAME 36px
    the icons use via the wcagm.*-sm token group, never simplified. */
-/* Interim tier: name + arrow, no lead line (Nathan 2026-09-12).
-   Between the full pill and the mark-only badge there was a cliff: at 769 the
-   row is three labelled pills 482px wide, and one pixel narrower all three
-   labels vanish at once, while 736px of the hero foot sits empty. The lead
-   line ("Connect on" / "Plugins on" / "View code on") is the half that carries
-   no information a logo and a wordmark do not already carry, so it is the half
-   that goes first. Measured on the page, both themes: the row drops 482 -> 390.
-   600 and not the 560 the first sketch suggested. 560 is where the row fits
-   EXACTLY: 390 + 126 badge + 12 gap = 528, the whole width of the hero foot,
-   with the gap already at its floor. Re-measured with the web fonts blocked (a
-   real first paint, before Anton and Work Sans arrive) the row is 397 and the
-   badge wants 131, and at 560 the badge is squeezed to 119 to make room. A tier
-   whose only slack is a font that has not loaded yet is not a tier. At 600 that
-   same fallback pass leaves 40px spare and the badge keeps its full width.
-   align-self on the arrow is the whole second half of the change. The base
-   rule pins it to flex-start so it sits level with the small line; with that
-   line gone, flex-start leaves it floating above a single centred wordmark.
-   center puts it beside the name, which is what the two-line version was
-   aiming at all along.
-   Nothing else moves: padding, plate height, radius, mark size and the hover,
-   focus and press states are the desktop ones, because this is the SAME pill
-   with one line fewer, not a third design.
-   600 is a raw number because a media query cannot read a custom property. It
-   is registered in tokens/breakpoints.shared.mjs with this reasoning, which is
-   the gate that checks it. */
+/* Name-and-arrow tier, 600 to 768 (Nathan 2026-09-12). The row badges carry
+   no lead line at any width now (W60 F, 2026-10-08), so this tier is only the
+   row guard: at 769 the row is three name pills, and this band must never wrap
+   one of them onto a second line. 600 and not the 560 the first sketch
+   suggested: with the web fonts blocked (a real first paint, before Anton and
+   Work Sans arrive) the row and the WCAG badge only fit with room to spare
+   from 600. 600 is a raw number because a media query cannot read a custom
+   property. It is registered in tokens/breakpoints.shared.mjs with this
+   reasoning, which is the gate that checks it. */
 @media (min-width: 600px) and (max-width: 768px) {
-  /* Same second guard as the mark-only tier below: a labelled row that has
-     just lost a line must still never wrap internally. */
   .sbtn-row { flex-wrap: nowrap; }
-  .sbtn-t small { display: none; }
-  .sbtn-arr { align-self: center; }
-  /* Pin the mark cell to the shared mark height. With two lines of text the
-     stack is the tallest thing in the pill and every plate resolves to the same
-     49px; with one line the MARK becomes the tallest thing, and Figma's mark is
-     deliberately a size down (it is the only portrait mark here, see .sbtn-m svg
-     above). Measured without this line: LinkedIn and GitHub 46px, Figma 44px,
-     three pills at two heights in one row. The cell takes --sbtn-mark so the
-     Figma tower keeps its optical step down INSIDE a cell that agrees with the
-     other two. */
-  .sbtn-m { height: var(--sbtn-mark); }
 }
 
 @media (max-width: 599.98px) {
@@ -1868,18 +1846,17 @@ a.card:focus-visible { text-decoration: none; }
 }
 
 /* Labelled variant (.sbtn--labelled): the full pill at EVERY width (Nathan,
-   2026-09-28). The two tiers above exist because the hero and footer rows must
-   fit three badges and the WCAG mark on one line; a badge that is a card's only
-   action has its column to itself, so it keeps its lead line and its name on a
-   phone rather than collapsing to the bare mark. It hugs its words like the
-   base pill, and max-width keeps a long line inside a narrow column.
-   Declared after both tiers so it wins their ties at the same specificity. */
+   2026-09-28). The row badges are the name alone and fall to the bare mark
+   under 600, because the hero and footer rows must fit three badges and the
+   WCAG mark on one line; a badge that is a card's only action has its column
+   to itself, so it keeps its lead line ("View code") and its name on a phone.
+   It hugs its words like the base pill, and max-width keeps a long line inside
+   a narrow column. Declared after both tiers so it wins their ties at the same
+   specificity. */
 .sbtn--labelled { max-width: 100%; }
 .sbtn--labelled .sbtn-t { min-width: 0; }
-@media (min-width: 600px) and (max-width: 768px) {
-  .sbtn--labelled .sbtn-t small { display: block; }
-  .sbtn--labelled .sbtn-arr { align-self: flex-start; }
-}
+/* Level with the lead line, the way the two-line pill was drawn. */
+.sbtn--labelled .sbtn-arr { align-self: flex-start; }
 @media (max-width: 599.98px) {
   .sbtn.sbtn--labelled {
     width: auto;
@@ -2352,10 +2329,19 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
    It is a real <a href="mailto:">, not a styled div, and it carries a visually
    hidden label because its visible type rides an SVG path.
 
-   Structure, outside in: the rotating rim of type and separators, a hairline
-   ring, the ink disc, a plate under the glyph, then the mail glyph itself. The
-   plate is load bearing on the footer, where a lime glyph on a lime slab would
-   otherwise vanish.
+   Structure, outside in: the rotating ring of three phrases and their dots, the
+   ink disc, a plate under the glyph, then the mail glyph itself. No hairline
+   rim: the words hug the disc, the About print's badge drawn at this size
+   (Nathan, W60 F, 2026-10-08). The plate is load bearing on the footer, where a
+   lime glyph on a lime slab would otherwise vanish.
+
+   THE DRAWING HAS ONE SOURCE. renderOrbit in tokens/components.manifest.js
+   writes both circles, and it sets four custom properties on the anchor from
+   the same numbers: --orbit-type (the word size, in drawing units),
+   --orbit-ring (the words' baseline radius), --orbit-disc (the disc's
+   diameter) and --orbit-glyph (the envelope's width), the last three as shares
+   of the control. The rules below, hero-intro.js and the Theme lab's ring
+   fitter read those, so none of them hard-codes the geometry.
    ========================================================================= */
 .nm-orbit {
   --orbit-size: var(--space-1000);
@@ -2366,10 +2352,6 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
      interfering with things" (2026-09-16). 1.25 is 160px, a 29% smaller footprint
      at the same rest size, which is the ~30% he asked for. */
   --orbit-swell: 1.25;
-  /* 16, not 18. Four phrases of different lengths need it to fit the rim at a
-     readable size; 18 only ever fitted one phrase repeated. Below about 16 the
-     type stops reading at 128px and becomes texture. */
-  --orbit-type: 16px;
   position: relative;
   z-index: 2;
   display: block;
@@ -2412,9 +2394,9 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
   font-family: var(--font-display);
   text-transform: uppercase;
   font-size: var(--orbit-type);
+  letter-spacing: var(--tracking-label);
 }
 .nm-orbit-sep { fill: var(--brand-primary-dim); }
-.nm-orbit-rim { fill: none; stroke: var(--color-text-tertiary); }
 .nm-orbit-core { fill: var(--color-accent); stroke: var(--color-accent); }
 .nm-orbit-pad { fill: var(--color-accent); }
 .nm-orbit-icon {
@@ -2422,9 +2404,9 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
   left: 50%;
   top: 50%;
   z-index: 3;
-  width: calc(var(--orbit-size) * 0.21);
-  height: calc(var(--orbit-size) * 0.21);
-  margin: calc(var(--orbit-size) * -0.105) 0 0 calc(var(--orbit-size) * -0.105);
+  width: calc(var(--orbit-size) * var(--orbit-glyph));
+  height: calc(var(--orbit-size) * var(--orbit-glyph));
+  margin: calc(var(--orbit-size) * var(--orbit-glyph) / -2) 0 0 calc(var(--orbit-size) * var(--orbit-glyph) / -2);
   color: var(--color-on-accent);
   pointer-events: none;
 }
@@ -2466,12 +2448,14 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
 }
 .nm-orbit-foil {
   position: absolute;
-  /* r 43 in a 200 viewBox is 43% of the control, centred on the drawn disc. */
+  /* The drawn disc's own size, centred on it (--orbit-disc, see the head of
+     this block). A % margin resolves against the control's width, so half the
+     share pulls it back to the centre on both axes. */
   left: 50%;
   top: 50%;
-  width: 43%;
-  height: 43%;
-  margin: -21.5% 0 0 -21.5%;
+  width: calc(var(--orbit-disc) * 100%);
+  height: calc(var(--orbit-disc) * 100%);
+  margin: calc(var(--orbit-disc) * -50%) 0 0 calc(var(--orbit-disc) * -50%);
   /* The shape tier, not the primitive: this plate has to stay exactly as round
      as the disc it sits on, and --dot-radius is the tier that means "a circle
      whatever the radius scale does". */
@@ -2603,7 +2587,6 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
    is the same reasoning as the documented lime-on-lime ban for .btn--primary. */
 [id="site-footer"] .nm-orbit-type { fill: var(--brand-ink); }
 [id="site-footer"] .nm-orbit-sep { fill: var(--brand-ink); }
-[id="site-footer"] .nm-orbit-rim { stroke: var(--color-on-primary-muted); }
 [id="site-footer"] .nm-orbit-core,
 [id="site-footer"] .nm-orbit-pad { fill: var(--brand-ink); stroke: var(--brand-ink); }
 [id="site-footer"] .nm-orbit-icon { color: var(--brand-primary); }

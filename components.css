@@ -1703,12 +1703,20 @@ a.card:focus-visible { text-decoration: none; }
    the artwork this replaces let it fill the plate. Still under the text cell's
    height, so the badge keeps taking its overall height from the badge tokens. */
 .wcagm-w3c svg { height: var(--wcagm-mark); width: auto; display: block; }
+/* Height: the same sum a social badge makes, its block padding either side of
+   the mark cell (.sbtn and .sbtn-m), so the two stand the same height beside
+   each other. Since the row badges lost their lead line (W60 F, 2026-10-08)
+   the MARK sets their height, and this two-line stack under the full badge
+   padding stood 3px taller (49 against 46). The stack centres in that height
+   on a smaller step of padding, which only matters when larger text grows it
+   past the badge. */
 .wcagm-txt {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--sbtn-stack-gap);
-  padding: var(--sbtn-pad-y) var(--sbtn-pad-x);
+  min-height: calc(var(--sbtn-mark) + 2 * var(--sbtn-pad-y));
+  padding: var(--space-100) var(--sbtn-pad-x);
   background: var(--ext-brand-wcag-amber);
   color: var(--brand-ink);
   line-height: 1;
@@ -1839,6 +1847,7 @@ a.card:focus-visible { text-decoration: none; }
   .wcagm-w3c svg { height: var(--wcagm-mark-sm); }
   .wcagm-txt {
     gap: var(--wcagm-stack-gap-sm);
+    min-height: auto;
     padding: var(--wcagm-pad-y-sm) var(--wcagm-pad-x-sm);
   }
   .wcagm-txt b { font-size: var(--wcagm-label-size-sm); }

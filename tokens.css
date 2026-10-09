@@ -191,6 +191,7 @@
   --btn-icon-fg: var(--btn-secondary-fg);
   --header-control: 36px;
   --header-clearance: 80px;
+  --header-menu-width: 400px;
   --card-radius: var(--radius-xl);
   --card-padding: var(--card-pad-standard);
   --card-border: var(--border-hairline);

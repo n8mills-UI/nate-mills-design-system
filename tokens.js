@@ -172,6 +172,7 @@ export const tokens = {
   "btn-icon-fg": "#0a0a0b",
   "header-control": "36px",
   "header-clearance": "80px",
+  "header-menu-width": "400px",
   "card-radius": "20px",
   "card-padding": "24px",
   "card-border": "1px solid #e4e4e7",

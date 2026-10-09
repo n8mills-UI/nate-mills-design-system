@@ -172,6 +172,7 @@ export interface DesignTokens {
   "btn-icon-fg": string;
   "header-control": string;
   "header-clearance": string;
+  "header-menu-width": string;
   "card-radius": string;
   "card-padding": string;
   "card-border": string;

@@ -1956,10 +1956,11 @@ a.card:focus-visible { text-decoration: none; }
       direction of travel, the chip's sparkles twinkle, a document's
       text lines write themselves in, the download arrow bobs into a dipping
       tray, Figma's five pieces burst and reassemble, the octocat nods,
-      LinkedIn's dot drops onto its bar, and the design system's four parts
-      take a quarter turn into each other's places. Picked by Nathan from the
-      glyph-lab mockup (2026-09-06) and the icon-motion lab (2026-09-07),
-      after the theme-lab flask set the bar.
+      LinkedIn's dot drops onto its bar, the design system's four parts
+      take a quarter turn into each other's places, the moon tips back and
+      the sun's rays tick round one step. Picked by Nathan from the
+      glyph-lab mockup (2026-09-06), the icon-motion lab (2026-09-07) and
+      the theme-hover lab (2026-10-09), after the theme-lab flask set the bar.
 
    The external arrow keeps its nudge above and the mail glyph keeps its
    shake, so both decline the default too. The WCAG mark and the book glyph
@@ -2028,6 +2029,7 @@ a.card:focus-visible { text-decoration: none; }
     --gm-li-dot: gm-ping-dot; --gm-li-bar: gm-ping-bar; --gm-li-arch: gm-ping-arch;
     --gm-li-mark: gm-li-mark;
     --gm-ds: gm-index;
+    --gm-moon: gm-tip; --gm-sun-ray: gm-tick; --gm-sun-core: gm-squeeze;
   }
 }
 :is(a, button):not(:disabled):focus-visible,
@@ -2042,6 +2044,7 @@ a.card:focus-visible { text-decoration: none; }
   --gm-li-dot: gm-ping-dot; --gm-li-bar: gm-ping-bar; --gm-li-arch: gm-ping-arch;
   --gm-li-mark: gm-li-mark;
   --gm-ds: gm-index;
+  --gm-moon: gm-tip; --gm-sun-ray: gm-tick; --gm-sun-core: gm-squeeze;
 }
 
 /* A root <svg> clips to its viewBox by default, and these glyphs are drawn
@@ -2071,6 +2074,8 @@ a.card:focus-visible { text-decoration: none; }
 [data-lucide="figma"] > path,
 [data-lucide="linkedin"] > *,
 [data-lucide="component"] > path,
+[data-lucide="moon"] > path,
+[data-lucide="sun"] > *,
 .sbtn-fg > path { transform-box: view-box; }
 
 /* TIER 1, the shared default. Every glyph reads it; the ones with a signature
@@ -2099,7 +2104,9 @@ a.card:focus-visible { text-decoration: none; }
    rotation was suppressed for the whole hover rather than just during the
    perk. What was left was an opacity-and-blur cross-fade, which is precisely
    the "it does it, but it's very quick" Nathan reported. The swap is their
-   signature; see .theme-toggle-swap .theme-toggle-icon in sections.css. */
+   click; see .theme-toggle-swap .theme-toggle-icon in sections.css. Their
+   hover signature (the moon's tip, the sun's tick, below) moves the PARTS
+   inside the svg, never the root, for the same reason. */
 [data-lucide="moon"],
 [data-lucide="sun"],
 [data-lucide="sparkles"] { --gm-perk: none; }
@@ -2179,6 +2186,21 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
 [data-lucide="sparkles"] > path:nth-child(5) { transform-origin: 4px 18px; animation: var(--gm-spark-small, none) var(--gm-t2) var(--ease-emphasized) both; animation-delay: calc(var(--gm-beat) * 4); }
 @keyframes gm-pop   { 0% { transform: scale(1) rotate(0); } 28% { transform: scale(0.68) rotate(-10deg); } 66% { transform: scale(1.16) rotate(5deg); } 100% { transform: scale(1) rotate(0); } }
 @keyframes gm-blink { 0% { transform: scale(1); } 25% { transform: scale(0); } 65% { transform: scale(1.4); } 100% { transform: scale(1); } }
+
+/* Moon and sun, a hint of the click's own turn (Nathan's Turn pick from the
+   theme-hover lab, 2026-10-09). The moon tips back and settles past rest;
+   the sun's eight rays tick round one step while its middle dips. The rays
+   land on 45deg, which draws exactly like rest, so holding the last frame
+   while hovered and dropping it on leave are both invisible. Parts only: the
+   root svg carries the click swap as a transition, and an animation on the
+   root's transform would beat it (the perk opt-out above). Lucide's sun is
+   the core circle then eight ray paths, so `> *` is the whole glyph. */
+[data-lucide="moon"] > path { transform-origin: 12px 12px; animation: var(--gm-moon, none) var(--gm-t3) var(--ease-default) both; }
+[data-lucide="sun"] > path { transform-origin: 12px 12px; animation: var(--gm-sun-ray, none) var(--gm-t3) var(--ease-default) both; }
+[data-lucide="sun"] > circle { transform-origin: 12px 12px; animation: var(--gm-sun-core, none) var(--gm-t3) var(--ease-default) both; }
+@keyframes gm-tip     { 0% { transform: rotate(0); } 35% { transform: rotate(-22deg); } 70% { transform: rotate(7deg); } 100% { transform: rotate(0); } }
+@keyframes gm-tick    { 0% { transform: rotate(0); } 65% { transform: rotate(53deg); } 100% { transform: rotate(45deg); } }
+@keyframes gm-squeeze { 0% { transform: scale(1); } 40% { transform: scale(0.82); } 100% { transform: scale(1); } }
 
 /* Document: the three text lines write themselves in from the left, one
    after another, while the page lifts a hair. Dash lengths are the lines'
@@ -2315,6 +2337,7 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
   [data-lucide="file-text"] > path, [data-lucide="download"] > *,
   [data-lucide="figma"] > path, .sbtn-fg > path,
   [data-lucide="linkedin"] > *, [data-lucide="component"] > path,
+  [data-lucide="moon"] > path, [data-lucide="sun"] > *,
   .sbtn-li, .sbtn-li-glyph,
   [data-lucide="github"], .sbtn-gh { animation: none; transition: none; }
   .link-underline--icon:hover [data-lucide="file-text"],

@@ -54,17 +54,17 @@ colors:
   on-ink-border: "rgba(255, 255, 255, 0.08)"                                    # --color-on-ink-border
 
   # Dark theme semantics (data-theme="dark" or OS dark)
-  dark-bg: "#0a0a0b"                                                            # --darkTheme-color-bg
-  dark-surface: "#1c1c1f"                                                       # --darkTheme-color-surface
-  dark-surface-sunken: "#141416"                                                # --darkTheme-color-surface-sunken
-  dark-text-primary: "#f4f4f5"                                                  # --darkTheme-color-text-primary
-  dark-text-secondary: "#a1a1aa"                                                # --darkTheme-color-text-secondary
-  dark-text-tertiary: "#909096"                                                 # --darkTheme-color-text-tertiary
-  dark-border: "#27272a"                                                        # --darkTheme-color-border
-  dark-accent: "#d2ff37"                                                        # --darkTheme-color-accent (brand lime, deliberate)
-  dark-accent-hover: "#b8e030"                                                  # --darkTheme-color-accent-hover
-  dark-focus-ring: "#d2ff37"                                                    # --darkTheme-color-focus-ring
-  dark-link: "#d2ff37"                                                          # --darkTheme-color-link
+  dark-bg: "#0a0a0b"                                                            # --color-bg (dark theme)
+  dark-surface: "#1c1c1f"                                                       # --color-surface (dark theme)
+  dark-surface-sunken: "#141416"                                                # --color-surface-sunken (dark theme)
+  dark-text-primary: "#f4f4f5"                                                  # --color-text-primary (dark theme)
+  dark-text-secondary: "#a1a1aa"                                                # --color-text-secondary (dark theme)
+  dark-text-tertiary: "#909096"                                                 # --color-text-tertiary (dark theme)
+  dark-border: "#27272a"                                                        # --color-border (dark theme)
+  dark-accent: "#d2ff37"                                                        # --color-accent (dark theme; brand lime, deliberate)
+  dark-accent-hover: "#b8e030"                                                  # --color-accent-hover (dark theme)
+  dark-focus-ring: "#d2ff37"                                                    # --color-focus-ring (dark theme)
+  dark-link: "#d2ff37"                                                          # --color-link (dark theme)
 
   # Scrims
   overlay-soft: "rgba(0, 0, 0, 0.35)"                                           # --color-overlay-soft

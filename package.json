@@ -1,7 +1,8 @@
 {
   "name": "@n8mills/design-tokens",
   "version": "4.0.0",
-  "description": "The design tokens behind natemills.me: DTCG 2025.10 source, generated CSS custom properties, the component layer, and a resolved JS/TS export. Three-tier, OKLCH-authored, WCAG 2.2 AA.",
+  "private": true,
+  "description": "The design tokens behind natemills.me: DTCG 2025.10 source, generated CSS custom properties, the component layer, and a resolved JS/TS export. Three-tier, OKLCH-authored, WCAG 2.2 AA. Not on npm: the registry copy is retired at 1.1.0 and out of date, so do not install it. Link https://natemills.me/assets/tokens.css and components.css, or clone this repo.",
   "license": "MIT",
   "author": "Nate Mills <mail@natemills.me> (https://natemills.me)",
   "homepage": "https://github.com/n8mills-UI/nate-mills-design-system#readme",
@@ -50,8 +51,5 @@
     "tokens.json",
     "components.css",
     "DESIGN.md"
-  ],
-  "publishConfig": {
-    "access": "public"
-  }
+  ]
 }

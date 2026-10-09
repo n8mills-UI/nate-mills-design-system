@@ -2626,6 +2626,14 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
 [data-theme="dark"] .nm-orbit-core { fill: var(--color-surface); stroke: var(--color-surface); }
 [data-theme="dark"] .nm-orbit-pad { fill: var(--color-surface); }
 [data-theme="dark"] .nm-orbit-icon { color: var(--color-accent); }
+/* No-script twin, the form described at the logo inversions in sections.css:
+   keyed on NO data-theme, at the same weight, and above the footer's pins so
+   they still win there. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme])) .nm-orbit-core { fill: var(--color-surface); stroke: var(--color-surface); }
+  :root:where(:not([data-theme])) .nm-orbit-pad { fill: var(--color-surface); }
+  :root:where(:not([data-theme])) .nm-orbit-icon { color: var(--color-accent); }
+}
 
 /* The footer slab is flat lime in BOTH themes, so --color-accent (ink in light,
    lime in dark) cannot be trusted there: in dark mode it would put lime on

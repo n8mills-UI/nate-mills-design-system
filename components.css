@@ -2588,8 +2588,14 @@ button[aria-expanded="true"] [data-lucide="menu"] > line:nth-child(3) { translat
 
 /* ------------------------------------------------------------- THE GLYPH --
    The envelope is still the resting glyph and still what anyone without the
-   engine sees. It steps aside for a drawn hand rather than being replaced. */
+   engine sees. It steps aside for a drawn hand rather than being replaced.
+   The engine wraps it in a span (orbit-foil.js) so the layer out of play can
+   carry inert, which an SVG ignores; the span fills the glyph box like the
+   envelope did. */
 .nm-orbit-swap {
+  display: block;
+  width: 100%;
+  height: 100%;
   transition: opacity 180ms linear, scale var(--duration-moderate) var(--ease-emphasized);
 }
 .nm-orbit-swap[data-orbit-out="1"] { opacity: 0; scale: 0.7; }

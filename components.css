@@ -1018,7 +1018,7 @@ a.card:focus-visible { text-decoration: none; }
    by data-lede on the slot's container, never per block, so a pick reaches every
    block of that kind:
      accent   the lead in bold accent ink, one running paragraph
-              (section intros: .section-head; Top skills: .idx)
+              (Top skills: .idx; a section intro, should one return)
      marker   the lead on the brand strip, the rest on its own line
               (Roles write-ups: .xp-list)
    Without data-lede the spans are plain text. tokens/lede-lint.mjs holds each

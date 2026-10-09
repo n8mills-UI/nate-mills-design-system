@@ -64,6 +64,7 @@ export const tokens = {
   "ext-brand-wcag-amber": "#ffcc66",
   "fx-glitch-magenta": "#ff2bd6",
   "fx-glitch-cyan": "#00d4ff",
+  "fx-glitch-cyan-deep": "#0094a6",
   "fx-swap-1": "#ff00bb",
   "fx-swap-2": "#00e5ff",
   "fx-swap-3": "#ff5c00",

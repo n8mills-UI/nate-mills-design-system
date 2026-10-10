@@ -1,0 +1,26 @@
+# Nate Mills Design System
+
+> The design system behind natemills.me: DTCG tokens authored once, generated CSS, a small published class API, a portable brand contract and a rulebook for AI coding agents. Everything an agent needs to build on-brand without the repo.
+
+Link the published CSS; never rebuild it from values. The rules are in AGENTS.md, the resolved values in DESIGN.md, the class facts as data in components-api.json.
+
+## For agents
+
+- [AGENTS.md](https://natemills.me/AGENTS.md): the rules, the published class names with examples, the token names, the mistakes to avoid. Read this first.
+- [DESIGN.md](https://natemills.me/DESIGN.md): the portable brand contract. Every colour, type, radius and spacing value resolved, the component recipes, do's and don'ts, voice and tone.
+- [components-api.json](https://natemills.me/components-api.json): the published class API as data. Per class: kind, own selectors, states, parts, descendant rules, the custom properties it reads and sets; an example for each group that has one; the stylesheets in load order.
+- [llms-full.txt](https://natemills.me/llms-full.txt): AGENTS.md and DESIGN.md in one file.
+
+## Source
+
+- [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json): the DTCG token source, three tiers, OKLCH-authored.
+- [tokens.css](https://natemills.me/assets/tokens.css): every custom property in light, dark and high-contrast. Load before components.css.
+- [components.css](https://natemills.me/assets/components.css): the class layer; reads semantic tokens only.
+- [fonts.css](https://natemills.me/assets/fonts.css): self-hosted Anton and JetBrains Mono, with its slashed zero. Required; Work Sans comes from Google Fonts. AGENTS.md has the full link block in order.
+- [Public repository](https://github.com/n8mills-UI/nate-mills-design-system): the mirror of the source, MIT.
+- [Claude Code plugin](https://github.com/n8mills-UI/nate-mills-design-system/tree/main/skills): a skill carrying AGENTS.md and DESIGN.md. Install with `claude plugin marketplace add n8mills-UI/nate-mills-design-system`, then `claude plugin install nate-mills-design-system@nate-mills-design-system`.
+
+## Optional
+
+- [The live design system](https://natemills.me/design-system): the view for people, built with JavaScript; a plain fetch gets one line of text. Agents should read DESIGN.md instead.
+- [Portfolio](https://natemills.me/): the site the system runs.

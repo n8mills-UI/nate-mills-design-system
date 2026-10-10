@@ -1,0 +1,9 @@
+{
+  "name": "nate-mills-design-system",
+  "description": "Build on-brand for natemills.me: the published CSS class API, the design tokens and the rules an agent must follow. Links the live foundation; never rebuilds it.",
+  "author": { "name": "Nate Mills", "email": "mail@natemills.me", "url": "https://natemills.me" },
+  "homepage": "https://natemills.me/design-system",
+  "repository": "https://github.com/n8mills-UI/nate-mills-design-system",
+  "license": "MIT",
+  "keywords": ["design-system", "design-tokens", "dtcg", "css", "agents", "skill"]
+}

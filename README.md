@@ -73,7 +73,7 @@ the site runs on, so it cannot fall behind.
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 <link href="https://natemills.me/assets/fonts.css" rel="stylesheet">
 <link href="https://natemills.me/assets/tokens.css" rel="stylesheet">
 <link href="https://natemills.me/assets/components.css" rel="stylesheet">
@@ -95,11 +95,13 @@ Then compose with the published classes and tokens:
 ```
 
 `tokens.css` carries every custom property in all three themes and `components.css` reads them, so
-tokens must load first. `fonts.css` declares the self-hosted mono and its slashed zero.
+tokens must load first. `fonts.css` declares the self-hosted Anton and mono, and the mono's slashed zero.
 
-**Building with an AI agent?** Point it at [`DESIGN.md`](./DESIGN.md), or at
-`https://natemills.me/DESIGN.md`. It is a self-contained brief: the resolved values, the class API
-to link against, and the rules that keep the result from looking generated.
+**Building with an AI agent?** Three ways in, cheapest first:
+
+- **One line in your own `AGENTS.md` (or `CLAUDE.md`, for Claude Code):** `Before writing UI for natemills.me, read https://natemills.me/AGENTS.md and follow it.` [`AGENTS.md`](./AGENTS.md) is the short rulebook: the published classes with examples, the token names, the mistakes agents make here. Cursor, Codex and Copilot read a file of that name on their own; Claude Code does when the project has no CLAUDE.md.
+- **The Claude Code plugin:** `claude plugin marketplace add n8mills-UI/nate-mills-design-system`, then `claude plugin install nate-mills-design-system@nate-mills-design-system`, installs the [skill](./skills/nate-mills-design-system/SKILL.md) that carries the same rules.
+- **The index for AI tools:** `https://natemills.me/llms.txt` (and `llms-full.txt` for one file) lists every agent-facing document: [`DESIGN.md`](./DESIGN.md) for every resolved value, recipe and the voice; [`components-api.json`](./components-api.json) for the class API as data (per class: kind, own selectors, states, parts, descendant rules, the tokens it reads and sets).
 
 Prefer the source? Clone it and take what you need, including the raw DTCG token file and the typed
 JS export:

@@ -1,0 +1,14 @@
+{
+  "name": "nate-mills-design-system",
+  "description": "The design system behind natemills.me, installable for Claude Code: a skill that teaches an agent the published classes, tokens and rules.",
+  "owner": { "name": "Nate Mills", "email": "mail@natemills.me", "url": "https://natemills.me" },
+  "plugins": [
+    {
+      "name": "nate-mills-design-system",
+      "source": "./",
+      "description": "Build on-brand for natemills.me: the published CSS class API, the design tokens and the rules an agent must follow.",
+      "category": "design",
+      "tags": ["design-system", "design-tokens", "css"]
+    }
+  ]
+}

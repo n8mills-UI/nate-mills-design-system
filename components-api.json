@@ -235,7 +235,7 @@
         {
           "name": "card",
           "kind": "base",
-          "note": "base",
+          "note": "base; its heading takes the level of where the card sits (h3 under a section h2)",
           "selectors": [
             ".card",
             "a.card",
@@ -658,7 +658,7 @@
         {
           "name": "section-title",
           "kind": "base",
-          "note": "h1/h2, carries the drawn brand period",
+          "note": "any heading level, picked for where it sits (h2 for a page section, h3 inside one); carries the drawn brand period",
           "selectors": [
             ".section-title",
             ".section-title::after"

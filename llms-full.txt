@@ -485,7 +485,7 @@ Rules for using it:
 
 | Class | Use |
 | --- | --- |
-| `.card` | base |
+| `.card` | base; its heading takes the level of where the card sits (h3 under a section h2) |
 | `.card--dark` | on an always-dark slab; switches to the on-ink-* text family |
 | `.card--interactive` | THE clickable-card hover: border strengthens and lifts, no fill |
 | `.card--compact` | 16px padding |
@@ -517,7 +517,7 @@ Rules for using it:
 | `.section-label--center` | centred |
 | `.section-label--icon` | icon-led; the glyph is decorative |
 | `.section-label--row` | heading ROW rather than an inline tag |
-| `.section-title` | h1/h2, carries the drawn brand period |
+| `.section-title` | any heading level, picked for where it sits (h2 for a page section, h3 inside one); carries the drawn brand period |
 | `.section-subtitle` | intro line under the title |
 
 **Links:** A border-bottom underline, so the rule colours and animates independently of the text.

@@ -60,7 +60,7 @@ It is wired into the tokens, so you cannot opt out of it by accident:
 
 - Every text token is contrast-checked for WCAG 2.2 AA: a blocking CI lint over the token source in both themes, plus live ratio computation on the Under-the-Hood page.
 - Focus rings are never removed without a replacement.
-- Default control height is 44 by 44 px. Two documented dense sizes sit below it on purpose, a 32px small button and a 24px dot; both clear the WCAG 2.5.8 AA 24px floor and carry a larger pointer target than their painted box.
+- Default control height is 44 by 44 px. One documented dense size sits below it on purpose: the 32px small button, `.btn--sm`. Its pointer target is its painted box, and it clears the WCAG 2.5.8 AA 24px floor. The carousel's bare chevrons go the other way: a 24px glyph on an invisible 44px target.
 - Every animation is gated behind `prefers-reduced-motion`, collapsed in one place, not per component.
 
 There is one honest carveout. The brand lime is a background and accent only. It fails as foreground text on the light surface, roughly 1.06 to 1, so the system refuses to let you use it there and hands you a theme-aware token instead. The full reasoning is in [`DESIGN.md`](./DESIGN.md#color-roles).

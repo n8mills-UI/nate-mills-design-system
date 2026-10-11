@@ -48,7 +48,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 ```
 
 **Cards:** Surface step plus a hairline border. Never a drop shadow.
-`.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error`, `.card--loading`
+`.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error`, `.card--loading`, `.card-skel`, `.card-skel--media`, `.card-skel--title`, `.card-skel--line`
 
 ```html
 <a class="card card--interactive" href="/work">
@@ -76,7 +76,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 ```
 
 **Links:** A border-bottom underline, so the rule colours and animates independently of the text.
-`.link-underline`, `.link-underline--prose`, `.link-underline--icon`
+`.link-underline`, `.link-underline--prose`, `.link-underline--icon`, `.icon-size-xs`
 
 ```html
 <a class="link-underline link-underline--prose" href="https://natemills.me">natemills.me</a>

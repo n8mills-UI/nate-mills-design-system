@@ -81,7 +81,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 ```
 
 **Cards:** Surface step plus a hairline border. Never a drop shadow.
-`.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error`, `.card--loading`
+`.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error`, `.card--loading`, `.card-skel`, `.card-skel--media`, `.card-skel--title`, `.card-skel--line`
 
 ```html
 <a class="card card--interactive" href="/work">
@@ -109,7 +109,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 ```
 
 **Links:** A border-bottom underline, so the rule colours and animates independently of the text.
-`.link-underline`, `.link-underline--prose`, `.link-underline--icon`
+`.link-underline`, `.link-underline--prose`, `.link-underline--icon`, `.icon-size-xs`
 
 ```html
 <a class="link-underline link-underline--prose" href="https://natemills.me">natemills.me</a>
@@ -165,7 +165,7 @@ description: >
   API to link against, and the rules that keep the result from looking generated.
 about: >
   A design-systems consultant's portfolio where the system IS the pitch. The voltage is a single
-  high-chroma lime held as a scarce accent against warm off-white and warm near-black, with honest
+  high-chroma lime held as a scarce accent against a neutral off-white and a cool near-black, with honest
   hairline borders instead of decorative shadows or gradients. It counter-positions against the
   typical portfolio that scatters colour and leans on drop shadows: here depth is carried by a
   surface ladder and 1px hairlines, type hierarchy comes from weight not opacity, and every value
@@ -359,7 +359,7 @@ components:
     backgroundColor: "{colors.brand-lime}"
     textColor: "{colors.brand-ink}"
     border: "1px solid {colors.border-brand}"
-    typography: "{typography.label} at 14px, weight 600"
+    typography: "{typography.families.body} at 14px, weight 600, normal tracking, sentence case (not the mono label)"
     rounded: "{rounded.full}"
     padding: "10px 18px"
     height: "44px (md); 32px (sm); 52px (lg)"
@@ -394,11 +394,12 @@ components:
     textColor: "{colors.on-ink-primary}"
     border: "1px solid {colors.on-ink-border}"
   carousel-nav:
-    layout: "bare chevron buttons and a counter on a rail below the cards"
-    dotActive: "{colors.accent}"
-    dotInactive: "{colors.text-tertiary} (tuned to clear 3:1)"
-    dotInactiveOnInverse: "{colors.on-ink-muted}"
-    counter: "{typography.label} mono"
+    layout: "a progress rail, then bare chevrons around a counter, below the cards; no pagination dots"
+    railTrack: "{colors.border}, a 4px hairline groove"
+    railFill: "{colors.accent} (ink on light, lime on dark), grows with the position"
+    counter: "{typography.families.mono} at 14px, weight 700, normal tracking; current number {colors.text-primary}, slash and total {colors.text-secondary}"
+    arrows: "{colors.text-secondary} glyph, {colors.text-primary} on hover; 24px glyph on a 44px invisible target"
+    onDarkSlab: "re-map --cn-rail-fill to {colors.brand-lime} and --cn-rail-track to --color-on-ink-hover on that band; the default ink fill vanishes on near-black"
   badge:
     backgroundColor: "transparent"
     textColor: "{colors.text-secondary}"
@@ -455,10 +456,12 @@ Rules for using it:
 
 - **Use the exact class names below.** Do not invent synonyms. There is no `.button`, no `.btn-primary`
   with one dash, and no `.card-dark`.
-- **Do not read the stylesheet into context.** It is 75KB of implementation you do not need. The table
-  below is the whole public API.
-- **Never `@import`, never `file://`, never a placeholder URL.** Link the absolute URLs above, or copy
-  the files into the project and link them relatively.
+- **Do not read the stylesheet into context.** It is implementation you do not need. The table below is
+  the whole public API.
+- **Never `@import`, never `file://`, never a placeholder URL.** Link the absolute URLs above. You may
+  copy `tokens.css` and `components.css` into the project and link them relatively, but keep `fonts.css`
+  linked from natemills.me: it loads its font files from `/assets/fonts/` on whatever site serves it,
+  so a copied `fonts.css` finds nothing unless your site serves those files at that same path.
 - **Reach for a class before a value.** The resolved colours, type, radii and spacing in the frontmatter
   are for things the class layer does not cover, and for the offline case where you cannot link at all.
   If a class exists, use it.
@@ -489,7 +492,11 @@ Rules for using it:
 | `.card--spacious` | 32px padding |
 | `.card--empty` | centred empty state |
 | `.card--error` | centred error state, carries the feedback colour |
-| `.card--loading` | skeleton state |
+| `.card--loading` | skeleton state; fill it with .card-skel bars or it is an empty box |
+| `.card-skel` | one skeleton bar inside .card--loading; pair it with a size below |
+| `.card-skel--media` | media-block bar |
+| `.card-skel--title` | title bar |
+| `.card-skel--line` | body-line bar |
 
 **Chips and badges:** Resolve by job: a label is a chip, a status is a badge. A badge is read-only, never interactive.
 
@@ -519,7 +526,8 @@ Rules for using it:
 | --- | --- |
 | `.link-underline` | base |
 | `.link-underline--prose` | inside body copy |
-| `.link-underline--icon` | carries a trailing glyph |
+| `.link-underline--icon` | carries a trailing glyph; give the glyph .icon-size-xs |
+| `.icon-size-xs` | the trailing glyph inside .link-underline--icon: sizes it and nudges it on hover; does nothing elsewhere |
 
 **Carousel navigation:** Bare chevrons plus a mono counter on a rail BELOW the cards. One nav, site-wide.
 
@@ -545,12 +553,13 @@ Anything not in that table is a portfolio internal, not public API. Build it you
 
 ## Overview
 
-This is the portfolio of a Senior Product Designer (Design Systems). The site is the argument: a
-calm, Swiss-minimal editorial surface where a single high-chroma lime does all the talking and
-everything else stays quiet. The atmosphere is warm off-white paper in light mode and warm near-black
-in dark mode, never pure white and never pure black. Depth is built from a surface ladder and honest
-1px hairlines, not from drop shadows or decorative gradients. Display type is Anton, set large and
-tight; body copy and controls are Work Sans; JetBrains Mono carries eyebrows and labels.
+This is the portfolio of a Senior Product Designer (Design Systems). The site is the argument: a calm,
+Swiss-minimal editorial surface where a single high-chroma lime does all the talking and everything
+else stays quiet. The atmosphere is a neutral off-white page in light mode and a cool near-black in
+dark mode. The page is never pure white (cards are) and the ink is never pure black. Depth is built
+from a surface ladder and honest 1px hairlines, not from drop shadows or decorative gradients. Display
+type is Anton, set large and tight; body copy and controls are Work Sans; JetBrains Mono carries
+eyebrows and labels.
 
 The counter-position is deliberate: most portfolios scatter accent colour across whole sections and
 lean on soft shadows to fake hierarchy. This one refuses both. Colour is scarce, borders are honest,
@@ -563,7 +572,8 @@ as static stylesheets. The custom build is the point, so do not reach for a fram
 
 ### Key characteristics
 
-- Warm off-white canvas (`{colors.bg}`), not white. Ink is warm near-black, not pure black.
+- Neutral off-white canvas (`{colors.bg}`); pure white is the card surface (`{colors.surface}`), never
+  the page. Ink is a cool near-black (`{colors.text-primary}`), not pure black.
 - One accent, one lime (`{colors.brand-lime}`), used scarcely. Never a section fill or body text.
 - Borders over shadows. Shadows are rare and reserved for overlays.
 - Display type is Anton, tight tracking. Anton draws one weight (400) and no italic, and font
@@ -578,22 +588,26 @@ as static stylesheets. The custom build is the point, so do not reach for a fram
 
 ## Color roles
 
-The palette is two families, a warm neutral ramp and one lime, plus one error pair
-(`--color-feedback-background-error` and `--color-on-feedback-error`; copy `.card--error`). There is no
+The palette is a neutral ramp and one lime, plus the lime's yellow partner and one error pair. The
+neutrals are not warm: the light end (the canvas, the white card, the sunken well) is pure grey with
+no hue, and the borders, text and dark surfaces are a faintly cool zinc grey. The yellow
+(`{colors.brand-secondary}`) is the colour `{colors.brand-gradient}` runs into, and it appears in
+gradients beside the lime, not as a flat colour of its own. The error pair is
+`--color-feedback-background-error` and `--color-on-feedback-error`; copy `.card--error`. There is no
 success, warning or info colour (external brand colours like a client blue are locked constants used
 only inside their own case-study or logo context, never as system colour).
 
 **Brand voltage rule: use the lime (`{colors.brand-lime}`) ONLY for** the primary button fill, brand
 outlines (`{colors.border-brand}`), focus rings on dark surfaces, the lime period after a section
-title, the active carousel dot on dark, status dots, and the footer slab. **Never** use lime as body
+title, the carousel rail's fill on dark, status dots, and the footer slab. **Never** use lime as body
 text, as a link on a light background, as a section background, or as a large fill on the light page.
 On the off-white canvas raw lime composites to roughly 1.06:1 and fails WCAG outright.
 
 **The theme-aware accent.** `{colors.accent}` is the one interactive role that follows the theme: it
 resolves to ink on light and to lime on dark. Anything that signals an active or selected state
-(current nav item, pressed toggle, active dot) uses `accent`, never raw lime, so it stays legible on
-the light page. `{colors.border-brand}` is the deliberate exception: it stays fixed lime in both
-themes because it is a brand-identity outline, not a state signal.
+(current nav item, pressed toggle, the carousel rail's fill) uses `accent`, never raw lime, so it
+stays legible on the light page. `{colors.border-brand}` is the deliberate exception: it stays fixed
+lime in both themes because it is a brand-identity outline, not a state signal.
 
 **Dark-mode accent is the lime, deliberately.** On the dark theme, `accent`, `link`, and `focus-ring`
 all resolve to brand lime. This is a locked brand ruling, not a contrast bug: lime on near-black reads
@@ -629,12 +643,25 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
   dark slab use the `card-dark` recipe, whose fixed ink and `on-ink-*` tokens keep it dark in both
   themes. Never pin `data-theme` on an element to force a look: the pin survives when the element is
   cloned and silently breaks dark mode.
+- **Loading card** is `.card--loading` filled with `.card-skel` bars, one per line of the content it
+  stands in for. Without the bars it is an empty box. The shimmer stops under reduced motion.
+
+```html
+<div class="card card--loading">
+  <span class="sr-only">Loading</span>
+  <div class="card-skel card-skel--media"></div>
+  <div class="card-skel card-skel--title"></div>
+  <div class="card-skel card-skel--line"></div>
+</div>
+```
+
 - **Chips vs badges vs counters** resolve by job: a label is a chip, a status is a badge, a count is
   the carousel counter. A badge is read-only and never interactive; its dot stays lime in both themes
   but colour is never the only signal, every status also carries a word.
-- **Carousel nav** is bare chevrons plus a mono counter on a rail below the cards. The active dot
-  follows `{colors.accent}`; the inactive dot is a solid tuned grey (not a translucent one, which
-  would fail 3:1).
+- **Carousel nav** is a progress rail plus bare chevrons around a mono counter, below the cards. There
+  are no pagination dots. The rail is a `{colors.border}` hairline groove with a `{colors.accent}` fill
+  that grows to the current position. The counter reads "N/total" in bold 14px mono: the current
+  number in `{colors.text-primary}`, the slash and total in `{colors.text-secondary}`.
 - **Footer** is a fixed lime slab with ink text, lime in both themes.
 - **Links** are underlined, `{colors.link}` (ink on light, lime on dark). External links open a new
   tab, set `rel`, and carry a trailing up-right arrow glyph plus a screen-reader cue.
@@ -647,6 +674,15 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
   underline together render as a visible double line. A component that draws its own border must also
   cancel `text-decoration` in its `:hover` and `:focus-visible`, not only at rest, or the global link
   hover puts the second line back.
+- **A link with a trailing glyph** is `.link-underline--icon`, and the glyph takes `.icon-size-xs`,
+  which sizes it to the label and nudges it on hover. Without that class the glyph renders unsized.
+
+```html
+<a class="link-underline link-underline--icon" href="https://example.com" target="_blank" rel="noopener noreferrer">
+  Verify the credential<span class="sr-only"> (opens in a new tab)</span>
+  <i class="icon-size-xs" data-lucide="arrow-up-right" aria-hidden="true"></i>
+</a>
+```
 
 ## Layout principles
 
@@ -750,7 +786,8 @@ generated.
 
 - No AI-default gradient palette. The indigo, violet, fuchsia and cyan family (`#4f46e5`, `#6366f1`,
   `#7c3aed`, `#8b5cf6`, `#a855f7`, `#06b6d4`, `#d946ef` and relatives) is the single loudest tell.
-  This system has two colour families: a warm neutral ramp and one lime.
+  This system's colour is the set under **Color roles**: neutral greys, one lime with its yellow
+  gradient partner, and one error pair.
 - No gradient text, glows, blobs, mesh backgrounds, glass, noise overlays, or fake depth. The one
   gradient in the system is `{colors.brand-gradient}`, and it is brand identity, not decoration.
 - No decorative surface to fill space. A border is earned by grouping or interaction.
@@ -794,7 +831,8 @@ Reference breakpoints: mobile 375px, tablet 768px, desktop 1024px, wide 1440px, 
 - At and below 768px, section-level primary CTAs go full-width and centre for a thumb-friendly tap
   target; inline buttons inside paragraphs stay auto-width.
 - Dense value tables tighten below ~640px but never drop a column and never shrink labels below 11px.
-- Touch targets meet 44px; small dots keep a 24px hit area.
+- Touch targets meet 44px. The dense `.btn--sm` is 32px with no larger tap area around it, which still
+  clears the WCAG 2.5.8 AA 24px minimum; nothing goes below 24px.
 - Verify layout at ~375px alongside both light and dark themes whenever you touch a layout.
 
 ## Agent prompt guide

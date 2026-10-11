@@ -372,7 +372,7 @@
         {
           "name": "card--loading",
           "kind": "modifier",
-          "note": "skeleton state",
+          "note": "skeleton state; fill it with .card-skel bars or it is an empty box",
           "selectors": [
             ".card--loading"
           ],
@@ -382,6 +382,68 @@
           "reads": [
             "--space-300"
           ],
+          "sets": []
+        },
+        {
+          "name": "card-skel",
+          "kind": "base",
+          "note": "one skeleton bar inside .card--loading; pair it with a size below",
+          "selectors": [
+            ".card-skel",
+            ".card-skel::after"
+          ],
+          "descendants": [],
+          "states": [],
+          "parts": [
+            "after"
+          ],
+          "reads": [
+            "--alpha-200",
+            "--brand-ink-rgb",
+            "--color-surface-sunken",
+            "--ease-default",
+            "--radius-sm"
+          ],
+          "sets": []
+        },
+        {
+          "name": "card-skel--media",
+          "kind": "modifier",
+          "note": "media-block bar",
+          "selectors": [
+            ".card-skel--media"
+          ],
+          "descendants": [],
+          "states": [],
+          "parts": [],
+          "reads": [],
+          "sets": []
+        },
+        {
+          "name": "card-skel--title",
+          "kind": "modifier",
+          "note": "title bar",
+          "selectors": [
+            ".card-skel--title"
+          ],
+          "descendants": [],
+          "states": [],
+          "parts": [],
+          "reads": [],
+          "sets": []
+        },
+        {
+          "name": "card-skel--line",
+          "kind": "modifier",
+          "note": "body-line bar",
+          "selectors": [
+            ".card-skel--line",
+            ".card-skel--line.is-short"
+          ],
+          "descendants": [],
+          "states": [],
+          "parts": [],
+          "reads": [],
           "sets": []
         }
       ]
@@ -696,7 +758,7 @@
         {
           "name": "link-underline--icon",
           "kind": "modifier",
-          "note": "carries a trailing glyph",
+          "note": "carries a trailing glyph; give the glyph .icon-size-xs",
           "selectors": [
             ".link-underline--icon"
           ],
@@ -715,6 +777,24 @@
           "reads": [
             "--space-200"
           ],
+          "sets": []
+        },
+        {
+          "name": "icon-size-xs",
+          "kind": "base",
+          "note": "the trailing glyph inside .link-underline--icon: sizes it and nudges it on hover; does nothing elsewhere",
+          "selectors": [],
+          "descendants": [
+            ".link-underline--icon .icon-size-xs",
+            ".link-underline--icon:focus-visible .icon-size-xs",
+            ".link-underline--icon:hover .icon-size-xs"
+          ],
+          "states": [
+            "focus-visible",
+            "hover"
+          ],
+          "parts": [],
+          "reads": [],
           "sets": []
         }
       ]

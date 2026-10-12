@@ -593,6 +593,9 @@ copy wander still feels inconsistent.
 - Write in the first person, in plain words, the way one designer talks to another over coffee.
 - Let proof carry the brag. Numbers, not superlatives: "18 hours back to the team", never "huge
   productivity gains".
+- Say who changed, and how we know. Name the people (customers, designers, engineers, squads) and
+  what they now do differently. A feeling needs a measure or a quote: "gave them confidence" and
+  "built trust" are claims nobody can check.
 - No hedges. Say it or don't.
 - Body sentences run 6 to 14 words, one idea each.
 - Headings are sentence case, everywhere.

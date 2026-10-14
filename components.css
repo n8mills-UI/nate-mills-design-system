@@ -1637,7 +1637,11 @@ a.card:focus-visible { text-decoration: none; }
    portrait mark here (2:3), and a tower matched by HEIGHT to a square glyph and
    a circular one reads a size larger than both, so it takes the optical step
    down --sbtn-mark-figma instead of the shared --sbtn-mark. */
-.sbtn-m svg { width: var(--sbtn-mark); height: var(--sbtn-mark); display: block; }
+/* [data-lucide] covers the Resume download glyph: the authored <i> holds the
+   same box before the icon script swaps in its <svg>, so the footer row does
+   not widen and slide 28px when it does (load-shift gate, 2026-10-14). */
+.sbtn-m svg,
+.sbtn-m [data-lucide] { width: var(--sbtn-mark); height: var(--sbtn-mark); display: block; }
 .sbtn-m svg.sbtn-fg { width: auto; height: var(--sbtn-mark-figma); }
 .sbtn-gh { color: var(--sbtn-gh-fg); }
 .sbtn-li { display: none; width: auto; height: var(--sbtn-mark); flex: none; }

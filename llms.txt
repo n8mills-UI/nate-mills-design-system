@@ -2,14 +2,19 @@
 
 > The design system behind natemills.me: DTCG tokens authored once, generated CSS, a small published class API, a portable brand contract and a rulebook for AI coding agents. Everything an agent needs to build on-brand without the repo.
 
-Link the published CSS; never rebuild it from values. The rules are in AGENTS.md, the resolved values in DESIGN.md, the class facts as data in components-api.json.
+Link the published CSS; never rebuild it from values. The rules are in AGENTS.md, the resolved values in DESIGN.md, the class facts as data in components-api.json, and one page per component in the components folder. Every link below is the public repository's own copy, readable without a login.
 
 ## For agents
 
-- [AGENTS.md](https://natemills.me/AGENTS.md): the rules, the published class names with examples, the token names, the mistakes to avoid. Read this first.
-- [DESIGN.md](https://natemills.me/DESIGN.md): the portable brand contract. Every colour, type, radius and spacing value resolved, the component recipes, do's and don'ts, voice and tone.
-- [components-api.json](https://natemills.me/components-api.json): the published class API as data. Per class: kind, own selectors, states, parts, descendant rules, the custom properties it reads and sets; an example for each group that has one; the stylesheets in load order.
-- [llms-full.txt](https://natemills.me/llms-full.txt): AGENTS.md and DESIGN.md in one file.
+- [AGENTS.md](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/AGENTS.md): the rules, the published class names with examples, the token names, the mistakes to avoid. Read this first.
+- [DESIGN.md](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/DESIGN.md): the portable brand contract. Every colour, type, radius and spacing value resolved, the component recipes, do's and don'ts, voice and tone.
+- [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json): the published class API as data. Per class: kind, own selectors, states, parts, descendant rules, the custom properties it reads and sets; an example for each group that has one; the stylesheets in load order.
+- [llms-full.txt](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/llms-full.txt): AGENTS.md and DESIGN.md in one file.
+
+## Components and foundations
+
+- [Components](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components/README.md): every component, one page each, and the whole inventory: anything not listed is not in the system. Each page gives when to use it, its props (the classes and attributes) with types and defaults, the allowed values, invalid combinations, the keys it answers to, and its rules.
+- [Foundations](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/foundations/README.md): colour, type, spacing, depth, responsive behaviour, voice and accessibility, one page each.
 
 ## Source
 

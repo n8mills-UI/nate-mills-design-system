@@ -7,8 +7,9 @@
     "https://natemills.me/assets/tokens.css",
     "https://natemills.me/assets/components.css"
   ],
-  "rules": "https://natemills.me/AGENTS.md",
-  "values": "https://natemills.me/DESIGN.md",
+  "rules": "https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/AGENTS.md",
+  "values": "https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/DESIGN.md",
+  "pages": "https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components/README.md",
   "components": [
     {
       "name": "Buttons",

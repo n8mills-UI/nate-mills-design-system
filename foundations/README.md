@@ -20,5 +20,5 @@ Most pages are one topic of [DESIGN.md](../DESIGN.md), the whole brand contract 
 | [Voice and tone](voice-and-tone.md) | How the words sound. |
 | [Do's and don'ts](dos-and-donts.md) | The system-wide rules, and the generated-design habits to reject. |
 | [Agent guide](agent-guide.md) | How to prompt for this system, and what it does not cover yet. |
-| [Accessibility](accessibility.md) | Every hard accessibility rule across the components, how each is checked, and the keys each component answers to. |
+| [Accessibility](accessibility.md) | Every hard accessibility rule across the components, how each is checked, the keys each component answers to, and the `.sr-only` helper class. |
 | [How rules are checked](checks.md) | Every check the component rules name: what it does, which WCAG criterion it backs, and when it runs. |

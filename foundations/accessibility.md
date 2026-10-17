@@ -2,7 +2,7 @@
 
 # Accessibility
 
-> Every hard accessibility rule across the components, how each is checked, and the keys each component answers to.
+> Every hard accessibility rule across the components, how each is checked, the keys each component answers to, and the `.sr-only` helper class.
 
 Part of the [Nate Mills Design System](../README.md). The system is authored to WCAG 2.2 AA in both themes. This page gathers the hard rules from every [component page](../components/README.md); each component page has the full set. How each check works: [How rules are checked](checks.md).
 
@@ -86,13 +86,6 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 | MUST | Give the `<img>` alt text naming the person. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
 | MUST | Give the `<img>` `width` and `height`, so the page does not shift as it loads. | [Automated: Image-size checks](checks.md#image-size-checks) |
 
-### [Screen-reader text](../components/screen-reader-text.md)
-
-| Level | Rule | Checked by |
-|---|---|---|
-| MUST | Use the one phrase "(opens in a new tab)" for the cue on a text link that leaves the site. | [Automated: External-link lint](checks.md#external-link-lint) |
-| MUST NOT | Hide words a sighted reader needs. | [Manual: Hidden-words review](checks.md#hidden-words-review) |
-
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
 ## Keyboard at a glance
@@ -108,4 +101,57 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | [Link](../components/link.md) | Tab; Shift + Tab; Enter; Space |
 | [Carousel navigation](../components/carousel-navigation.md) | Tab; Enter or Space; Left arrow, Right arrow; Enter on the forward chevron at the last card |
 | [Avatar](../components/avatar.md) | Not focusable. Enter, Space; Tab; Enter; G in a screen reader's browse mode (VoiceOver: VO + Command + G) |
-| [Screen-reader text](../components/screen-reader-text.md) | Not focusable. Enter, Space; Tab; Enter; Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) |
+
+## Helper classes
+
+Published classes that are not components: no look of their own, no variants and no input. They sit in components.css and components-api.json beside the components.
+
+### Screen-reader text
+
+> Words a screen reader announces and the screen does not show.
+
+**Element:** `<span class="sr-only">`. **Class:** `.sr-only` (visually hidden, still announced)
+
+**Use it for:**
+
+- The "(opens in a new tab)" cue on a text link that leaves the site.
+- The "Loading" line in a Loading card.
+- Any word a sighted reader gets from the layout and a screen-reader user would miss.
+
+**Not for:**
+
+- Text a sighted reader needs: show it.
+- The name of an icon-only button: that is its `aria-label`.
+
+**How to use:**
+
+- Put `.sr-only` on a `<span>` inside the element it describes, holding the words to announce.
+
+**Never:**
+
+| Combination | Level | Why |
+|---|---|---|
+| `.sr-only` with `aria-hidden="true"` | MUST NOT | It is then hidden from the screen and the screen reader, so nobody gets the words. |
+| `.sr-only` on words a sighted reader needs | MUST NOT | They vanish from the screen. |
+| `.sr-only` as the name of an icon-only button | SHOULD NOT | Use the button's `aria-label`. |
+
+**Keys:**
+
+| Key | Action |
+|---|---|
+| Tab | Passes over plain `.sr-only` text. On a focusable element, such as a skip link, Tab stops there and the element shows while it has focus. |
+| Enter | Does nothing on plain text; follows a focused skip link. |
+| Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) | Reads the hidden words in place, as part of the element they sit in. |
+
+On an element that is focusable, such as a skip link, the class shows it while it has focus, because it hides only what is not focused.
+
+**Rules:**
+
+| Level | Rule | Checked by |
+|---|---|---|
+| MUST | Use the one phrase "(opens in a new tab)" for the cue on a text link that leaves the site. | [Automated: External-link lint](checks.md#external-link-lint) |
+| MUST NOT | Hide words a sighted reader needs. | [Manual: Hidden-words review](checks.md#hidden-words-review) |
+
+```html
+<span class="sr-only">(opens in a new tab)</span>
+```

@@ -25,14 +25,13 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 - **[Card](card.md):** A card with one destination becomes that link itself. A card with several actions stays static and puts a Button on each action.
 - **[Carousel navigation](carousel-navigation.md):** Paging a carousel is the bare chevrons of Carousel navigation. A labelled action under a carousel is a Button.
 - **[Avatar](avatar.md):** Both are circles. An avatar is a person and never acts; an icon button is a control.
-- **[Screen-reader text](screen-reader-text.md):** An icon-only Button takes its name from `aria-label`. Screen-reader text adds words to content, not a name to a control.
 
 ## How to use
 
 **Element:** `<button type="button">` for an action on this page; `<a href>` for a call to action that goes somewhere.
 
 - Put `.btn` and exactly one variant class on a `<button type="button">` for an action, or on an `<a href>` for a destination.
-- For an icon-only control, use `.btn--icon` and give it an `aria-label`.
+- For an icon-only control, use `.btn--icon` and give it an `aria-label`. A `.sr-only` span adds words to content; it never names a control.
 - Add a size class only for a dense toolbar (`.btn--sm`) or a hero call to action (`.btn--lg`).
 
 **Classes:** `.btn`, `.btn--primary`, `.btn--secondary`, `.btn--icon`, `.btn--sm`, `.btn--md`, `.btn--lg`

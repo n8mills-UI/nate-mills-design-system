@@ -2,7 +2,7 @@
 
 # Components
 
-> Every component in the Nate Mills Design System: 10 components, 44 classes. This list is the whole inventory; anything not on it is not part of the system.
+> Every component in the Nate Mills Design System: 9 components, 43 classes. This list and the helper classes under it are the whole inventory; anything not on them is not part of the system.
 
 The system is a CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, and its props are those classes and attributes. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows. The same facts as data: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), one Design System Doc Spec 0.20.0 document with every component and token, and [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json), the class API.
 
@@ -19,7 +19,8 @@ The system is a CSS class API, not a JavaScript component library: each componen
 | [Link](link.md) | Words that take you somewhere, underlined with a border so the line colours and animates on its own. | `.link-underline`, `.link-underline--prose`, `.link-underline--icon`, `.icon-size-xs` | Yes |
 | [Carousel navigation](carousel-navigation.md) | The one pager for every carousel: a progress rail, bare chevrons around a mono counter, sitting below the cards. | `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__rail`, `.ds-carousel-nav__arrow`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__fill`, `.ds-carousel-nav__count` | Yes |
 | [Avatar](avatar.md) | A round portrait at the touch-target size. | `.avatar` | No |
-| [Screen-reader text](screen-reader-text.md) | Words a screen reader announces and the screen does not show. | `.sr-only` | No |
+
+Helper classes are published too, but they are not components: no look of their own, no variants and no input. Each is covered on the Accessibility page: [Screen-reader text](../foundations/accessibility.md#screen-reader-text) (`.sr-only`).
 
 ## Not in this system
 

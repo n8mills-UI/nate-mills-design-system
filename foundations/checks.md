@@ -47,7 +47,7 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **What it checks:** Reads the pages and fails any link that leaves the site without `target="_blank"`, `rel="noopener noreferrer"`, the trailing `arrow-up-right` glyph and an "opens in a new tab" cue.
 - **WCAG:** 3.2.5 Change on Request, AAA (advisory)
 - **When it runs:** Every pull request and every deploy.
-- **Rules it checks:** [Button](../components/button.md#rules), [Link](../components/link.md#rules), [Screen-reader text](../components/screen-reader-text.md#rules)
+- **Rules it checks:** [Button](../components/button.md#rules), [Link](../components/link.md#rules), [Screen-reader text](accessibility.md#screen-reader-text)
 
 ### Underline gate
 
@@ -164,4 +164,4 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **What it checks:** For every new `.sr-only` span, read the visible screen without it and confirm a sighted reader loses nothing they need; if they do, show the words.
 - **WCAG:** 1.3.1 Info and Relationships, A
 - **When it runs:** Every pull request that adds screen-reader text, by hand.
-- **Rules it checks:** [Screen-reader text](../components/screen-reader-text.md#rules)
+- **Rules it checks:** [Screen-reader text](accessibility.md#screen-reader-text)

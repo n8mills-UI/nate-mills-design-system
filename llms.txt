@@ -15,6 +15,8 @@ Link the published CSS; never rebuild it from values. The rules are in AGENTS.md
 
 - [Components](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components/README.md): every component, one page each, and the whole inventory: anything not listed is not in the system. Each page gives when to use it, its props (the classes and attributes) with types and defaults, the allowed values, invalid combinations, the keys it answers to, and its rules.
 - [Foundations](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/foundations/README.md): colour, type, spacing, depth, responsive behaviour, voice and accessibility, one page each.
+- [Tokens](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/foundations/tokens.md): every token name the published CSS gives you, what each one is for, and its value in light and dark.
+- [How rules are checked](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/foundations/checks.md): what each check behind the component rules does, which WCAG criterion it backs, and when it runs.
 
 ## Source
 

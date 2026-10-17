@@ -23,4 +23,4 @@ The system is a CSS class API, not a JavaScript component library: each componen
 
 ## Not in this system
 
-There is no text field, checkbox, radio button, select, switch, slider, dialog or modal, tooltip, popover, tabs, accordion, toast, table or pagination dots component. If a page needs one, build it from the tokens on the [foundation pages](../foundations/README.md); never invent a class name for it.
+There is no text field, checkbox, radio button, select, switch, slider, dialog or modal, tooltip, popover, tabs, accordion, toast, table or pagination dots component. If a page needs one, build it from the tokens on the [foundation pages](../foundations/README.md); never invent a class name for it. The `nav`, `hero-headline` and `footer` recipes in [DESIGN.md](../DESIGN.md) describe natemills.me's own page, not published components.

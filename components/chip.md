@@ -6,10 +6,6 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** `<span>`
-
-**Classes:** `.chip`, `.chip--outline`
-
 ## When to use
 
 - A label or a tag that describes something: a skill, a discipline, a role.
@@ -17,13 +13,24 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 ## When not to use
 
 - A status, such as "Open to work": use a Badge.
-- A count of where you are in a carousel: use the Carousel navigation counter.
+- A position in a carousel: use the Carousel navigation counter.
 - Anything clickable: use a Button or a Link.
 
 ## Alternatives
 
 - **[Badge](badge.md):** Same pill shape, different job: a chip labels, a badge reports a status. Pick by what the words do.
 - **[Button](button.md):** A chip never takes a click. If a tag has to act, it is a Button.
+- **[Section heading](section-heading.md):** A section label names a part of the page; a chip labels a thing inside it.
+
+## How to use
+
+**Element:** `<span>`
+
+- Put `.chip` on a `<span>` with the label as its text.
+- Add `.chip--outline` where the filled chip carries too much weight.
+- A leading Lucide glyph is optional; mark it `aria-hidden="true"`.
+
+**Classes:** `.chip`, `.chip--outline`
 
 ## Props
 
@@ -46,20 +53,30 @@ The CSS styles these states: `:hover`.
 
 ## Invalid combinations
 
-- A chip on a `<button>` or an `<a>`: a chip is a label, with no focus or pressed state.
-- A chip carrying a status: that is a Badge.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `.chip` on a `<button>` or an `<a>` | MUST NOT | A chip is a label, with no focus or pressed state. |
+| `.chip` with a status word, such as "Open to work" | MUST NOT | A status is a Badge. |
+| `icon` with no `aria-hidden="true"` | MUST NOT | The word carries the meaning; a screen reader should not read the glyph. |
 
 ## Keyboard
 
-Not focusable. A chip is a label; if it must act, use a Button.
+| Key | Action |
+|---|---|
+| Tab | Passes over it: a chip is not focusable. |
+| Enter, Space | Do nothing: a chip takes no input. |
+
+A chip is a label; if it must act, use a Button.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST NOT | Make a `.chip` interactive. | Manual: design review |
-| MUST | Mark a leading glyph `aria-hidden="true"`. | Manual: design review |
-| MUST NOT | Report a status on a chip. | Manual: design review |
+| MUST NOT | Make a `.chip` interactive. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Mark a leading glyph `aria-hidden="true"`. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST NOT | Report a status on a chip. | [Manual: Design review](../foundations/checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -91,7 +108,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
   the carousel counter. A badge is read-only and never interactive; its dot stays lime in both themes
   but colour is never the only signal, every status also carries a word.
 
-Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md).
+Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md); every token with its purpose is on [Tokens](../foundations/tokens.md).
 
 ## Recipe
 

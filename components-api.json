@@ -960,7 +960,7 @@
     {
       "name": "Other",
       "note": "",
-      "example": "<span class=\"avatar\"><img src=\"your-portrait.jpg\" alt=\"Your name\" width=\"44\" height=\"44\"></span>\n<span class=\"sr-only\">Opens in a new tab</span>",
+      "example": "<span class=\"avatar\"><img src=\"your-portrait.jpg\" alt=\"Your name\" width=\"44\" height=\"44\"></span>\n<span class=\"sr-only\">(opens in a new tab)</span>",
       "classes": [
         {
           "name": "avatar",

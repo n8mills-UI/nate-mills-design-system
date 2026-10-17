@@ -6,15 +6,11 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** `<button type="button">` for an action on this page; `<a href>` for a call to action that goes somewhere.
-
-**Classes:** `.btn`, `.btn--primary`, `.btn--secondary`, `.btn--icon`, `.btn--sm`, `.btn--md`, `.btn--lg`
-
 ## When to use
 
 - An action on this page, such as submitting, opening or toggling something.
 - A standalone call to action that leaves the page, such as "Read the case study" or "Get in touch".
-- An icon-only chrome control, such as a theme toggle or a menu button: use the `icon` variant.
+- An icon-only chrome control, such as a theme toggle or a menu button.
 
 ## When not to use
 
@@ -26,6 +22,20 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 - **[Link](link.md):** Words inside running text that take you somewhere are a Link. A standalone action or call to action is a Button.
 - **[Chip](chip.md):** A chip only labels and never takes a click. If the thing must do something, it is a Button.
+- **[Card](card.md):** A card with one destination becomes that link itself. A card with several actions stays static and puts a Button on each action.
+- **[Carousel navigation](carousel-navigation.md):** Paging a carousel is the bare chevrons of Carousel navigation. A labelled action under a carousel is a Button.
+- **[Avatar](avatar.md):** Both are circles. An avatar is a person and never acts; an icon button is a control.
+- **[Screen-reader text](screen-reader-text.md):** An icon-only Button takes its name from `aria-label`. Screen-reader text adds words to content, not a name to a control.
+
+## How to use
+
+**Element:** `<button type="button">` for an action on this page; `<a href>` for a call to action that goes somewhere.
+
+- Put `.btn` and exactly one variant class on a `<button type="button">` for an action, or on an `<a href>` for a destination.
+- For an icon-only control, use `.btn--icon` and give it an `aria-label`.
+- Add a size class only for a dense toolbar (`.btn--sm`) or a hero call to action (`.btn--lg`).
+
+**Classes:** `.btn`, `.btn--primary`, `.btn--secondary`, `.btn--icon`, `.btn--sm`, `.btn--md`, `.btn--lg`
 
 ## Props
 
@@ -62,11 +72,16 @@ The CSS styles these states: `:active`, `:disabled`, `:focus`, `:focus-visible`,
 
 ## Invalid combinations
 
-- `.btn` with no variant: the base class sets no fill or colour, so the button renders blank.
-- Two variants on one button, such as `.btn--primary` with `.btn--secondary`: the rules tie, so the look depends on stylesheet order.
-- Two size classes on one button.
-- `.btn--primary` on a lime surface: lime on lime hides the button. Use `.btn--secondary` there.
-- A `.btn--primary` shrunk to a single glyph: an icon-only control is `.btn--icon`.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `variant: primary` with `variant: secondary`, or any two variants on one button | MUST NOT | The rules tie, so the look depends on stylesheet order. |
+| `size: sm` with `size: lg`, or any two sizes on one button | MUST NOT | The rules tie, so the height depends on stylesheet order. |
+| `.btn` with no `variant` | MUST NOT | The base class sets no fill or colour, so the button renders blank. |
+| `variant: primary` on a lime surface | MUST NOT | Lime on lime hides the button. Use `variant: secondary` there. |
+| `variant: primary` or `variant: secondary` with a glyph and no words | MUST NOT | An icon-only control is `variant: icon`. |
+| `variant: icon` with no `aria-label` | MUST NOT | The button has no visible words, so it would have no name. |
 
 ## Keyboard
 
@@ -77,19 +92,19 @@ The CSS styles these states: `:active`, `:disabled`, `:focus`, `:focus-visible`,
 | Enter | Activates a `<button>`; follows an `<a>`. |
 | Space | Activates a `<button>`. On an `<a>` it scrolls the page, as on every link. |
 
-The CSS adds no key handling. These are the native keys of `<button>` and `<a>`, which is why the element matters.
+These are the native keys of `<button>` and `<a>`, so they work with no script; the classes change only the look.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Keep the pointer target at least 44px. `.btn--sm` at 32px is the one exception, for dense toolbars, and still clears the 24px AA floor. | Automated: touch-target lint, which reads the CSS |
-| MUST | Show the focus ring on keyboard focus; never remove the outline without a replacement. | Automated: focus-ring gate, which presses Tab to every control in both themes and compares the pixels |
-| MUST | Keep the label and glyph readable on hover, focus and press: 4.5:1 for text, 3:1 for an icon. | Automated: state-contrast gate, which hovers, focuses and presses every control in both themes |
-| MUST | Give every `.btn--icon` an `aria-label`. | Automated: axe accessibility scan |
-| MUST | Give a button that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and an "opens in a new tab" cue. | Automated: external-link lint |
-| MUST NOT | Put `.btn--primary` on a lime surface. | Manual: design review |
-| SHOULD | Reach for `.btn--sm` sparingly; it is for dense toolbars, not a default. | Manual: design review |
+| MUST | Keep the pointer target at least 44px. `.btn--sm` at 32px is the one exception, for dense toolbars, and still clears the 24px AA floor. | [Automated: Touch-target lint](../foundations/checks.md#touch-target-lint) |
+| MUST | Show the focus ring on keyboard focus; never remove the outline without a replacement. | [Automated: Focus-ring gate](../foundations/checks.md#focus-ring-gate) |
+| MUST | Keep the label and glyph readable on hover, focus and press: 4.5:1 for text, 3:1 for an icon. | [Automated: State-contrast gate](../foundations/checks.md#state-contrast-gate) |
+| MUST | Give every `.btn--icon` an `aria-label`. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
+| MUST | Give a button that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and an "opens in a new tab" cue. | [Automated: External-link lint](../foundations/checks.md#external-link-lint) |
+| MUST NOT | Put `.btn--primary` on a lime surface. | [Manual: Design review](../foundations/checks.md#design-review) |
+| SHOULD | Reach for `.btn--sm` sparingly; it is for dense toolbars, not a default. | [Manual: Design review](../foundations/checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -131,7 +146,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
   download, `arrow-up-right` for an external link. Never the `external-link` box glyph, and no icon
   on a same-page anchor, because it never leaves the page.
 
-Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md).
+Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md); every token with its purpose is on [Tokens](../foundations/tokens.md).
 
 ## Recipe
 

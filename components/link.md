@@ -6,15 +6,11 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** `<a href>`
-
-**Classes:** `.link-underline`, `.link-underline--prose`, `.link-underline--icon`, `.icon-size-xs`
-
 ## When to use
 
-- A destination inside running text: `.link-underline--prose`.
-- A standalone text link, such as "Verify the credential": the base `.link-underline`.
-- A text link with a trailing glyph: `.link-underline--icon`, with `.icon-size-xs` on the glyph.
+- A destination inside running text.
+- A standalone text link, such as "Verify the credential".
+- A text link with a trailing glyph.
 
 ## When not to use
 
@@ -24,6 +20,16 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 ## Alternatives
 
 - **[Button](button.md):** A link navigates, a button acts. A standalone call to action that must stand out is a Button styled on an `<a>`.
+
+## How to use
+
+**Element:** `<a href>`
+
+- Put `.link-underline` on the `<a href>`.
+- Add `.link-underline--prose` inside body copy.
+- For a trailing glyph, add `.link-underline--icon` and give the glyph `.icon-size-xs`.
+
+**Classes:** `.link-underline`, `.link-underline--prose`, `.link-underline--icon`, `.icon-size-xs`
 
 ## Props
 
@@ -49,10 +55,15 @@ The CSS styles these states: `:focus-visible`, `:hover`.
 
 ## Invalid combinations
 
-- A text-decoration underline and the border underline on one link: they render as a double line.
-- `.icon-size-xs` outside `.link-underline--icon`: it does nothing there.
-- A glyph inside `.link-underline--icon` without `.icon-size-xs`: it renders unsized.
-- The `external-link` box glyph on any link: the trailing glyph is `arrow-up-right`.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `.link-underline` with a text-decoration underline | MUST NOT | The border and the decoration render as a double line. |
+| `variant: icon` with a glyph that has no `.icon-size-xs` | MUST NOT | The glyph renders unsized. |
+| `.icon-size-xs` outside `variant: icon` | SHOULD NOT | It does nothing there. |
+| `target="_blank"` with no `rel="noopener noreferrer"` | MUST NOT | The new page could reach back into this tab. |
+| Any link with the `external-link` box glyph | MUST NOT | The trailing glyph for a link that leaves the site is `arrow-up-right`. |
 
 ## Keyboard
 
@@ -63,16 +74,16 @@ The CSS styles these states: `:focus-visible`, `:hover`.
 | Enter | Follows the link. |
 | Space | Scrolls the page; it does not follow a link. |
 
-The CSS adds no key handling; these are the native keys of `<a href>`.
+These are the native keys of `<a href>`, so they work with no script.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Render exactly one underline in every state. | Automated: underline gate, every link in every state in a real browser |
-| MUST | Give a link that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and a `.sr-only` "(opens in a new tab)" cue. | Automated: external-link lint |
-| MUST | Show the focus ring on keyboard focus. | Automated: focus-ring gate, which presses Tab to every control in both themes and compares the pixels |
-| MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | Manual: design review |
+| MUST | Render exactly one underline in every state. | [Automated: Underline gate](../foundations/checks.md#underline-gate) |
+| MUST | Give a link that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and a `.sr-only` "(opens in a new tab)" cue. | [Automated: External-link lint](../foundations/checks.md#external-link-lint) |
+| MUST | Show the focus ring on keyboard focus. | [Automated: Focus-ring gate](../foundations/checks.md#focus-ring-gate) |
+| MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | [Manual: Design review](../foundations/checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -105,7 +116,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
   download, `arrow-up-right` for an external link. Never the `external-link` box glyph, and no icon
   on a same-page anchor, because it never leaves the page.
 
-Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md).
+Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md); every token with its purpose is on [Tokens](../foundations/tokens.md).
 
 ## Recipe
 

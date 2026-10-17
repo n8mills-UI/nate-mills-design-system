@@ -4,7 +4,7 @@
 
 > Depth from the surface ladder and hairline borders, never shadows; the corner radius scale.
 
-Part of the [Nate Mills Design System](../README.md): this page is a section of [DESIGN.md](../DESIGN.md), the whole brand contract in one file. All foundations: [Foundations](README.md).
+Part of the [Nate Mills Design System](../README.md): this page is a section of [DESIGN.md](../DESIGN.md), the whole brand contract in one file. Every token with its purpose: [Tokens](tokens.md). All foundations: [Foundations](README.md).
 
 ## Depth and elevation
 

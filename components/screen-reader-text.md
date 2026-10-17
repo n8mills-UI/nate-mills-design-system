@@ -6,10 +6,6 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** `<span class="sr-only">`
-
-**Classes:** `.sr-only`
-
 ## When to use
 
 - The "(opens in a new tab)" cue on a text link that leaves the site.
@@ -19,11 +15,19 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 ## When not to use
 
 - Text a sighted reader needs: show it.
-- The name of an icon-only button: use its `aria-label`.
+- The name of an icon-only button: that is its `aria-label`.
 
 ## Alternatives
 
 - **[Button](button.md):** An icon-only Button takes its name from `aria-label`, not from a `.sr-only` span.
+
+## How to use
+
+**Element:** `<span class="sr-only">`
+
+- Put `.sr-only` on a `<span>` inside the element it describes, holding the words to announce.
+
+**Classes:** `.sr-only`
 
 ## Props
 
@@ -31,29 +35,40 @@ None. Put the class on the element whose words should be read and not seen.
 
 ## Variants
 
-None: `.sr-only` has one behaviour.
+Available variants: none. `.sr-only` has one behaviour and takes no modifiers.
 
 ## Invalid combinations
 
-None: `.sr-only` takes no modifiers.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `.sr-only` with `aria-hidden="true"` | MUST NOT | It is then hidden from the screen and the screen reader, so nobody gets the words. |
+| `.sr-only` on words a sighted reader needs | MUST NOT | They vanish from the screen. |
+| `.sr-only` as the name of an icon-only button | SHOULD NOT | Use the button's `aria-label`. |
 
 ## Keyboard
 
-Not focusable. On an element that is focusable, such as a skip link, the class shows it while it has focus, because it hides only what is not focused.
+| Key | Action |
+|---|---|
+| Tab | Passes over it: screen-reader text is not focusable. |
+| Enter, Space | Do nothing: screen-reader text takes no input. |
+
+On an element that is focusable, such as a skip link, the class shows it while it has focus, because it hides only what is not focused.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Use the one phrase "(opens in a new tab)" for the cue on a text link that leaves the site. | Automated: external-link lint |
-| MUST NOT | Hide words a sighted reader needs. | Manual: design review |
+| MUST | Use the one phrase "(opens in a new tab)" for the cue on a text link that leaves the site. | [Automated: External-link lint](../foundations/checks.md#external-link-lint) |
+| MUST NOT | Hide words a sighted reader needs. | [Manual: Design review](../foundations/checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
 ## Example
 
 ```html
-<span class="sr-only">Opens in a new tab</span>
+<span class="sr-only">(opens in a new tab)</span>
 ```
 
 ## Classes

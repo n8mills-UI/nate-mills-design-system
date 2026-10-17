@@ -6,15 +6,11 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** `<div class="section-head">` around an `<h2 class="section-title">` (an `<h3>` inside a section), a `<p class="section-subtitle">`, and `<p class="section-label">` for a sub-section label.
-
-**Classes:** `.section-head`, `.section-label`, `.section-label--accent`, `.section-label--center`, `.section-label--icon`, `.section-label--row`, `.section-title`, `.section-subtitle`
-
 ## When to use
 
-- The start of every page section: `.section-head` with a `.section-title` inside.
-- A one-line intro under the title: `.section-subtitle`.
-- A small label for a sub-section further down: `.section-label`.
+- The start of every page section.
+- A one-line intro under a section title.
+- A small label for a sub-section further down the page.
 
 ## When not to use
 
@@ -23,7 +19,17 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 ## Alternatives
 
-- **[Chip](chip.md):** A `.section-label` names a part of the page; a Chip labels a thing inside it. Neither is clickable.
+- **[Chip](chip.md):** A section label names a part of the page; a Chip labels a thing inside it. Neither is clickable.
+
+## How to use
+
+**Element:** `<div class="section-head">` around an `<h2 class="section-title">` (an `<h3>` inside a section), a `<p class="section-subtitle">`, and `<p class="section-label">` for a sub-section label.
+
+- Wrap the title in `.section-head` and put `.section-title` on the heading element.
+- Put `.section-subtitle` on the intro `<p>`.
+- Put `.section-label` on a sub-section label `<p>`, with a variant class only when the layout needs it.
+
+**Classes:** `.section-head`, `.section-label`, `.section-label--accent`, `.section-label--center`, `.section-label--icon`, `.section-label--row`, `.section-title`, `.section-subtitle`
 
 ## Props
 
@@ -45,21 +51,31 @@ Default label variant: No class: a left-aligned inline label.
 
 ## Invalid combinations
 
-- A typed full stop at the end of a `.section-title`: the `::after` already draws the brand period, so it doubles.
-- A `.section-label` directly above a `.section-title` as an eyebrow: that tier was retired.
-- A top margin on the content right after `.section-head`: the block owns that gap.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `.section-title` with a typed full stop at the end | MUST NOT | The `::after` already draws the brand period, so it doubles. |
+| `.section-label` directly above a `.section-title` | MUST NOT | That eyebrow tier was retired; the label is for sub-sections. |
+| `.section-head` with a top margin on the element after it | MUST NOT | The block owns that gap. |
+| `label variant` on `.section-title`, `.section-subtitle` or `.section-head` | MUST NOT | Only `.section-label` takes the variants. |
 
 ## Keyboard
 
-Not focusable. Screen-reader users reach headings with their heading navigation, not Tab.
+| Key | Action |
+|---|---|
+| Tab | Passes over it: a section heading is not focusable. |
+| Enter, Space | Do nothing: a section heading takes no input. |
+
+Screen-reader users reach headings with their heading navigation, not Tab.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST NOT | Type a full stop after a `.section-title`. | Manual: design review |
-| MUST | Let `.section-head` own the gap below the heading; add no top margin to what follows. | Automated: section-head gate, which measures the gap under every heading |
-| SHOULD | Pick the heading level for where it sits: `<h2>` for a page section, `<h3>` inside one. | Manual: design review |
+| MUST NOT | Type a full stop after a `.section-title`. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Let `.section-head` own the gap below the heading; add no top margin to what follows. | [Automated: Section-head gate](../foundations/checks.md#section-head-gate) |
+| SHOULD | Pick the heading level for where it sits: `<h2>` for a page section, `<h3>` inside one. | [Manual: Design review](../foundations/checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 

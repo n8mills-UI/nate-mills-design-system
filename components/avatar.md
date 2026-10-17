@@ -6,10 +6,6 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** `<span class="avatar">` holding one `<img>`.
-
-**Classes:** `.avatar`
-
 ## When to use
 
 - A person's portrait beside their name, such as the site header or a quote.
@@ -17,11 +13,20 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 ## When not to use
 
 - A brand mark or a logo: show it as an image, not a portrait.
-- An icon-only control: use a Button with the `icon` variant.
+- An icon-only control: use an icon Button.
 
 ## Alternatives
 
 - **[Button](button.md):** The avatar and the icon button are both circles. The avatar is a person; the icon button is a control.
+
+## How to use
+
+**Element:** `<span class="avatar">` holding one `<img>`.
+
+- Put `.avatar` on a `<span>` holding one `<img>` with `alt`, `width` and `height`.
+- If the portrait goes somewhere, wrap the span in a link; the link takes focus.
+
+**Classes:** `.avatar`
 
 ## Props
 
@@ -32,7 +37,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 ## Variants
 
-None: `.avatar` has one look, a 44px circle.
+Available variants: none. `.avatar` has one look, a 44px circle, and takes no modifiers.
 
 ## States
 
@@ -40,18 +45,29 @@ The CSS styles these states: `:focus-visible`, `:hover`.
 
 ## Invalid combinations
 
-None: `.avatar` takes no modifiers.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `.avatar` with an `<img>` that has no `alt` | MUST NOT | A screen reader gets nothing, or the file name. |
+| `.avatar` with an `<img>` that has no `width` and `height` | MUST NOT | The page shifts when the image arrives. |
+| `.avatar` holding a brand logo | SHOULD NOT | The circle crops a logo; an avatar is a person. |
 
 ## Keyboard
 
-Not focusable on its own. Wrapped in a link, the link takes focus.
+| Key | Action |
+|---|---|
+| Tab | Passes over it: an avatar is not focusable. |
+| Enter, Space | Do nothing: an avatar takes no input. |
+
+Wrapped in a link, the link takes focus instead.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Give the `<img>` alt text naming the person. | Automated: axe accessibility scan |
-| MUST | Give the `<img>` `width` and `height`, so the page does not shift as it loads. | Automated: image-size checks (both attributes present, and matching the file) |
+| MUST | Give the `<img>` alt text naming the person. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
+| MUST | Give the `<img>` `width` and `height`, so the page does not shift as it loads. | [Automated: Image-size checks](../foundations/checks.md#image-size-checks) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 

@@ -4,7 +4,7 @@
 
 > Every hard accessibility rule across the components, how each is checked, and the keys each component answers to.
 
-Part of the [Nate Mills Design System](../README.md). The system is authored to WCAG 2.2 AA in both themes. This page gathers the hard rules from every [component page](../components/README.md); each component page has the full set.
+Part of the [Nate Mills Design System](../README.md). The system is authored to WCAG 2.2 AA in both themes. This page gathers the hard rules from every [component page](../components/README.md); each component page has the full set. How each check works: [How rules are checked](checks.md).
 
 ## Rules every component carries
 
@@ -12,86 +12,86 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Keep the pointer target at least 44px. `.btn--sm` at 32px is the one exception, for dense toolbars, and still clears the 24px AA floor. | Automated: touch-target lint, which reads the CSS |
-| MUST | Show the focus ring on keyboard focus; never remove the outline without a replacement. | Automated: focus-ring gate, which presses Tab to every control in both themes and compares the pixels |
-| MUST | Keep the label and glyph readable on hover, focus and press: 4.5:1 for text, 3:1 for an icon. | Automated: state-contrast gate, which hovers, focuses and presses every control in both themes |
-| MUST | Give every `.btn--icon` an `aria-label`. | Automated: axe accessibility scan |
-| MUST | Give a button that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and an "opens in a new tab" cue. | Automated: external-link lint |
-| MUST NOT | Put `.btn--primary` on a lime surface. | Manual: design review |
+| MUST | Keep the pointer target at least 44px. `.btn--sm` at 32px is the one exception, for dense toolbars, and still clears the 24px AA floor. | [Automated: Touch-target lint](checks.md#touch-target-lint) |
+| MUST | Show the focus ring on keyboard focus; never remove the outline without a replacement. | [Automated: Focus-ring gate](checks.md#focus-ring-gate) |
+| MUST | Keep the label and glyph readable on hover, focus and press: 4.5:1 for text, 3:1 for an icon. | [Automated: State-contrast gate](checks.md#state-contrast-gate) |
+| MUST | Give every `.btn--icon` an `aria-label`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
+| MUST | Give a button that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and an "opens in a new tab" cue. | [Automated: External-link lint](checks.md#external-link-lint) |
+| MUST NOT | Put `.btn--primary` on a lime surface. | [Manual: Design review](checks.md#design-review) |
 
 ### [Card](../components/card.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Make a whole-card target a real `<a>` or `<button>`. `.card--interactive` styles the hover; it does not make the card operable. | Manual: design review |
-| MUST NOT | Give a static `.card` a hover state; only `.card--interactive` answers the pointer. | Automated: mobile-consistency lint, on the cards natemills.me registers as static |
-| MUST | Show the focus ring on an interactive card. | Automated: focus-ring gate, which presses Tab to every control in both themes and compares the pixels |
-| MUST | Keep text readable on an interactive card in hover, focus and press. | Automated: state-contrast gate, which hovers, focuses and presses every control in both themes |
-| MUST NOT | Give a card a drop shadow. | Manual: design review |
+| MUST | Make a whole-card target a real `<a>` or `<button>`. `.card--interactive` styles the hover; it does not make the card operable. | [Manual: Design review](checks.md#design-review) |
+| MUST NOT | Give a static `.card` a hover state; only `.card--interactive` answers the pointer. | [Automated: Mobile-consistency lint](checks.md#mobile-consistency-lint) |
+| MUST | Show the focus ring on an interactive card. | [Automated: Focus-ring gate](checks.md#focus-ring-gate) |
+| MUST | Keep text readable on an interactive card in hover, focus and press. | [Automated: State-contrast gate](checks.md#state-contrast-gate) |
+| MUST NOT | Give a card a drop shadow. | [Manual: Design review](checks.md#design-review) |
 
 ### [Loading card](../components/loading-card.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Fill `.card--loading` with `.card-skel` bars, one per line of the content it stands in for. | Manual: design review |
-| MUST | Add `<span class="sr-only">Loading</span>`, so a screen reader hears what the bars show. | Manual: design review |
-| MUST | Stop the shimmer under reduced motion. | Built into the class |
+| MUST | Fill `.card--loading` with `.card-skel` bars, one per line of the content it stands in for. | [Manual: Design review](checks.md#design-review) |
+| MUST | Add `<span class="sr-only">Loading</span>`, so a screen reader hears what the bars show. | [Manual: Design review](checks.md#design-review) |
+| MUST | Stop the shimmer under reduced motion; components.css already does, so keep it when you restyle the bars. | [Manual: Design review](checks.md#design-review) |
 
 ### [Chip](../components/chip.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST NOT | Make a `.chip` interactive. | Manual: design review |
-| MUST | Mark a leading glyph `aria-hidden="true"`. | Manual: design review |
-| MUST NOT | Report a status on a chip. | Manual: design review |
+| MUST NOT | Make a `.chip` interactive. | [Manual: Design review](checks.md#design-review) |
+| MUST | Mark a leading glyph `aria-hidden="true"`. | [Manual: Design review](checks.md#design-review) |
+| MUST NOT | Report a status on a chip. | [Manual: Design review](checks.md#design-review) |
 
 ### [Badge](../components/badge.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Give every status a word as well as the dot; colour is never the only signal (WCAG 1.4.1). | Manual: design review |
-| MUST | Mark `.badge__dot` `aria-hidden="true"`. | Manual: design review |
-| MUST NOT | Make `.badge` interactive. | Manual: design review |
+| MUST | Give every status a word as well as the dot; colour is never the only signal (WCAG 1.4.1). | [Manual: Design review](checks.md#design-review) |
+| MUST | Mark `.badge__dot` `aria-hidden="true"`. | [Manual: Design review](checks.md#design-review) |
+| MUST NOT | Make `.badge` interactive. | [Manual: Design review](checks.md#design-review) |
 
 ### [Section heading](../components/section-heading.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST NOT | Type a full stop after a `.section-title`. | Manual: design review |
-| MUST | Let `.section-head` own the gap below the heading; add no top margin to what follows. | Automated: section-head gate, which measures the gap under every heading |
+| MUST NOT | Type a full stop after a `.section-title`. | [Manual: Design review](checks.md#design-review) |
+| MUST | Let `.section-head` own the gap below the heading; add no top margin to what follows. | [Automated: Section-head gate](checks.md#section-head-gate) |
 
 ### [Link](../components/link.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Render exactly one underline in every state. | Automated: underline gate, every link in every state in a real browser |
-| MUST | Give a link that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and a `.sr-only` "(opens in a new tab)" cue. | Automated: external-link lint |
-| MUST | Show the focus ring on keyboard focus. | Automated: focus-ring gate, which presses Tab to every control in both themes and compares the pixels |
-| MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | Manual: design review |
+| MUST | Render exactly one underline in every state. | [Automated: Underline gate](checks.md#underline-gate) |
+| MUST | Give a link that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and a `.sr-only` "(opens in a new tab)" cue. | [Automated: External-link lint](checks.md#external-link-lint) |
+| MUST | Show the focus ring on keyboard focus. | [Automated: Focus-ring gate](checks.md#focus-ring-gate) |
+| MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | [Manual: Design review](checks.md#design-review) |
 
 ### [Carousel navigation](../components/carousel-navigation.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | Automated: touch-target lint, which reads the CSS |
-| MUST | Label each chevron `<button>` with an `aria-label`. | Automated: axe accessibility scan |
-| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | Manual: design review |
-| MUST | Keep the track a Tab stop only while it can scroll. | Automated: keyboard gate |
-| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | Manual: design review |
+| MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | [Automated: Touch-target lint](checks.md#touch-target-lint) |
+| MUST | Label each chevron `<button>` with an `aria-label`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
+| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Manual: Design review](checks.md#design-review) |
+| MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Keyboard gate](checks.md#keyboard-gate) |
+| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Design review](checks.md#design-review) |
 
 ### [Avatar](../components/avatar.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Give the `<img>` alt text naming the person. | Automated: axe accessibility scan |
-| MUST | Give the `<img>` `width` and `height`, so the page does not shift as it loads. | Automated: image-size checks (both attributes present, and matching the file) |
+| MUST | Give the `<img>` alt text naming the person. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
+| MUST | Give the `<img>` `width` and `height`, so the page does not shift as it loads. | [Automated: Image-size checks](checks.md#image-size-checks) |
 
 ### [Screen-reader text](../components/screen-reader-text.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Use the one phrase "(opens in a new tab)" for the cue on a text link that leaves the site. | Automated: external-link lint |
-| MUST NOT | Hide words a sighted reader needs. | Manual: design review |
+| MUST | Use the one phrase "(opens in a new tab)" for the cue on a text link that leaves the site. | [Automated: External-link lint](checks.md#external-link-lint) |
+| MUST NOT | Hide words a sighted reader needs. | [Manual: Design review](checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -100,7 +100,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | Component | Keys |
 |---|---|
 | [Button](../components/button.md) | Tab; Shift + Tab; Enter; Space |
-| [Card](../components/card.md) | Tab; Enter; Space |
+| [Card](../components/card.md) | Tab (interactive card); Tab (static card); Enter; Space |
 | [Loading card](../components/loading-card.md) | Not focusable |
 | [Chip](../components/chip.md) | Not focusable |
 | [Badge](../components/badge.md) | Not focusable |

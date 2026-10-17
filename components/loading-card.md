@@ -6,10 +6,6 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** `<div class="card card--loading">` holding `.card-skel` bars and a `.sr-only` "Loading" line.
-
-**Classes:** `.card--loading`, `.card-skel`, `.card-skel--media`, `.card-skel--title`, `.card-skel--line`
-
 ## When to use
 
 - Content that takes a moment to arrive, in the place its card will sit.
@@ -17,12 +13,22 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 ## When not to use
 
 - Content that is already there: use a Card.
-- Nothing to show at all: use `.card--empty` on a Card.
-- A failure: use `.card--error` on a Card.
+- Nothing to show at all: use the empty state of a Card.
+- A failure: use the error state of a Card.
 
 ## Alternatives
 
 - **[Card](card.md):** The Card is the finished state. The Loading card holds its place until the content arrives, then the Card replaces it.
+
+## How to use
+
+**Element:** `<div class="card card--loading">` holding `.card-skel` bars and a `.sr-only` "Loading" line.
+
+- Add `.card--loading` to a `.card`.
+- Inside it, add one `.card-skel` bar per line of the coming content, each with one size class.
+- Add `<span class="sr-only">Loading</span>`, so a screen reader hears what the bars show.
+
+**Classes:** `.card--loading`, `.card-skel`, `.card-skel--media`, `.card-skel--title`, `.card-skel--line`
 
 ## Props
 
@@ -42,21 +48,31 @@ Default bar: None. Required: every `.card-skel` takes one size.
 
 ## Invalid combinations
 
-- `.card--loading` with no `.card-skel` bars: it renders as an empty box.
-- `.card-skel` with no size class.
-- `.card-skel` outside a `.card--loading`.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `.card--loading` with no `.card-skel` bars inside | MUST NOT | It renders as an empty box. |
+| `.card-skel` with no `bar` size | MUST NOT | The bar has no shape. |
+| `.card-skel` outside a `.card--loading` | MUST NOT | The bars are made to sit inside a loading card. |
+| `.card--loading` with the `empty` or `error` state of a Card | MUST NOT | A card shows one state at a time. |
 
 ## Keyboard
 
-Not focusable. A loading card holds no controls; its `.sr-only` "Loading" line is what a screen reader hears.
+| Key | Action |
+|---|---|
+| Tab | Passes over it: a loading card is not focusable. |
+| Enter, Space | Do nothing: a loading card takes no input. |
+
+A loading card holds no controls; its `.sr-only` "Loading" line is what a screen reader hears.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Fill `.card--loading` with `.card-skel` bars, one per line of the content it stands in for. | Manual: design review |
-| MUST | Add `<span class="sr-only">Loading</span>`, so a screen reader hears what the bars show. | Manual: design review |
-| MUST | Stop the shimmer under reduced motion. | Built into the class |
+| MUST | Fill `.card--loading` with `.card-skel` bars, one per line of the content it stands in for. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Add `<span class="sr-only">Loading</span>`, so a screen reader hears what the bars show. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Stop the shimmer under reduced motion; components.css already does, so keep it when you restyle the bars. | [Manual: Design review](../foundations/checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -76,7 +92,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 - **Loading card** is `.card--loading` filled with `.card-skel` bars, one per line of the content it
   stands in for. Without the bars it is an empty box. The shimmer stops under reduced motion.
 
-Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md).
+Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md); every token with its purpose is on [Tokens](../foundations/tokens.md).
 
 ## Classes
 

@@ -4,7 +4,7 @@
 
 > How the words sound.
 
-Part of the [Nate Mills Design System](../README.md): this page is a section of [DESIGN.md](../DESIGN.md), the whole brand contract in one file. All foundations: [Foundations](README.md).
+Part of the [Nate Mills Design System](../README.md): this page is a section of [DESIGN.md](../DESIGN.md), the whole brand contract in one file. Every token with its purpose: [Tokens](tokens.md). All foundations: [Foundations](README.md).
 
 ## Voice and tone
 

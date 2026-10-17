@@ -6,15 +6,11 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** `<div>` or `<article>` for a static card; `<a href>` or `<button>` when the whole card is the target.
-
-**Classes:** `.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error`
-
 ## When to use
 
 - A self-contained piece of content: a project, a credential, a metric, a quote.
-- A whole surface that goes to one place: `.card--interactive` on a real link or button.
-- An empty or error message in the place a card would sit: `.card--empty` or `.card--error`.
+- A whole surface that goes to exactly one place.
+- An empty or error message in the place a card would sit.
 
 ## When not to use
 
@@ -26,6 +22,16 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 - **[Loading card](loading-card.md):** While the content is still on its way, show a Loading card; swap in the Card when it arrives.
 - **[Button](button.md):** A card holding several actions stays static and puts a Button on each action. Only a card with exactly one destination becomes `.card--interactive`.
+
+## How to use
+
+**Element:** `<div>` or `<article>` for a static card; `<a href>` or `<button>` when the whole card is the target.
+
+- Put `.card` on a `<div>` or `<article>`.
+- When the whole card goes to one place, make the card itself the `<a href>` or `<button>` and add `.card--interactive`.
+- For a message in place of content, add `.card--empty` or `.card--error`; on an always-dark slab, add `.card--dark`.
+
+**Classes:** `.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error`
 
 ## Props
 
@@ -70,32 +76,37 @@ The CSS styles these states: `:active`, `:focus-visible`, `:focus-within`, `:hov
 
 ## Invalid combinations
 
-- `.card--interactive` on a `<div>` with a click handler: keyboard users can never reach it.
-- `.card--compact` with `.card--spacious`: the padding rules tie.
-- `.card--empty` with `.card--error`: one card carries one message.
-- A drop shadow on any card: depth is the surface step plus the hairline border.
-- A `data-theme` attribute pinned on a card to force a look: it survives cloning and breaks dark mode.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `interactive` on a `<div>` or `<article>` with a click handler | MUST NOT | Keyboard users can never reach it. The interactive card must itself be an `<a href>` or a `<button>`. |
+| `interactive` with links or buttons inside it | MUST NOT | A control inside a link or button is invalid HTML. A card with several actions stays static. |
+| `density: compact` with `density: spacious` | MUST NOT | The padding rules tie, so the padding depends on stylesheet order. |
+| `state: empty` with `state: error` | MUST NOT | One card carries one message. |
+| Any card with a `data-theme` attribute pinned on it | MUST NOT | The pin survives when the card is cloned and breaks dark mode. Use `tone: dark` for a dark slab. |
 
 ## Keyboard
 
 | Key | Action |
 |---|---|
-| Tab | On a `.card--interactive` link or button: moves focus to the card and shows the focus ring. On a static card: skips the card and moves to the links or buttons inside it. |
+| Tab (interactive card) | Moves focus to the card, which is itself the `<a>` or `<button>`, and shows the focus ring. |
+| Tab (static card) | Passes over the card and moves to the links or buttons inside it. |
 | Enter | Follows an interactive link card, or activates a button card. |
 | Space | Activates a button card; scrolls the page on a link card. |
 
-The CSS adds no key handling; the element underneath decides the keys.
+These are the native keys of the element underneath, so they work with no script.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Make a whole-card target a real `<a>` or `<button>`. `.card--interactive` styles the hover; it does not make the card operable. | Manual: design review |
-| MUST NOT | Give a static `.card` a hover state; only `.card--interactive` answers the pointer. | Automated: mobile-consistency lint, on the cards natemills.me registers as static |
-| MUST | Show the focus ring on an interactive card. | Automated: focus-ring gate, which presses Tab to every control in both themes and compares the pixels |
-| MUST | Keep text readable on an interactive card in hover, focus and press. | Automated: state-contrast gate, which hovers, focuses and presses every control in both themes |
-| MUST NOT | Give a card a drop shadow. | Manual: design review |
-| SHOULD | Change density with `.card--compact` or `.card--spacious` rather than a padding override. | Manual: design review |
+| MUST | Make a whole-card target a real `<a>` or `<button>`. `.card--interactive` styles the hover; it does not make the card operable. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST NOT | Give a static `.card` a hover state; only `.card--interactive` answers the pointer. | [Automated: Mobile-consistency lint](../foundations/checks.md#mobile-consistency-lint) |
+| MUST | Show the focus ring on an interactive card. | [Automated: Focus-ring gate](../foundations/checks.md#focus-ring-gate) |
+| MUST | Keep text readable on an interactive card in hover, focus and press. | [Automated: State-contrast gate](../foundations/checks.md#state-contrast-gate) |
+| MUST NOT | Give a card a drop shadow. | [Manual: Design review](../foundations/checks.md#design-review) |
+| SHOULD | Change density with `.card--compact` or `.card--spacious` rather than a padding override. | [Manual: Design review](../foundations/checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -132,7 +143,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
   themes. Never pin `data-theme` on an element to force a look: the pin survives when the element is
   cloned and silently breaks dark mode.
 
-Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md).
+Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md); every token with its purpose is on [Tokens](../foundations/tokens.md).
 
 ## Recipe
 

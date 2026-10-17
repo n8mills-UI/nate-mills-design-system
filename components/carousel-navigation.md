@@ -6,14 +6,10 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** A `role="group"` container with an `aria-label`, two `<button type="button">` chevrons, and a rail and counter hidden from assistive tech.
-
-**Classes:** `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__rail`, `.ds-carousel-nav__arrow`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__fill`, `.ds-carousel-nav__count`
-
 ## When to use
 
 - Any carousel or horizontal track of cards, at any width.
-- A mobile swipe carousel that becomes a grid on desktop: the `full` variant.
+- A mobile swipe carousel that becomes a grid on wider screens.
 
 ## When not to use
 
@@ -24,6 +20,16 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 - **[Badge](badge.md):** The counter shows a position in the carousel ("2 / 6"); a Badge shows a status or a count of something else. Never show a carousel position in a badge.
 - **[Button](button.md):** The chevrons are bare glyphs with a hidden 44px target. A labelled action under a carousel is a Button.
+
+## How to use
+
+**Element:** A `role="group"` container with an `aria-label`, two `<button type="button">` chevrons, and a rail and counter hidden from assistive tech.
+
+- Place `.ds-carousel-nav` below the cards, holding the rail with its fill, and the pager with the two chevrons around the counter.
+- Add `.ds-carousel-nav--full` for a mobile swipe carousel.
+- Drive it with a script that steps the track, updates the fill and the counter, and announces the position in a polite live region.
+
+**Classes:** `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__rail`, `.ds-carousel-nav__arrow`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__fill`, `.ds-carousel-nav__count`
 
 ## Props
 
@@ -48,9 +54,14 @@ The CSS styles these states: `:active`, `:disabled`, `:focus-visible`, `:hover`.
 
 ## Invalid combinations
 
-- `.ds-carousel-nav--full` above the mobile width: the CSS hides it there.
-- A second, hand-built pager beside it: there is one nav, site-wide.
-- Hiding a disabled chevron: it dims, so the end of the rail stays visible.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `variant: full` on a screen wider than a phone | MUST NOT | It is the mobile swipe variant, and the CSS hides it on wider screens. |
+| `.ds-carousel-nav` with a second, hand-built pager | MUST NOT | There is one nav, site-wide. |
+| `disabled` on a chevron with the chevron hidden | MUST NOT | It dims instead, so the end of the rail stays visible. |
+| `.ds-carousel-nav` with an autoplay timer | MUST NOT | There is no visible pause control (WCAG 2.2.2). |
 
 ## Keyboard
 
@@ -67,11 +78,11 @@ The published CSS draws the nav; the behaviour comes from the script that drives
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | Automated: touch-target lint, which reads the CSS |
-| MUST | Label each chevron `<button>` with an `aria-label`. | Automated: axe accessibility scan |
-| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | Manual: design review |
-| MUST | Keep the track a Tab stop only while it can scroll. | Automated: keyboard gate |
-| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | Manual: design review |
+| MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | [Automated: Touch-target lint](../foundations/checks.md#touch-target-lint) |
+| MUST | Label each chevron `<button>` with an `aria-label`. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
+| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Keyboard gate](../foundations/checks.md#keyboard-gate) |
+| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Design review](../foundations/checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -97,7 +108,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
   that grows to the current position. The counter reads "N/total" in bold 14px mono: the current
   number in `{colors.text-primary}`, the slash and total in `{colors.text-secondary}`.
 
-Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md).
+Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md); every token with its purpose is on [Tokens](../foundations/tokens.md).
 
 ## Recipe
 

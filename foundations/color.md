@@ -4,7 +4,7 @@
 
 > The colour roles and every resolved colour value, in both themes.
 
-Part of the [Nate Mills Design System](../README.md): this page is a section of [DESIGN.md](../DESIGN.md), the whole brand contract in one file. All foundations: [Foundations](README.md).
+Part of the [Nate Mills Design System](../README.md): this page is a section of [DESIGN.md](../DESIGN.md), the whole brand contract in one file. Every token with its purpose: [Tokens](tokens.md). All foundations: [Foundations](README.md).
 
 ## Color roles
 

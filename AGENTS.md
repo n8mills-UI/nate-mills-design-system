@@ -90,7 +90,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 
 ```html
 <span class="avatar"><img src="your-portrait.jpg" alt="Your name" width="44" height="44"></span>
-<span class="sr-only">Opens in a new tab</span>
+<span class="sr-only">(opens in a new tab)</span>
 ```
 <!-- AGENTS:classes:end -->
 

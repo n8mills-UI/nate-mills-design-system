@@ -2,15 +2,16 @@
 
 # Foundations
 
-> The decisions under every component: colour, type, spacing, depth, responsive behaviour, voice and accessibility.
+> The decisions under every component: tokens, colour, type, spacing, depth, responsive behaviour, voice, accessibility and how the rules are checked.
 
-Each page is one section of [DESIGN.md](../DESIGN.md), the whole brand contract in one file, apart from Accessibility, which gathers the rules from the [component pages](../components/README.md). The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json).
+Most pages are one topic of [DESIGN.md](../DESIGN.md), the whole brand contract in one file. Three are built from data: Tokens from tokens.json, and Accessibility and How rules are checked from the [component pages](../components/README.md). The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json).
 
 ## Every foundation
 
 | Page | What it covers |
 |---|---|
 | [Getting started](getting-started.md) | Link the published CSS, then build with its classes: the setup and the character of the system in one read. |
+| [Tokens](tokens.md) | Every token name the published CSS gives you, what each one is for, and its value. |
 | [Colour](color.md) | The colour roles and every resolved colour value, in both themes. |
 | [Typography](typography.md) | Three families and the named type styles, with every size resolved. |
 | [Layout and spacing](layout.md) | The layout principles and the spacing scale. |
@@ -20,3 +21,4 @@ Each page is one section of [DESIGN.md](../DESIGN.md), the whole brand contract 
 | [Do's and don'ts](dos-and-donts.md) | The system-wide rules, and the generated-design habits to reject. |
 | [Agent guide](agent-guide.md) | How to prompt for this system, and what it does not cover yet. |
 | [Accessibility](accessibility.md) | Every hard accessibility rule across the components, how each is checked, and the keys each component answers to. |
+| [How rules are checked](checks.md) | Every check the component rules name: what it does, which WCAG criterion it backs, and when it runs. |

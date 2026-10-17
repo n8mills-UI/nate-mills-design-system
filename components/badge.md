@@ -6,10 +6,6 @@
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](README.md).
 
-**Element:** `<span>`
-
-**Classes:** `.badge`, `.badge__dot`
-
 ## When to use
 
 - A status, such as "Open to work" or "In progress".
@@ -26,6 +22,15 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 - **[Chip](chip.md):** Same pill shape, different job: a badge reports a status, a chip labels. Pick by what the words do.
 - **[Carousel navigation](carousel-navigation.md):** A position in a carousel ("2 / 6") is the carousel counter, not a badge.
 
+## How to use
+
+**Element:** `<span>`
+
+- Put `.badge` on a `<span>` with the status word as its text.
+- For the dot form, start it with `<span class="badge__dot" aria-hidden="true"></span>`; for the icon form, a Lucide glyph marked `aria-hidden="true"`.
+
+**Classes:** `.badge`, `.badge__dot`
+
 ## Props
 
 | Prop | Type | Allowed values | Default | Description |
@@ -34,25 +39,34 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 ## Variants
 
-Available forms: `dot`, `icon`, `plain`. They are child elements, not modifier classes: `.badge` has no modifiers.
+Available forms: `dot`, `icon`, `plain`. They are child elements, not modifier classes: `.badge` has no modifiers. Default form: `plain`.
 
 ## Invalid combinations
 
-- A badge on a `<button>` or an `<a>`: a badge reports, it never acts.
-- A `.badge__dot` with no word beside it: colour alone reaches no screen reader.
-- A dot and an icon in the same badge: pick one form.
+Options that must not be used together. Each names the props above.
+
+| Combination | Level | Why |
+|---|---|---|
+| `form: dot` with `form: icon` | MUST NOT | Pick one form; two leading marks read as two signals. |
+| `.badge` on a `<button>` or an `<a>` | MUST NOT | A badge reports, it never acts. |
+| `form: dot` with no word beside it | MUST NOT | Colour alone reaches no screen reader. |
 
 ## Keyboard
 
-Not focusable. A badge reports a status and never takes input.
+| Key | Action |
+|---|---|
+| Tab | Passes over it: a badge is not focusable. |
+| Enter, Space | Do nothing: a badge takes no input. |
+
+A badge reports a status and never takes input.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Give every status a word as well as the dot; colour is never the only signal (WCAG 1.4.1). | Manual: design review |
-| MUST | Mark `.badge__dot` `aria-hidden="true"`. | Manual: design review |
-| MUST NOT | Make `.badge` interactive. | Manual: design review |
+| MUST | Give every status a word as well as the dot; colour is never the only signal (WCAG 1.4.1). | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Mark `.badge__dot` `aria-hidden="true"`. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST NOT | Make `.badge` interactive. | [Manual: Design review](../foundations/checks.md#design-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -84,7 +98,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
   the carousel counter. A badge is read-only and never interactive; its dot stays lime in both themes
   but colour is never the only signal, every status also carries a word.
 
-Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md).
+Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md); every token with its purpose is on [Tokens](../foundations/tokens.md).
 
 ## Recipe
 

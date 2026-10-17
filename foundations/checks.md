@@ -68,7 +68,7 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 ### Mobile-consistency lint
 
 - **Kind:** Automated
-- **What it checks:** Reads the CSS and fails if a card natemills.me registers as static grows a hover state of its own, among other mobile layout rules.
+- **What it checks:** Reads the CSS and fails if any card natemills.me registers sets a `box-shadow` in any state, or a card registered as static grows a hover state of its own, among other mobile layout rules.
 - **WCAG:** House rule
 - **When it runs:** Every pull request and every deploy.
 - **Rules it checks:** [Card](../components/card.md#rules)
@@ -89,12 +89,79 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **When it runs:** Every pull request and every deploy (the ratio lint); the presence check runs whenever a page is edited.
 - **Rules it checks:** [Avatar](../components/avatar.md#rules)
 
+### Screen-reader structure gate
+
+- **Kind:** Automated
+- **What it checks:** Reads the accessibility tree in a real browser: heading order with no skipped level and one h1, and every status message fired and read back, including each carousel's position after its next arrow is pressed.
+- **WCAG:** 1.3.1 Info and Relationships, A; 4.1.3 Status Messages, AA
+- **When it runs:** Every deploy.
+- **Rules it checks:** [Section heading](../components/section-heading.md#rules), [Carousel navigation](../components/carousel-navigation.md#rules)
+
+### Component-rules lint
+
+- **Kind:** Automated
+- **What it checks:** Reads every component in the site's pages and in the html examples these docs publish, and components.css, and fails when one of the rules below is broken. Each rule fails on a planted break before it is trusted.
+- **WCAG:** 1.1.1 Non-text Content, A; 1.4.1 Use of Color, A; 2.1.1 Keyboard, A; 2.3.3 Animation from Interactions, AAA; house rules
+- **When it runs:** Every pull request and every deploy.
+- **Rules it checks:** [Card](../components/card.md#rules), [Loading card](../components/loading-card.md#rules), [Chip](../components/chip.md#rules), [Badge](../components/badge.md#rules), [Section heading](../components/section-heading.md#rules), [Link](../components/link.md#rules)
+
+- No `.chip` is a link or a button, or carries a tabindex or a click handler.
+- Every glyph inside a `.chip` carries `aria-hidden="true"`.
+- No `.badge` is a link or a button, or carries a tabindex or a click handler.
+- Every `.badge` carries words, so its dot is never the only signal.
+- Every `.badge__dot` carries `aria-hidden="true"`.
+- Every `.card--interactive` is itself an `<a href>` or a `<button>`, or holds exactly one control: the `<button aria-expanded>` of a card that opens in place.
+- Every `.card--loading` holds at least one `.card-skel` bar and a `.sr-only` line.
+- No `.section-title` ends in a typed full stop; the CSS draws the brand period.
+- The glyph inside every `.link-underline--icon` carries `.icon-size-xs`.
+- components.css stops the `.card-skel` shimmer under `prefers-reduced-motion: reduce`.
+
 ## Manual
 
-### Design review
+### Lime-surface review
 
 - **Kind:** Manual
-- **What it checks:** Checked by hand when a change is reviewed, because no automated check can judge it.
-- **WCAG:** Varies by rule
-- **When it runs:** Every change, by hand.
-- **Rules it checks:** [Button](../components/button.md#rules), [Card](../components/card.md#rules), [Loading card](../components/loading-card.md#rules), [Chip](../components/chip.md#rules), [Badge](../components/badge.md#rules), [Section heading](../components/section-heading.md#rules), [Link](../components/link.md#rules), [Carousel navigation](../components/carousel-navigation.md#rules), [Screen-reader text](../components/screen-reader-text.md#rules)
+- **What it checks:** In the pull request, open every view that puts a button on a lime ground, theme presets included, and confirm each one is `.btn--secondary`. No script can tell which grounds a theme will paint lime.
+- **WCAG:** 1.4.11 Non-text Contrast, AA
+- **When it runs:** Every pull request that touches a button or a theme, by hand.
+- **Rules it checks:** [Button](../components/button.md#rules)
+
+### Dense-button review
+
+- **Kind:** Manual
+- **What it checks:** In the pull request, list every new `.btn--sm` and confirm it sits in a toolbar or filter row, not in running content.
+- **WCAG:** House rule
+- **When it runs:** Every pull request that adds a button, by hand.
+- **Rules it checks:** [Button](../components/button.md#rules)
+
+### Card-padding review
+
+- **Kind:** Manual
+- **What it checks:** In the pull request, search the diff for `padding` on a card selector and confirm each one is `.card--compact` or `.card--spacious` instead.
+- **WCAG:** House rule
+- **When it runs:** Every pull request that touches a card, by hand.
+- **Rules it checks:** [Card](../components/card.md#rules)
+
+### Label-or-status review
+
+- **Kind:** Manual
+- **What it checks:** Read the words on every new chip. A word that reports a state (Open to work, In progress, Available) belongs on a Badge; move it.
+- **WCAG:** House rule; it keeps one meaning per shape
+- **When it runs:** Every pull request that adds a chip, by hand.
+- **Rules it checks:** [Chip](../components/chip.md#rules)
+
+### Carousel autoplay review
+
+- **Kind:** Manual
+- **What it checks:** Load the page, touch nothing for ten seconds, and confirm no carousel moved on its own.
+- **WCAG:** 2.2.2 Pause, Stop, Hide, A
+- **When it runs:** Every pull request that touches a carousel, by hand.
+- **Rules it checks:** [Carousel navigation](../components/carousel-navigation.md#rules)
+
+### Hidden-words review
+
+- **Kind:** Manual
+- **What it checks:** For every new `.sr-only` span, read the visible screen without it and confirm a sighted reader loses nothing they need; if they do, show the words.
+- **WCAG:** 1.3.1 Info and Relationships, A
+- **When it runs:** Every pull request that adds screen-reader text, by hand.
+- **Rules it checks:** [Screen-reader text](../components/screen-reader-text.md#rules)

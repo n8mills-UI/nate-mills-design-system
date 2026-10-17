@@ -17,47 +17,47 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 | MUST | Keep the label and glyph readable on hover, focus and press: 4.5:1 for text, 3:1 for an icon. | [Automated: State-contrast gate](checks.md#state-contrast-gate) |
 | MUST | Give every `.btn--icon` an `aria-label`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
 | MUST | Give a button that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and an "opens in a new tab" cue. | [Automated: External-link lint](checks.md#external-link-lint) |
-| MUST NOT | Put `.btn--primary` on a lime surface. | [Manual: Design review](checks.md#design-review) |
+| MUST NOT | Put `.btn--primary` on a lime surface. | [Manual: Lime-surface review](checks.md#lime-surface-review) |
 
 ### [Card](../components/card.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Make a whole-card target a real `<a>` or `<button>`. `.card--interactive` styles the hover; it does not make the card operable. | [Manual: Design review](checks.md#design-review) |
+| MUST | Make a whole-card target a real `<a>` or `<button>`, or, for a card that opens in place, give it exactly one `<button aria-expanded>`. `.card--interactive` styles the hover; it does not make the card operable. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
 | MUST NOT | Give a static `.card` a hover state; only `.card--interactive` answers the pointer. | [Automated: Mobile-consistency lint](checks.md#mobile-consistency-lint) |
 | MUST | Show the focus ring on an interactive card. | [Automated: Focus-ring gate](checks.md#focus-ring-gate) |
 | MUST | Keep text readable on an interactive card in hover, focus and press. | [Automated: State-contrast gate](checks.md#state-contrast-gate) |
-| MUST NOT | Give a card a drop shadow. | [Manual: Design review](checks.md#design-review) |
+| MUST NOT | Give a card a drop shadow. | [Automated: Mobile-consistency lint](checks.md#mobile-consistency-lint) |
 
 ### [Loading card](../components/loading-card.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Fill `.card--loading` with `.card-skel` bars, one per line of the content it stands in for. | [Manual: Design review](checks.md#design-review) |
-| MUST | Add `<span class="sr-only">Loading</span>`, so a screen reader hears what the bars show. | [Manual: Design review](checks.md#design-review) |
-| MUST | Stop the shimmer under reduced motion; components.css already does, so keep it when you restyle the bars. | [Manual: Design review](checks.md#design-review) |
+| MUST | Fill `.card--loading` with `.card-skel` bars, one per line of the content it stands in for. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
+| MUST | Add `<span class="sr-only">Loading</span>`, so a screen reader hears what the bars show. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
+| MUST | Stop the shimmer under reduced motion; components.css already does, so keep it when you restyle the bars. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
 
 ### [Chip](../components/chip.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST NOT | Make a `.chip` interactive. | [Manual: Design review](checks.md#design-review) |
-| MUST | Mark a leading glyph `aria-hidden="true"`. | [Manual: Design review](checks.md#design-review) |
-| MUST NOT | Report a status on a chip. | [Manual: Design review](checks.md#design-review) |
+| MUST NOT | Make a `.chip` interactive. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
+| MUST | Mark a leading glyph `aria-hidden="true"`. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
+| MUST NOT | Report a status on a chip. | [Manual: Label-or-status review](checks.md#label-or-status-review) |
 
 ### [Badge](../components/badge.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Give every status a word as well as the dot; colour is never the only signal (WCAG 1.4.1). | [Manual: Design review](checks.md#design-review) |
-| MUST | Mark `.badge__dot` `aria-hidden="true"`. | [Manual: Design review](checks.md#design-review) |
-| MUST NOT | Make `.badge` interactive. | [Manual: Design review](checks.md#design-review) |
+| MUST | Give every status a word as well as the dot; colour is never the only signal (WCAG 1.4.1). | [Automated: Component-rules lint](checks.md#component-rules-lint) |
+| MUST | Mark `.badge__dot` `aria-hidden="true"`. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
+| MUST NOT | Make `.badge` interactive. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
 
 ### [Section heading](../components/section-heading.md)
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST NOT | Type a full stop after a `.section-title`. | [Manual: Design review](checks.md#design-review) |
+| MUST NOT | Type a full stop after a `.section-title`. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
 | MUST | Let `.section-head` own the gap below the heading; add no top margin to what follows. | [Automated: Section-head gate](checks.md#section-head-gate) |
 
 ### [Link](../components/link.md)
@@ -67,7 +67,7 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 | MUST | Render exactly one underline in every state. | [Automated: Underline gate](checks.md#underline-gate) |
 | MUST | Give a link that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and a `.sr-only` "(opens in a new tab)" cue. | [Automated: External-link lint](checks.md#external-link-lint) |
 | MUST | Show the focus ring on keyboard focus. | [Automated: Focus-ring gate](checks.md#focus-ring-gate) |
-| MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | [Manual: Design review](checks.md#design-review) |
+| MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
 
 ### [Carousel navigation](../components/carousel-navigation.md)
 
@@ -75,9 +75,9 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 |---|---|---|
 | MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | [Automated: Touch-target lint](checks.md#touch-target-lint) |
 | MUST | Label each chevron `<button>` with an `aria-label`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
-| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Manual: Design review](checks.md#design-review) |
+| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Automated: Screen-reader structure gate](checks.md#screen-reader-structure-gate) |
 | MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Keyboard gate](checks.md#keyboard-gate) |
-| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Design review](checks.md#design-review) |
+| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Carousel autoplay review](checks.md#carousel-autoplay-review) |
 
 ### [Avatar](../components/avatar.md)
 
@@ -91,7 +91,7 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 | Level | Rule | Checked by |
 |---|---|---|
 | MUST | Use the one phrase "(opens in a new tab)" for the cue on a text link that leaves the site. | [Automated: External-link lint](checks.md#external-link-lint) |
-| MUST NOT | Hide words a sighted reader needs. | [Manual: Design review](checks.md#design-review) |
+| MUST NOT | Hide words a sighted reader needs. | [Manual: Hidden-words review](checks.md#hidden-words-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -100,12 +100,12 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | Component | Keys |
 |---|---|
 | [Button](../components/button.md) | Tab; Shift + Tab; Enter; Space |
-| [Card](../components/card.md) | Tab (interactive card); Tab (static card); Enter; Space |
-| [Loading card](../components/loading-card.md) | Not focusable |
-| [Chip](../components/chip.md) | Not focusable |
-| [Badge](../components/badge.md) | Not focusable |
-| [Section heading](../components/section-heading.md) | Not focusable |
+| [Card](../components/card.md) | Tab (interactive card); Tab (card that opens in place); Tab (static card); Enter; Space |
+| [Loading card](../components/loading-card.md) | Not focusable. Tab; Enter, Space; Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) |
+| [Chip](../components/chip.md) | Not focusable. Tab; Enter, Space; Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) |
+| [Badge](../components/badge.md) | Not focusable. Tab; Enter, Space; Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) |
+| [Section heading](../components/section-heading.md) | Not focusable. Tab; Enter, Space; H in a screen reader's browse mode (VoiceOver: VO + Command + H); 2 or 3 in browse mode (NVDA, JAWS); Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) |
 | [Link](../components/link.md) | Tab; Shift + Tab; Enter; Space |
 | [Carousel navigation](../components/carousel-navigation.md) | Tab; Enter or Space; Left arrow, Right arrow; Enter on the forward chevron at the last card |
-| [Avatar](../components/avatar.md) | Not focusable |
-| [Screen-reader text](../components/screen-reader-text.md) | Not focusable |
+| [Avatar](../components/avatar.md) | Not focusable. Enter, Space; Tab; Enter; G in a screen reader's browse mode (VoiceOver: VO + Command + G) |
+| [Screen-reader text](../components/screen-reader-text.md) | Not focusable. Enter, Space; Tab; Enter; Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) |

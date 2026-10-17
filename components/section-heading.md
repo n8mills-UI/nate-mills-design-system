@@ -66,6 +66,9 @@ Options that must not be used together. Each names the props above.
 |---|---|
 | Tab | Passes over it: a section heading is not focusable. |
 | Enter, Space | Do nothing: a section heading takes no input. |
+| H in a screen reader's browse mode (VoiceOver: VO + Command + H) | Moves to the next heading. `.section-title` sits on a real `<h2>` or `<h3>`, so it is in the list. |
+| 2 or 3 in browse mode (NVDA, JAWS) | Moves to the next heading at that level. |
+| Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) | Reads the title, then the `.section-subtitle` intro. The brand period is drawn by CSS and is not read. |
 
 Screen-reader users reach headings with their heading navigation, not Tab.
 
@@ -73,9 +76,9 @@ Screen-reader users reach headings with their heading navigation, not Tab.
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST NOT | Type a full stop after a `.section-title`. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST NOT | Type a full stop after a `.section-title`. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
 | MUST | Let `.section-head` own the gap below the heading; add no top margin to what follows. | [Automated: Section-head gate](../foundations/checks.md#section-head-gate) |
-| SHOULD | Pick the heading level for where it sits: `<h2>` for a page section, `<h3>` inside one. | [Manual: Design review](../foundations/checks.md#design-review) |
+| SHOULD | Pick the heading level for where it sits: `<h2>` for a page section, `<h3>` inside one. | [Automated: Screen-reader structure gate](../foundations/checks.md#screen-reader-structure-gate) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -119,6 +122,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 
 ## Source
 
+- The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `section-heading`
 - The class API as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json)
 - The stylesheet: [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css)
 - The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json)

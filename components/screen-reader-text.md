@@ -51,8 +51,10 @@ Options that must not be used together. Each names the props above.
 
 | Key | Action |
 |---|---|
-| Tab | Passes over it: screen-reader text is not focusable. |
 | Enter, Space | Do nothing: screen-reader text takes no input. |
+| Tab | Passes over plain `.sr-only` text. On a focusable element, such as a skip link, Tab stops there and the element shows while it has focus. |
+| Enter | Does nothing on plain text; follows a focused skip link. |
+| Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) | Reads the hidden words in place, as part of the element they sit in. |
 
 On an element that is focusable, such as a skip link, the class shows it while it has focus, because it hides only what is not focused.
 
@@ -61,7 +63,7 @@ On an element that is focusable, such as a skip link, the class shows it while i
 | Level | Rule | Checked by |
 |---|---|---|
 | MUST | Use the one phrase "(opens in a new tab)" for the cue on a text link that leaves the site. | [Automated: External-link lint](../foundations/checks.md#external-link-lint) |
-| MUST NOT | Hide words a sighted reader needs. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST NOT | Hide words a sighted reader needs. | [Manual: Hidden-words review](../foundations/checks.md#hidden-words-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -79,6 +81,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 
 ## Source
 
+- The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `screen-reader-text`
 - The class API as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json)
 - The stylesheet: [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css)
 - The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json)

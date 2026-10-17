@@ -80,9 +80,9 @@ The published CSS draws the nav; the behaviour comes from the script that drives
 |---|---|---|
 | MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | [Automated: Touch-target lint](../foundations/checks.md#touch-target-lint) |
 | MUST | Label each chevron `<button>` with an `aria-label`. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
-| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Automated: Screen-reader structure gate](../foundations/checks.md#screen-reader-structure-gate) |
 | MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Keyboard gate](../foundations/checks.md#keyboard-gate) |
-| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Carousel autoplay review](../foundations/checks.md#carousel-autoplay-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -138,6 +138,7 @@ carousel-nav:
 
 ## Source
 
+- The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `carousel-navigation`
 - The class API as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json)
 - The stylesheet: [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css)
 - The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json)

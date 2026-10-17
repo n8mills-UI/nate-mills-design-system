@@ -4,7 +4,7 @@
 
 > Every component in the Nate Mills Design System: 10 components, 44 classes. This list is the whole inventory; anything not on it is not part of the system.
 
-The system is a CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, and its props are those classes and attributes. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows. The same facts as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json).
+The system is a CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, and its props are those classes and attributes. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows. The same facts as data: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), one Design System Doc Spec 0.20.0 document with every component and token, and [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json), the class API.
 
 ## Every component
 

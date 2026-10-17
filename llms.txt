@@ -9,6 +9,7 @@ Link the published CSS; never rebuild it from values. The rules are in AGENTS.md
 - [AGENTS.md](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/AGENTS.md): the rules, the published class names with examples, the token names, the mistakes to avoid. Read this first.
 - [DESIGN.md](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/DESIGN.md): the portable brand contract. Every colour, type, radius and spacing value resolved, the component recipes, do's and don'ts, voice and tone.
 - [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json): the published class API as data. Per class: kind, own selectors, states, parts, descendant rules, the custom properties it reads and sets; an example for each group that has one; the stylesheets in load order.
+- [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml): the whole system as one Design System Doc Spec 0.20.0 document. Every component with its traits and allowed values, invalid combinations, when-to-use and how-to-use guidelines with RFC 2119 levels, each rule's checkedBy and check, its keys and its look-alikes; every published token with its purpose and its DTCG source.
 - [llms-full.txt](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/llms-full.txt): AGENTS.md and DESIGN.md in one file.
 
 ## Components and foundations
@@ -21,8 +22,8 @@ Link the published CSS; never rebuild it from values. The rules are in AGENTS.md
 ## Source
 
 - [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json): the DTCG token source, three tiers, OKLCH-authored.
-- [tokens.css](https://natemills.me/assets/tokens.css): every custom property in light, dark and high-contrast. Load before components.css.
-- [components.css](https://natemills.me/assets/components.css): the class layer; reads semantic tokens only.
+- [tokens.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.css): every custom property in light, dark and high-contrast, as text. To use it on a page, link the natemills.me copy in AGENTS.md's link block; load it before components.css.
+- [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css): the class layer, as text; reads semantic tokens only. Link the natemills.me copy on a page, as AGENTS.md shows.
 - [fonts.css](https://natemills.me/assets/fonts.css): self-hosted Anton and JetBrains Mono, with its slashed zero. Required; Work Sans comes from Google Fonts. AGENTS.md has the full link block in order.
 - [Public repository](https://github.com/n8mills-UI/nate-mills-design-system): the mirror of the source, MIT.
 - [Claude Code plugin](https://github.com/n8mills-UI/nate-mills-design-system/tree/main/skills): a skill carrying AGENTS.md and DESIGN.md. Install with `claude plugin marketplace add n8mills-UI/nate-mills-design-system`, then `claude plugin install nate-mills-design-system@nate-mills-design-system`.

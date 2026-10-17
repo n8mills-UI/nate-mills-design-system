@@ -83,7 +83,7 @@ These are the native keys of `<a href>`, so they work with no script.
 | MUST | Render exactly one underline in every state. | [Automated: Underline gate](../foundations/checks.md#underline-gate) |
 | MUST | Give a link that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and a `.sr-only` "(opens in a new tab)" cue. | [Automated: External-link lint](../foundations/checks.md#external-link-lint) |
 | MUST | Show the focus ring on keyboard focus. | [Automated: Focus-ring gate](../foundations/checks.md#focus-ring-gate) |
-| MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -141,6 +141,7 @@ link:
 
 ## Source
 
+- The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `link`
 - The class API as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json)
 - The stylesheet: [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css)
 - The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json)

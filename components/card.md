@@ -29,6 +29,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 - Put `.card` on a `<div>` or `<article>`.
 - When the whole card goes to one place, make the card itself the `<a href>` or `<button>` and add `.card--interactive`.
+- When the whole card opens and closes in place, keep it an `<article>`, give it one `<button aria-expanded>` as its only control, and add `.card--interactive`; a click anywhere on the card works that button.
 - For a message in place of content, add `.card--empty` or `.card--error`; on an always-dark slab, add `.card--dark`.
 
 **Classes:** `.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error`
@@ -39,7 +40,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 |---|---|---|---|---|
 | `tone` | modifier class | `dark` (`.card--dark`) | No class: the surface follows the page theme. | Which surface the card sits on. |
 | `density` | modifier class | `compact` (`.card--compact`), `spacious` (`.card--spacious`) | No class: 24px padding. | Inner padding. |
-| `interactive` | modifier class | `interactive` (`.card--interactive`) | No class: static, with no hover. | Whether the whole card answers the pointer. Put it on a real `<a>` or `<button>`. |
+| `interactive` | modifier class | `interactive` (`.card--interactive`) | No class: static, with no hover. | Whether the whole card answers the pointer. Put it on a real `<a>` or `<button>`, or on a card whose one control is a `<button aria-expanded>` that opens it in place. |
 | `state` | modifier class | `empty` (`.card--empty`), `error` (`.card--error`) | No class: normal content. | A message in place of content. For loading, see Loading card. |
 
 ## Variants
@@ -81,7 +82,7 @@ Options that must not be used together. Each names the props above.
 | Combination | Level | Why |
 |---|---|---|
 | `interactive` on a `<div>` or `<article>` with a click handler | MUST NOT | Keyboard users can never reach it. The interactive card must itself be an `<a href>` or a `<button>`. |
-| `interactive` with links or buttons inside it | MUST NOT | A control inside a link or button is invalid HTML. A card with several actions stays static. |
+| `interactive` with a link, or more than one button, inside it | MUST NOT | A control inside a link or button is invalid HTML, and two controls leave the card's one target unclear. The one inner control allowed is the `<button aria-expanded>` of a card that opens in place. A card with several actions stays static. |
 | `density: compact` with `density: spacious` | MUST NOT | The padding rules tie, so the padding depends on stylesheet order. |
 | `state: empty` with `state: error` | MUST NOT | One card carries one message. |
 | Any card with a `data-theme` attribute pinned on it | MUST NOT | The pin survives when the card is cloned and breaks dark mode. Use `tone: dark` for a dark slab. |
@@ -91,9 +92,10 @@ Options that must not be used together. Each names the props above.
 | Key | Action |
 |---|---|
 | Tab (interactive card) | Moves focus to the card, which is itself the `<a>` or `<button>`, and shows the focus ring. |
+| Tab (card that opens in place) | Moves focus to its one `<button aria-expanded>` and shows the focus ring; the card's border strengthens. |
 | Tab (static card) | Passes over the card and moves to the links or buttons inside it. |
-| Enter | Follows an interactive link card, or activates a button card. |
-| Space | Activates a button card; scrolls the page on a link card. |
+| Enter | Follows an interactive link card, activates a button card, or opens and closes a card that opens in place. |
+| Space | Activates a button card, or opens and closes a card that opens in place; scrolls the page on a link card. |
 
 These are the native keys of the element underneath, so they work with no script.
 
@@ -101,12 +103,12 @@ These are the native keys of the element underneath, so they work with no script
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Make a whole-card target a real `<a>` or `<button>`. `.card--interactive` styles the hover; it does not make the card operable. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Make a whole-card target a real `<a>` or `<button>`, or, for a card that opens in place, give it exactly one `<button aria-expanded>`. `.card--interactive` styles the hover; it does not make the card operable. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
 | MUST NOT | Give a static `.card` a hover state; only `.card--interactive` answers the pointer. | [Automated: Mobile-consistency lint](../foundations/checks.md#mobile-consistency-lint) |
 | MUST | Show the focus ring on an interactive card. | [Automated: Focus-ring gate](../foundations/checks.md#focus-ring-gate) |
 | MUST | Keep text readable on an interactive card in hover, focus and press. | [Automated: State-contrast gate](../foundations/checks.md#state-contrast-gate) |
-| MUST NOT | Give a card a drop shadow. | [Manual: Design review](../foundations/checks.md#design-review) |
-| SHOULD | Change density with `.card--compact` or `.card--spacious` rather than a padding override. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST NOT | Give a card a drop shadow. | [Automated: Mobile-consistency lint](../foundations/checks.md#mobile-consistency-lint) |
+| SHOULD | Change density with `.card--compact` or `.card--spacious` rather than a padding override. | [Manual: Card-padding review](../foundations/checks.md#card-padding-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -177,6 +179,7 @@ card-dark:
 
 ## Source
 
+- The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `card`
 - The class API as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json)
 - The stylesheet: [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css)
 - The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json)

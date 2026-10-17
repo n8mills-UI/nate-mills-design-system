@@ -63,6 +63,7 @@ Options that must not be used together. Each names the props above.
 |---|---|
 | Tab | Passes over it: a loading card is not focusable. |
 | Enter, Space | Do nothing: a loading card takes no input. |
+| Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) | Reads the `.sr-only` "Loading" line. The skeleton bars are empty boxes, so nothing else is read. |
 
 A loading card holds no controls; its `.sr-only` "Loading" line is what a screen reader hears.
 
@@ -70,9 +71,9 @@ A loading card holds no controls; its `.sr-only` "Loading" line is what a screen
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Fill `.card--loading` with `.card-skel` bars, one per line of the content it stands in for. | [Manual: Design review](../foundations/checks.md#design-review) |
-| MUST | Add `<span class="sr-only">Loading</span>`, so a screen reader hears what the bars show. | [Manual: Design review](../foundations/checks.md#design-review) |
-| MUST | Stop the shimmer under reduced motion; components.css already does, so keep it when you restyle the bars. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Fill `.card--loading` with `.card-skel` bars, one per line of the content it stands in for. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
+| MUST | Add `<span class="sr-only">Loading</span>`, so a screen reader hears what the bars show. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
+| MUST | Stop the shimmer under reduced motion; components.css already does, so keep it when you restyle the bars. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -106,6 +107,7 @@ Values in braces, such as `{colors.border}`, are named on the foundation pages, 
 
 ## Source
 
+- The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `loading-card`
 - The class API as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json)
 - The stylesheet: [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css)
 - The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json)

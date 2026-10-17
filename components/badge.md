@@ -57,6 +57,7 @@ Options that must not be used together. Each names the props above.
 |---|---|
 | Tab | Passes over it: a badge is not focusable. |
 | Enter, Space | Do nothing: a badge takes no input. |
+| Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) | Reads the status word. The `.badge__dot` is `aria-hidden`, so it is skipped. |
 
 A badge reports a status and never takes input.
 
@@ -64,9 +65,9 @@ A badge reports a status and never takes input.
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Give every status a word as well as the dot; colour is never the only signal (WCAG 1.4.1). | [Manual: Design review](../foundations/checks.md#design-review) |
-| MUST | Mark `.badge__dot` `aria-hidden="true"`. | [Manual: Design review](../foundations/checks.md#design-review) |
-| MUST NOT | Make `.badge` interactive. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST | Give every status a word as well as the dot; colour is never the only signal (WCAG 1.4.1). | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
+| MUST | Mark `.badge__dot` `aria-hidden="true"`. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
+| MUST NOT | Make `.badge` interactive. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -124,6 +125,7 @@ badge:
 
 ## Source
 
+- The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `badge`
 - The class API as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json)
 - The stylesheet: [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css)
 - The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json)

@@ -103,8 +103,8 @@ These are the native keys of `<button>` and `<a>`, so they work with no script; 
 | MUST | Keep the label and glyph readable on hover, focus and press: 4.5:1 for text, 3:1 for an icon. | [Automated: State-contrast gate](../foundations/checks.md#state-contrast-gate) |
 | MUST | Give every `.btn--icon` an `aria-label`. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
 | MUST | Give a button that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and an "opens in a new tab" cue. | [Automated: External-link lint](../foundations/checks.md#external-link-lint) |
-| MUST NOT | Put `.btn--primary` on a lime surface. | [Manual: Design review](../foundations/checks.md#design-review) |
-| SHOULD | Reach for `.btn--sm` sparingly; it is for dense toolbars, not a default. | [Manual: Design review](../foundations/checks.md#design-review) |
+| MUST NOT | Put `.btn--primary` on a lime surface. | [Manual: Lime-surface review](../foundations/checks.md#lime-surface-review) |
+| SHOULD | Reach for `.btn--sm` sparingly; it is for dense toolbars, not a default. | [Manual: Dense-button review](../foundations/checks.md#dense-button-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -196,6 +196,7 @@ button-icon:
 
 ## Source
 
+- The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `button`
 - The class API as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json)
 - The stylesheet: [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css)
 - The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json)

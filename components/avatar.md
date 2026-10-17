@@ -57,8 +57,10 @@ Options that must not be used together. Each names the props above.
 
 | Key | Action |
 |---|---|
-| Tab | Passes over it: an avatar is not focusable. |
 | Enter, Space | Do nothing: an avatar takes no input. |
+| Tab | Passes over it: an avatar is not focusable. Wrapped in a link, Tab stops on the link. |
+| Enter | Does nothing on its own; follows the link when one wraps it. |
+| G in a screen reader's browse mode (VoiceOver: VO + Command + G) | Moves to the next image and reads the `<img>` alt text, the person's name. |
 
 Wrapped in a link, the link takes focus instead.
 
@@ -85,6 +87,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 
 ## Source
 
+- The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `avatar`
 - The class API as data: [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json)
 - The stylesheet: [components.css](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components.css)
 - The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json)

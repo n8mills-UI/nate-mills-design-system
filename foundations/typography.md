@@ -15,7 +15,7 @@ Part of the [Nate Mills Design System](../README.md): this page is a section of 
 - Eyebrows and labels are uppercase JetBrains Mono with positive tracking (0.08em labels, 0.18em
   eyebrows) to mark them as taxonomy.
 - Body copy is `text-align: start`, ragged right. Never justify.
-- Line length caps at 52ch. The 11px mono label is the floor; never go smaller.
+- Line length caps at 52ch. The 11px mono label (`--text-label`) is the floor; never go smaller.
 
 ## Values
 

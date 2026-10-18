@@ -8,12 +8,29 @@ Part of the [Nate Mills Design System](../README.md): this page is a section of 
 
 ## Responsive behavior
 
-Reference breakpoints: mobile 375px, tablet 768px, desktop 1024px, wide 1440px, ultrawide 1600px.
+Reference breakpoints, each a token: mobile 375px (`--bp-mobile`), tablet 768px (`--bp-tablet`), desktop
+1024px (`--bp-desktop`), wide 1440px (`--bp-wide`), ultrawide 1600px (`--bp-ultrawide`). A media query cannot
+read a custom property, so the CSS writes the number and the token records it.
 
 - Type is fluid via `clamp()` and capped, so headings grow on wider screens and stop; they never balloon.
 - At and below 768px, section-level primary CTAs go full-width and centre for a thumb-friendly tap
   target; inline buttons inside paragraphs stay auto-width.
-- Dense value tables tighten below ~640px but never drop a column and never shrink labels below 11px.
-- Touch targets meet 44px. The dense `.btn--sm` is 32px with no larger tap area around it, which still
+- Dense value tables tighten below ~640px but never drop a column and never shrink labels below 11px (`--text-label`).
+- Touch targets meet 44px (`--touch-target-min`). The dense `.btn--sm` is 32px (`--btn-sm`) with no larger tap area around it, which still
   clears the WCAG 2.5.8 AA 24px minimum; nothing goes below 24px.
 - Verify layout at ~375px alongside both light and dark themes whenever you touch a layout.
+
+## Values
+
+The tokens this page names, as data from tokens.json: write `var(--name)`, never the raw value. Every token: [Tokens](tokens.md).
+
+| Token | Value | What it is for |
+|---|---|---|
+| `--bp-mobile` | `375px` | The reference phone width: check every layout here. |
+| `--bp-tablet` | `768px` | At and below this width, section-level primary calls to action go full-width. |
+| `--bp-desktop` | `1024px` | The reference desktop width. |
+| `--bp-wide` | `1440px` | The reference wide-screen width. |
+| `--bp-ultrawide` | `1600px` | The widest reference width; layouts scale as one piece above it. |
+| `--touch-target-min` | `44px` | The smallest pointer target for any control a finger or pointer taps. |
+| `--btn-sm` | `32px` | Compact: dense cards, toolbars, filters. Clears the WCAG 2.5.8 AA 24px target minimum. |
+| `--text-label` | `0.6875rem` | Uppercase mono labels, eyebrows, stat labels, badges. |

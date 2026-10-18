@@ -22,7 +22,7 @@ Don't:
 - Don't dim text with opacity to fake a secondary tone; step down a text style.
 - Don't italicise a whole heading, and don't use an alpha colour for heading emphasis.
 - Don't reach for a drop shadow to separate a card; use a hairline border.
-- Don't justify body text, and don't drop below the 11px mono label floor.
+- Don't justify body text, and don't drop below the 11px mono label floor (`--text-label`).
 - Don't leak an external client brand colour into general UI; those are locked constants for their
   own case-study context only.
 
@@ -80,3 +80,11 @@ generated.
   match the file's own shape, so the browser reserves the right box and the page does not jump.
 - Semantic HTML first (`<header>`, `<nav>`, `<main>`, `<section>`, `<button>`). ARIA only where
   HTML cannot carry the meaning.
+
+## Values
+
+The tokens this page names, as data from tokens.json: write `var(--name)`, never the raw value. Every token: [Tokens](tokens.md).
+
+| Token | Value | What it is for |
+|---|---|---|
+| `--text-label` | `0.6875rem` | Uppercase mono labels, eyebrows, stat labels, badges. |

@@ -635,7 +635,7 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
 - Eyebrows and labels are uppercase JetBrains Mono with positive tracking (0.08em labels, 0.18em
   eyebrows) to mark them as taxonomy.
 - Body copy is `text-align: start`, ragged right. Never justify.
-- Line length caps at 52ch. The 11px mono label is the floor; never go smaller.
+- Line length caps at 52ch. The 11px mono label (`--text-label`) is the floor; never go smaller.
 
 ## Component stylings
 
@@ -742,7 +742,7 @@ Don't:
 - Don't dim text with opacity to fake a secondary tone; step down a text style.
 - Don't italicise a whole heading, and don't use an alpha colour for heading emphasis.
 - Don't reach for a drop shadow to separate a card; use a hairline border.
-- Don't justify body text, and don't drop below the 11px mono label floor.
+- Don't justify body text, and don't drop below the 11px mono label floor (`--text-label`).
 - Don't leak an external client brand colour into general UI; those are locked constants for their
   own case-study context only.
 
@@ -836,13 +836,15 @@ generated.
 
 ## Responsive behavior
 
-Reference breakpoints: mobile 375px, tablet 768px, desktop 1024px, wide 1440px, ultrawide 1600px.
+Reference breakpoints, each a token: mobile 375px (`--bp-mobile`), tablet 768px (`--bp-tablet`), desktop
+1024px (`--bp-desktop`), wide 1440px (`--bp-wide`), ultrawide 1600px (`--bp-ultrawide`). A media query cannot
+read a custom property, so the CSS writes the number and the token records it.
 
 - Type is fluid via `clamp()` and capped, so headings grow on wider screens and stop; they never balloon.
 - At and below 768px, section-level primary CTAs go full-width and centre for a thumb-friendly tap
   target; inline buttons inside paragraphs stay auto-width.
-- Dense value tables tighten below ~640px but never drop a column and never shrink labels below 11px.
-- Touch targets meet 44px. The dense `.btn--sm` is 32px with no larger tap area around it, which still
+- Dense value tables tighten below ~640px but never drop a column and never shrink labels below 11px (`--text-label`).
+- Touch targets meet 44px (`--touch-target-min`). The dense `.btn--sm` is 32px (`--btn-sm`) with no larger tap area around it, which still
   clears the WCAG 2.5.8 AA 24px minimum; nothing goes below 24px.
 - Verify layout at ~375px alongside both light and dark themes whenever you touch a layout.
 

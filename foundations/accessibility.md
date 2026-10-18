@@ -4,7 +4,7 @@
 
 > Every hard accessibility rule across the components, how each is checked, the keys each component answers to, and the `.sr-only` helper class.
 
-Part of the [Nate Mills Design System](../README.md). The system is authored to WCAG 2.2 AA in both themes. This page gathers the hard rules from every [component page](../components/README.md); each component page has the full set. How each check works: [How rules are checked](checks.md).
+Part of the [Nate Mills Design System](../README.md). The system is authored to WCAG 2.2 AA in both themes. This page gathers the hard rules from every [component page](../COMPONENTS.md); each component page has the full set. How each check works: [How rules are checked](checks.md).
 
 ## Rules every component carries
 

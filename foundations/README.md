@@ -4,7 +4,7 @@
 
 > The decisions under every component: tokens, colour, type, spacing, depth, responsive behaviour, voice, accessibility and how the rules are checked.
 
-Most pages are one topic of [DESIGN.md](../DESIGN.md), the whole brand contract in one file. Three are built from data: Tokens from tokens.json, and Accessibility and How rules are checked from the [component pages](../components/README.md). The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json).
+Most pages are one topic of [DESIGN.md](../DESIGN.md), the whole brand contract in one file. Three are built from data: Tokens from tokens.json, and Accessibility and How rules are checked from the [component pages](../COMPONENTS.md). The token source: [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json).
 
 ## Every foundation
 

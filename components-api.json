@@ -9,7 +9,7 @@
   ],
   "rules": "https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/AGENTS.md",
   "values": "https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/DESIGN.md",
-  "pages": "https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components/README.md",
+  "pages": "https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/COMPONENTS.md",
   "components": [
     {
       "name": "Buttons",

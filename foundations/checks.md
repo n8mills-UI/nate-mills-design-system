@@ -4,7 +4,7 @@
 
 > Every check the component rules name: what it does, which WCAG criterion it backs, and when it runs.
 
-Part of the [Nate Mills Design System](../README.md). Every rule on a [component page](../components/README.md) names one of these checks. Automated checks run on natemills.me before every publish; the scripts live in the private source repository. All foundations: [Foundations](README.md).
+Part of the [Nate Mills Design System](../README.md). Every rule on a [component page](../COMPONENTS.md) names one of these checks. Automated checks run on natemills.me before every publish; the scripts live in the private source repository. All foundations: [Foundations](README.md).
 
 ## Automated
 

@@ -139,6 +139,22 @@ link:
 | `.link-underline--icon` | modifier | carries a trailing glyph; give the glyph .icon-size-xs | `--space-200` |
 | `.icon-size-xs` | base | the trailing glyph inside .link-underline--icon: sizes it and nudges it on hover; does nothing elsewhere | None |
 
+## Tokens
+
+Every token the classes above read, as data from tokens.json: write `var(--name)`, never the raw value. A component token belongs to one component: change it to restyle that component and nothing else. A semantic token is a shared role; never change one for a single component. The three tiers: [Tokens](../foundations/tokens.md#three-tiers).
+
+| Token | Tier | Value | What it is for |
+|---|---|---|---|
+| `--color-accent` | Semantic | `#1c1c1f`; dark `#d2ff37`, from `--neutral-850` | The single theme-aware interactive role: ink on light, brand lime on dark. Active and selected states. |
+| `--color-border-brand` | Semantic | `#d2ff37`, from `--brand-primary` | The brand-lime outline accent (active selection, link underline, brand ring). Theme-invariant lime, never overridden per theme; the semantic the brand outlines read instead of the raw primitive. |
+| `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
+| `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
+| `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--font-body` | Semantic | `"Work Sans", "Work Sans Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif` | Body copy, lists, and buttons. |
+| `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
+| `--tracking-normal` | Semantic | `0` | 0. The body default; most text sits here. |
+| `--weight-semibold` | Semantic | `600` | 600. The workhorse emphasis: buttons, subheads, labels. |
+
 ## Source
 
 - The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `link`

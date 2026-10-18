@@ -120,6 +120,37 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | `.section-title` | base | any heading level, picked for where it sits (h2 for a page section, h3 inside one); carries the drawn brand period | `--brand-primary`, `--color-text-primary`, `--display-section`, `--display-tight`, `--dot-radius`, `--font-display`, `--line-display`, `--space-300`, `--weight-extrabold` |
 | `.section-subtitle` | base | intro line under the title | `--color-text-secondary`, `--font-body`, `--line-body`, `--space-500`, `--text-body` |
 
+## Tokens
+
+Every token the classes above read, as data from tokens.json: write `var(--name)`, never the raw value. A component token belongs to one component: change it to restyle that component and nothing else. A semantic token is a shared role; never change one for a single component. The three tiers: [Tokens](../foundations/tokens.md#three-tiers).
+
+| Token | Tier | Value | What it is for |
+|---|---|---|---|
+| `--chip-line` | Component | `1.4` | Chip label line height. Component-level literal, sized to the mono label; off the named line scale by design. |
+| `--brand-primary` | Semantic | `#d2ff37`, from `--lime-500` | The brand lime, scarce on purpose: the primary button fill, brand outlines, focus rings on dark surfaces and status dots. Never body text on a light surface. |
+| `--color-accent-emphasis` | Semantic | `#1c1c1f`; dark `#d2ff37`, from `--neutral-850` | Theme-aware emphasis text following the accent role: ink on light, lime on dark. For text on theme-following surfaces; on-* tokens are for fixed-colour surfaces. |
+| `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
+| `--color-text-secondary` | Semantic | `#3f3f46`; dark `#a1a1aa`, from `--neutral-700` | Secondary text: supporting copy one step quieter than text-primary. |
+| `--color-text-tertiary` | Semantic | `#67676f`; dark `#909096`, from `--neutral-600` | Tertiary text: section labels and quiet meta copy; the last step that still clears 4.5:1 on light. |
+| `--display-section` | Semantic | `clamp(min(4.25rem, 19vw), 8.7vw, 7.5rem)` | Section headings (every section h2). .section-title consumes this; the About headings are a documented exception in sections.css (Hi, I'm Nate opens the section and fills its column; the headline over the story fills its column and stays under 85% of it). |
+| `--display-tight` | Semantic | `-0.0176em` | Display tracking. Pairs with every heading above card size, the hero included. |
+| `--dot-radius` | Semantic | `999px`, from `--radius-full` | Circle geometry: dots, markers, slider thumbs, and drawn circles (the brand period, status dots, touch-target rings). Full by definition: a re-theme that softens buttons leaves a dot round, and the theme lab's corner tier squares it only when the whole system goes sharp (0 at sharp, full at soft and round). |
+| `--font-body` | Semantic | `"Work Sans", "Work Sans Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif` | Body copy, lists, and buttons. |
+| `--font-display` | Semantic | `"Anton", Impact, "Haettenschweiler", sans-serif` | Display headings and large numbers. Anton, one weight, never faux-bolded. |
+| `--font-feature-mono` | Semantic | `"zero" 1` | Switches on the slashed zero for every piece of mono text. |
+| `--font-mono` | Semantic | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace` | Tabular numbers, code, and eyebrow labels. |
+| `--line-body` | Semantic | `1.5` | Default reading text: paragraphs, lists, captions. The workhorse. |
+| `--line-display` | Semantic | `1.05` | Display-grade headings (--text-h1, section h2s). Big text wants the tightest leading. |
+| `--section-head-gap` | Semantic | `clamp(var(--space-300), 1.75vw, var(--space-500))` | Section rhythm. The single gap from a section heading to the first content under it, owned by .section-head. |
+| `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
+| `--space-300` | Semantic | `12px` | Medium-tight break. Heading-to-body, compact rows. |
+| `--space-500` | Semantic | `24px` | Medium break. Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
+| `--text-body` | Semantic | `1rem`, from `--size-base` | Paragraphs, lists, default reading text, card body copy. |
+| `--text-label` | Semantic | `0.6875rem`, from `--size-2xs` | Uppercase mono labels, eyebrows, stat labels, badges. |
+| `--tracking-eyebrow` | Semantic | `0.18em` | Wide tracking for uppercase eyebrows. |
+| `--weight-extrabold` | Semantic | `800` | Five distinct weights. The body face loads 400 to 800 as one variable file; the display face ships a single 400, so font-synthesis is off site-wide. |
+| `--weight-semibold` | Semantic | `600` | 600. The workhorse emphasis: buttons, subheads, labels. |
+
 ## Source
 
 - The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `section-heading`

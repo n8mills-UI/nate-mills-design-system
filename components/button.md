@@ -193,6 +193,46 @@ button-icon:
 | `.btn--md` | modifier | 44px like base, with tighter 8px / 16px padding | `--btn-md`, `--size-sm`, `--space-200`, `--space-400` |
 | `.btn--lg` | modifier | 52px | `--btn-lg`, `--size-base`, `--space-300`, `--space-500` |
 
+## Tokens
+
+Every token the classes above read, as data from tokens.json: write `var(--name)`, never the raw value. A component token belongs to one component: change it to restyle that component and nothing else. A semantic token is a shared role; never change one for a single component. The three tiers: [Tokens](../foundations/tokens.md#three-tiers).
+
+| Token | Tier | Value | What it is for |
+|---|---|---|---|
+| `--btn-focus-ring` | Component | `#1c1c1f`; dark `#d2ff37`, from `--color-focus-ring` | Button focus-visible outline colour. |
+| `--btn-font` | Component | `"Work Sans", "Work Sans Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`, from `--font-body` | Button label typeface, the body face. |
+| `--btn-font-size` | Component | `0.875rem`, from `--size-sm` | Button label size at the default (md) button. |
+| `--btn-font-weight` | Component | `600`, from `--weight-semibold` | Button label weight; semibold on every button. |
+| `--btn-gap` | Component | `8px`, from `--space-200` | Space between a button's icon and its label. |
+| `--btn-icon-border` | Component | `#e4e4e7`; dark `#d4d4d8`, from `--btn-secondary-border` | Icon button border. Aliases secondary-border: the icon button is the secondary button without text, so its chrome reads the secondary's tokens and cannot drift. |
+| `--btn-icon-fg` | Component | `#0a0a0b`; dark `#f4f4f5`, from `--btn-secondary-fg` | Icon button glyph at rest. Aliases secondary-fg: the icon button is the secondary button without text, so the two must not drift; before this it pointed at text-secondary and the grey read dim next to a secondary label wherever the two sat in one row (hero CTA row at ultrawide, where the icon buttons grow labels). |
+| `--btn-lg` | Component | `52px` | Hero CTAs and primary conversion actions. |
+| `--btn-md` | Component | `44px`, from `--touch-target-min` | Default. Most CTAs. |
+| `--btn-pad-x` | Component | `18px` | Base button inline (left/right) padding. Component-level literal; sits off the 4px space scale by design (the historic DC-03 value, kept so the live button is unchanged). |
+| `--btn-pad-y` | Component | `10px` | Base button block (top/bottom) padding. Component-level literal, paired with --btn-pad-x. |
+| `--btn-primary-bg` | Component | `#d2ff37`, from `--brand-primary` | Primary button fill. A deliberate component-to-brand alias, not a theme-following semantic. |
+| `--btn-primary-bg-hover` | Component | `#1c1c1f`, from `--brand-ink` | Primary button fill on hover/focus (inverts to ink). |
+| `--btn-primary-border` | Component | `#d2ff37`, from `--color-border-brand` | Primary button border. |
+| `--btn-primary-fg` | Component | `#1c1c1f`, from `--brand-ink` | Primary button label and glyph. |
+| `--btn-primary-fg-hover` | Component | `#d2ff37`, from `--brand-primary` | Primary button label on hover/focus (inverts to lime). |
+| `--btn-radius` | Component | `999px`, from `--radius-full` | Button corner radius; full pill. |
+| `--btn-secondary-border` | Component | `#e4e4e7`; dark `#d4d4d8`, from `--color-border` | Secondary button outline at rest: the border grey, a soft edge rather than a frame; dark mode takes the stronger grey (darkTheme). The label names the control, so the outline needs no 3:1 (W3C Understanding SC 1.4.11), and hover, focus and press fill lime. |
+| `--btn-secondary-fg` | Component | `#0a0a0b`; dark `#f4f4f5`, from `--color-text-primary` | Secondary button label (transparent fill). |
+| `--btn-sm` | Component | `32px` | Compact: dense cards, toolbars, filters. Clears the WCAG 2.5.8 AA 24px target minimum. |
+| `--btn-transition` | Component | `background var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default), transform var(--duration-fast) var(--ease-default)` | CSS composite: the button's hover/focus transition across its four animated properties. Reads var(--duration-fast)/var(--ease-default) directly so it follows a motion re-point (same pattern as --gradient; DTCG forbids embedded aliases inside string values). |
+| `--brand-ink` | Semantic | `#1c1c1f`, from `--neutral-850` | Fixed, theme-invariant brand ink. The always-dark bed, and the dark foreground on a fixed lime or static-white bed. |
+| `--brand-primary-dim` | Semantic | `#b8e030`, from `--lime-600` | Hover-dim step of the brand lime (lime.600). |
+| `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
+| `--size-base` | Semantic | `1rem` | 16px. The body stop; --text-body resolves here. |
+| `--size-sm` | Semantic | `0.875rem` | 14px. Compact body: footer text, card bullets, dense UI copy. |
+| `--size-xs` | Semantic | `0.75rem` | 12px. Captions, footnotes, fine print; --text-caption resolves here. |
+| `--space-100` | Semantic | `4px` | Hairline gap. Icon-to-label, tight inline spacing. |
+| `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
+| `--space-300` | Semantic | `12px` | Medium-tight break. Heading-to-body, compact rows. |
+| `--space-400` | Semantic | `16px` | Base unit. Default gap between related elements; the compact card-padding tier (--card-pad-compact). |
+| `--space-500` | Semantic | `24px` | Medium break. Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
+| `--touch-target-min` | Semantic | `44px` | The smallest pointer target for any control a finger or pointer taps. |
+
 ## Source
 
 - The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `button`

@@ -177,6 +177,31 @@ card-dark:
 | `.card--empty` | modifier | centred empty state | `--space-200` |
 | `.card--error` | modifier | centred error state, carries the feedback colour | `--color-border`, `--color-feedback-background-error`, `--space-200` |
 
+## Tokens
+
+Every token the classes above read, as data from tokens.json: write `var(--name)`, never the raw value. A component token belongs to one component: change it to restyle that component and nothing else. A semantic token is a shared role; never change one for a single component. The three tiers: [Tokens](../foundations/tokens.md#three-tiers).
+
+| Token | Tier | Value | What it is for |
+|---|---|---|---|
+| `--card-bg` | Component | `#ffffff`; dark `#1c1c1f`, from `--color-surface` | Card surface fill on light slabs. |
+| `--card-border` | Component | `1px solid var(--color-border)`, from `--border-hairline` | Card edge; 1px hairline that follows the theme border colour. |
+| `--card-dark-bg` | Component | `#1c1c1f`, from `--brand-ink` | Card surface fill on dark slabs (.card--dark). |
+| `--card-dark-border` | Component | `rgba(255, 255, 255, 0.08)`, from `--color-on-ink-border` | Card edge on dark slabs. |
+| `--card-dark-fg` | Component | `rgba(255, 255, 255, 0.88)`, from `--color-on-ink-primary` | Card body text on dark slabs. |
+| `--card-fg` | Component | `#0a0a0b`; dark `#f4f4f5`, from `--color-text-primary` | Card body text. |
+| `--card-padding` | Component | `24px`, from `--card-pad-standard` | Card content inset; the standard 24px card padding. |
+| `--card-radius` | Component | `20px`, from `--radius-xl` | Card corner radius; the default for content cards and modals. Every card family on the site reads this one token: awards and training used to sit at radius.lg while the featured-work and kind-words cards hardcoded radius.xl, so four card families shipped two different corners. |
+| `--border-focus` | Semantic | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
+| `--card-pad-compact` | Semantic | `16px`, from `--space-400` | Compact card-padding tier (16px). Dense content tiles: credential cards, health-check tiles, inner controls. |
+| `--card-pad-spacious` | Semantic | `32px`, from `--space-600` | Spacious card-padding tier (32px). Large feature, award, and full-testimonial cards (often the desktop step up from standard). |
+| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. |
+| `--color-border-strong` | Semantic | `#d4d4d8`; dark `#3f3f46`, from `--neutral-400` | Heavier border for edges that must read past a hairline (secondary-button outlines). |
+| `--color-feedback-background-error` | Semantic | `#961010`; dark `#ff8f8f` | Error message backgrounds: deep red on light, soft red on dark. |
+| `--color-surface-sunken` | Semantic | `#ececec`; dark `#141416`, from `--neutral-200` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. |
+| `--duration-base` | Semantic | `220ms` | Reveal, modal, and swap transitions. |
+| `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
+
 ## Source
 
 - The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `card`

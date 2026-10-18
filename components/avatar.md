@@ -85,6 +85,20 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 |---|---|---|---|
 | `.avatar` | base | round portrait | `--avatar-radius`, `--color-border`, `--color-border-brand`, `--color-surface-sunken`, `--duration-fast`, `--ease-default`, `--touch-target-min` |
 
+## Tokens
+
+Every token the classes above read, as data from tokens.json: write `var(--name)`, never the raw value. A component token belongs to one component: change it to restyle that component and nothing else. A semantic token is a shared role; never change one for a single component. The three tiers: [Tokens](../foundations/tokens.md#three-tiers).
+
+| Token | Tier | Value | What it is for |
+|---|---|---|---|
+| `--avatar-radius` | Semantic | `999px`, from `--radius-full` | Identity shape: the header profile mark (.avatar / .profile-mark), the Kind words faces (.kw-face) and the hero widget's four theme marks. Full by default, which on a square box is the same circle those surfaces drew with 50% before. |
+| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. |
+| `--color-border-brand` | Semantic | `#d2ff37`, from `--brand-primary` | The brand-lime outline accent (active selection, link underline, brand ring). Theme-invariant lime, never overridden per theme; the semantic the brand outlines read instead of the raw primitive. |
+| `--color-surface-sunken` | Semantic | `#ececec`; dark `#141416`, from `--neutral-200` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. |
+| `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
+| `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--touch-target-min` | Semantic | `44px` | The smallest pointer target for any control a finger or pointer taps. |
+
 ## Source
 
 - The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `avatar`

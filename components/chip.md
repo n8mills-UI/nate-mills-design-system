@@ -132,6 +132,27 @@ chip:
 | `.chip` | base | sunken fill, mono label | `--chip-bg`, `--chip-border`, `--chip-border-hover`, `--chip-fg`, `--chip-font`, `--chip-font-size`, `--chip-font-weight`, `--chip-gap`, `--chip-line`, `--chip-pad-x`, `--chip-pad-y`, `--chip-radius`, `--font-feature-mono` |
 | `.chip--outline` | modifier | fill drops out for quieter contexts | `--color-text-secondary` |
 
+## Tokens
+
+Every token the classes above read, as data from tokens.json: write `var(--name)`, never the raw value. A component token belongs to one component: change it to restyle that component and nothing else. A semantic token is a shared role; never change one for a single component. The three tiers: [Tokens](../foundations/tokens.md#three-tiers).
+
+| Token | Tier | Value | What it is for |
+|---|---|---|---|
+| `--chip-bg` | Component | `#ececec`; dark `#141416`, from `--color-surface-sunken` | Chip fill at rest (and on active). |
+| `--chip-border` | Component | `#e4e4e7`; dark `#27272a`, from `--color-border` | Chip border at rest. |
+| `--chip-border-hover` | Component | `#d4d4d8`; dark `#3f3f46`, from `--color-border-strong` | Chip border on hover and active. |
+| `--chip-fg` | Component | `#0a0a0b`; dark `#f4f4f5`, from `--color-text-primary` | Chip label and icon colour. |
+| `--chip-font` | Component | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace`, from `--font-mono` | Chip label typeface (JetBrains Mono). |
+| `--chip-font-size` | Component | `0.6875rem`, from `--text-label` | Chip label size. |
+| `--chip-font-weight` | Component | `500`, from `--weight-medium` | Chip label weight. |
+| `--chip-gap` | Component | `8px`, from `--space-200` | Space between a chip's icon and its label. |
+| `--chip-line` | Component | `1.4` | Chip label line height. Component-level literal, sized to the mono label; off the named line scale by design. |
+| `--chip-pad-x` | Component | `10px` | Chip inline (left/right) padding. Component-level literal; sits off the 4px space scale by design (between space-200 and space-300), kept so the live chip is unchanged. |
+| `--chip-pad-y` | Component | `4px`, from `--space-100` | Chip block (top/bottom) padding; 4px. |
+| `--chip-radius` | Component | `999px`, from `--radius-full` | Chip corner radius; full pill. |
+| `--color-text-secondary` | Semantic | `#3f3f46`; dark `#a1a1aa`, from `--neutral-700` | Secondary text: supporting copy one step quieter than text-primary. |
+| `--font-feature-mono` | Semantic | `"zero" 1` | Switches on the slashed zero for every piece of mono text. |
+
 ## Source
 
 - The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `chip`

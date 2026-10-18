@@ -136,6 +136,38 @@ carousel-nav:
 | `.ds-carousel-nav__fill` | element | progress fill | `--bar-radius`, `--cn-rail-fill`, `--duration-slow`, `--ease-spring` |
 | `.ds-carousel-nav__count` | element | mono counter | `--color-text-secondary`, `--font-mono`, `--size-sm`, `--tracking-normal`, `--weight-bold` |
 
+## Tokens
+
+Every token the classes above read, as data from tokens.json: write `var(--name)`, never the raw value. A component token belongs to one component: change it to restyle that component and nothing else. A semantic token is a shared role; never change one for a single component. The three tiers: [Tokens](../foundations/tokens.md#three-tiers).
+
+| Token | Tier | Value | What it is for |
+|---|---|---|---|
+| `--btn-radius` | Component | `999px`, from `--radius-full` | Button corner radius; full pill. |
+| `--cn-glyph` | Component | `24px` | The chevron size, shared by the arrow's box and the glyph inside it. |
+| `--cn-rail-fill` | Component | `#1c1c1f`; dark `#d2ff37`, from `--color-dot-active` | The carousel rail's fill, the active-dot accent. A section band may re-map it. |
+| `--cn-rail-track` | Component | `#e4e4e7`; dark `#27272a`, from `--color-border` | The groove the carousel rail draws behind its fill: a subtle line, not a dot grey, so the fill stands out. A section band may re-map it. |
+| `--bar-radius` | Semantic | `999px`, from `--radius-full` | End-cap rounding for thin bars, rails, tracks, indicators, and capsule strips (progress rails, tab indicators, slider tracks, chart bars, the hero edge widget's pill). Full by definition; it rounds the ends of a strip at any height. |
+| `--border-focus` | Semantic | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
+| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. |
+| `--color-dot-active` | Semantic | `#1c1c1f`; dark `#d2ff37`, from `--color-accent` | The fill on the carousel nav progress rail (.ds-carousel-nav__fill), reached through --cn-rail-fill, which defaults to this token. Renaming the pair is a follow-up (it moves the showcase manifest and the doc tables too), so the job is written here instead. |
+| `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
+| `--color-text-secondary` | Semantic | `#3f3f46`; dark `#a1a1aa`, from `--neutral-700` | Secondary text: supporting copy one step quieter than text-primary. |
+| `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
+| `--duration-slow` | Semantic | `400ms` | Context shift and slide transitions. |
+| `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--ease-spring` | Semantic | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Overshoot and settle, so a move reads as a bounce. Micro-moments only. |
+| `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
+| `--font-mono` | Semantic | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace` | Tabular numbers, code, and eyebrow labels. |
+| `--size-sm` | Semantic | `0.875rem` | 14px. Compact body: footer text, card bullets, dense UI copy. |
+| `--space-100` | Semantic | `4px` | Hairline gap. Icon-to-label, tight inline spacing. |
+| `--space-1100` | Semantic | `192px` | Outsized spacing for full-bleed editorial breaks. |
+| `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
+| `--space-400` | Semantic | `16px` | Base unit. Default gap between related elements; the compact card-padding tier (--card-pad-compact). |
+| `--space-500` | Semantic | `24px` | Medium break. Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
+| `--touch-target-min` | Semantic | `44px` | The smallest pointer target for any control a finger or pointer taps. |
+| `--tracking-normal` | Semantic | `0` | 0. The body default; most text sits here. |
+| `--weight-bold` | Semantic | `700` | 700. Strong emphasis inside body copy. |
+
 ## Source
 
 - The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `carousel-navigation`

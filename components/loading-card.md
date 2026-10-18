@@ -105,6 +105,19 @@ Values in braces, such as `{colors.border}`, are named on the foundation pages, 
 | `.card-skel--title` | modifier | title bar | None |
 | `.card-skel--line` | modifier | body-line bar | None |
 
+## Tokens
+
+Every token the classes above read, as data from tokens.json: write `var(--name)`, never the raw value. A component token belongs to one component: change it to restyle that component and nothing else. A semantic token is a shared role; never change one for a single component. The three tiers: [Tokens](../foundations/tokens.md#three-tiers).
+
+| Token | Tier | Value | What it is for |
+|---|---|---|---|
+| `--brand-ink-rgb` | Semantic | `#1c1c1f`, from `--neutral-850` | Channel form of --brand-ink for ink-at-alpha: rgb(var(--brand-ink-rgb) / 0.65). |
+| `--color-surface-sunken` | Semantic | `#ececec`; dark `#141416`, from `--neutral-200` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. |
+| `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--radius-sm` | Semantic | `8px` | Small radius. The workhorse for inputs and small controls; chips, badges and buttons take the full radius. |
+| `--space-300` | Semantic | `12px` | Medium-tight break. Heading-to-body, compact rows. |
+| `--alpha-200` | Primitive | `0.08` | Hairline: quiet dividers and borders, the --uth-divider weight. Absorbed 0.06, 0.07 and 0.1. |
+
 ## Source
 
 - The whole system as one Design System Doc Spec document: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), where this component is the entry `loading-card`

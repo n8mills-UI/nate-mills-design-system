@@ -34,7 +34,7 @@
             ".btn[aria-disabled=\"true\"]:not(:disabled)"
           ],
           "descendants": [
-            ".feat-cta-corner .btn",
+            ".feat-cta .btn",
             ".btn i",
             ".btn svg",
             ".btn:focus-visible [data-lucide=\"arrow-up-right\"]",

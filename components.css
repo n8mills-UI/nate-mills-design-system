@@ -185,7 +185,7 @@
    thumb argument does not hold and the button just reads broken. The drawer CTA
    joined on 2026-08-23 after doing exactly that, measured at 1155px wide. */
 @media (max-width: 767.98px) {
-  .feat-cta-corner .btn,
+  .feat-cta .btn,
   .dsc-cta,
   .ap2-cta,
   .overlay-cta {

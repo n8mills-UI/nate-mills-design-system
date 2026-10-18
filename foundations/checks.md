@@ -165,3 +165,13 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **WCAG:** 1.3.1 Info and Relationships, A
 - **When it runs:** Every pull request that adds screen-reader text, by hand.
 - **Rules it checks:** [Screen-reader text](accessibility.md#screen-reader-text)
+
+## Values
+
+The tokens this page names, as data from tokens.json: write `var(--name)`, never the raw value. Every token: [Tokens](tokens.md).
+
+| Token | Value | What it is for |
+|---|---|---|
+| `--touch-target-min` | `44px` | The smallest pointer target for any control a finger or pointer taps. |
+| `--btn-sm` | `32px` | Compact: dense cards, toolbars, filters. Clears the WCAG 2.5.8 AA 24px target minimum. |
+| `--touch-target-dot` | `24px` | Carousel-dot hit area (WCAG 2.5.8 AA floor). |

@@ -50,7 +50,15 @@ Default variant: No class: the compact nav below the cards.
 
 ## States
 
-The CSS styles these states: `:active`, `:disabled`, `:focus-visible`, `:hover`.
+| State | What changes | Tokens |
+|---|---|---|
+| `default` | Bare chevron glyphs in the secondary text colour, each with a hidden 44px target. | `--color-text-secondary`, `--touch-target-min` |
+| `hover` | The glyph steps to primary text and grows; the growth is for pointer devices only. | `--color-text-primary` |
+| `focus-visible` | The system ring around the arrow. | `--border-focus`, `--focus-ring-offset` |
+| `active` | The glyph turns primary text and shrinks under the finger. | `--color-text-primary` |
+| `disabled` | The backward chevron at the first card dims and stops taking clicks; it stays visible so the end of the rail reads. | None |
+
+The CSS styles these pseudo-classes: `:active`, `:disabled`, `:focus-visible`, `:hover`.
 
 ## Invalid combinations
 

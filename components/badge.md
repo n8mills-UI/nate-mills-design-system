@@ -41,6 +41,10 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 Available forms: `dot`, `icon`, `plain`. They are child elements, not modifier classes: `.badge` has no modifiers. Default form: `plain`.
 
+## States
+
+No interactive states: a badge is a status and never takes a click or focus.
+
 ## Invalid combinations
 
 Options that must not be used together. Each names the props above.

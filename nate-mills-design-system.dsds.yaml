@@ -1832,7 +1832,7 @@ entries:
   - id: "display.weight"
     kind: "token"
     name: "--display-weight"
-    description: "The single weight every display preset carries (semibold). Display headings are always roman, never italic."
+    description: "The single weight every display preset carries: regular (400), the one weight Anton ships. Asking for more would send Figma looking for an Anton SemiBold that does not exist."
     source: "./tokens.json"
     metadata:
       group: "Type styles"

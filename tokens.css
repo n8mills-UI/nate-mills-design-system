@@ -180,7 +180,7 @@
   --display-stat-num: clamp(2.5rem, 7vw, 5.5rem);
   --display-intro: clamp(1.25rem, 5vw, 1.5rem);
   --display-tight: -0.0176em;
-  --display-weight: var(--weight-semibold);
+  --display-weight: var(--weight-regular);
   --measure: 52ch;
   --btn-sm: 32px;
   --btn-md: var(--touch-target-min);

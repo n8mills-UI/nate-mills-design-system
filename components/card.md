@@ -73,7 +73,15 @@ Default state: No class: normal content.
 
 ## States
 
-The CSS styles these states: `:active`, `:focus-visible`, `:focus-within`, `:hover`.
+| State | What changes | Tokens |
+|---|---|---|
+| `default` | Surface fill, hairline border. | `--card-bg`, `--card-border` |
+| `hover` | Interactive only: the border steps darker and the card lifts slightly on a fine pointer. | `--color-border-strong` |
+| `focus-visible` | Interactive only: the system ring around the card. | `--border-focus` |
+| `active` | Interactive only: the fill steps to the sunken surface while pressed. | `--color-surface-sunken` |
+| `error` | The `.card--error` class: a tinted border, an error-coloured icon and a message in words. Never colour alone. | `--color-feedback-background-error` |
+
+The CSS styles these pseudo-classes: `:active`, `:focus-visible`, `:focus-within`, `:hover`.
 
 ## Invalid combinations
 

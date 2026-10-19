@@ -18,7 +18,7 @@ When building a new page or prototype with this system:
    dots, and the footer. Nowhere else.
 4. For any active or selected state use `{colors.accent}` (theme-aware), not raw lime, so it survives
    the light theme.
-5. Build hierarchy from weight (600 display, 400 body) and scale, not opacity.
+5. Build hierarchy from scale, not opacity. Anton ships one weight (400), so display size does the work; body runs 400 to 600.
 6. Use hairline borders for separation; reach for a shadow only on an overlay or lightbox.
 7. Support both themes: the dark accent is intentionally the lime, and the dark treatment for a dark
    surface is charcoal with lime text, never lime wallpaper.

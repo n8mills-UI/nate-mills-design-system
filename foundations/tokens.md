@@ -71,7 +71,7 @@ Size, weight, line height and tracking for the named styles on the Typography pa
 | Token | Use it for | Value | Source in tokens.json |
 |---|---|---|---|
 | `--display-hero` | Display type at hero scale, fluid 40 to 118px. This site’s own hero headline is a documented exception: it sets its own clamps and runs larger still. | `clamp(2.5rem, 9vw, 7.375rem)` | `display.hero` |
-| `--display-weight` | The single weight every display preset carries (semibold). Display headings are always roman, never italic. | `600` | `display.weight` |
+| `--display-weight` | The single weight every display preset carries: regular (400), the one weight Anton ships. Asking for more would send Figma looking for an Anton SemiBold that does not exist. | `400` | `display.weight` |
 | `--line-display` | Display-grade headings (--text-h1, section h2s). Big text wants the tightest leading. | `1.05` | `line.display` |
 | `--display-tight` | Display tracking. Pairs with every heading above card size, the hero included. | `-0.0176em` | `display.tight` |
 | `--display-section` | Section headings (every section h2). .section-title consumes this; the About headings are a documented exception in sections.css (Hi, I'm Nate opens the section and fills its column; the headline over the story fills its column and stays under 85% of it). | `clamp(min(4.25rem, 19vw), 8.7vw, 7.5rem)` | `display.section` |

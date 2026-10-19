@@ -67,7 +67,15 @@ Default size: No size class: the base `.btn`, 44px high.
 
 ## States
 
-The CSS styles these states: `:active`, `:disabled`, `:focus`, `:focus-visible`, `:hover`.
+| State | What changes | Tokens |
+|---|---|---|
+| `default` | Primary: lime fill, ink label. Secondary and icon: transparent with a grey outline. | `--btn-primary-bg`, `--btn-primary-fg`, `--btn-secondary-fg`, `--btn-secondary-border`, `--btn-icon-border` |
+| `hover` | Primary inverts to an ink fill with a lime label; secondary and icon fill lime with an ink label. Pointer devices only. | `--btn-primary-bg-hover`, `--btn-primary-fg-hover`, `--btn-primary-bg`, `--btn-primary-fg` |
+| `focus-visible` | The system ring outside the border, plus the same fill swap as hover. | `--btn-focus-ring`, `--focus-ring-offset` |
+| `active` | The fill steps to the dimmed lime while pressed. | `--brand-primary-dim` |
+| `disabled` | The whole button dims and stops taking pointer input. A disabled link also gets a strike-through so the state survives greyscale. | None |
+
+The CSS styles these pseudo-classes: `:active`, `:disabled`, `:focus`, `:focus-visible`, `:hover`.
 
 ## Invalid combinations
 

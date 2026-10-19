@@ -34,7 +34,7 @@ typography:
   hero:  # display specimen; a consuming site’s own hero may set bespoke clamps
     family: display
     size: "clamp(2.5rem, 9vw, 7.375rem)"  # --display-hero
-    weight: 600                           # --display-weight
+    weight: 400                           # --display-weight
     lineHeight: 1.05                      # --line-display
     tracking: "-0.0176em"                 # --display-tight
   section-title:  # every section heading (.section-title)
@@ -46,25 +46,25 @@ typography:
   h1:  # document headings outside .section-title
     family: display
     size: "clamp(2.125rem, 5.8vw, 4.5rem)"  # --text-h1
-    weight: 600                             # --display-weight
+    weight: 400                             # --display-weight
     lineHeight: 1.05                        # --line-display
     tracking: "-0.0176em"                   # --display-tight
   h2:  # card titles, sub-heads
     family: display
     size: "clamp(1.375rem, 4vw, 2rem)"  # --text-h2
-    weight: 600                         # --display-weight
+    weight: 400                         # --display-weight
     lineHeight: 1.15                    # --line-heading
     tracking: "-0.02em"                 # --tracking-tight
   card-title:  # large feature-card titles
     family: display
     size: "clamp(1.375rem, 4vw, 2.75rem)"  # --display-card-title
-    weight: 600                            # --display-weight
+    weight: 400                            # --display-weight
     lineHeight: 1.15                       # --line-heading
     tracking: "-0.0176em"                  # --display-tight
   stat-num:  # stat callout numerals
     family: display
     size: "clamp(2.5rem, 7vw, 5.5rem)"  # --display-stat-num
-    weight: 600                         # --display-weight
+    weight: 400                         # --display-weight
     lineHeight: 1.05                    # --line-display
     tracking: "-0.0176em"               # --display-tight
   intro:  # section intro line

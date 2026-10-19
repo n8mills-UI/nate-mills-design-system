@@ -46,6 +46,10 @@ Available bar sizes: `media`, `title`, `line`.
 
 Default bar: None. Required: every `.card-skel` takes one size.
 
+## States
+
+No interactive states: a loading card never takes a click or focus. Its bars shimmer, and stop under Reduce motion.
+
 ## Invalid combinations
 
 Options that must not be used together. Each names the props above.

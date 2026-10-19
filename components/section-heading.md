@@ -49,6 +49,10 @@ Available label variants: `accent`, `center`, `icon`, `row`.
 
 Default label variant: No class: a left-aligned inline label.
 
+## States
+
+No interactive states: a section heading is text and never takes a click or focus.
+
 ## Invalid combinations
 
 Options that must not be used together. Each names the props above.

@@ -1150,6 +1150,13 @@ a.card:focus-visible { text-decoration: none; }
   border-color: var(--color-accent);
   text-decoration: none;
 }
+/* The ring lives here, not only in the page sheet, so the package and
+   design-system.html (which load this file alone) draw the system ring too,
+   as .btn and .ds-carousel-nav__arrow already do (DS AUDIT, 2026-10-20). */
+.link-underline:focus-visible {
+  outline: var(--border-focus);
+  outline-offset: var(--focus-ring-offset);
+}
 
 /* Icon variant: label plus trailing arrow. Held off the base so the prose
    consumer stays a plain inline box and its baseline, and the full stop after

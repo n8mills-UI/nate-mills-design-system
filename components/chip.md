@@ -49,7 +49,9 @@ Default variant: No class: a sunken fill.
 
 ## States
 
-The CSS styles these states: `:hover`.
+No interactive states: a chip is a label and never takes a click or focus.
+
+The CSS styles these pseudo-classes: `:hover`.
 
 ## Invalid combinations
 

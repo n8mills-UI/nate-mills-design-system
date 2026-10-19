@@ -41,7 +41,9 @@ Available variants: none. `.avatar` has one look, a 44px circle, and takes no mo
 
 ## States
 
-The CSS styles these states: `:focus-visible`, `:hover`.
+No interactive states: an avatar is a person and never takes a click or focus. When it sits inside a link, the link owns the states.
+
+The CSS styles these pseudo-classes: `:focus-visible`, `:hover`.
 
 ## Invalid combinations
 

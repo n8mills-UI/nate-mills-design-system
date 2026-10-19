@@ -726,11 +726,13 @@
           ],
           "parts": [],
           "reads": [
+            "--border-focus",
             "--color-accent",
             "--color-border-brand",
             "--color-text-primary",
             "--duration-fast",
             "--ease-default",
+            "--focus-ring-offset",
             "--font-body",
             "--tracking-normal",
             "--weight-semibold"

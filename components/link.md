@@ -51,7 +51,13 @@ Default variant: No class: a standalone underlined link.
 
 ## States
 
-The CSS styles these states: `:focus-visible`, `:hover`.
+| State | What changes | Tokens |
+|---|---|---|
+| `default` | Primary text, semibold, with a brand underline. | `--color-text-primary`, `--color-border-brand` |
+| `hover` | Text and underline turn the accent; the icon variant nudges its arrow toward the corner. | `--color-accent` |
+| `focus-visible` | The system ring, plus the same accent colour as hover. | `--border-focus`, `--focus-ring-offset`, `--color-accent` |
+
+The CSS styles these pseudo-classes: `:focus-visible`, `:hover`.
 
 ## Invalid combinations
 
@@ -134,7 +140,7 @@ link:
 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
-| `.link-underline` | base | base | `--color-accent`, `--color-border-brand`, `--color-text-primary`, `--duration-fast`, `--ease-default`, `--font-body`, `--tracking-normal`, `--weight-semibold` |
+| `.link-underline` | base | base | `--border-focus`, `--color-accent`, `--color-border-brand`, `--color-text-primary`, `--duration-fast`, `--ease-default`, `--focus-ring-offset`, `--font-body`, `--tracking-normal`, `--weight-semibold` |
 | `.link-underline--prose` | modifier | inside body copy | `--color-text-primary` |
 | `.link-underline--icon` | modifier | carries a trailing glyph; give the glyph .icon-size-xs | `--space-200` |
 | `.icon-size-xs` | base | the trailing glyph inside .link-underline--icon: sizes it and nudges it on hover; does nothing elsewhere | None |
@@ -145,11 +151,13 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 
 | Token | Tier | Value | What it is for |
 |---|---|---|---|
+| `--border-focus` | Semantic | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
 | `--color-accent` | Semantic | `#1c1c1f`; dark `#d2ff37`, from `--neutral-850` | The single theme-aware interactive role: ink on light, brand lime on dark. Active and selected states. |
 | `--color-border-brand` | Semantic | `#d2ff37`, from `--brand-primary` | The brand-lime outline accent (active selection, link underline, brand ring). Theme-invariant lime, never overridden per theme; the semantic the brand outlines read instead of the raw primitive. |
 | `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
 | `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
 | `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
 | `--font-body` | Semantic | `"Work Sans", "Work Sans Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif` | Body copy, lists, and buttons. |
 | `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
 | `--tracking-normal` | Semantic | `0` | 0. The body default; most text sits here. |

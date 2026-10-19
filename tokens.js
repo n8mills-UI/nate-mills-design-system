@@ -161,7 +161,7 @@ export const tokens = {
   "display-stat-num": "clamp(2.5rem, 7vw, 5.5rem)",
   "display-intro": "clamp(1.25rem, 5vw, 1.5rem)",
   "display-tight": "-0.0176em",
-  "display-weight": "600",
+  "display-weight": "400",
   "measure": "52ch",
   "btn-sm": "32px",
   "btn-md": "44px",

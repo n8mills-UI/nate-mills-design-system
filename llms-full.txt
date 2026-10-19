@@ -250,7 +250,7 @@ typography:
   hero:  # display specimen; a consuming site’s own hero may set bespoke clamps
     family: display
     size: "clamp(2.5rem, 9vw, 7.375rem)"  # --display-hero
-    weight: 600                           # --display-weight
+    weight: 400                           # --display-weight
     lineHeight: 1.05                      # --line-display
     tracking: "-0.0176em"                 # --display-tight
   section-title:  # every section heading (.section-title)
@@ -262,25 +262,25 @@ typography:
   h1:  # document headings outside .section-title
     family: display
     size: "clamp(2.125rem, 5.8vw, 4.5rem)"  # --text-h1
-    weight: 600                             # --display-weight
+    weight: 400                             # --display-weight
     lineHeight: 1.05                        # --line-display
     tracking: "-0.0176em"                   # --display-tight
   h2:  # card titles, sub-heads
     family: display
     size: "clamp(1.375rem, 4vw, 2rem)"  # --text-h2
-    weight: 600                         # --display-weight
+    weight: 400                         # --display-weight
     lineHeight: 1.15                    # --line-heading
     tracking: "-0.02em"                 # --tracking-tight
   card-title:  # large feature-card titles
     family: display
     size: "clamp(1.375rem, 4vw, 2.75rem)"  # --display-card-title
-    weight: 600                            # --display-weight
+    weight: 400                            # --display-weight
     lineHeight: 1.15                       # --line-heading
     tracking: "-0.0176em"                  # --display-tight
   stat-num:  # stat callout numerals
     family: display
     size: "clamp(2.5rem, 7vw, 5.5rem)"  # --display-stat-num
-    weight: 600                         # --display-weight
+    weight: 400                         # --display-weight
     lineHeight: 1.05                    # --line-display
     tracking: "-0.0176em"               # --display-tight
   intro:  # section intro line
@@ -860,7 +860,7 @@ When building a new page or prototype with this system:
    dots, and the footer. Nowhere else.
 4. For any active or selected state use `{colors.accent}` (theme-aware), not raw lime, so it survives
    the light theme.
-5. Build hierarchy from weight (600 display, 400 body) and scale, not opacity.
+5. Build hierarchy from scale, not opacity. Anton ships one weight (400), so display size does the work; body runs 400 to 600.
 6. Use hairline borders for separation; reach for a shadow only on an overlay or lightbox.
 7. Support both themes: the dark accent is intentionally the lime, and the dark treatment for a dark
    surface is charcoal with lime text, never lime wallpaper.

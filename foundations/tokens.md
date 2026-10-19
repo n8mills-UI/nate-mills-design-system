@@ -46,15 +46,15 @@ The same names in every theme; the dark column shows the value the dark theme gi
 | `--color-focus-ring` | Theme-aware keyboard-focus colour: ink on light, lime on dark. Consumed via border.focus. | `#1c1c1f` | `#d2ff37` | `color.focus-ring` |
 | `--color-link` | Underlined navigational link text: ink on light, lime on dark. Distinct role from accent (Section 10). | `#1c1c1f` | `#d2ff37` | `color.link` |
 | `--color-link-hover` | Link hover colour. | `#0a0a0b` | `#ffffff` | `color.link-hover` |
-| `--color-on-ink-primary` | Primary text on an always-dark slab (88% white). | `rgba(255, 255, 255, 0.88)` | `rgba(255, 255, 255, 0.88)` | `color.on-ink-primary` |
-| `--color-on-ink-secondary` | Secondary text on an always-dark slab (66% white). | `rgba(255, 255, 255, 0.66)` | `rgba(255, 255, 255, 0.66)` | `color.on-ink-secondary` |
-| `--color-on-ink-muted` | Quiet fills and inactive dots on an always-dark slab. Not a text colour. | `rgba(255, 255, 255, 0.4)` | `rgba(255, 255, 255, 0.4)` | `color.on-ink-muted` |
-| `--color-on-ink-border` | Hairline border on an always-dark slab (8% white). | `rgba(255, 255, 255, 0.08)` | `rgba(255, 255, 255, 0.08)` | `color.on-ink-border` |
+| `--color-on-ink-primary` | Primary text on an always-dark slab (88% white). | `rgb(255 255 255 / 0.88)` | `rgb(255 255 255 / 0.88)` | `color.on-ink-primary` |
+| `--color-on-ink-secondary` | Secondary text on an always-dark slab (66% white). | `rgb(255 255 255 / 0.66)` | `rgb(255 255 255 / 0.66)` | `color.on-ink-secondary` |
+| `--color-on-ink-muted` | Quiet fills and inactive dots on an always-dark slab. Not a text colour. | `rgb(255 255 255 / 0.4)` | `rgb(255 255 255 / 0.4)` | `color.on-ink-muted` |
+| `--color-on-ink-border` | Hairline border on an always-dark slab (8% white). | `rgb(255 255 255 / 0.08)` | `rgb(255 255 255 / 0.08)` | `color.on-ink-border` |
 | `--color-feedback-background-error` | Error message backgrounds: deep red on light, soft red on dark. | `#961010` | `#ff8f8f` | `color.feedback-background-error` |
 | `--color-on-feedback-error` | Contrast pair for content sitting on feedback-background-error: white on the deep light-theme red, near-black red on the soft dark-theme red. 8.7:1 light, 8.9:1 dark. | `#ffffff` | `#2a0000` | `color.on-feedback-error` |
-| `--color-overlay-soft` | Soft scrim behind floating chrome (35% black). | `rgba(0, 0, 0, 0.35)` | `rgba(0, 0, 0, 0.35)` | `color.overlay-soft` |
-| `--color-overlay-base` | Standard modal and lightbox scrim (62% black). | `rgba(0, 0, 0, 0.62)` | `rgba(0, 0, 0, 0.62)` | `color.overlay-base` |
-| `--color-overlay-strong` | Heavy scrim for maximum content isolation (88% black). | `rgba(0, 0, 0, 0.88)` | `rgba(0, 0, 0, 0.88)` | `color.overlay-strong` |
+| `--color-overlay-soft` | Soft scrim behind floating chrome (35% black). | `rgb(0 0 0 / 0.35)` | `rgb(0 0 0 / 0.35)` | `color.overlay-soft` |
+| `--color-overlay-base` | Standard modal and lightbox scrim (62% black). | `rgb(0 0 0 / 0.62)` | `rgb(0 0 0 / 0.62)` | `color.overlay-base` |
+| `--color-overlay-strong` | Heavy scrim for maximum content isolation (88% black). | `rgb(0 0 0 / 0.88)` | `rgb(0 0 0 / 0.88)` | `color.overlay-strong` |
 
 ## Font families
 

@@ -209,10 +209,10 @@ colors:
   link-hover: "#0a0a0b"                                                         # --color-link-hover
 
   # Text on always-dark slabs (theme-invariant)
-  on-ink-primary: "rgba(255, 255, 255, 0.88)"                                   # --color-on-ink-primary
-  on-ink-secondary: "rgba(255, 255, 255, 0.66)"                                 # --color-on-ink-secondary
-  on-ink-muted: "rgba(255, 255, 255, 0.4)"                                      # --color-on-ink-muted
-  on-ink-border: "rgba(255, 255, 255, 0.08)"                                    # --color-on-ink-border
+  on-ink-primary: "rgb(255 255 255 / 0.88)"                                     # --color-on-ink-primary
+  on-ink-secondary: "rgb(255 255 255 / 0.66)"                                   # --color-on-ink-secondary
+  on-ink-muted: "rgb(255 255 255 / 0.4)"                                        # --color-on-ink-muted
+  on-ink-border: "rgb(255 255 255 / 0.08)"                                      # --color-on-ink-border
 
   # Dark theme semantics (data-theme="dark" or OS dark)
   dark-bg: "#0a0a0b"                                                            # --color-bg (dark theme)
@@ -234,9 +234,9 @@ colors:
   dark-on-feedback-error: "#2a0000"                                             # --color-on-feedback-error (dark theme)
 
   # Scrims
-  overlay-soft: "rgba(0, 0, 0, 0.35)"                                           # --color-overlay-soft
-  overlay-base: "rgba(0, 0, 0, 0.62)"                                           # --color-overlay-base
-  overlay-strong: "rgba(0, 0, 0, 0.88)"                                         # --color-overlay-strong
+  overlay-soft: "rgb(0 0 0 / 0.35)"                                             # --color-overlay-soft
+  overlay-base: "rgb(0 0 0 / 0.62)"                                             # --color-overlay-base
+  overlay-strong: "rgb(0 0 0 / 0.88)"                                           # --color-overlay-strong
   # DESIGN:colors:end
 
 typography:

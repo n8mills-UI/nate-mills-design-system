@@ -194,8 +194,8 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--card-bg` | Component | `#ffffff`; dark `#1c1c1f`, from `--color-surface` | Card surface fill on light slabs. |
 | `--card-border` | Component | `1px solid var(--color-border)`, from `--border-hairline` | Card edge; 1px hairline that follows the theme border colour. |
 | `--card-dark-bg` | Component | `#1c1c1f`, from `--brand-ink` | Card surface fill on dark slabs (.card--dark). |
-| `--card-dark-border` | Component | `rgba(255, 255, 255, 0.08)`, from `--color-on-ink-border` | Card edge on dark slabs. |
-| `--card-dark-fg` | Component | `rgba(255, 255, 255, 0.88)`, from `--color-on-ink-primary` | Card body text on dark slabs. |
+| `--card-dark-border` | Component | `rgb(255 255 255 / 0.08)`, from `--color-on-ink-border` | Card edge on dark slabs. |
+| `--card-dark-fg` | Component | `rgb(255 255 255 / 0.88)`, from `--color-on-ink-primary` | Card body text on dark slabs. |
 | `--card-fg` | Component | `#0a0a0b`; dark `#f4f4f5`, from `--color-text-primary` | Card body text. |
 | `--card-padding` | Component | `24px`, from `--card-pad-standard` | Card content inset; the standard 24px card padding. |
 | `--card-radius` | Component | `20px`, from `--radius-xl` | Card corner radius; the default for content cards and modals. Every card family on the site reads this one token: awards and training used to sit at radius.lg while the featured-work and kind-words cards hardcoded radius.xl, so four card families shipped two different corners. |

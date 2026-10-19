@@ -229,7 +229,6 @@
   --chip-fg: var(--color-text-primary);
   --chip-bg: var(--color-surface-sunken);
   --chip-border: var(--color-border);
-  --chip-border-hover: var(--color-border-strong);
   --badge-pad-x: var(--space-300);
   --badge-pad-y: var(--space-100);
   --badge-gap: var(--space-200);
@@ -336,6 +335,7 @@
   --hero-gel-fill: #8cb2f0;
   --hero-light-warm: radial-gradient(closest-side, color-mix(in srgb, var(--hero-gel-key) 62%, transparent) 0%, color-mix(in srgb, var(--hero-gel-key) 61.2%, transparent) 6.25%, color-mix(in srgb, var(--hero-gel-key) 58.8%, transparent) 12.5%, color-mix(in srgb, var(--hero-gel-key) 55.1%, transparent) 18.75%, color-mix(in srgb, var(--hero-gel-key) 50.1%, transparent) 25%, color-mix(in srgb, var(--hero-gel-key) 44.2%, transparent) 31.25%, color-mix(in srgb, var(--hero-gel-key) 37.7%, transparent) 37.5%, color-mix(in srgb, var(--hero-gel-key) 30.9%, transparent) 43.75%, color-mix(in srgb, var(--hero-gel-key) 24.3%, transparent) 50%, color-mix(in srgb, var(--hero-gel-key) 18.1%, transparent) 56.25%, color-mix(in srgb, var(--hero-gel-key) 12.7%, transparent) 62.5%, color-mix(in srgb, var(--hero-gel-key) 8.1%, transparent) 68.75%, color-mix(in srgb, var(--hero-gel-key) 4.6%, transparent) 75%, color-mix(in srgb, var(--hero-gel-key) 2.2%, transparent) 81.25%, color-mix(in srgb, var(--hero-gel-key) 0.8%, transparent) 87.5%, color-mix(in srgb, var(--hero-gel-key) 0.1%, transparent) 93.75%, transparent 100%);
   --hero-light-fill: radial-gradient(closest-side, color-mix(in srgb, var(--hero-gel-fill) 22%, transparent) 0%, color-mix(in srgb, var(--hero-gel-fill) 21.8%, transparent) 6.25%, color-mix(in srgb, var(--hero-gel-fill) 21.2%, transparent) 12.5%, color-mix(in srgb, var(--hero-gel-fill) 20.1%, transparent) 18.75%, color-mix(in srgb, var(--hero-gel-fill) 18.8%, transparent) 25%, color-mix(in srgb, var(--hero-gel-fill) 17.1%, transparent) 31.25%, color-mix(in srgb, var(--hero-gel-fill) 15.2%, transparent) 37.5%, color-mix(in srgb, var(--hero-gel-fill) 13.1%, transparent) 43.75%, color-mix(in srgb, var(--hero-gel-fill) 11%, transparent) 50%, color-mix(in srgb, var(--hero-gel-fill) 8.9%, transparent) 56.25%, color-mix(in srgb, var(--hero-gel-fill) 6.8%, transparent) 62.5%, color-mix(in srgb, var(--hero-gel-fill) 4.9%, transparent) 68.75%, color-mix(in srgb, var(--hero-gel-fill) 3.2%, transparent) 75%, color-mix(in srgb, var(--hero-gel-fill) 1.9%, transparent) 81.25%, color-mix(in srgb, var(--hero-gel-fill) 0.8%, transparent) 87.5%, color-mix(in srgb, var(--hero-gel-fill) 0.2%, transparent) 93.75%, transparent 100%);
+  --opacity-disabled: 0.45;
   --alpha-100: 0.04;
   --alpha-200: 0.08;
   --alpha-300: 0.12;
@@ -487,7 +487,6 @@
   --chip-fg: var(--color-text-primary);
   --chip-bg: var(--color-surface-sunken);
   --chip-border: var(--color-border);
-  --chip-border-hover: var(--color-border-strong);
   --badge-fg: var(--color-text-secondary);
   --badge-border: var(--color-border);
   --border-hairline: 1px solid var(--color-border);

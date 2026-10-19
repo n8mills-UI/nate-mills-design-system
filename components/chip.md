@@ -51,8 +51,6 @@ Default variant: No class: a sunken fill.
 
 No interactive states: a chip is a label and never takes a click or focus.
 
-The CSS styles these pseudo-classes: `:hover`.
-
 ## Invalid combinations
 
 Options that must not be used together. Each names the props above.
@@ -131,7 +129,7 @@ chip:
 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
-| `.chip` | base | sunken fill, mono label | `--chip-bg`, `--chip-border`, `--chip-border-hover`, `--chip-fg`, `--chip-font`, `--chip-font-size`, `--chip-font-weight`, `--chip-gap`, `--chip-line`, `--chip-pad-x`, `--chip-pad-y`, `--chip-radius`, `--font-feature-mono` |
+| `.chip` | base | sunken fill, mono label | `--chip-bg`, `--chip-border`, `--chip-fg`, `--chip-font`, `--chip-font-size`, `--chip-font-weight`, `--chip-gap`, `--chip-line`, `--chip-pad-x`, `--chip-pad-y`, `--chip-radius`, `--font-feature-mono` |
 | `.chip--outline` | modifier | fill drops out for quieter contexts | `--color-text-secondary` |
 
 ## Tokens
@@ -142,7 +140,6 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 |---|---|---|---|
 | `--chip-bg` | Component | `#ececec`; dark `#141416`, from `--color-surface-sunken` | Chip fill at rest (and on active). |
 | `--chip-border` | Component | `#e4e4e7`; dark `#27272a`, from `--color-border` | Chip border at rest. |
-| `--chip-border-hover` | Component | `#d4d4d8`; dark `#3f3f46`, from `--color-border-strong` | Chip border on hover and active. |
 | `--chip-fg` | Component | `#0a0a0b`; dark `#f4f4f5`, from `--color-text-primary` | Chip label and icon colour. |
 | `--chip-font` | Component | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace`, from `--font-mono` | Chip label typeface (JetBrains Mono). |
 | `--chip-font-size` | Component | `0.6875rem`, from `--text-label` | Chip label size. |

@@ -179,7 +179,7 @@ card-dark:
 |---|---|---|---|
 | `.card` | base | base; its heading takes the level of where the card sits (h3 under a section h2) | `--card-bg`, `--card-border`, `--card-fg`, `--card-padding`, `--card-radius` |
 | `.card--dark` | modifier | on an always-dark slab; switches to the on-ink-* text family | `--card-dark-bg`, `--card-dark-border`, `--card-dark-fg` |
-| `.card--interactive` | modifier | THE clickable-card hover: border strengthens and lifts, no fill | `--border-focus`, `--color-border-strong`, `--color-surface-sunken`, `--duration-base`, `--ease-default` |
+| `.card--interactive` | modifier | THE clickable-card hover: border strengthens and lifts, no fill | `--border-focus`, `--color-border-strong`, `--color-surface-sunken`, `--duration-base`, `--ease-default`, `--focus-ring-offset` |
 | `.card--compact` | modifier | 16px padding | `--card-pad-compact` |
 | `.card--spacious` | modifier | 32px padding | `--card-pad-spacious` |
 | `.card--empty` | modifier | centred empty state | `--space-200` |
@@ -208,6 +208,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--color-surface-sunken` | Semantic | `#ececec`; dark `#141416`, from `--neutral-200` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. |
 | `--duration-base` | Semantic | `220ms` | Reveal, modal, and swap transitions. |
 | `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
 | `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
 
 ## Source

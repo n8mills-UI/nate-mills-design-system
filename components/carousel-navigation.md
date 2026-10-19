@@ -56,7 +56,7 @@ Default variant: No class: the compact nav below the cards.
 | `hover` | The glyph steps to primary text and grows; the growth is for pointer devices only. | `--color-text-primary` |
 | `focus-visible` | The system ring around the arrow. | `--border-focus`, `--focus-ring-offset` |
 | `active` | The glyph turns primary text and shrinks under the finger. | `--color-text-primary` |
-| `disabled` | The backward chevron at the first card dims and stops taking clicks; it stays visible so the end of the rail reads. | None |
+| `disabled` | The backward chevron at the first card dims and stops taking clicks; it stays visible so the end of the rail reads. | `--opacity-disabled` |
 
 The CSS styles these pseudo-classes: `:active`, `:disabled`, `:focus-visible`, `:hover`.
 
@@ -136,10 +136,10 @@ carousel-nav:
 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
-| `.ds-carousel-nav` | base | wrapper | `--color-border`, `--color-dot-active`, `--space-400`, `--space-500` |
+| `.ds-carousel-nav` | base | wrapper | `--color-border`, `--color-dot-active`, `--size-xl`, `--space-400`, `--space-500` |
 | `.ds-carousel-nav--full` | modifier | full-width rail | `--space-400` |
 | `.ds-carousel-nav__rail` | element | the track | `--bar-radius`, `--cn-rail-track`, `--space-100`, `--space-1100` |
-| `.ds-carousel-nav__arrow` | element | prev / next | `--border-focus`, `--btn-radius`, `--cn-glyph`, `--color-text-primary`, `--color-text-secondary`, `--duration-fast`, `--ease-default`, `--focus-ring-offset`, `--touch-target-min` |
+| `.ds-carousel-nav__arrow` | element | prev / next | `--border-focus`, `--btn-radius`, `--cn-glyph`, `--color-text-primary`, `--color-text-secondary`, `--duration-fast`, `--ease-default`, `--focus-ring-offset`, `--opacity-disabled`, `--touch-target-min` |
 | `.ds-carousel-nav__pager` | element | groups the prev / next chevrons around the counter | `--space-200` |
 | `.ds-carousel-nav__fill` | element | progress fill | `--bar-radius`, `--cn-rail-fill`, `--duration-slow`, `--ease-spring` |
 | `.ds-carousel-nav__count` | element | mono counter | `--color-text-secondary`, `--font-mono`, `--size-sm`, `--tracking-normal`, `--weight-bold` |
@@ -151,7 +151,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | Token | Tier | Value | What it is for |
 |---|---|---|---|
 | `--btn-radius` | Component | `999px`, from `--radius-full` | Button corner radius; full pill. |
-| `--cn-glyph` | Component | `24px` | The chevron size, shared by the arrow's box and the glyph inside it. |
+| `--cn-glyph` | Component | `1.5rem`, from `--size-xl` | The chevron size, shared by the arrow's box and the glyph inside it. |
 | `--cn-rail-fill` | Component | `#1c1c1f`; dark `#d2ff37`, from `--color-dot-active` | The carousel rail's fill, the active-dot accent. A section band may re-map it. |
 | `--cn-rail-track` | Component | `#e4e4e7`; dark `#27272a`, from `--color-border` | The groove the carousel rail draws behind its fill: a subtle line, not a dot grey, so the fill stands out. A section band may re-map it. |
 | `--bar-radius` | Semantic | `999px`, from `--radius-full` | End-cap rounding for thin bars, rails, tracks, indicators, and capsule strips (progress rails, tab indicators, slider tracks, chart bars, the hero edge widget's pill). Full by definition; it rounds the ends of a strip at any height. |
@@ -166,7 +166,9 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--ease-spring` | Semantic | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Overshoot and settle, so a move reads as a bounce. Micro-moments only. |
 | `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
 | `--font-mono` | Semantic | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace` | Tabular numbers, code, and eyebrow labels. |
+| `--opacity-disabled` | Semantic | `0.45` | A disabled control, dimmed as one piece and still findable. One value for every component. |
 | `--size-sm` | Semantic | `0.875rem` | 14px. Compact body: footer text, card bullets, dense UI copy. |
+| `--size-xl` | Semantic | `1.5rem` | 24px. Modal and tile titles. |
 | `--space-100` | Semantic | `4px` | Hairline gap. Icon-to-label, tight inline spacing. |
 | `--space-1100` | Semantic | `192px` | Outsized spacing for full-bleed editorial breaks. |
 | `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |

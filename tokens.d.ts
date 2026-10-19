@@ -210,7 +210,6 @@ export interface DesignTokens {
   "chip-fg": string;
   "chip-bg": string;
   "chip-border": string;
-  "chip-border-hover": string;
   "badge-pad-x": string;
   "badge-pad-y": string;
   "badge-gap": string;
@@ -317,6 +316,7 @@ export interface DesignTokens {
   "hero-gel-fill": string;
   "hero-light-warm": string;
   "hero-light-fill": string;
+  "opacity-disabled": string;
   "alpha-100": string;
   "alpha-200": string;
   "alpha-300": string;

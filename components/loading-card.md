@@ -104,7 +104,7 @@ Values in braces, such as `{colors.border}`, are named on the foundation pages, 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
 | `.card--loading` | modifier | skeleton state; fill it with .card-skel bars or it is an empty box | `--space-300` |
-| `.card-skel` | base | one skeleton bar inside .card--loading; pair it with a size below | `--alpha-200`, `--brand-ink-rgb`, `--color-surface-sunken`, `--ease-default`, `--radius-sm` |
+| `.card-skel` | base | one skeleton bar inside .card--loading; pair it with a size below | `--alpha-200`, `--brand-ink-rgb`, `--color-surface-sunken`, `--duration-expressive`, `--ease-default`, `--radius-sm` |
 | `.card-skel--media` | modifier | media-block bar | None |
 | `.card-skel--title` | modifier | title bar | None |
 | `.card-skel--line` | modifier | body-line bar | None |
@@ -117,6 +117,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 |---|---|---|---|
 | `--brand-ink-rgb` | Semantic | `#1c1c1f`, from `--neutral-850` | Channel form of --brand-ink for ink-at-alpha: rgb(var(--brand-ink-rgb) / 0.65). |
 | `--color-surface-sunken` | Semantic | `#ececec`; dark `#141416`, from `--neutral-200` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. |
+| `--duration-expressive` | Semantic | `1300ms` | The slow, cinematic entrance for one large hero moment. |
 | `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
 | `--radius-sm` | Semantic | `8px` | Small radius. The workhorse for inputs and small controls; chips, badges and buttons take the full radius. |
 | `--space-300` | Semantic | `12px` | Medium-tight break. Heading-to-body, compact rows. |

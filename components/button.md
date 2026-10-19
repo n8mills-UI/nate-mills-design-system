@@ -73,7 +73,7 @@ Default size: No size class: the base `.btn`, 44px high.
 | `hover` | Primary inverts to an ink fill with a lime label; secondary and icon fill lime with an ink label. Pointer devices only. | `--btn-primary-bg-hover`, `--btn-primary-fg-hover`, `--btn-primary-bg`, `--btn-primary-fg` |
 | `focus-visible` | The system ring outside the border, plus the same fill swap as hover. | `--btn-focus-ring`, `--focus-ring-offset` |
 | `active` | The fill steps to the dimmed lime while pressed. | `--brand-primary-dim` |
-| `disabled` | The whole button dims and stops taking pointer input. A disabled link also gets a strike-through so the state survives greyscale. | None |
+| `disabled` | The whole button dims and stops taking pointer input. A disabled link also gets a strike-through so the state survives greyscale. | `--opacity-disabled` |
 
 The CSS styles these pseudo-classes: `:active`, `:disabled`, `:focus`, `:focus-visible`, `:hover`.
 
@@ -193,7 +193,7 @@ button-icon:
 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
-| `.btn` | base | base; always pair with a variant | `--btn-focus-ring`, `--btn-font`, `--btn-font-size`, `--btn-font-weight`, `--btn-gap`, `--btn-pad-x`, `--btn-pad-y`, `--btn-radius`, `--btn-transition`, `--focus-ring-offset`, `--touch-target-min` |
+| `.btn` | base | base; always pair with a variant | `--btn-focus-ring`, `--btn-font`, `--btn-font-size`, `--btn-font-weight`, `--btn-gap`, `--btn-pad-x`, `--btn-pad-y`, `--btn-radius`, `--btn-transition`, `--focus-ring-offset`, `--opacity-disabled`, `--touch-target-min` |
 | `.btn--primary` | modifier | lime fill, ink label; inverts on hover | `--brand-ink`, `--brand-primary-dim`, `--btn-primary-bg`, `--btn-primary-bg-hover`, `--btn-primary-border`, `--btn-primary-fg`, `--btn-primary-fg-hover` |
 | `.btn--secondary` | modifier | transparent, border-grey outline (stronger grey in dark); fills lime on hover | `--brand-primary-dim`, `--btn-primary-bg`, `--btn-primary-border`, `--btn-primary-fg`, `--btn-secondary-border`, `--btn-secondary-fg` |
 | `.btn--icon` | modifier | the one canonical icon button: 44px circle, never a labelled pill | `--brand-primary-dim`, `--btn-icon-border`, `--btn-icon-fg`, `--btn-lg`, `--btn-md`, `--btn-primary-bg`, `--btn-primary-border`, `--btn-primary-fg`, `--btn-radius`, `--btn-sm`, `--touch-target-min` |
@@ -231,6 +231,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--brand-ink` | Semantic | `#1c1c1f`, from `--neutral-850` | Fixed, theme-invariant brand ink. The always-dark bed, and the dark foreground on a fixed lime or static-white bed. |
 | `--brand-primary-dim` | Semantic | `#b8e030`, from `--lime-600` | Hover-dim step of the brand lime (lime.600). |
 | `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
+| `--opacity-disabled` | Semantic | `0.45` | A disabled control, dimmed as one piece and still findable. One value for every component. |
 | `--size-base` | Semantic | `1rem` | 16px. The body stop; --text-body resolves here. |
 | `--size-sm` | Semantic | `0.875rem` | 14px. Compact body: footer text, card bullets, dense UI copy. |
 | `--size-xs` | Semantic | `0.75rem` | 12px. Captions, footnotes, fine print; --text-caption resolves here. |

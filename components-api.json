@@ -69,6 +69,7 @@
             "--btn-radius",
             "--btn-transition",
             "--focus-ring-offset",
+            "--opacity-disabled",
             "--touch-target-min"
           ],
           "sets": []
@@ -299,7 +300,8 @@
             "--color-border-strong",
             "--color-surface-sunken",
             "--duration-base",
-            "--ease-default"
+            "--ease-default",
+            "--focus-ring-offset"
           ],
           "sets": []
         },
@@ -402,6 +404,7 @@
             "--alpha-200",
             "--brand-ink-rgb",
             "--color-surface-sunken",
+            "--duration-expressive",
             "--ease-default",
             "--radius-sm"
           ],
@@ -459,8 +462,7 @@
           "kind": "base",
           "note": "sunken fill, mono label",
           "selectors": [
-            ".chip",
-            ".chip:hover"
+            ".chip"
           ],
           "descendants": [
             ".chip i[data-lucide]",
@@ -470,14 +472,11 @@
             ".chip .chip-icon > img",
             ".chip .chip-icon > svg"
           ],
-          "states": [
-            "hover"
-          ],
+          "states": [],
           "parts": [],
           "reads": [
             "--chip-bg",
             "--chip-border",
-            "--chip-border-hover",
             "--chip-fg",
             "--chip-font",
             "--chip-font-size",
@@ -819,6 +818,7 @@
           "reads": [
             "--color-border",
             "--color-dot-active",
+            "--size-xl",
             "--space-400",
             "--space-500"
           ],
@@ -899,6 +899,7 @@
             "--duration-fast",
             "--ease-default",
             "--focus-ring-offset",
+            "--opacity-disabled",
             "--touch-target-min"
           ],
           "sets": []
@@ -969,25 +970,17 @@
           "kind": "base",
           "note": "round portrait",
           "selectors": [
-            ".avatar",
-            ".avatar:hover",
-            ".avatar:focus-visible"
+            ".avatar"
           ],
           "descendants": [
             ".avatar img"
           ],
-          "states": [
-            "focus-visible",
-            "hover"
-          ],
+          "states": [],
           "parts": [],
           "reads": [
             "--avatar-radius",
             "--color-border",
-            "--color-border-brand",
             "--color-surface-sunken",
-            "--duration-fast",
-            "--ease-default",
             "--touch-target-min"
           ],
           "sets": []

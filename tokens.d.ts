@@ -198,6 +198,7 @@ export interface DesignTokens {
   "card-dark-bg": string;
   "card-dark-fg": string;
   "card-dark-border": string;
+  "tab-compact-min-h": string;
   "chip-pad-x": string;
   "chip-pad-y": string;
   "chip-gap": string;

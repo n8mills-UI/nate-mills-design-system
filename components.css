@@ -1195,6 +1195,68 @@ a.card:focus-visible { text-decoration: none; }
   white-space: nowrap;
 }
 
+/* -----------------------------------------------------------------------------
+   Tabs
+   ---
+   One row of tabs that switches panels in the same place (W3C APG tabs
+   pattern: role="tablist" on .tabs, role="tab" on each .tab, role="tabpanel"
+   on each panel, aria-selected on the chosen tab). Two sizes, one behaviour:
+     .tabs              base row; never used without a size
+     .tabs--lg          display-face tabs that head a whole view (the Component
+                        Playground); the selected tab is marked by a bar the
+                        page draws, so the tab itself only changes colour
+     .tabs--compact     mono caption tabs inside a card (Tokens / CSS / JSON);
+                        each selected tab draws its own 2px accent underline
+     .tab               one tab: a <button type="button">
+   States: rest is tertiary text; hover and selected are primary text;
+   :focus-visible draws the system ring INSET (-2px, the carousel-tab rule in
+   the Button notes above), so a ring on a tab in a clipped, scrolling row is
+   never shaved; forced-colors marks the selected tab with Highlight. Added
+   2026-10-21 (drift audit): the two tab bars on the design-system view shared
+   one keyboard script but wrote their look twice, with focus offsets of -2px
+   and -3px. Slide pickers are not tabs: a carousel's picker is a group of
+   buttons (.ds-carousel-nav, APG grouped carousel).
+   ----------------------------------------------------------------------------- */
+.tabs { display: flex; }
+.tab {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+.tab:hover,
+.tab[aria-selected="true"] { color: var(--color-text-primary); }
+.tab:focus-visible { outline: var(--border-focus); outline-offset: -2px; border-radius: var(--radius-sm); }
+.tabs--lg .tab {
+  position: relative;
+  white-space: nowrap; /* one scrolling row; the page fades the cut edge */
+  padding: var(--space-200) var(--space-400) var(--space-400);
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--size-lg);
+}
+.tabs--compact .tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-200);
+  min-height: var(--tab-compact-min-h);
+  margin-bottom: -1px;
+  padding: 0 var(--space-400);
+  border-bottom: 2px solid transparent;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+}
+/* Theme-aware accent (ink on light, lime on dark): brand lime fails contrast on light. */
+.tabs--compact .tab[aria-selected="true"] { border-bottom-color: var(--color-accent); }
+@media (forced-colors: active) {
+  /* The selected tab carries its state in author colour alone, which forced
+     colours replace (audit M-01); Highlight / HighlightText is the system pair. */
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- system colour keywords are the whole point under forced colours */
+  .tab[aria-selected="true"] { background: Highlight; color: HighlightText; }
+}
+
 /* ============================================================
    Mobile carousel component (.ds-carousel)
    Opt in by adding `ds-carousel` + `data-ds-carousel` to a grid

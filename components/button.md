@@ -25,6 +25,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 - **[Card](card.md):** A card with one destination becomes that link itself. A card with several actions stays static and puts a Button on each action.
 - **[Carousel navigation](carousel-navigation.md):** Paging a carousel is the bare chevrons of Carousel navigation. A labelled action under a carousel is a Button.
 - **[Avatar](avatar.md):** Both are circles. An avatar is a person and never acts; an icon button is a control.
+- **[Tabs](tabs.md):** A Button runs an action once; a tab selects a panel and stays selected.
 
 ## How to use
 

@@ -102,6 +102,15 @@ Rules for using it:
 | `.link-underline--icon` | carries a trailing glyph; give the glyph .icon-size-xs |
 | `.icon-size-xs` | the trailing glyph inside .link-underline--icon: sizes it and nudges it on hover; does nothing elsewhere |
 
+**Tabs:** Swap panels in place.
+
+| Class | Use |
+| --- | --- |
+| `.tabs` | the row; role="tablist" |
+| `.tabs--lg` | display-face tabs that head a whole view |
+| `.tabs--compact` | mono caption tabs inside a card, each with its own underline |
+| `.tab` | one tab: a <button type="button" role="tab"> |
+
 **Carousel navigation:** Bare chevrons plus a mono counter on a rail BELOW the cards. One nav, site-wide.
 
 | Class | Use |

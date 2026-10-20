@@ -802,6 +802,82 @@
       ]
     },
     {
+      "name": "Tabs",
+      "note": "Swap panels in place.",
+      "classes": [
+        {
+          "name": "tabs",
+          "kind": "base",
+          "note": "the row; role=\"tablist\"",
+          "selectors": [
+            ".tabs"
+          ],
+          "descendants": [],
+          "states": [],
+          "parts": [],
+          "reads": [],
+          "sets": []
+        },
+        {
+          "name": "tabs--lg",
+          "kind": "modifier",
+          "note": "display-face tabs that head a whole view",
+          "selectors": [],
+          "descendants": [
+            ".tabs--lg .tab"
+          ],
+          "states": [],
+          "parts": [],
+          "reads": [],
+          "sets": []
+        },
+        {
+          "name": "tabs--compact",
+          "kind": "modifier",
+          "note": "mono caption tabs inside a card, each with its own underline",
+          "selectors": [],
+          "descendants": [
+            ".tabs--compact .tab",
+            ".tabs--compact .tab[aria-selected=\"true\"]"
+          ],
+          "states": [],
+          "parts": [],
+          "reads": [],
+          "sets": []
+        },
+        {
+          "name": "tab",
+          "kind": "base",
+          "note": "one tab: a <button type=\"button\" role=\"tab\">",
+          "selectors": [
+            ".tab",
+            ".tab:hover",
+            ".tab[aria-selected=\"true\"]",
+            ".tab:focus-visible"
+          ],
+          "descendants": [
+            ".tabs--lg .tab",
+            ".tabs--compact .tab",
+            ".tabs--compact .tab[aria-selected=\"true\"]"
+          ],
+          "states": [
+            "focus-visible",
+            "hover"
+          ],
+          "parts": [],
+          "reads": [
+            "--border-focus",
+            "--color-text-primary",
+            "--color-text-tertiary",
+            "--duration-fast",
+            "--ease-default",
+            "--radius-sm"
+          ],
+          "sets": []
+        }
+      ]
+    },
+    {
       "name": "Carousel navigation",
       "note": "Bare chevrons plus a mono counter on a rail BELOW the cards. One nav, site-wide.",
       "classes": [

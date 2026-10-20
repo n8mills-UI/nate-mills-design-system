@@ -217,6 +217,7 @@
   --card-dark-bg: var(--brand-ink);
   --card-dark-fg: var(--color-on-ink-primary);
   --card-dark-border: var(--color-on-ink-border);
+  --tab-compact-min-h: var(--space-700);
   --chip-pad-x: 10px;
   --chip-pad-y: var(--space-100);
   --chip-gap: var(--space-200);

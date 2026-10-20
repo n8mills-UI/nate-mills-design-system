@@ -2,7 +2,7 @@
 
 # Components
 
-> Every component in the Nate Mills Design System: 9 components, 43 classes. This list and the helper classes under it are the whole inventory; anything not on them is not part of the system.
+> Every component in the Nate Mills Design System: 10 components, 47 classes. This list and the helper classes under it are the whole inventory; anything not on them is not part of the system.
 
 The system is a CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, and its props are those classes and attributes. Link the stylesheets as [Getting started](foundations/getting-started.md) shows. The same facts as data: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), one Design System Doc Spec 0.20.0 document with every component and token, and [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json), the class API.
 
@@ -17,6 +17,7 @@ The system is a CSS class API, not a JavaScript component library: each componen
 | [Badge](components/badge.md) | A read-only status or count pill: a hairline outline, a word, and an optional lime dot or glyph. | `.badge`, `.badge__dot` | No |
 | [Section heading](components/section-heading.md) | The heading block every section opens with: a display title that draws its own brand period, an optional intro line, and small mono labels for sub-sections. | `.section-head`, `.section-label`, `.section-label--accent`, `.section-label--center`, `.section-label--icon`, `.section-label--row`, `.section-title`, `.section-subtitle` | No |
 | [Link](components/link.md) | Words that take you somewhere, underlined with a border so the line colours and animates on its own. | `.link-underline`, `.link-underline--prose`, `.link-underline--icon`, `.icon-size-xs` | Yes |
+| [Tabs](components/tabs.md) | One row of tabs that switches panels in the same place: large tabs that head a view, compact tabs inside a card. | `.tabs`, `.tabs--lg`, `.tabs--compact`, `.tab` | Yes |
 | [Carousel navigation](components/carousel-navigation.md) | The one pager for every carousel: a progress rail, bare chevrons around a mono counter, sitting below the cards. | `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__rail`, `.ds-carousel-nav__arrow`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__fill`, `.ds-carousel-nav__count` | Yes |
 | [Avatar](components/avatar.md) | A round portrait at the touch-target size. | `.avatar` | No |
 

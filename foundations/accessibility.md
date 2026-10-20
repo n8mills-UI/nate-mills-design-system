@@ -69,6 +69,15 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 | MUST | Show the focus ring on keyboard focus. | [Automated: Focus-ring gate](checks.md#focus-ring-gate) |
 | MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
 
+### [Tabs](../components/tabs.md)
+
+| Level | Rule | Checked by |
+|---|---|---|
+| MUST | Mark the row `role="tablist"` with an `aria-label`, each tab `role="tab"` with `aria-selected`, and each panel `role="tabpanel"`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
+| MUST | Keep one Tab stop on the row and move between tabs with the arrow keys. | [Manual: Tabs review](checks.md#tabs-review) |
+| MUST | Make each tab a `<button type="button">`. | [Manual: Tabs review](checks.md#tabs-review) |
+| MUST NOT | Use tabs to pick a carousel slide or switch a view mode. | [Manual: Tabs review](checks.md#tabs-review) |
+
 ### [Carousel navigation](../components/carousel-navigation.md)
 
 | Level | Rule | Checked by |
@@ -99,6 +108,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | [Badge](../components/badge.md) | Not focusable. Tab; Enter, Space; Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) |
 | [Section heading](../components/section-heading.md) | Not focusable. Tab; Enter, Space; H in a screen reader's browse mode (VoiceOver: VO + Command + H); 2 or 3 in browse mode (NVDA, JAWS); Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) |
 | [Link](../components/link.md) | Tab; Shift + Tab; Enter; Space |
+| [Tabs](../components/tabs.md) | Tab; Left arrow, Right arrow; Home, End |
 | [Carousel navigation](../components/carousel-navigation.md) | Tab; Enter or Space; Left arrow, Right arrow; Enter on the forward chevron at the last card |
 | [Avatar](../components/avatar.md) | Not focusable. Enter, Space; Tab; Enter; G in a screen reader's browse mode (VoiceOver: VO + Command + G) |
 

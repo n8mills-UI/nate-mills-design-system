@@ -20,6 +20,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 - **[Badge](badge.md):** The counter shows a position in the carousel ("2 / 6"); a Badge shows a status or a count of something else. Never show a carousel position in a badge.
 - **[Button](button.md):** The chevrons are bare glyphs with a hidden 44px target. A labelled action under a carousel is a Button.
+- **[Tabs](tabs.md):** The nav moves along a track of cards; Tabs swap panels in the same place. If nothing scrolls sideways, it is Tabs.
 
 ## How to use
 

@@ -1,6 +1,6 @@
 # AGENTS.md: building with the Nate Mills design system
 
-Rules for any AI coding agent building something that must look like natemills.me. Values live in DESIGN.md, the class facts as data in components-api.json. In your own AGENTS.md (or CLAUDE.md, for Claude Code) add: "Before writing UI for natemills.me, read https://natemills.me/AGENTS.md and follow it."
+Rules for any AI coding agent building something that must look like natemills.me. In your own AGENTS.md (or CLAUDE.md, for Claude Code) add: "Before writing UI for natemills.me, read https://natemills.me/AGENTS.md and follow it."
 
 ## Link the foundation, never rebuild it
 
@@ -81,6 +81,9 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 ```html
 <a class="link-underline link-underline--prose" href="https://natemills.me">natemills.me</a>
 ```
+
+**Tabs:** Swap panels in place.
+`.tabs`, `.tabs--lg`, `.tabs--compact`, `.tab`
 
 **Carousel navigation:** Bare chevrons plus a mono counter on a rail BELOW the cards. One nav, site-wide.
 `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__rail`, `.ds-carousel-nav__arrow`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__fill`, `.ds-carousel-nav__count`

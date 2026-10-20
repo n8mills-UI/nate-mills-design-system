@@ -198,6 +198,7 @@ export const tokens = {
   "card-dark-bg": "#1c1c1f",
   "card-dark-fg": "rgb(255 255 255 / 0.88)",
   "card-dark-border": "rgb(255 255 255 / 0.08)",
+  "tab-compact-min-h": "48px",
   "chip-pad-x": "10px",
   "chip-pad-y": "4px",
   "chip-gap": "8px",

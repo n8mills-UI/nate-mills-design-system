@@ -38,7 +38,7 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **What it checks:** Runs axe-core's WCAG 2.2 A and AA rules on every page state in both themes, including the rules that every button has a name and every image has alt text.
 - **WCAG:** WCAG 2.2 A and AA, including 4.1.2 Name, Role, Value and 1.1.1 Non-text Content
 - **When it runs:** Every deploy.
-- **Rules it checks:** [Button](../components/button.md#rules), [Carousel navigation](../components/carousel-navigation.md#rules), [Avatar](../components/avatar.md#rules)
+- **Rules it checks:** [Button](../components/button.md#rules), [Tabs](../components/tabs.md#rules), [Carousel navigation](../components/carousel-navigation.md#rules), [Avatar](../components/avatar.md#rules)
 - **Reference:** [github.com/dequelabs](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md)
 
 ### External-link lint
@@ -157,6 +157,14 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **WCAG:** 2.2.2 Pause, Stop, Hide, A
 - **When it runs:** Every pull request that touches a carousel, by hand.
 - **Rules it checks:** [Carousel navigation](../components/carousel-navigation.md#rules)
+
+### Tabs review
+
+- **Kind:** Manual
+- **What it checks:** In the pull request, open every new tab row and press Tab, then the arrow keys, Home and End: focus enters on the chosen tab, the arrows move it and show each panel, and Tab leaves the row. Confirm each tab is a `<button type="button">` and that the row swaps panels in place rather than picking a carousel slide or a view mode.
+- **WCAG:** 2.1.1 Keyboard, A; 4.1.2 Name, Role, Value, A
+- **When it runs:** Every pull request that adds or changes a tab row, by hand.
+- **Rules it checks:** [Tabs](../components/tabs.md#rules)
 
 ### Hidden-words review
 

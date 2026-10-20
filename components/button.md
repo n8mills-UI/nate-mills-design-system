@@ -240,7 +240,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--space-300` | Semantic | `12px` | Medium-tight break. Heading-to-body, compact rows. |
 | `--space-400` | Semantic | `16px` | Base unit. Default gap between related elements; the compact card-padding tier (--card-pad-compact). |
 | `--space-500` | Semantic | `24px` | Medium break. Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
-| `--touch-target-min` | Semantic | `44px` | The smallest pointer target for any control a finger or pointer taps. |
+| `--touch-target-min` | Semantic | `44px` | Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px). |
 
 ## Source
 

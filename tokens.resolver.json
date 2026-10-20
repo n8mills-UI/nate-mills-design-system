@@ -1,0 +1,54 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/resolver.json",
+  "name": "natemills.me tokens",
+  "version": "2025.10",
+  "description": "How the four themes combine (the same four that contrast-pairs.mjs checks), for any tool that reads the DTCG Resolver Module (Terrazzo, Tokens Studio, Figma, Penpot). Everything lives in tokens.json. The base set is that file with the three theme groups emptied out (a key beside $ref replaces that key, Resolver 4.2.2). Each theme group mirrors the base paths, so darkTheme.color.bg is the dark color.bg. build.mjs emits the same four combinations as CSS: light at :root, dark under [data-theme=dark] and prefers-color-scheme, high contrast under prefers-contrast: more. dtcg-validate.mjs fails if this file and build.mjs disagree.",
+  "sets": {
+    "base": {
+      "description": "Every token in tokens.json except the theme overrides: primitives, brand, semantics, components and the flat scales. This is the light theme.",
+      "sources": [
+        {
+          "$ref": "tokens.json",
+          "darkTheme": {},
+          "highContrast": {},
+          "highContrastDark": {}
+        }
+      ]
+    }
+  },
+  "modifiers": {
+    "theme": {
+      "description": "The four themes the site ships, as the spec's own example lays a high contrast dark: each context lists the overrides laid over the base, in order.",
+      "contexts": {
+        "light": [],
+        "dark": [
+          {
+            "$ref": "tokens.json#/darkTheme"
+          }
+        ],
+        "high-contrast": [
+          {
+            "$ref": "tokens.json#/highContrast"
+          }
+        ],
+        "high-contrast-dark": [
+          {
+            "$ref": "tokens.json#/darkTheme"
+          },
+          {
+            "$ref": "tokens.json#/highContrastDark"
+          }
+        ]
+      },
+      "default": "light"
+    }
+  },
+  "resolutionOrder": [
+    {
+      "$ref": "#/sets/base"
+    },
+    {
+      "$ref": "#/modifiers/theme"
+    }
+  ]
+}

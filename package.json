@@ -42,6 +42,8 @@
     "./tokens.css": "./tokens.css",
     "./components.css": "./components.css",
     "./tokens.json": "./tokens.json",
+    "./tokens.resolver.json": "./tokens.resolver.json",
+    "./components-api.json": "./components-api.json",
     "./package.json": "./package.json"
   },
   "files": [
@@ -49,6 +51,8 @@
     "tokens.d.ts",
     "tokens.css",
     "tokens.json",
+    "tokens.resolver.json",
+    "components-api.json",
     "components.css",
     "DESIGN.md"
   ]

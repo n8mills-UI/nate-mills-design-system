@@ -25,6 +25,7 @@ I publish it because the discipline is the point. A design system is easy to cla
 One source, three generated outputs, and the discipline between them. That is the whole system.
 
 - **`tokens.json`** : the single source of truth, in the [W3C Design Tokens Community Group](https://www.designtokens.org/) (DTCG) format. Three tiers: primitives (raw values), semantics (roles), and component tokens (btn/card/chip/badge, aliasing semantics only).
+- **`tokens.resolver.json`** : how the light, dark and high contrast themes combine, in the DTCG Resolver Module format, so Terrazzo, Tokens Studio, Figma or Penpot can build every theme from `tokens.json` without reading my build code.
 - **`tokens.css`** : the generated CSS custom properties, built from `tokens.json` by [Style Dictionary](https://styledictionary.com). All three themes (light, dark, high-contrast) included. Never hand-edited.
 - **`tokens.js` / `tokens.d.ts`** : the same tokens as a typed JavaScript object, resolved to literal values for the default theme. For build tools that read tokens in JS, not CSS. Generated, never hand-edited.
 - **Units:** type sizes are `rem` (`1rem` is 16px at the browser's default), so text follows the reader's own text-size setting; spacing, radius, borders and control sizes stay `px`.

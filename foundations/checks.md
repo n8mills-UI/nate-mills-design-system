@@ -172,6 +172,6 @@ The tokens this page names, as data from tokens.json: write `var(--name)`, never
 
 | Token | Value | What it is for |
 |---|---|---|
-| `--touch-target-min` | `44px` | The smallest pointer target for any control a finger or pointer taps. |
+| `--touch-target-min` | `44px` | Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px). |
 | `--btn-sm` | `32px` | Compact: dense cards, toolbars, filters. Clears the WCAG 2.5.8 AA 24px target minimum. |
 | `--touch-target-dot` | `24px` | Carousel-dot hit area (WCAG 2.5.8 AA floor). |

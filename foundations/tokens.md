@@ -30,22 +30,22 @@ The same names in every theme; the dark column shows the value the dark theme gi
 | `--brand-secondary` | The second brand colour, lime's partner: the yellow the brand gradient runs into. The Theme lab repaints it per preset from the preset's heading colour (Rave keeps its authored hot pink), so a theme's Secondary set is the second colour you actually see on its page. | `#eeff00` | `#eeff00` | `brand.secondary` |
 | `--brand-ink` | Fixed, theme-invariant brand ink. The always-dark bed, and the dark foreground on a fixed lime or static-white bed. | `#1c1c1f` | `#1c1c1f` | `brand.ink` |
 | `--brand-gradient` | CSS-only composite; reads var(--brand-primary) and var(--brand-spot) so the gradient follows a brand re-point at CSS level. The explicit 'in oklab' preserves the perceptual midpoint the gradient had when its stops were oklch(): rgb()/hex stops interpolate in sRGB by default, which would shift the blend by up to 11/255. | `linear-gradient(135deg in oklab, #d2ff37 0%, #eeff00 100%)` | `linear-gradient(135deg in oklab, #d2ff37 0%, #eeff00 100%)` | `brand.gradient` |
-| `--color-bg` | The page canvas. Brand off-white in light, near-black in dark. | `#f5f5f5` | `#0a0a0b` | `color.bg` |
+| `--color-bg` | The page canvas: brand off-white in light, near-black in dark. Use it behind sections; cards and panels sit on color.surface. | `#f5f5f5` | `#0a0a0b` | `color.bg` |
 | `--color-surface` | The default card / panel surface. White card on the grey page in light (a genuine lift); the lighter near-black (#1c1c1f) in dark. | `#ffffff` | `#1c1c1f` | `color.surface` |
 | `--color-surface-sunken` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. | `#ececec` | `#141416` | `color.surface-sunken` |
 | `--color-surface-inverse` | A slab that stays near-black in both themes, like the testimonials band. | `#0a0a0b` | `#0a0a0b` | `color.surface-inverse` |
 | `--color-text-primary` | Default reading text. Near-black on light, near-white on dark. | `#0a0a0b` | `#f4f4f5` | `color.text-primary` |
-| `--color-text-secondary` | Secondary text: supporting copy one step quieter than text-primary. | `#3f3f46` | `#a1a1aa` | `color.text-secondary` |
+| `--color-text-secondary` | Secondary text: supporting copy one step quieter than text-primary. Checked at 4.5:1 on bg, surface, surface-sunken and the four tint surfaces; for labels and quiet meta copy use text-tertiary. | `#3f3f46` | `#a1a1aa` | `color.text-secondary` |
 | `--color-text-tertiary` | Tertiary text: section labels and quiet meta copy; the last step that still clears 4.5:1 on light. | `#67676f` | `#909096` | `color.text-tertiary` |
-| `--color-border` | Default hairline border and divider colour, theme-aware. | `#e4e4e7` | `#27272a` | `color.border` |
+| `--color-border` | Default hairline border and divider colour, theme-aware. Decoration only: never the only edge of an input or control, which needs 3:1; use text-tertiary there. | `#e4e4e7` | `#27272a` | `color.border` |
 | `--color-border-strong` | Heavier border for edges that must read past a hairline (secondary-button outlines). | `#d4d4d8` | `#3f3f46` | `color.border-strong` |
 | `--color-border-brand` | The brand-lime outline accent (active selection, link underline, brand ring). Theme-invariant lime, never overridden per theme; the semantic the brand outlines read instead of the raw primitive. | `#d2ff37` | `#d2ff37` | `color.border-brand` |
 | `--color-accent` | The single theme-aware interactive role: ink on light, brand lime on dark. Active and selected states. | `#1c1c1f` | `#d2ff37` | `color.accent` |
-| `--color-accent-hover` | Hover step of the accent role. | `#0a0a0b` | `#b8e030` | `color.accent-hover` |
+| `--color-accent-hover` | Hover fill for an accent-filled control: darker ink on light, dimmed lime on dark. Text on it is color.on-accent. | `#0a0a0b` | `#b8e030` | `color.accent-hover` |
 | `--color-on-accent` | Text or icons sitting on an accent fill; the contrast pair of color.accent. | `#ffffff` | `#0a0a0b` | `color.on-accent` |
 | `--color-focus-ring` | Theme-aware keyboard-focus colour: ink on light, lime on dark. Consumed via border.focus. | `#1c1c1f` | `#d2ff37` | `color.focus-ring` |
 | `--color-link` | Underlined navigational link text: ink on light, lime on dark. Distinct role from accent (Section 10). | `#1c1c1f` | `#d2ff37` | `color.link` |
-| `--color-link-hover` | Link hover colour. | `#0a0a0b` | `#ffffff` | `color.link-hover` |
+| `--color-link-hover` | Link text on hover: darker ink on light, white on dark. Checked at 4.5:1 on bg, surface and surface-sunken; use it on those only. | `#0a0a0b` | `#ffffff` | `color.link-hover` |
 | `--color-on-ink-primary` | Primary text on an always-dark slab (88% white). | `rgb(255 255 255 / 0.88)` | `rgb(255 255 255 / 0.88)` | `color.on-ink-primary` |
 | `--color-on-ink-secondary` | Secondary text on an always-dark slab (66% white). | `rgb(255 255 255 / 0.66)` | `rgb(255 255 255 / 0.66)` | `color.on-ink-secondary` |
 | `--color-on-ink-muted` | Quiet fills and inactive dots on an always-dark slab. Not a text colour. | `rgb(255 255 255 / 0.4)` | `rgb(255 255 255 / 0.4)` | `color.on-ink-muted` |
@@ -123,7 +123,7 @@ Size, weight, line height and tracking for the named styles on the Typography pa
 | `--space-1000` | Very large block space. The design-system doc's closing space and the orbit specimen's size. | `128px` | `space.1000` |
 | `--space-1100` | Outsized spacing for full-bleed editorial breaks. | `192px` | `space.1100` |
 | `--space-1200` | Largest step. The upper bound of vertical section padding (--section-padding), reached only on very large screens; otherwise rare, marquee-scale vertical space. | `256px` | `space.1200` |
-| `--section-padding` | The vertical padding of every page section, fluid between its lower and upper bounds. | `clamp(96px, min(14.2vh, 12vw), 256px)` | `section-padding` |
+| `--section-padding` | Top and bottom padding of every main section, fluid from space-900 to space-1200. Two sections meet at two units; override it only in sections.css, never inline. | `clamp(96px, min(14.2vh, 12vw), 256px)` | `section-padding` |
 | `--card-pad-compact` | Compact card-padding tier (16px). Dense content tiles: credential cards, health-check tiles, inner controls. | `16px` | `card-pad.compact` |
 | `--card-pad-standard` | Standard card-padding tier (24px). The default content-card inset; matches the base .card. | `24px` | `card-pad.standard` |
 | `--card-pad-spacious` | Spacious card-padding tier (32px). Large feature, award, and full-testimonial cards (often the desktop step up from standard). | `32px` | `card-pad.spacious` |
@@ -136,4 +136,4 @@ Size, weight, line height and tracking for the named styles on the Typography pa
 | `--border-strong` | Heavier 1px border; reads --color-border-strong. For edges that need to read past a hairline, such as interactive-card hover outlines. | `1px solid var(--color-border-strong)` | `border.strong` |
 | `--border-focus` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. | `2px solid var(--color-focus-ring)` | `border.focus` |
 | `--focus-ring-offset` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. | `2px` | `focus-ring-offset` |
-| `--touch-target-min` | The smallest pointer target for any control a finger or pointer taps. | `44px` | `touch-target-min` |
+| `--touch-target-min` | Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px). | `44px` | `touch-target-min` |

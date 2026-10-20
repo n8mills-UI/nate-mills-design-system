@@ -156,10 +156,10 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--cn-rail-track` | Component | `#e4e4e7`; dark `#27272a`, from `--color-border` | The groove the carousel rail draws behind its fill: a subtle line, not a dot grey, so the fill stands out. A section band may re-map it. |
 | `--bar-radius` | Semantic | `999px`, from `--radius-full` | End-cap rounding for thin bars, rails, tracks, indicators, and capsule strips (progress rails, tab indicators, slider tracks, chart bars, the hero edge widget's pill). Full by definition; it rounds the ends of a strip at any height. |
 | `--border-focus` | Semantic | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
-| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. |
+| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. Decoration only: never the only edge of an input or control, which needs 3:1; use text-tertiary there. |
 | `--color-dot-active` | Semantic | `#1c1c1f`; dark `#d2ff37`, from `--color-accent` | The fill on the carousel nav progress rail (.ds-carousel-nav__fill), reached through --cn-rail-fill, which defaults to this token. Renaming the pair is a follow-up (it moves the showcase manifest and the doc tables too), so the job is written here instead. |
 | `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
-| `--color-text-secondary` | Semantic | `#3f3f46`; dark `#a1a1aa`, from `--neutral-700` | Secondary text: supporting copy one step quieter than text-primary. |
+| `--color-text-secondary` | Semantic | `#3f3f46`; dark `#a1a1aa`, from `--neutral-700` | Secondary text: supporting copy one step quieter than text-primary. Checked at 4.5:1 on bg, surface, surface-sunken and the four tint surfaces; for labels and quiet meta copy use text-tertiary. |
 | `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
 | `--duration-slow` | Semantic | `400ms` | Context shift and slide transitions. |
 | `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
@@ -174,7 +174,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
 | `--space-400` | Semantic | `16px` | Base unit. Default gap between related elements; the compact card-padding tier (--card-pad-compact). |
 | `--space-500` | Semantic | `24px` | Medium break. Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
-| `--touch-target-min` | Semantic | `44px` | The smallest pointer target for any control a finger or pointer taps. |
+| `--touch-target-min` | Semantic | `44px` | Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px). |
 | `--tracking-normal` | Semantic | `0` | 0. The body default; most text sits here. |
 | `--weight-bold` | Semantic | `700` | 700. Strong emphasis inside body copy. |
 

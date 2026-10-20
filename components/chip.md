@@ -149,7 +149,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--chip-pad-x` | Component | `10px` | Chip inline (left/right) padding. Component-level literal; sits off the 4px space scale by design (between space-200 and space-300), kept so the live chip is unchanged. |
 | `--chip-pad-y` | Component | `4px`, from `--space-100` | Chip block (top/bottom) padding; 4px. |
 | `--chip-radius` | Component | `999px`, from `--radius-full` | Chip corner radius; full pill. |
-| `--color-text-secondary` | Semantic | `#3f3f46`; dark `#a1a1aa`, from `--neutral-700` | Secondary text: supporting copy one step quieter than text-primary. |
+| `--color-text-secondary` | Semantic | `#3f3f46`; dark `#a1a1aa`, from `--neutral-700` | Secondary text: supporting copy one step quieter than text-primary. Checked at 4.5:1 on bg, surface, surface-sunken and the four tint surfaces; for labels and quiet meta copy use text-tertiary. |
 | `--font-feature-mono` | Semantic | `"zero" 1` | Switches on the slashed zero for every piece of mono text. |
 
 ## Source

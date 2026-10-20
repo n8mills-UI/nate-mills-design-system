@@ -92,9 +92,9 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | Token | Tier | Value | What it is for |
 |---|---|---|---|
 | `--avatar-radius` | Semantic | `999px`, from `--radius-full` | Identity shape: the header profile mark (.avatar / .profile-mark), the Kind words faces (.kw-face) and the hero widget's four theme marks. Full by default, which on a square box is the same circle those surfaces drew with 50% before. |
-| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. |
+| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. Decoration only: never the only edge of an input or control, which needs 3:1; use text-tertiary there. |
 | `--color-surface-sunken` | Semantic | `#ececec`; dark `#141416`, from `--neutral-200` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. |
-| `--touch-target-min` | Semantic | `44px` | The smallest pointer target for any control a finger or pointer taps. |
+| `--touch-target-min` | Semantic | `44px` | Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px). |
 
 ## Source
 

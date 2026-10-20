@@ -1601,7 +1601,7 @@ entries:
   - id: "color.bg"
     kind: "token"
     name: "--color-bg"
-    description: "The page canvas. Brand off-white in light, near-black in dark."
+    description: "The page canvas: brand off-white in light, near-black in dark. Use it behind sections; cards and panels sit on color.surface."
     tokenType: "color"
     source: "./tokens.json"
     metadata:
@@ -1641,7 +1641,7 @@ entries:
   - id: "color.text-secondary"
     kind: "token"
     name: "--color-text-secondary"
-    description: "Secondary text: supporting copy one step quieter than text-primary."
+    description: "Secondary text: supporting copy one step quieter than text-primary. Checked at 4.5:1 on bg, surface, surface-sunken and the four tint surfaces; for labels and quiet meta copy use text-tertiary."
     tokenType: "color"
     source: "./tokens.json"
     metadata:
@@ -1657,7 +1657,7 @@ entries:
   - id: "color.border"
     kind: "token"
     name: "--color-border"
-    description: "Default hairline border and divider colour, theme-aware."
+    description: "Default hairline border and divider colour, theme-aware. Decoration only: never the only edge of an input or control, which needs 3:1; use text-tertiary there."
     tokenType: "color"
     source: "./tokens.json"
     metadata:
@@ -1689,7 +1689,7 @@ entries:
   - id: "color.accent-hover"
     kind: "token"
     name: "--color-accent-hover"
-    description: "Hover step of the accent role."
+    description: "Hover fill for an accent-filled control: darker ink on light, dimmed lime on dark. Text on it is color.on-accent."
     tokenType: "color"
     source: "./tokens.json"
     metadata:
@@ -1721,7 +1721,7 @@ entries:
   - id: "color.link-hover"
     kind: "token"
     name: "--color-link-hover"
-    description: "Link hover colour."
+    description: "Link text on hover: darker ink on light, white on dark. Checked at 4.5:1 on bg, surface and surface-sunken; use it on those only."
     tokenType: "color"
     source: "./tokens.json"
     metadata:
@@ -2158,7 +2158,7 @@ entries:
   - id: "section-padding"
     kind: "token"
     name: "--section-padding"
-    description: "The vertical padding of every page section, fluid between its lower and upper bounds."
+    description: "Top and bottom padding of every main section, fluid from space-900 to space-1200. Two sections meet at two units; override it only in sections.css, never inline."
     source: "./tokens.json"
     metadata:
       group: "Spacing"
@@ -2215,7 +2215,7 @@ entries:
   - id: "touch-target-min"
     kind: "token"
     name: "--touch-target-min"
-    description: "The smallest pointer target for any control a finger or pointer taps."
+    description: "Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px)."
     tokenType: "dimension"
     source: "./tokens.json"
     metadata:

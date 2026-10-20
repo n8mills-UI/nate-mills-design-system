@@ -202,7 +202,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--border-focus` | Semantic | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
 | `--card-pad-compact` | Semantic | `16px`, from `--space-400` | Compact card-padding tier (16px). Dense content tiles: credential cards, health-check tiles, inner controls. |
 | `--card-pad-spacious` | Semantic | `32px`, from `--space-600` | Spacious card-padding tier (32px). Large feature, award, and full-testimonial cards (often the desktop step up from standard). |
-| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. |
+| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. Decoration only: never the only edge of an input or control, which needs 3:1; use text-tertiary there. |
 | `--color-border-strong` | Semantic | `#d4d4d8`; dark `#3f3f46`, from `--neutral-400` | Heavier border for edges that must read past a hairline (secondary-button outlines). |
 | `--color-feedback-background-error` | Semantic | `#961010`; dark `#ff8f8f` | Error message backgrounds: deep red on light, soft red on dark. |
 | `--color-surface-sunken` | Semantic | `#ececec`; dark `#141416`, from `--neutral-200` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. |

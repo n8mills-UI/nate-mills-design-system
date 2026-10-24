@@ -479,6 +479,7 @@
 [data-theme="light"], [data-theme="dark"] {
   --color-dot-active: var(--color-accent);
   --btn-focus-ring: var(--color-focus-ring);
+  --btn-primary-border: var(--color-border-brand);
   --btn-secondary-fg: var(--color-text-primary);
   --btn-icon-border: var(--btn-secondary-border);
   --btn-icon-fg: var(--btn-secondary-fg);
@@ -569,9 +570,11 @@
   }
 }
 
-/* High-contrast preference layer, authored in tokens.json (TK-03). */
+/* High-contrast preference layer, authored in tokens.json (TK-03). The light
+   block also names [data-theme="light"] so a light PIN inside the page gets
+   high contrast too, instead of the plain light values its pin re-declares. */
 @media (prefers-contrast: more) {
-  :root {
+  :root, [data-theme="light"] {
     --color-bg: var(--neutral-0);
     --color-surface: var(--neutral-0);
     --color-surface-sunken: var(--neutral-0);

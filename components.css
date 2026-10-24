@@ -827,11 +827,11 @@ a.card:focus-visible { text-decoration: none; }
   mask-composite: exclude;
 }
 /* The glitch IS the movement, so reduced motion drops it rather than slowing
-   it down. Same ruling as .heading-glitch and the .glitch-tgt engine. */
+   it down. Same ruling as .heading-glitch and the .glitch-tgt engine.
+   opacity needs !important too: the hover and focus triggers live in
+   sections.css, which loads later and wins any tie (W62 S1-04). */
 @media (prefers-reduced-motion: reduce) {
-  .profile-mark__glitch { transition: none; animation: none !important; }
-  .header-brand-link:hover .profile-mark__glitch,
-  .header-brand-link:focus-visible .profile-mark__glitch { opacity: 0; }
+  .profile-mark__glitch { transition: none; animation: none !important; opacity: 0 !important; }
 }
 
 
@@ -1527,7 +1527,7 @@ a.card:focus-visible { text-decoration: none; }
    `--cn-glyph` is a component token rather than a raw px because it now has
    two consumers (the box and the glyph) at every width instead of one inside
    a media query. */
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .ds-carousel-nav { gap: var(--space-500); }
 }
 

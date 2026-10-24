@@ -88,7 +88,7 @@ These are the native keys of `<a href>`, so they work with no script.
 |---|---|---|
 | MUST | Render exactly one underline in every state. | [Automated: Underline gate](../foundations/checks.md#underline-gate) |
 | MUST | Give a link that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and a `.sr-only` "(opens in a new tab)" cue. | [Automated: External-link lint](../foundations/checks.md#external-link-lint) |
-| MUST | Show the focus ring on keyboard focus. | [Automated: Focus-ring gate](../foundations/checks.md#focus-ring-gate) |
+| MUST | Show the focus ring on keyboard focus. | [Automated: Tab walk: focus ring](../foundations/checks.md#tab-walk-focus-ring) |
 | MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.

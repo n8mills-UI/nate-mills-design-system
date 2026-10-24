@@ -27,7 +27,7 @@ The tokens this page names, as data from tokens.json: write `var(--name)`, never
 | Token | Value | What it is for |
 |---|---|---|
 | `--bp-mobile` | `375px` | The reference phone width: check every layout here. |
-| `--bp-tablet` | `768px` | At and below this width, section-level primary calls to action go full-width. |
+| `--bp-tablet` | `768px` | Below this width, section-level primary calls to action go full-width. |
 | `--bp-desktop` | `1024px` | The reference desktop width. |
 | `--bp-wide` | `1440px` | The reference wide-screen width. |
 | `--bp-ultrawide` | `1600px` | The widest reference width; layouts scale as one piece above it. |

@@ -13,7 +13,7 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 | Level | Rule | Checked by |
 |---|---|---|
 | MUST | Keep the pointer target at least 44px. `.btn--sm` at 32px is the one exception, for dense toolbars, and still clears the 24px AA floor. | [Automated: Touch-target lint](checks.md#touch-target-lint) |
-| MUST | Show the focus ring on keyboard focus; never remove the outline without a replacement. | [Automated: Focus-ring gate](checks.md#focus-ring-gate) |
+| MUST | Show the focus ring on keyboard focus; never remove the outline without a replacement. | [Automated: Tab walk: focus ring](checks.md#tab-walk-focus-ring) |
 | MUST | Keep the label and glyph readable on hover, focus and press: 4.5:1 for text, 3:1 for an icon. | [Automated: State-contrast gate](checks.md#state-contrast-gate) |
 | MUST | Give every `.btn--icon` an `aria-label`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
 | MUST | Give a button that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and an "opens in a new tab" cue. | [Automated: External-link lint](checks.md#external-link-lint) |
@@ -25,7 +25,7 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 |---|---|---|
 | MUST | Make a whole-card target a real `<a>` or `<button>`, or, for a card that opens in place, give it exactly one `<button aria-expanded>`. `.card--interactive` styles the hover; it does not make the card operable. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
 | MUST NOT | Give a static `.card` a hover state; only `.card--interactive` answers the pointer. | [Automated: Mobile-consistency lint](checks.md#mobile-consistency-lint) |
-| MUST | Show the focus ring on an interactive card. | [Automated: Focus-ring gate](checks.md#focus-ring-gate) |
+| MUST | Show the focus ring on an interactive card. | [Automated: Tab walk: focus ring](checks.md#tab-walk-focus-ring) |
 | MUST | Keep text readable on an interactive card in hover, focus and press. | [Automated: State-contrast gate](checks.md#state-contrast-gate) |
 | MUST NOT | Give a card a drop shadow. | [Automated: Mobile-consistency lint](checks.md#mobile-consistency-lint) |
 
@@ -66,7 +66,7 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 |---|---|---|
 | MUST | Render exactly one underline in every state. | [Automated: Underline gate](checks.md#underline-gate) |
 | MUST | Give a link that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and a `.sr-only` "(opens in a new tab)" cue. | [Automated: External-link lint](checks.md#external-link-lint) |
-| MUST | Show the focus ring on keyboard focus. | [Automated: Focus-ring gate](checks.md#focus-ring-gate) |
+| MUST | Show the focus ring on keyboard focus. | [Automated: Tab walk: focus ring](checks.md#tab-walk-focus-ring) |
 | MUST | Give the trailing glyph in `.link-underline--icon` the `.icon-size-xs` class. | [Automated: Component-rules lint](checks.md#component-rules-lint) |
 
 ### [Tabs](../components/tabs.md)
@@ -74,7 +74,7 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 | Level | Rule | Checked by |
 |---|---|---|
 | MUST | Mark the row `role="tablist"` with an `aria-label`, each tab `role="tab"` with `aria-selected`, and each panel `role="tabpanel"`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
-| MUST | Keep one Tab stop on the row and move between tabs with the arrow keys. | [Manual: Tabs review](checks.md#tabs-review) |
+| MUST | Keep one Tab stop on the row and move between tabs with the arrow keys. | [Automated: Tab walk: keyboard](checks.md#tab-walk-keyboard) |
 | MUST | Make each tab a `<button type="button">`. | [Manual: Tabs review](checks.md#tabs-review) |
 | MUST NOT | Use tabs to pick a carousel slide or switch a view mode. | [Manual: Tabs review](checks.md#tabs-review) |
 
@@ -85,7 +85,7 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 | MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | [Automated: Touch-target lint](checks.md#touch-target-lint) |
 | MUST | Label each chevron `<button>` with an `aria-label`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
 | MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Automated: Screen-reader structure gate](checks.md#screen-reader-structure-gate) |
-| MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Keyboard gate](checks.md#keyboard-gate) |
+| MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Tab walk: keyboard](checks.md#tab-walk-keyboard) |
 | MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Carousel autoplay review](checks.md#carousel-autoplay-review) |
 
 ### [Avatar](../components/avatar.md)

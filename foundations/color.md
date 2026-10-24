@@ -61,7 +61,7 @@ colors:
   text-secondary: "#3f3f46"                                                     # --color-text-secondary
   text-tertiary: "#67676f"                                                      # --color-text-tertiary
   border: "#e4e4e7"                                                             # --color-border
-  border-strong: "#d4d4d8"                                                      # --color-border-strong
+  border-strong: "#d4d4d8"                                                      # --color-border-strong (a colour; var(--border-strong) is the whole 1px border)
   border-brand: "#d2ff37"                                                       # --color-border-brand (lime, fixed both themes)
   accent: "#1c1c1f"                                                             # --color-accent (theme-aware: ink light, lime dark)
   accent-hover: "#0a0a0b"                                                       # --color-accent-hover
@@ -76,7 +76,7 @@ colors:
   on-ink-muted: "rgb(255 255 255 / 0.4)"                                        # --color-on-ink-muted
   on-ink-border: "rgb(255 255 255 / 0.08)"                                      # --color-on-ink-border
 
-  # Dark theme semantics (data-theme="dark" or OS dark)
+  # Dark theme semantics (the same properties as above, re-pointed under data-theme="dark" or OS dark; no --dark-* property exists)
   dark-bg: "#0a0a0b"                                                            # --color-bg (dark theme)
   dark-surface: "#1c1c1f"                                                       # --color-surface (dark theme)
   dark-surface-sunken: "#141416"                                                # --color-surface-sunken (dark theme)
@@ -90,7 +90,7 @@ colors:
   dark-link: "#d2ff37"                                                          # --color-link (dark theme)
 
   # Feedback (errors only; copy .card--error)
-  feedback-error: "#961010"                                                     # --color-feedback-background-error
+  feedback-error: "#961010"                                                     # --color-feedback-background-error (the error fill)
   on-feedback-error: "#ffffff"                                                  # --color-on-feedback-error (the only ink on the error fill)
   dark-feedback-error: "#ff8f8f"                                                # --color-feedback-background-error (dark theme)
   dark-on-feedback-error: "#2a0000"                                             # --color-on-feedback-error (dark theme)

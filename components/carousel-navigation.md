@@ -90,7 +90,7 @@ The published CSS draws the nav; the behaviour comes from the script that drives
 | MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | [Automated: Touch-target lint](../foundations/checks.md#touch-target-lint) |
 | MUST | Label each chevron `<button>` with an `aria-label`. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
 | MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Automated: Screen-reader structure gate](../foundations/checks.md#screen-reader-structure-gate) |
-| MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Keyboard gate](../foundations/checks.md#keyboard-gate) |
+| MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Tab walk: keyboard](../foundations/checks.md#tab-walk-keyboard) |
 | MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Carousel autoplay review](../foundations/checks.md#carousel-autoplay-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
@@ -129,7 +129,7 @@ carousel-nav:
   railTrack: "{colors.border}, a 4px hairline groove"
   railFill: "{colors.accent} (ink on light, lime on dark), grows with the position"
   counter: "{typography.families.mono} at 14px, weight 700, normal tracking; current number {colors.text-primary}, slash and total {colors.text-secondary}"
-  arrows: "{colors.text-secondary} glyph, {colors.text-primary} on hover; 24px glyph on a 44px invisible target"
+  arrows: "{colors.text-secondary} glyph, {colors.text-primary} on hover; 24px glyph on a {structure.touch-target-min} invisible target"
   onDarkSlab: "re-map --cn-rail-fill to {colors.brand-lime} and --cn-rail-track to --color-on-ink-hover on that band; the default ink fill vanishes on near-black"
 ```
 

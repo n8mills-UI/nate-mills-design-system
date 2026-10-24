@@ -25,7 +25,7 @@ Generated from tokens.json; every value is resolved, with the token it comes fro
 typography:
   families:
     display: '"Anton", Impact, "Haettenschweiler", sans-serif'  # --font-display
-    body: '"Work Sans", "Work Sans Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'  # --font-body
+    body: '"Work Sans", "Work Sans Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'  # --font-body (the family; --text-body is the body size)
     mono: '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace'  # --font-mono
 ```
 
@@ -37,7 +37,7 @@ typography:
     weight: 400                           # --display-weight
     lineHeight: 1.05                      # --line-display
     tracking: "-0.0176em"                 # --display-tight
-  section-title:  # every section heading (.section-title)
+  section-title:  # every section heading (.section-title); Anton has one weight and draws 400 whatever is asked, so 800 shows only in a display font that has it
     family: display
     size: "clamp(min(4.25rem, 19vw), 8.7vw, 7.5rem)"  # --display-section
     weight: 800                                       # --weight-extrabold

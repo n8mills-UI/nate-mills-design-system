@@ -8,7 +8,7 @@ entries:
     kind: "system"
     name: "Nate Mills Design System"
     description: "The design system behind natemills.me: DTCG tokens, generated CSS and a small published class API. Every component and published token is an entry in this document, and every helper class (a published class that is not a component) is a set of guidelines on this system entry; anything not listed is not in the system."
-    purpose: "A CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, so its traits are those classes and attributes. Not in this system: text field, checkbox, radio button, select, switch, slider, dialog or modal, tooltip, popover, tabs, accordion, toast, table, pagination dots."
+    purpose: "A CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, so its traits are those classes and attributes. Not in this system: text field, checkbox, radio button, select, switch, slider, dialog or modal, tooltip, popover, accordion, toast, table, pagination dots."
     metadata:
       version: "4.0.0"
       organization: "Nate Mills"
@@ -261,9 +261,9 @@ entries:
             level: "must"
             checkedBy: "automated"
             checks:
-              - href: "./foundations/checks.md#focus-ring-gate"
+              - href: "./foundations/checks.md#tab-walk-focus-ring"
                 rel: "test"
-                role: "Focus-ring gate"
+                role: "Tab walk: focus ring"
             tags:
               - "rule"
           - id: "rule-3"
@@ -515,9 +515,9 @@ entries:
             level: "must"
             checkedBy: "automated"
             checks:
-              - href: "./foundations/checks.md#focus-ring-gate"
+              - href: "./foundations/checks.md#tab-walk-focus-ring"
                 rel: "test"
-                role: "Focus-ring gate"
+                role: "Tab walk: focus ring"
             tags:
               - "rule"
           - id: "rule-4"
@@ -1219,9 +1219,9 @@ entries:
             level: "must"
             checkedBy: "automated"
             checks:
-              - href: "./foundations/checks.md#focus-ring-gate"
+              - href: "./foundations/checks.md#tab-walk-focus-ring"
                 rel: "test"
-                role: "Focus-ring gate"
+                role: "Tab walk: focus ring"
             tags:
               - "rule"
           - id: "rule-4"
@@ -1379,11 +1379,11 @@ entries:
           - id: "rule-2"
             statement: "Keep one Tab stop on the row and move between tabs with the arrow keys."
             level: "must"
-            checkedBy: "manual"
+            checkedBy: "automated"
             checks:
-              - href: "./foundations/checks.md#tabs-review"
-                rel: "see-also"
-                role: "Tabs review"
+              - href: "./foundations/checks.md#tab-walk-keyboard"
+                rel: "test"
+                role: "Tab walk: keyboard"
             tags:
               - "rule"
           - id: "rule-3"
@@ -1555,9 +1555,9 @@ entries:
             level: "must"
             checkedBy: "automated"
             checks:
-              - href: "./foundations/checks.md#keyboard-gate"
+              - href: "./foundations/checks.md#tab-walk-keyboard"
                 rel: "test"
-                role: "Keyboard gate"
+                role: "Tab walk: keyboard"
             tags:
               - "rule"
           - id: "rule-5"

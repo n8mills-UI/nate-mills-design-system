@@ -288,8 +288,11 @@
    The paths are not in the markup: contact-cta.js swaps them into every mail
    glyph inside a .btn, the same way it used to add the letter. PROGRESSIVE
    ENHANCEMENT: with that script absent the button renders Lucide's envelope
-   exactly as authored and simply does not move. The inline-SVG ruling is
-   satisfied for the same reason it was before.
+   exactly as authored. It still flies off and comes back on hover, focus and
+   press, because the flight rules below target the glyph itself, but it never
+   folds: the fold needs the .btn-mail-body and .btn-mail-crease paths the
+   script adds. The inline-SVG ruling is satisfied for the same reason it was
+   before.
 
    Same shape as the arrow nudge above: the hover half behind the capability
    query, focus-visible outside it, reduced motion cancels. Held by

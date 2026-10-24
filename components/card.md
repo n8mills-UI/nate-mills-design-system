@@ -113,7 +113,7 @@ These are the native keys of the element underneath, so they work with no script
 |---|---|---|
 | MUST | Make a whole-card target a real `<a>` or `<button>`, or, for a card that opens in place, give it exactly one `<button aria-expanded>`. `.card--interactive` styles the hover; it does not make the card operable. | [Automated: Component-rules lint](../foundations/checks.md#component-rules-lint) |
 | MUST NOT | Give a static `.card` a hover state; only `.card--interactive` answers the pointer. | [Automated: Mobile-consistency lint](../foundations/checks.md#mobile-consistency-lint) |
-| MUST | Show the focus ring on an interactive card. | [Automated: Focus-ring gate](../foundations/checks.md#focus-ring-gate) |
+| MUST | Show the focus ring on an interactive card. | [Automated: Tab walk: focus ring](../foundations/checks.md#tab-walk-focus-ring) |
 | MUST | Keep text readable on an interactive card in hover, focus and press. | [Automated: State-contrast gate](../foundations/checks.md#state-contrast-gate) |
 | MUST NOT | Give a card a drop shadow. | [Automated: Mobile-consistency lint](../foundations/checks.md#mobile-consistency-lint) |
 | SHOULD | Change density with `.card--compact` or `.card--spacious` rather than a padding override. | [Manual: Card-padding review](../foundations/checks.md#card-padding-review) |
@@ -163,7 +163,7 @@ The recipe from [DESIGN.md](../DESIGN.md), one entry per state. Names in braces 
 card:
   backgroundColor: "{colors.surface}"
   textColor: "{colors.text-primary}"
-  border: "1px solid {colors.border}"
+  border: "{structure.border-hairline}"
   rounded: "{rounded.xl}"
   padding: "{spacing.card-pad-standard}"
   hover: "outline and slight lift, NOT a fill"

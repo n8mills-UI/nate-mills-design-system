@@ -107,7 +107,7 @@ These are the native keys of `<button>` and `<a>`, so they work with no script; 
 | Level | Rule | Checked by |
 |---|---|---|
 | MUST | Keep the pointer target at least 44px. `.btn--sm` at 32px is the one exception, for dense toolbars, and still clears the 24px AA floor. | [Automated: Touch-target lint](../foundations/checks.md#touch-target-lint) |
-| MUST | Show the focus ring on keyboard focus; never remove the outline without a replacement. | [Automated: Focus-ring gate](../foundations/checks.md#focus-ring-gate) |
+| MUST | Show the focus ring on keyboard focus; never remove the outline without a replacement. | [Automated: Tab walk: focus ring](../foundations/checks.md#tab-walk-focus-ring) |
 | MUST | Keep the label and glyph readable on hover, focus and press: 4.5:1 for text, 3:1 for an icon. | [Automated: State-contrast gate](../foundations/checks.md#state-contrast-gate) |
 | MUST | Give every `.btn--icon` an `aria-label`. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
 | MUST | Give a button that leaves the site `target="_blank"`, `rel="noopener noreferrer"`, a trailing `arrow-up-right` glyph and an "opens in a new tab" cue. | [Automated: External-link lint](../foundations/checks.md#external-link-lint) |
@@ -168,14 +168,14 @@ button-primary:
   typography: "{typography.families.body} at 14px, weight 600, normal tracking, sentence case (not the mono label)"
   rounded: "{rounded.full}"
   padding: "10px 18px"
-  height: "44px (md); 32px (sm); 52px (lg)"
+  height: "{structure.touch-target-min} (md); 32px (sm); 52px (lg)"
 button-primary-hover:
   backgroundColor: "{colors.brand-ink}"
   textColor: "{colors.brand-lime}"
 button-secondary:
   backgroundColor: "transparent"
   textColor: "{colors.text-primary}"
-  border: "1px solid {colors.border} (a stronger grey in dark)"
+  border: "{structure.border-hairline} (a stronger grey in dark)"
   rounded: "{rounded.full}"
   padding: "10px 18px"
 button-secondary-hover:
@@ -184,9 +184,9 @@ button-secondary-hover:
   border: "1px solid {colors.border-brand}"
 button-icon:
   shape: "circle, {rounded.full}"
-  border: "1px solid {colors.border} (a stronger grey in dark)"
+  border: "{structure.border-hairline} (a stronger grey in dark)"
   iconColor: "{colors.text-primary}"
-  size: "44px, glyph 16px"
+  size: "{structure.touch-target-min}, glyph 16px"
   note: "The one canonical icon button. An icon-only button is never a pill with a label."
 ```
 

@@ -16,10 +16,10 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **When it runs:** Every pull request and every deploy.
 - **Rules it checks:** [Button](../components/button.md#rules), [Carousel navigation](../components/carousel-navigation.md#rules)
 
-### Focus-ring gate
+### Tab walk: focus ring
 
 - **Kind:** Automated
-- **What it checks:** Presses Tab to every control in a real browser, in both themes, and compares the pixels at rest and focused. It fails if no ring appears, or if the ring is under 3:1 against what is behind it.
+- **What it checks:** Part of the Tab walk. Presses Tab to every control in a real browser, in both themes, and compares the pixels at rest and focused. It fails if no ring appears, or if the ring is under 3:1 against what is behind it.
 - **WCAG:** 2.4.7 Focus Visible, AA; 1.4.11 Non-text Contrast, AA
 - **When it runs:** Every deploy.
 - **Rules it checks:** [Button](../components/button.md#rules), [Card](../components/card.md#rules), [Link](../components/link.md#rules)
@@ -57,13 +57,13 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **When it runs:** Every deploy.
 - **Rules it checks:** [Link](../components/link.md#rules)
 
-### Keyboard gate
+### Tab walk: keyboard
 
 - **Kind:** Automated
-- **What it checks:** Walks the page with real key presses: no positive tabindex, the skip link first, focus returning from overlays, and carousel tracks that are Tab stops only while they can scroll.
+- **What it checks:** Part of the Tab walk. Walks the page with real key presses: the skip link first, focus returning from overlays, carousel tracks that are Tab stops only while they can scroll, and every tab row one Tab stop that the arrows, Home and End move along.
 - **WCAG:** 2.1.1 Keyboard, A; 2.4.3 Focus Order, A; 2.4.11 Focus Not Obscured (Minimum), AA
 - **When it runs:** Every deploy.
-- **Rules it checks:** [Carousel navigation](../components/carousel-navigation.md#rules)
+- **Rules it checks:** [Tabs](../components/tabs.md#rules), [Carousel navigation](../components/carousel-navigation.md#rules)
 
 ### Mobile-consistency lint
 
@@ -161,7 +161,7 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 ### Tabs review
 
 - **Kind:** Manual
-- **What it checks:** In the pull request, open every new tab row and press Tab, then the arrow keys, Home and End: focus enters on the chosen tab, the arrows move it and show each panel, and Tab leaves the row. Confirm each tab is a `<button type="button">` and that the row swaps panels in place rather than picking a carousel slide or a view mode.
+- **What it checks:** In the pull request, open every new tab row. Confirm each tab is a `<button type="button">` and that the row swaps panels in place rather than picking a carousel slide or a view mode. The Tab walk checks the keys.
 - **WCAG:** 2.1.1 Keyboard, A; 4.1.2 Name, Role, Value, A
 - **When it runs:** Every pull request that adds or changes a tab row, by hand.
 - **Rules it checks:** [Tabs](../components/tabs.md#rules)

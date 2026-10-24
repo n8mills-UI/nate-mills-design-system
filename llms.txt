@@ -9,8 +9,6 @@ Link the published CSS; never rebuild it from values. The rules are in AGENTS.md
 - [AGENTS.md](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/AGENTS.md): the rules, the published class names with examples, the token names, the mistakes to avoid. Read this first.
 - [DESIGN.md](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/DESIGN.md): the portable brand contract. Every colour, type, radius and spacing value resolved, the component recipes, do's and don'ts, voice and tone.
 - [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json): the published class API as data. Per class: kind, own selectors, states, parts, descendant rules, the custom properties it reads and sets; an example for each group that has one; the stylesheets in load order.
-- [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml): the whole system as one Design System Doc Spec 0.20.0 document. Every component with its traits and allowed values, invalid combinations, when-to-use and how-to-use guidelines with RFC 2119 levels, each rule's checkedBy and check, its keys and its look-alikes; every published token with its purpose and its DTCG source.
-- [llms-full.txt](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/llms-full.txt): AGENTS.md and DESIGN.md in one file.
 
 ## Components and foundations
 
@@ -30,5 +28,7 @@ Link the published CSS; never rebuild it from values. The rules are in AGENTS.md
 
 ## Optional
 
+- [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml): the largest file here, so read it only when a tool needs one structured file. The whole system as one Design System Doc Spec 0.20.0 document. Every component with its traits and allowed values, invalid combinations, when-to-use and how-to-use guidelines with RFC 2119 levels, each rule's checkedBy and check, its keys and its look-alikes; every published token with its purpose and its DTCG source.
+- [llms-full.txt](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/llms-full.txt): AGENTS.md and DESIGN.md in one file, for a tool that takes a single fetch; skip it once you have read those two.
 - [The live design system](https://natemills.me/design-system): the view for people, built with JavaScript; a plain fetch gets one line of text. Agents should read DESIGN.md instead.
 - [Portfolio](https://natemills.me/): the site the system runs.

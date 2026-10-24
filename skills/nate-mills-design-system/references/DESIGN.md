@@ -1,5 +1,5 @@
 ---
-# The value blocks below (colors, typography, rounded, spacing) are GENERATED from
+# The value blocks below (colors, typography, rounded, spacing, structure) are GENERATED from
 # tokens.json by tokens/designmd.mjs and drift-gated on deploy. Do not hand-edit between the
 # `# DESIGN:*:start` / `# DESIGN:*:end` markers; edit tokens.json and regenerate. The prose, the
 # component recipe map, and everything outside the markers is hand-authored.
@@ -38,7 +38,7 @@ colors:
   text-secondary: "#3f3f46"                                                     # --color-text-secondary
   text-tertiary: "#67676f"                                                      # --color-text-tertiary
   border: "#e4e4e7"                                                             # --color-border
-  border-strong: "#d4d4d8"                                                      # --color-border-strong
+  border-strong: "#d4d4d8"                                                      # --color-border-strong (a colour; var(--border-strong) is the whole 1px border)
   border-brand: "#d2ff37"                                                       # --color-border-brand (lime, fixed both themes)
   accent: "#1c1c1f"                                                             # --color-accent (theme-aware: ink light, lime dark)
   accent-hover: "#0a0a0b"                                                       # --color-accent-hover
@@ -53,7 +53,7 @@ colors:
   on-ink-muted: "rgb(255 255 255 / 0.4)"                                        # --color-on-ink-muted
   on-ink-border: "rgb(255 255 255 / 0.08)"                                      # --color-on-ink-border
 
-  # Dark theme semantics (data-theme="dark" or OS dark)
+  # Dark theme semantics (the same properties as above, re-pointed under data-theme="dark" or OS dark; no --dark-* property exists)
   dark-bg: "#0a0a0b"                                                            # --color-bg (dark theme)
   dark-surface: "#1c1c1f"                                                       # --color-surface (dark theme)
   dark-surface-sunken: "#141416"                                                # --color-surface-sunken (dark theme)
@@ -67,7 +67,7 @@ colors:
   dark-link: "#d2ff37"                                                          # --color-link (dark theme)
 
   # Feedback (errors only; copy .card--error)
-  feedback-error: "#961010"                                                     # --color-feedback-background-error
+  feedback-error: "#961010"                                                     # --color-feedback-background-error (the error fill)
   on-feedback-error: "#ffffff"                                                  # --color-on-feedback-error (the only ink on the error fill)
   dark-feedback-error: "#ff8f8f"                                                # --color-feedback-background-error (dark theme)
   dark-on-feedback-error: "#2a0000"                                             # --color-on-feedback-error (dark theme)
@@ -82,7 +82,7 @@ typography:
   families:
     # DESIGN:type-families:start
     display: '"Anton", Impact, "Haettenschweiler", sans-serif'  # --font-display
-    body: '"Work Sans", "Work Sans Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'  # --font-body
+    body: '"Work Sans", "Work Sans Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'  # --font-body (the family; --text-body is the body size)
     mono: '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace'  # --font-mono
     # DESIGN:type-families:end
   # DESIGN:type-styles:start
@@ -92,7 +92,7 @@ typography:
     weight: 400                           # --display-weight
     lineHeight: 1.05                      # --line-display
     tracking: "-0.0176em"                 # --display-tight
-  section-title:  # every section heading (.section-title)
+  section-title:  # every section heading (.section-title); Anton has one weight and draws 400 whatever is asked, so 800 shows only in a display font that has it
     family: display
     size: "clamp(min(4.25rem, 19vw), 8.7vw, 7.5rem)"  # --display-section
     weight: 800                                       # --weight-extrabold
@@ -183,13 +183,26 @@ spacing:
   card-pad-spacious: "32px"                                 # --card-pad-spacious
   # DESIGN:spacing:end
 
+# Borders, focus and targets: whole shorthand values, so a recipe names one instead of spelling
+# 1px solid or 44px.
+structure:
+  # DESIGN:structure:start
+  border-hairline: "1px solid #e4e4e7"  # --border-hairline (the default 1px border)
+  border-strong: "1px solid #d4d4d8"    # --border-strong
+  border-focus: "2px solid #1c1c1f"     # --border-focus (the keyboard-focus outline)
+  focus-ring-offset: "2px"              # --focus-ring-offset
+  touch-target-min: "44px"              # --touch-target-min (the smallest tap target)
+  # DESIGN:structure:end
+
 # There is no elevation scale. Depth is the surface ladder plus hairline borders (see "Depth and
 # elevation" below). The focus ring is the one ring-shaped value, and it is an outline, not a step.
 focus:
-  ring: "0 0 0 2px {colors.focus-ring}"   # 2px keyboard-focus outline, offset 2px
+  outline: "{structure.border-focus}"        # outline: var(--border-focus); never a box-shadow
+  offset: "{structure.focus-ring-offset}"    # outline-offset: var(--focus-ring-offset)
 
 # Component recipes reference {token} names that resolve against the blocks above, so a value change
-# propagates automatically and no raw value can drift here. Each variant is its own entry.
+# propagates automatically. A border with no shorthand of its own is the hairline width, 1px, plus a
+# colour token. Each variant is its own entry.
 components:
   nav:
     background: "transparent (frosted glass pill once scrolled)"
@@ -209,14 +222,14 @@ components:
     typography: "{typography.families.body} at 14px, weight 600, normal tracking, sentence case (not the mono label)"
     rounded: "{rounded.full}"
     padding: "10px 18px"
-    height: "44px (md); 32px (sm); 52px (lg)"
+    height: "{structure.touch-target-min} (md); 32px (sm); 52px (lg)"
   button-primary-hover:
     backgroundColor: "{colors.brand-ink}"
     textColor: "{colors.brand-lime}"
   button-secondary:
     backgroundColor: "transparent"
     textColor: "{colors.text-primary}"
-    border: "1px solid {colors.border} (a stronger grey in dark)"
+    border: "{structure.border-hairline} (a stronger grey in dark)"
     rounded: "{rounded.full}"
     padding: "10px 18px"
   button-secondary-hover:
@@ -225,14 +238,14 @@ components:
     border: "1px solid {colors.border-brand}"
   button-icon:
     shape: "circle, {rounded.full}"
-    border: "1px solid {colors.border} (a stronger grey in dark)"
+    border: "{structure.border-hairline} (a stronger grey in dark)"
     iconColor: "{colors.text-primary}"
-    size: "44px, glyph 16px"
+    size: "{structure.touch-target-min}, glyph 16px"
     note: "The one canonical icon button. An icon-only button is never a pill with a label."
   card:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.text-primary}"
-    border: "1px solid {colors.border}"
+    border: "{structure.border-hairline}"
     rounded: "{rounded.xl}"
     padding: "{spacing.card-pad-standard}"
     hover: "outline and slight lift, NOT a fill"
@@ -245,12 +258,12 @@ components:
     railTrack: "{colors.border}, a 4px hairline groove"
     railFill: "{colors.accent} (ink on light, lime on dark), grows with the position"
     counter: "{typography.families.mono} at 14px, weight 700, normal tracking; current number {colors.text-primary}, slash and total {colors.text-secondary}"
-    arrows: "{colors.text-secondary} glyph, {colors.text-primary} on hover; 24px glyph on a 44px invisible target"
+    arrows: "{colors.text-secondary} glyph, {colors.text-primary} on hover; 24px glyph on a {structure.touch-target-min} invisible target"
     onDarkSlab: "re-map --cn-rail-fill to {colors.brand-lime} and --cn-rail-track to --color-on-ink-hover on that band; the default ink fill vanishes on near-black"
   badge:
     backgroundColor: "transparent"
     textColor: "{colors.text-secondary}"
-    border: "1px solid {colors.border}"
+    border: "{structure.border-hairline}"
     typography: "{typography.label} mono, weight 500"
     rounded: "{rounded.full}"
     padding: "4px 12px"
@@ -258,7 +271,7 @@ components:
   chip:
     backgroundColor: "{colors.surface-sunken}"
     textColor: "{colors.text-primary}"
-    border: "1px solid {colors.border}"
+    border: "{structure.border-hairline}"
     typography: "{typography.label} mono, weight 500"
     rounded: "{rounded.full}"
     padding: "4px 10px"

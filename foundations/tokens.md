@@ -132,8 +132,8 @@ Size, weight, line height and tracking for the named styles on the Typography pa
 
 | Token | Use it for | Value | Source in tokens.json |
 |---|---|---|---|
-| `--border-hairline` | Default 1px hairline border; reads --color-border so it follows the theme. The standard card edge and divider. | `1px solid var(--color-border)` | `border.hairline` |
-| `--border-strong` | Heavier 1px border; reads --color-border-strong. For edges that need to read past a hairline, such as interactive-card hover outlines. | `1px solid var(--color-border-strong)` | `border.strong` |
-| `--border-focus` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. | `2px solid var(--color-focus-ring)` | `border.focus` |
+| `--border-hairline` | Default 1px hairline border; reads --color-border so it follows the theme. The standard card edge and divider. | `1px solid #e4e4e7` | `border.hairline` |
+| `--border-strong` | Heavier 1px border; reads --color-border-strong. For edges that need to read past a hairline, such as interactive-card hover outlines. | `1px solid #d4d4d8` | `border.strong` |
+| `--border-focus` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. | `2px solid #1c1c1f` | `border.focus` |
 | `--focus-ring-offset` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. | `2px` | `focus-ring-offset` |
 | `--touch-target-min` | Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px). | `44px` | `touch-target-min` |

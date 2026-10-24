@@ -113,7 +113,7 @@ The recipe from [DESIGN.md](../DESIGN.md), one entry per state. Names in braces 
 badge:
   backgroundColor: "transparent"
   textColor: "{colors.text-secondary}"
-  border: "1px solid {colors.border}"
+  border: "{structure.border-hairline}"
   typography: "{typography.label} mono, weight 500"
   rounded: "{rounded.full}"
   padding: "4px 12px"

@@ -503,7 +503,7 @@ a.card:focus-visible { text-decoration: none; }
   align-items: center;
   justify-content: center;
   gap: var(--space-200);
-  min-height: 132px;
+  min-height: 132px; /* lint-ok: the empty card's floor height; no token sizes a card */
   text-align: center;
 }
 /* Attribute only, never `i[data-lucide]`. The boot script REPLACES the authored
@@ -536,9 +536,9 @@ a.card:focus-visible { text-decoration: none; }
   background: var(--color-surface-sunken);
   border-radius: var(--radius-sm);
 }
-.card-skel--media { height: 92px; }
-.card-skel--title { height: 18px; width: 55%; }
-.card-skel--line  { height: 12px; }
+.card-skel--media { height: 92px; } /* lint-ok: a placeholder sized to the thumbnail it stands in for */
+.card-skel--title { height: 18px; width: 55%; } /* lint-ok: a placeholder sized to the title line it stands in for */
+.card-skel--line  { height: 12px; } /* lint-ok: a placeholder sized to the text line it stands in for */
 .card-skel--line.is-short { width: 78%; }
 .card-skel::after {
   content: "";
@@ -801,7 +801,7 @@ a.card:focus-visible { text-decoration: none; }
      spacing). break-word, not anywhere: it never changes how wide the heading
      asks to be, so no layout moves and a word that fits never breaks. */
   overflow-wrap: break-word;
-  max-width: 22ch;
+  max-width: 22ch; /* lint-ok: the heading's line length in characters; --measure (52ch) is the body measure */
   color: var(--color-text-primary);
   font-style: normal;
 }
@@ -834,8 +834,8 @@ a.card:focus-visible { text-decoration: none; }
 .section-title::after {
   content: "" / "";
   display: inline-block;
-  width: 0.15em;
-  height: 0.15em;
+  width: 0.15em; /* lint-ok: the full stop is sized in em so it scales with the heading */
+  height: 0.15em; /* lint-ok: the full stop is sized in em so it scales with the heading */
   margin-left: 0.07em;
   border-radius: var(--dot-radius);
   background: var(--brand-primary);
@@ -852,7 +852,7 @@ a.card:focus-visible { text-decoration: none; }
   font-size: var(--text-body);
   line-height: var(--line-body);
   color: var(--color-text-secondary);
-  max-width: 60ch;
+  max-width: 60ch; /* lint-ok: the subtitle's line length in characters, wider than --measure */
   margin: 0 0 var(--space-500);
 }
 
@@ -976,8 +976,8 @@ a.card:focus-visible { text-decoration: none; }
   gap: var(--space-200);
 }
 .link-underline--icon .icon-size-xs {
-  width: 13px;
-  height: 13px;
+  width: 13px; /* lint-ok: the inline arrow glyph; no icon-size token is 13px */
+  height: 13px; /* lint-ok: the inline arrow glyph; no icon-size token is 13px */
   flex-shrink: 0;
   transition: transform var(--duration-fast) var(--ease-default);
 }
@@ -1050,7 +1050,7 @@ a.card:focus-visible { text-decoration: none; }
 }
 .tab:hover,
 .tab[aria-selected="true"] { color: var(--color-text-primary); }
-.tab:focus-visible { outline: var(--border-focus); outline-offset: -2px; border-radius: var(--radius-sm); }
+.tab:focus-visible { outline: var(--border-focus); outline-offset: calc(-1 * var(--focus-ring-offset)); border-radius: var(--radius-sm); }
 .tabs--lg .tab {
   position: relative;
   white-space: nowrap; /* one scrolling row; the page fades the cut edge */

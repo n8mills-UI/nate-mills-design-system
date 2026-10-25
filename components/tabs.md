@@ -98,7 +98,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | `.tabs` | base | the row; role="tablist" | None |
 | `.tabs--lg` | modifier | display-face tabs that head a whole view | `--font-display`, `--size-lg`, `--space-200`, `--space-400`, `--weight-semibold` |
 | `.tabs--compact` | modifier | mono caption tabs inside a card, each with its own underline | `--color-accent`, `--font-mono`, `--space-200`, `--space-400`, `--tab-compact-min-h`, `--text-caption` |
-| `.tab` | base | one tab: a <button type="button" role="tab"> | `--border-focus`, `--color-accent`, `--color-text-primary`, `--color-text-tertiary`, `--duration-fast`, `--ease-default`, `--font-display`, `--font-mono`, `--radius-sm`, `--size-lg`, `--space-200`, `--space-400`, `--tab-compact-min-h`, `--text-caption`, `--weight-semibold` |
+| `.tab` | base | one tab: a <button type="button" role="tab"> | `--border-focus`, `--color-accent`, `--color-text-primary`, `--color-text-tertiary`, `--duration-fast`, `--ease-default`, `--focus-ring-offset`, `--font-display`, `--font-mono`, `--radius-sm`, `--size-lg`, `--space-200`, `--space-400`, `--tab-compact-min-h`, `--text-caption`, `--weight-semibold` |
 
 ## Tokens
 
@@ -113,6 +113,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--color-text-tertiary` | Semantic | `#67676f`; dark `#909096`, from `--neutral-600` | Tertiary text: section labels and quiet meta copy; the last step that still clears 4.5:1 on light. |
 | `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
 | `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
 | `--font-display` | Semantic | `"Anton", Impact, "Haettenschweiler", sans-serif` | Display headings and large numbers. Anton, one weight, never faux-bolded. |
 | `--font-mono` | Semantic | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace` | Tabular numbers, code, and eyebrow labels. |
 | `--radius-sm` | Semantic | `8px` | Small radius. The workhorse for inputs and small controls; chips, badges and buttons take the full radius. |

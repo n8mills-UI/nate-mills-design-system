@@ -1046,6 +1046,7 @@
             "--color-text-tertiary",
             "--duration-fast",
             "--ease-default",
+            "--focus-ring-offset",
             "--font-display",
             "--font-mono",
             "--radius-sm",

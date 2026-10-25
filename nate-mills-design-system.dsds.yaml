@@ -441,20 +441,12 @@ entries:
           - id: "empty"
             name: ".card--empty"
             description: "A centred empty message."
-          - id: "error"
-            name: ".card--error"
-            description: "A centred error message carrying the feedback colour."
     combos:
       - subject: "density.compact"
         items:
           - "density.spacious"
         level: "must-not"
         note: "One density at a time: two densities on one element tie, so the result depends on stylesheet order."
-      - subject: "state.empty"
-        items:
-          - "state.error"
-        level: "must-not"
-        note: "One state at a time: two states on one element tie, so the result depends on stylesheet order."
     sections:
       - kind: "guidelines"
         for: "all"
@@ -464,7 +456,7 @@ entries:
             level: "may"
           - statement: "Use it for: A whole surface that goes to exactly one place."
             level: "may"
-          - statement: "Use it for: An empty or error message in the place a card would sit."
+          - statement: "Use it for: An empty message in the place a card would sit."
             level: "may"
           - statement: "Not for: A row in a list: rows answer the pointer with a background wash, not a card lift."
             level: "should-not"
@@ -484,7 +476,7 @@ entries:
             level: "should"
           - statement: "When the whole card opens and closes in place, keep it an `<article>`, give it one `<button aria-expanded>` as its only control, and add `.card--interactive`; a click anywhere on the card works that button."
             level: "should"
-          - statement: "For a message in place of content, add `.card--empty` or `.card--error`; on an always-dark slab, add `.card--dark`."
+          - statement: "For a message in place of content, add `.card--empty`; on an always-dark slab, add `.card--dark`."
             level: "should"
       - kind: "guidelines"
         for: "all"
@@ -566,10 +558,6 @@ entries:
             level: "must-not"
             tags:
               - "invalid-combination"
-          - statement: "`state: empty` with `state: error`: One card carries one message."
-            level: "must-not"
-            tags:
-              - "invalid-combination"
           - statement: "Any card with a `data-theme` attribute pinned on it: The pin survives when the card is cloned and breaks dark mode. Use `tone: dark` for a dark slab."
             level: "must-not"
             tags:
@@ -599,7 +587,7 @@ entries:
           - term: "interactive"
             definition: "Modifier class. Allowed: interactive (.card--interactive). Default: No class: static, with no hover. Whether the whole card answers the pointer. Put it on a real `<a>` or `<button>`, or on a card whose one control is a `<button aria-expanded>` that opens it in place."
           - term: "state"
-            definition: "Modifier class. Allowed: empty (.card--empty), error (.card--error). Default: No class: normal content. A message in place of content. For loading, see Loading card."
+            definition: "Modifier class. Allowed: empty (.card--empty). Default: No class: normal content. A message in place of content. For loading, see Loading card."
   - id: "loading-card"
     kind: "component"
     name: "Loading card"
@@ -1897,7 +1885,7 @@ entries:
   - id: "color.on-ink-primary"
     kind: "token"
     name: "--color-on-ink-primary"
-    description: "Primary text on an always-dark slab (88% white)."
+    description: "Primary text on an always-dark slab (solid neutral.300)."
     tokenType: "color"
     source: "./tokens.json"
     metadata:
@@ -1905,7 +1893,7 @@ entries:
   - id: "color.on-ink-secondary"
     kind: "token"
     name: "--color-on-ink-secondary"
-    description: "Secondary text on an always-dark slab (66% white)."
+    description: "Secondary text on an always-dark slab (66% white over brand ink, baked solid)."
     tokenType: "color"
     source: "./tokens.json"
     metadata:
@@ -1926,26 +1914,10 @@ entries:
     source: "./tokens.json"
     metadata:
       group: "Colour"
-  - id: "color.feedback-background-error"
-    kind: "token"
-    name: "--color-feedback-background-error"
-    description: "Error message backgrounds: deep red on light, soft red on dark."
-    tokenType: "color"
-    source: "./tokens.json"
-    metadata:
-      group: "Colour"
-  - id: "color.on-feedback-error"
-    kind: "token"
-    name: "--color-on-feedback-error"
-    description: "Contrast pair for content sitting on feedback-background-error: white on the deep light-theme red, near-black red on the soft dark-theme red. 8.7:1 light, 8.9:1 dark."
-    tokenType: "color"
-    source: "./tokens.json"
-    metadata:
-      group: "Colour"
   - id: "color.overlay-soft"
     kind: "token"
     name: "--color-overlay-soft"
-    description: "Soft scrim behind floating chrome (35% black)."
+    description: "Soft scrim behind floating chrome (neutral.950 at 35%)."
     tokenType: "color"
     source: "./tokens.json"
     metadata:
@@ -1953,7 +1925,7 @@ entries:
   - id: "color.overlay-base"
     kind: "token"
     name: "--color-overlay-base"
-    description: "Standard modal and lightbox scrim (62% black)."
+    description: "Standard modal and lightbox scrim (neutral.950 at 62%)."
     tokenType: "color"
     source: "./tokens.json"
     metadata:
@@ -1961,7 +1933,7 @@ entries:
   - id: "color.overlay-strong"
     kind: "token"
     name: "--color-overlay-strong"
-    description: "Heavy scrim for maximum content isolation (88% black)."
+    description: "Heavy scrim for maximum content isolation (neutral.950 at 88%)."
     tokenType: "color"
     source: "./tokens.json"
     metadata:

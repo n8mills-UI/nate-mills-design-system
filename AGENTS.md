@@ -34,7 +34,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 
 - Hand-building carousel controls (`.ds-carousel-nav` exists). Nav bars and form fields have no published class: build them from tokens and leave `.btn` alone.
 - Copying a dark-theme name that does not exist (see rule 5).
-- Leaving an error state uncoloured: the one feedback colour is for errors, so copy `.card--error`. There is no success or warning colour.
+- Inventing a status colour: there is no error, success or warning colour. Say what happened in words.
 
 ## Published classes
 
@@ -48,7 +48,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 ```
 
 **Cards:** Surface step plus a hairline border. Never a drop shadow.
-`.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error`, `.card--loading`, `.card-skel`, `.card-skel--media`, `.card-skel--title`, `.card-skel--line`
+`.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--loading`, `.card-skel`, `.card-skel--media`, `.card-skel--title`, `.card-skel--line`
 
 ```html
 <a class="card card--interactive" href="/work">
@@ -102,7 +102,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 As the CSS declares them; values are in DESIGN.md.
 
 <!-- AGENTS:names:start -->
-- **Colour (the same names in every theme):** `--brand-primary`, `--brand-primary-dim`, `--brand-primary-vivid`, `--brand-secondary`, `--brand-ink`, `--brand-gradient`, `--color-bg`, `--color-surface`, `--color-surface-sunken`, `--color-surface-inverse`, `--color-text-primary`, `--color-text-secondary`, `--color-text-tertiary`, `--color-border`, `--color-border-strong`, `--color-border-brand`, `--color-accent`, `--color-accent-hover`, `--color-on-accent`, `--color-focus-ring`, `--color-link`, `--color-link-hover`, `--color-on-ink-primary`, `--color-on-ink-secondary`, `--color-on-ink-muted`, `--color-on-ink-border`, `--color-feedback-background-error`, `--color-on-feedback-error`, `--color-overlay-soft`, `--color-overlay-base`, `--color-overlay-strong`
+- **Colour (the same names in every theme):** `--brand-primary`, `--brand-primary-dim`, `--brand-primary-vivid`, `--brand-secondary`, `--brand-ink`, `--brand-gradient`, `--color-bg`, `--color-surface`, `--color-surface-sunken`, `--color-surface-inverse`, `--color-text-primary`, `--color-text-secondary`, `--color-text-tertiary`, `--color-border`, `--color-border-strong`, `--color-border-brand`, `--color-accent`, `--color-accent-hover`, `--color-on-accent`, `--color-focus-ring`, `--color-link`, `--color-link-hover`, `--color-on-ink-primary`, `--color-on-ink-secondary`, `--color-on-ink-muted`, `--color-on-ink-border`, `--color-overlay-soft`, `--color-overlay-base`, `--color-overlay-strong`
 - **Font families:** `--font-display`, `--font-body`, `--font-mono`
 - **Type styles (size, weight, line height, tracking):** `--display-hero`, `--display-weight`, `--line-display`, `--display-tight`, `--display-section`, `--weight-extrabold`, `--text-h1`, `--text-h2`, `--line-heading`, `--tracking-tight`, `--display-card-title`, `--display-stat-num`, `--display-intro`, `--weight-regular`, `--line-snug`, `--text-body`, `--line-body`, `--tracking-normal`, `--size-sm`, `--text-caption`, `--text-label`, `--weight-medium`, `--tracking-label`
 - **Radius:** `--radius-none`, `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-xl`, `--radius-full`

@@ -10,7 +10,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 - A self-contained piece of content: a project, a credential, a metric, a quote.
 - A whole surface that goes to exactly one place.
-- An empty or error message in the place a card would sit.
+- An empty message in the place a card would sit.
 
 ## When not to use
 
@@ -30,9 +30,9 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 - Put `.card` on a `<div>` or `<article>`.
 - When the whole card goes to one place, make the card itself the `<a href>` or `<button>` and add `.card--interactive`.
 - When the whole card opens and closes in place, keep it an `<article>`, give it one `<button aria-expanded>` as its only control, and add `.card--interactive`; a click anywhere on the card works that button.
-- For a message in place of content, add `.card--empty` or `.card--error`; on an always-dark slab, add `.card--dark`.
+- For a message in place of content, add `.card--empty`; on an always-dark slab, add `.card--dark`.
 
-**Classes:** `.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error`
+**Classes:** `.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`
 
 ## Props
 
@@ -41,7 +41,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 | `tone` | modifier class | `dark` (`.card--dark`) | No class: the surface follows the page theme. | Which surface the card sits on. |
 | `density` | modifier class | `compact` (`.card--compact`), `spacious` (`.card--spacious`) | No class: 24px padding. | Inner padding. |
 | `interactive` | modifier class | `interactive` (`.card--interactive`) | No class: static, with no hover. | Whether the whole card answers the pointer. Put it on a real `<a>` or `<button>`, or on a card whose one control is a `<button aria-expanded>` that opens it in place. |
-| `state` | modifier class | `empty` (`.card--empty`), `error` (`.card--error`) | No class: normal content. | A message in place of content. For loading, see Loading card. |
+| `state` | modifier class | `empty` (`.card--empty`) | No class: normal content. | A message in place of content. For loading, see Loading card. |
 
 ## Variants
 
@@ -64,10 +64,9 @@ Available interactive values: `interactive`.
 
 Default interactive: No class: static, with no hover.
 
-Available states: `empty`, `error`.
+Available states: `empty`.
 
 - `empty` (`.card--empty`): A centred empty message.
-- `error` (`.card--error`): A centred error message carrying the feedback colour.
 
 Default state: No class: normal content.
 
@@ -79,7 +78,6 @@ Default state: No class: normal content.
 | `hover` | Interactive only: the border steps darker and the card lifts slightly on a fine pointer. | `--color-border-strong` |
 | `focus-visible` | Interactive only: the system ring around the card. | `--border-focus` |
 | `active` | Interactive only: the fill steps to the sunken surface while pressed. | `--color-surface-sunken` |
-| `error` | The `.card--error` class: a tinted border, an error-coloured icon and a message in words. Never colour alone. | `--color-feedback-background-error` |
 
 The CSS styles these pseudo-classes: `:active`, `:focus-visible`, `:focus-within`, `:hover`.
 
@@ -92,7 +90,6 @@ Options that must not be used together. Each names the props above.
 | `interactive` on a `<div>` or `<article>` with a click handler | MUST NOT | Keyboard users can never reach it. The interactive card must itself be an `<a href>` or a `<button>`. |
 | `interactive` with a link, or more than one button, inside it | MUST NOT | A control inside a link or button is invalid HTML, and two controls leave the card's one target unclear. The one inner control allowed is the `<button aria-expanded>` of a card that opens in place. A card with several actions stays static. |
 | `density: compact` with `density: spacious` | MUST NOT | The padding rules tie, so the padding depends on stylesheet order. |
-| `state: empty` with `state: error` | MUST NOT | One card carries one message. |
 | Any card with a `data-theme` attribute pinned on it | MUST NOT | The pin survives when the card is cloned and breaks dark mode. Use `tone: dark` for a dark slab. |
 
 ## Keyboard
@@ -183,7 +180,6 @@ card-dark:
 | `.card--compact` | modifier | 16px padding | `--card-pad-compact` |
 | `.card--spacious` | modifier | 32px padding | `--card-pad-spacious` |
 | `.card--empty` | modifier | centred empty state | `--color-text-tertiary`, `--size-xl`, `--space-200` |
-| `.card--error` | modifier | centred error state, carries the feedback colour | `--color-border`, `--color-feedback-background-error`, `--color-text-primary`, `--color-text-tertiary`, `--size-xl`, `--space-200` |
 
 ## Tokens
 
@@ -195,7 +191,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--card-border` | Component | `1px solid var(--color-border)`, from `--border-hairline` | Card edge; 1px hairline that follows the theme border colour. |
 | `--card-dark-bg` | Component | `#1c1c1f`, from `--brand-ink` | Card surface fill on dark slabs (.card--dark). |
 | `--card-dark-border` | Component | `rgb(255 255 255 / 0.08)`, from `--color-on-ink-border` | Card edge on dark slabs. |
-| `--card-dark-fg` | Component | `rgb(255 255 255 / 0.88)`, from `--color-on-ink-primary` | Card body text on dark slabs. |
+| `--card-dark-fg` | Component | `#e4e4e7`, from `--color-on-ink-primary` | Card body text on dark slabs. |
 | `--card-fg` | Component | `#0a0a0b`; dark `#f4f4f5`, from `--color-text-primary` | Card body text. |
 | `--card-padding` | Component | `24px`, from `--card-pad-standard` | Card content inset; the standard 24px card padding. |
 | `--card-radius` | Component | `20px`, from `--radius-xl` | Card corner radius; the default for content cards and modals. Every card family on the site reads this one token: awards and training used to sit at radius.lg while the featured-work and kind-words cards hardcoded radius.xl, so four card families shipped two different corners. |
@@ -203,12 +199,9 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--brand-primary` | Semantic | `#d2ff37`, from `--lime-500` | The brand lime, scarce on purpose: the primary button fill, brand outlines, focus rings on dark surfaces and status dots. Never body text on a light surface. |
 | `--card-pad-compact` | Semantic | `16px`, from `--space-400` | Compact card-padding tier (16px). Dense content tiles: credential cards, health-check tiles, inner controls. |
 | `--card-pad-spacious` | Semantic | `32px`, from `--space-600` | Spacious card-padding tier (32px). Large feature, award, and full-testimonial cards (often the desktop step up from standard). |
-| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. Decoration only: never the only edge of an input or control, which needs 3:1; use text-tertiary there. |
 | `--color-border-strong` | Semantic | `#d4d4d8`; dark `#3f3f46`, from `--neutral-400` | Heavier border for edges that must read past a hairline (secondary-button outlines). |
-| `--color-feedback-background-error` | Semantic | `#961010`; dark `#ff8f8f` | Error message backgrounds: deep red on light, soft red on dark. |
 | `--color-focus-ring` | Semantic | `#1c1c1f`; dark `#d2ff37`, from `--neutral-850` | Theme-aware keyboard-focus colour: ink on light, lime on dark. Consumed via border.focus. |
 | `--color-surface-sunken` | Semantic | `#ececec`; dark `#141416`, from `--neutral-200` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. |
-| `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
 | `--color-text-tertiary` | Semantic | `#67676f`; dark `#909096`, from `--neutral-600` | Tertiary text: section labels and quiet meta copy; the last step that still clears 4.5:1 on light. |
 | `--duration-base` | Semantic | `220ms` | Reveal, modal, and swap transitions. |
 | `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |

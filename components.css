@@ -419,7 +419,7 @@
      re-declared beside it because they resolve on :root and would otherwise
      keep the page colour (theme-pin-lint). W62 G-13. */
   --color-focus-ring: var(--brand-primary);
-  --border-focus: 2px solid var(--color-focus-ring);
+  --border-focus: 2px solid var(--color-focus-ring); /* lint-ok: border.focus restated, so its ring reads the lime set on this card; no width token exists */
   --btn-focus-ring: var(--color-focus-ring);
 }
 
@@ -502,10 +502,9 @@ a.card:focus-visible { text-decoration: none; }
   .card--interactive:hover { translate: none; }
 }
 
-/* Content states. Empty and error centre a message so the card is never a blank
-   box; loading shows a skeleton sized to the card. */
-.card--empty,
-.card--error {
+/* Content states. Empty centres a message so the card is never a blank box;
+   loading shows a skeleton sized to the card. */
+.card--empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -519,18 +518,10 @@ a.card:focus-visible { text-decoration: none; }
    tag name matches only the split second before hydration and silently stops
    applying after it. That is why these icons had been rendering at the
    inherited text colour rather than the tertiary grey this rule asks for. */
-.card--empty [data-lucide],
-.card--error [data-lucide] { width: var(--size-xl); height: var(--size-xl); color: var(--color-text-tertiary); }
-/* Error carries the feedback colour; empty stays neutral. The two states were
-   byte-identical greys, so "nothing here yet" and "this failed to load" looked
-   like the same event: only the sentence told them apart. Empty is not a fault
-   and must stay quiet; an error is, and gets the one feedback pair the system
-   owns. Colour is never the only signal, the message still says what happened,
-   and the tinted edge is mixed with --color-border so it reads as the same
-   hairline family rather than a second border weight. */
-.card--error { border-color: color-mix(in srgb, var(--color-feedback-background-error) 55%, var(--color-border)); }
-.card--error [data-lucide] { color: var(--color-feedback-background-error); }
-.card--error .card-state-msg { color: var(--color-text-primary); }
+.card--empty [data-lucide] { width: var(--size-xl); height: var(--size-xl); color: var(--color-text-tertiary); }
+/* .card--error and its feedback reds left on 2026-10-25 (W62 I, Nathan): a
+   portfolio has no failure states, and one error colour without success and
+   warning was half a feedback set. */
 .card-state-msg  { margin: 0; font-size: var(--size-sm); color: var(--color-text-secondary); }
 .card-state-hint { margin: 0; font-size: var(--text-caption); color: var(--color-text-tertiary); line-height: var(--line-body); }
 

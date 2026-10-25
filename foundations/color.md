@@ -8,13 +8,12 @@ Part of the [Nate Mills Design System](../README.md): this page is a section of 
 
 ## Color roles
 
-The palette is a neutral ramp and one lime, plus the lime's yellow partner and one error pair. The
+The palette is a neutral ramp and one lime, plus the lime's yellow partner. The
 neutrals are not warm: the light end (the canvas, the white card, the sunken well) is pure grey with
 no hue, and the borders, text and dark surfaces are a faintly cool zinc grey. The yellow
 (`{colors.brand-secondary}`) is the colour `{colors.brand-gradient}` runs into, and it appears in
-gradients beside the lime, not as a flat colour of its own. The error pair is
-`--color-feedback-background-error` and `--color-on-feedback-error`; copy `.card--error`. There is no
-success, warning or info colour (external brand colours like a client blue are locked constants used
+gradients beside the lime, not as a flat colour of its own. There is no
+status colour: no error, success, warning or info (external brand colours like a client blue are locked constants used
 only inside their own case-study or logo context, never as system colour).
 
 **Brand voltage rule: use the lime (`{colors.brand-lime}`) ONLY for** the primary button fill, brand
@@ -71,8 +70,8 @@ colors:
   link-hover: "#0a0a0b"                                                         # --color-link-hover
 
   # Text on always-dark slabs (theme-invariant)
-  on-ink-primary: "rgb(255 255 255 / 0.88)"                                     # --color-on-ink-primary
-  on-ink-secondary: "rgb(255 255 255 / 0.66)"                                   # --color-on-ink-secondary
+  on-ink-primary: "#e4e4e7"                                                     # --color-on-ink-primary
+  on-ink-secondary: "#b2b2b3"                                                   # --color-on-ink-secondary
   on-ink-muted: "rgb(255 255 255 / 0.4)"                                        # --color-on-ink-muted
   on-ink-border: "rgb(255 255 255 / 0.08)"                                      # --color-on-ink-border
 
@@ -89,14 +88,8 @@ colors:
   dark-focus-ring: "#d2ff37"                                                    # --color-focus-ring (dark theme)
   dark-link: "#d2ff37"                                                          # --color-link (dark theme)
 
-  # Feedback (errors only; copy .card--error)
-  feedback-error: "#961010"                                                     # --color-feedback-background-error (the error fill)
-  on-feedback-error: "#ffffff"                                                  # --color-on-feedback-error (the only ink on the error fill)
-  dark-feedback-error: "#ff8f8f"                                                # --color-feedback-background-error (dark theme)
-  dark-on-feedback-error: "#2a0000"                                             # --color-on-feedback-error (dark theme)
-
   # Scrims
-  overlay-soft: "rgb(0 0 0 / 0.35)"                                             # --color-overlay-soft
-  overlay-base: "rgb(0 0 0 / 0.62)"                                             # --color-overlay-base
-  overlay-strong: "rgb(0 0 0 / 0.88)"                                           # --color-overlay-strong
+  overlay-soft: "rgb(10 10 11 / 0.35)"                                          # --color-overlay-soft
+  overlay-base: "rgb(10 10 11 / 0.62)"                                          # --color-overlay-base
+  overlay-strong: "rgb(10 10 11 / 0.88)"                                        # --color-overlay-strong
 ```

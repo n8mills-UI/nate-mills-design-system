@@ -131,8 +131,6 @@ export interface DesignTokens {
   "color-on-ink-hover": string;
   "color-on-primary-strong": string;
   "color-on-primary-muted": string;
-  "color-feedback-background-error": string;
-  "color-on-feedback-error": string;
   "color-overlay-soft": string;
   "color-overlay-base": string;
   "color-overlay-strong": string;

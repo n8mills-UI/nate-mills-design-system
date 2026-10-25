@@ -417,36 +417,6 @@
           "unpublished": []
         },
         {
-          "name": "card--error",
-          "kind": "modifier",
-          "note": "centred error state, carries the feedback colour",
-          "selectors": [
-            ".card--error"
-          ],
-          "contexts": [],
-          "descendants": [
-            ".card--error [data-lucide]",
-            ".card--error .card-state-msg"
-          ],
-          "states": [],
-          "parts": [],
-          "reads": [
-            "--color-border",
-            "--color-feedback-background-error",
-            "--space-200"
-          ],
-          "descendantReads": [
-            "--color-feedback-background-error",
-            "--color-text-primary",
-            "--color-text-tertiary",
-            "--size-xl"
-          ],
-          "sets": [],
-          "unpublished": [
-            "card-state-msg"
-          ]
-        },
-        {
           "name": "card--loading",
           "kind": "modifier",
           "note": "skeleton state; fill it with .card-skel bars or it is an empty box",

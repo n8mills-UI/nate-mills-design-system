@@ -44,8 +44,8 @@ generated.
 
 - No AI-default gradient palette. The indigo, violet, fuchsia and cyan family (`#4f46e5`, `#6366f1`,
   `#7c3aed`, `#8b5cf6`, `#a855f7`, `#06b6d4`, `#d946ef` and relatives) is the single loudest tell.
-  This system's colour is the set under **Color roles**: neutral greys, one lime with its yellow
-  gradient partner, and one error pair.
+  This system's colour is the set under **Color roles**: neutral greys and one lime with its yellow
+  gradient partner.
 - No gradient text, glows, blobs, mesh backgrounds, glass, noise overlays, or fake depth. The one
   gradient in the system is `{colors.brand-gradient}`, and it is brand identity, not decoration.
 - No decorative surface to fill space. A border is earned by grouping or interaction.

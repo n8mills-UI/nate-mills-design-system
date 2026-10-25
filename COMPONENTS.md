@@ -2,7 +2,7 @@
 
 # Components
 
-> Every component in the Nate Mills Design System: 10 components, 47 classes. This list and the helper classes under it are the whole inventory; anything not on them is not part of the system.
+> Every component in the Nate Mills Design System: 10 components, 46 classes. This list and the helper classes under it are the whole inventory; anything not on them is not part of the system.
 
 The system is a CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, and its props are those classes and attributes. Link the stylesheets as [Getting started](foundations/getting-started.md) shows. The same facts as data: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), one Design System Doc Spec 0.20.0 document with every component and token, and [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json), the class API.
 
@@ -11,7 +11,7 @@ The system is a CSS class API, not a JavaScript component library: each componen
 | Component | What it is for | Classes | Takes keyboard focus |
 |---|---|---|---|
 | [Button](components/button.md) | A standalone action, or a call to action that goes somewhere: a full pill with a large pointer target. | `.btn`, `.btn--primary`, `.btn--secondary`, `.btn--icon`, `.btn--sm`, `.btn--md`, `.btn--lg` | Yes |
-| [Card](components/card.md) | A bounded container on the surface step with a hairline border; clickable as a whole only with the interactive class. | `.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty`, `.card--error` | Only as `.card--interactive` on a link or button |
+| [Card](components/card.md) | A bounded container on the surface step with a hairline border; clickable as a whole only with the interactive class. | `.card`, `.card--dark`, `.card--interactive`, `.card--compact`, `.card--spacious`, `.card--empty` | Only as `.card--interactive` on a link or button |
 | [Loading card](components/loading-card.md) | A card standing in for content on its way: skeleton bars, one per line of what is coming. | `.card--loading`, `.card-skel`, `.card-skel--media`, `.card-skel--title`, `.card-skel--line` | No |
 | [Chip](components/chip.md) | A read-only label pill in the mono label type: a skill, a tag, a role. | `.chip`, `.chip--outline` | No |
 | [Badge](components/badge.md) | A read-only status or count pill: a hairline outline, a word, and an optional lime dot or glyph. | `.badge`, `.badge__dot` | No |

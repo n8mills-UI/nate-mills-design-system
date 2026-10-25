@@ -31,12 +31,9 @@ When building a new page or prototype with this system:
   OKLCH as well, and the values here are exact round-trips of those OKLCH colours. The shipped CSS
   emits the sRGB hex only, deliberately: the round-trip is exact, so emitting OKLCH changed no pixel,
   and it made computed colours unreadable to sRGB-only accessibility scanners.
-- There is ONE status colour, for errors: `--color-feedback-background-error` (deep red on light, soft
-  red on dark) and `--color-on-feedback-error`, the only ink that may sit on it. For an error state,
-  copy `.card--error`: tint the border and the icon with the error colour and keep the message in
-  `--color-text-primary`. Never set text in the error colour on the page ground. There is no success or
-  warning colour; a portfolio has no such UI. If a consumer needs one, add it at the token layer
-  first, then route a semantic.
+- There is no status colour: no error, success or warning. A portfolio has no such UI, so the one
+  error pair and `.card--error` were removed on 2026-10-25. Say what happened in words. If a consumer
+  needs a status colour, add it at the token layer first, then route a semantic.
 - Fonts are Anton (display), Work Sans (body and controls) and JetBrains Mono (labels and numbers).
   All three are open source. If one is unavailable, fall back to a condensed grotesque for display,
   a neutral grotesque for body, and any monospace with a slashed zero for labels.

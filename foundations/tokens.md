@@ -4,7 +4,7 @@
 
 > Every token name the published CSS gives you, what each one is for, and its value.
 
-Part of the [Nate Mills Design System](../README.md). These 86 names are the core tokens [AGENTS.md](../AGENTS.md) lists for building pages: write `var(--name)`, never the raw value. tokens.css declares more (motion, weights, stacking, component tokens); every one is in [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json) with its description. Each purpose below comes from that description, each value from [DESIGN.md](../DESIGN.md) or tokens.json, and the last column is the token's path in tokens.json, its DTCG source. All foundations: [Foundations](README.md).
+Part of the [Nate Mills Design System](../README.md). These 84 names are the core tokens [AGENTS.md](../AGENTS.md) lists for building pages: write `var(--name)`, never the raw value. tokens.css declares more (motion, weights, stacking, component tokens); every one is in [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json) with its description. Each purpose below comes from that description, each value from [DESIGN.md](../DESIGN.md) or tokens.json, and the last column is the token's path in tokens.json, its DTCG source. All foundations: [Foundations](README.md).
 
 ## Three tiers
 
@@ -12,8 +12,8 @@ Every token in tokens.json sits in one of three tiers. Build with semantic token
 
 | Tier | What it is | Example | Where it is listed | Use it? |
 |---|---|---|---|---|
-| Primitive | A raw value, named by hue and stop. | `--neutral-850` (`#1c1c1f`) | Only in tokens.json, in the neutral, lime, yellow, alpha groups. | Never pick one: primitives are the source semantic tokens read from. |
-| Semantic | A role: what the value is for, such as reading text or the gap between sections. | `--color-text-primary` (`#0a0a0b`; dark `#f4f4f5`, from `--neutral-950`) | This page lists the 86 core ones; the rest are in tokens.json. | Yes: pick these for anything you build. |
+| Primitive | A raw value, named by hue and stop. | `--neutral-850` (`#1c1c1f`) | Only in tokens.json, in the neutral, lime, yellow, pastel, alpha groups. | Never pick one: primitives are the source semantic tokens read from. |
+| Semantic | A role: what the value is for, such as reading text or the gap between sections. | `--color-text-primary` (`#0a0a0b`; dark `#f4f4f5`, from `--neutral-950`) | This page lists the 84 core ones; the rest are in tokens.json. | Yes: pick these for anything you build. |
 | Component | One component's own value, usually aliasing a semantic token. | `--card-bg` (`#ffffff`; dark `#1c1c1f`, from `--color-surface`) | The Tokens table on each [component page](../COMPONENTS.md). | Only to restyle that one component; never reuse one elsewhere. |
 
 One way, top to bottom: a component token aliases a semantic token, a semantic token aliases a primitive, and a primitive is a literal. Nothing reaches back up. The primary button is the one deliberate shortcut: its fill aliases the brand lime directly, so it keeps the brand in every theme.
@@ -46,15 +46,13 @@ The same names in every theme; the dark column shows the value the dark theme gi
 | `--color-focus-ring` | Theme-aware keyboard-focus colour: ink on light, lime on dark. Consumed via border.focus. | `#1c1c1f` | `#d2ff37` | `color.focus-ring` |
 | `--color-link` | Underlined navigational link text: ink on light, lime on dark. Distinct role from accent (Section 10). | `#1c1c1f` | `#d2ff37` | `color.link` |
 | `--color-link-hover` | Link text on hover: darker ink on light, white on dark. Checked at 4.5:1 on bg, surface and surface-sunken; use it on those only. | `#0a0a0b` | `#ffffff` | `color.link-hover` |
-| `--color-on-ink-primary` | Primary text on an always-dark slab (88% white). | `rgb(255 255 255 / 0.88)` | `rgb(255 255 255 / 0.88)` | `color.on-ink-primary` |
-| `--color-on-ink-secondary` | Secondary text on an always-dark slab (66% white). | `rgb(255 255 255 / 0.66)` | `rgb(255 255 255 / 0.66)` | `color.on-ink-secondary` |
+| `--color-on-ink-primary` | Primary text on an always-dark slab (solid neutral.300). | `#e4e4e7` | `#e4e4e7` | `color.on-ink-primary` |
+| `--color-on-ink-secondary` | Secondary text on an always-dark slab (66% white over brand ink, baked solid). | `#b2b2b3` | `#b2b2b3` | `color.on-ink-secondary` |
 | `--color-on-ink-muted` | Quiet fills and inactive dots on an always-dark slab. Not a text colour. | `rgb(255 255 255 / 0.4)` | `rgb(255 255 255 / 0.4)` | `color.on-ink-muted` |
 | `--color-on-ink-border` | Hairline border on an always-dark slab (8% white). | `rgb(255 255 255 / 0.08)` | `rgb(255 255 255 / 0.08)` | `color.on-ink-border` |
-| `--color-feedback-background-error` | Error message backgrounds: deep red on light, soft red on dark. | `#961010` | `#ff8f8f` | `color.feedback-background-error` |
-| `--color-on-feedback-error` | Contrast pair for content sitting on feedback-background-error: white on the deep light-theme red, near-black red on the soft dark-theme red. 8.7:1 light, 8.9:1 dark. | `#ffffff` | `#2a0000` | `color.on-feedback-error` |
-| `--color-overlay-soft` | Soft scrim behind floating chrome (35% black). | `rgb(0 0 0 / 0.35)` | `rgb(0 0 0 / 0.35)` | `color.overlay-soft` |
-| `--color-overlay-base` | Standard modal and lightbox scrim (62% black). | `rgb(0 0 0 / 0.62)` | `rgb(0 0 0 / 0.62)` | `color.overlay-base` |
-| `--color-overlay-strong` | Heavy scrim for maximum content isolation (88% black). | `rgb(0 0 0 / 0.88)` | `rgb(0 0 0 / 0.88)` | `color.overlay-strong` |
+| `--color-overlay-soft` | Soft scrim behind floating chrome (neutral.950 at 35%). | `rgb(10 10 11 / 0.35)` | `rgb(10 10 11 / 0.35)` | `color.overlay-soft` |
+| `--color-overlay-base` | Standard modal and lightbox scrim (neutral.950 at 62%). | `rgb(10 10 11 / 0.62)` | `rgb(10 10 11 / 0.62)` | `color.overlay-base` |
+| `--color-overlay-strong` | Heavy scrim for maximum content isolation (neutral.950 at 88%). | `rgb(10 10 11 / 0.88)` | `rgb(10 10 11 / 0.88)` | `color.overlay-strong` |
 
 ## Font families
 

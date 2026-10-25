@@ -64,7 +64,6 @@ Rules for using it:
 | `.card--compact` | 16px padding |
 | `.card--spacious` | 32px padding |
 | `.card--empty` | centred empty state |
-| `.card--error` | centred error state, carries the feedback colour |
 | `.card--loading` | skeleton state; fill it with .card-skel bars or it is an empty box |
 | `.card-skel` | one skeleton bar inside .card--loading; pair it with a size below |
 | `.card-skel--media` | media-block bar |

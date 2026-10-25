@@ -194,7 +194,7 @@ button-icon:
 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
-| `.btn` | base | base; always pair with a variant | `--btn-focus-ring`, `--btn-font`, `--btn-font-size`, `--btn-font-weight`, `--btn-gap`, `--btn-glyph`, `--btn-pad-x`, `--btn-pad-y`, `--btn-radius`, `--btn-transition`, `--duration-expressive`, `--duration-fast`, `--ease-default`, `--ease-linear`, `--focus-ring-offset`, `--opacity-disabled`, `--touch-target-min` |
+| `.btn` | base | base; always pair with a variant | `--border-focus`, `--btn-focus-ring`, `--btn-font`, `--btn-font-size`, `--btn-font-weight`, `--btn-gap`, `--btn-glyph`, `--btn-pad-x`, `--btn-pad-y`, `--btn-radius`, `--btn-transition`, `--duration-expressive`, `--duration-fast`, `--ease-default`, `--ease-linear`, `--focus-ring-offset`, `--opacity-disabled`, `--touch-target-min` |
 | `.btn--primary` | modifier | lime fill, ink label; inverts on hover | `--brand-ink`, `--brand-primary-dim`, `--btn-primary-bg`, `--btn-primary-bg-hover`, `--btn-primary-border`, `--btn-primary-fg`, `--btn-primary-fg-hover` |
 | `.btn--secondary` | modifier | transparent, border-grey outline (stronger grey in dark); fills lime on hover | `--brand-primary-dim`, `--btn-primary-bg`, `--btn-primary-border`, `--btn-primary-fg`, `--btn-secondary-border`, `--btn-secondary-fg` |
 | `.btn--icon` | modifier | the one canonical icon button: 44px circle, never a labelled pill | `--brand-primary-dim`, `--btn-icon-border`, `--btn-icon-fg`, `--btn-lg`, `--btn-md`, `--btn-primary-bg`, `--btn-primary-border`, `--btn-primary-fg`, `--btn-radius`, `--btn-sm`, `--touch-target-min` |
@@ -232,6 +232,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--btn-secondary-fg` | Component | `#0a0a0b`; dark `#f4f4f5`, from `--color-text-primary` | Secondary button label (transparent fill). |
 | `--btn-sm` | Component | `32px` | Compact: dense cards, toolbars, filters. Clears the WCAG 2.5.8 AA 24px target minimum. |
 | `--btn-transition` | Component | `background var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default), transform var(--duration-fast) var(--ease-default)` | CSS composite: the button's hover/focus transition across its four animated properties. Reads var(--duration-fast)/var(--ease-default) directly so it follows a motion re-point (same pattern as --gradient; DTCG forbids embedded aliases inside string values). |
+| `--border-focus` | Semantic | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
 | `--brand-ink` | Semantic | `#1c1c1f`, from `--neutral-850` | Fixed, theme-invariant brand ink. The always-dark bed, and the dark foreground on a fixed lime or static-white bed. |
 | `--brand-primary-dim` | Semantic | `#b8e030`, from `--lime-600` | Hover-dim step of the brand lime (lime.600). |
 | `--duration-expressive` | Semantic | `1300ms` | The slow, cinematic entrance for one large hero moment. |

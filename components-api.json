@@ -59,6 +59,7 @@
           ],
           "parts": [],
           "reads": [
+            "--border-focus",
             "--btn-focus-ring",
             "--btn-font",
             "--btn-font-size",
@@ -310,12 +311,18 @@
           "states": [],
           "parts": [],
           "reads": [
+            "--brand-primary",
             "--card-dark-bg",
             "--card-dark-border",
-            "--card-dark-fg"
+            "--card-dark-fg",
+            "--color-focus-ring"
           ],
           "descendantReads": [],
-          "sets": [],
+          "sets": [
+            "--border-focus",
+            "--btn-focus-ring",
+            "--color-focus-ring"
+          ],
           "unpublished": []
         },
         {

@@ -79,7 +79,8 @@
    gallery thumbs, ap2-flink) set a literal outline-offset: -2px, not this
    token. */
 .btn:focus-visible {
-  outline: 2px solid var(--btn-focus-ring);
+  outline: var(--border-focus);
+  outline-color: var(--btn-focus-ring);
   outline-offset: var(--focus-ring-offset);
 }
 /* A button never wears an underline, in any state. It lived in the page sheet
@@ -413,6 +414,13 @@
   background: var(--card-dark-bg);
   color: var(--card-dark-fg);
   border-color: var(--card-dark-border);
+  /* Dark in both themes, so the ring inside is the house lime in both (the
+     light theme's near-black ring vanished on the ink). The outline tokens are
+     re-declared beside it because they resolve on :root and would otherwise
+     keep the page colour (theme-pin-lint). W62 G-13. */
+  --color-focus-ring: var(--brand-primary);
+  --border-focus: 2px solid var(--color-focus-ring);
+  --btn-focus-ring: var(--color-focus-ring);
 }
 
 /* -----------------------------------------------------------------------------

@@ -1707,6 +1707,13 @@ a.card:focus-visible { text-decoration: none; }
 .sbtn-li--blue { display: block; }
 [data-theme="dark"] .sbtn-li--blue { display: none; }
 [data-theme="dark"] .sbtn-li--white { display: block; }
+/* No-script twin: with scripting off nothing stamps data-theme, so the OS
+   setting decides. Keyed on no data-theme at the same weight, so it never
+   applies with script running (W62, found 25 Oct). */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme])) .sbtn-li--blue { display: none; }
+  :root:where(:not([data-theme])) .sbtn-li--white { display: block; }
+}
 @media (hover: hover) {
   .sbtn:hover .sbtn-li--blue,
   .sbtn:hover .sbtn-li--white,

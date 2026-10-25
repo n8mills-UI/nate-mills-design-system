@@ -119,7 +119,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | `.section-label` | base | uppercase mono eyebrow | `--chip-line`, `--color-text-tertiary`, `--font-feature-mono`, `--font-mono`, `--space-200`, `--text-label`, `--tracking-eyebrow`, `--weight-semibold` |
 | `.section-label--accent` | modifier | accent-emphasis colour, for eyebrows on marquee cards | `--color-accent-emphasis` |
 | `.section-label--center` | modifier | centred | None |
-| `.section-label--icon` | modifier | icon-led; the glyph is decorative | None |
+| `.section-label--icon` | modifier | icon-led; the glyph is decorative | `--size-sm` |
 | `.section-label--row` | modifier | heading ROW rather than an inline tag | None |
 | `.section-title` | base | any heading level, picked for where it sits (h2 for a page section, h3 inside one); carries the drawn brand period | `--brand-primary`, `--color-text-primary`, `--display-section`, `--display-tight`, `--dot-radius`, `--font-display`, `--line-display`, `--space-300`, `--weight-extrabold` |
 | `.section-subtitle` | base | intro line under the title | `--color-text-secondary`, `--font-body`, `--line-body`, `--space-500`, `--text-body` |
@@ -146,6 +146,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--line-body` | Semantic | `1.5` | Default reading text: paragraphs, lists, captions. The workhorse. |
 | `--line-display` | Semantic | `1.05` | Display-grade headings (--text-h1, section h2s). Big text wants the tightest leading. |
 | `--section-head-gap` | Semantic | `clamp(var(--space-300), 1.75vw, var(--space-500))` | Section rhythm. The single gap from a section heading to the first content under it, owned by .section-head. |
+| `--size-sm` | Semantic | `0.875rem` | 14px. Compact body: footer text, card bullets, dense UI copy. |
 | `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
 | `--space-300` | Semantic | `12px` | Medium-tight break. Heading-to-body, compact rows. |
 | `--space-500` | Semantic | `24px` | Medium break. Group separation inside a section; the standard card-padding tier (--card-pad-standard). |

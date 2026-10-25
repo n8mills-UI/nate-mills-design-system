@@ -143,7 +143,7 @@ carousel-nav:
 | `.ds-carousel-nav__arrow` | element | prev / next | `--border-focus`, `--btn-radius`, `--cn-glyph`, `--color-text-primary`, `--color-text-secondary`, `--duration-fast`, `--ease-default`, `--focus-ring-offset`, `--opacity-disabled`, `--touch-target-min` |
 | `.ds-carousel-nav__pager` | element | groups the prev / next chevrons around the counter | `--space-200` |
 | `.ds-carousel-nav__fill` | element | progress fill | `--bar-radius`, `--cn-rail-fill`, `--duration-slow`, `--ease-spring` |
-| `.ds-carousel-nav__count` | element | mono counter | `--color-text-secondary`, `--font-mono`, `--size-sm`, `--tracking-normal`, `--weight-bold` |
+| `.ds-carousel-nav__count` | element | mono counter | `--color-text-primary`, `--color-text-secondary`, `--font-mono`, `--size-sm`, `--tracking-normal`, `--weight-bold` |
 
 ## Tokens
 

@@ -182,8 +182,8 @@ card-dark:
 | `.card--interactive` | modifier | THE clickable-card hover: border strengthens and lifts, no fill | `--border-focus`, `--color-border-strong`, `--color-surface-sunken`, `--duration-base`, `--ease-default`, `--focus-ring-offset` |
 | `.card--compact` | modifier | 16px padding | `--card-pad-compact` |
 | `.card--spacious` | modifier | 32px padding | `--card-pad-spacious` |
-| `.card--empty` | modifier | centred empty state | `--space-200` |
-| `.card--error` | modifier | centred error state, carries the feedback colour | `--color-border`, `--color-feedback-background-error`, `--space-200` |
+| `.card--empty` | modifier | centred empty state | `--color-text-tertiary`, `--size-xl`, `--space-200` |
+| `.card--error` | modifier | centred error state, carries the feedback colour | `--color-border`, `--color-feedback-background-error`, `--color-text-primary`, `--color-text-tertiary`, `--size-xl`, `--space-200` |
 
 ## Tokens
 
@@ -206,9 +206,12 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--color-border-strong` | Semantic | `#d4d4d8`; dark `#3f3f46`, from `--neutral-400` | Heavier border for edges that must read past a hairline (secondary-button outlines). |
 | `--color-feedback-background-error` | Semantic | `#961010`; dark `#ff8f8f` | Error message backgrounds: deep red on light, soft red on dark. |
 | `--color-surface-sunken` | Semantic | `#ececec`; dark `#141416`, from `--neutral-200` | Recessed wells, insets, thumbnails, chips. A step below the card surface: light grey in light; the darker near-black (#141416) in dark. |
+| `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
+| `--color-text-tertiary` | Semantic | `#67676f`; dark `#909096`, from `--neutral-600` | Tertiary text: section labels and quiet meta copy; the last step that still clears 4.5:1 on light. |
 | `--duration-base` | Semantic | `220ms` | Reveal, modal, and swap transitions. |
 | `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
 | `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
+| `--size-xl` | Semantic | `1.5rem` | 24px. Modal and tile titles. |
 | `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
 
 ## Source

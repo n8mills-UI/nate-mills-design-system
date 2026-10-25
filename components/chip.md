@@ -129,7 +129,7 @@ chip:
 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
-| `.chip` | base | sunken fill, mono label | `--chip-bg`, `--chip-border`, `--chip-fg`, `--chip-font`, `--chip-font-size`, `--chip-font-weight`, `--chip-gap`, `--chip-line`, `--chip-pad-x`, `--chip-pad-y`, `--chip-radius`, `--font-feature-mono` |
+| `.chip` | base | sunken fill, mono label | `--chip-bg`, `--chip-border`, `--chip-fg`, `--chip-font`, `--chip-font-size`, `--chip-font-weight`, `--chip-gap`, `--chip-icon-size`, `--chip-line`, `--chip-pad-x`, `--chip-pad-y`, `--chip-radius`, `--font-feature-mono` |
 | `.chip--outline` | modifier | fill drops out for quieter contexts | `--color-text-secondary` |
 
 ## Tokens
@@ -145,6 +145,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--chip-font-size` | Component | `0.6875rem`, from `--text-label` | Chip label size. |
 | `--chip-font-weight` | Component | `500`, from `--weight-medium` | Chip label weight. |
 | `--chip-gap` | Component | `8px`, from `--space-200` | Space between a chip's icon and its label. |
+| `--chip-icon-size` | Component | `0.875rem`, from `--size-sm` | Icon footprint inside a chip (Lucide stroke icon or normalised brand mark). Sits on the --size-sm step of the size scale. |
 | `--chip-line` | Component | `1.4` | Chip label line height. Component-level literal, sized to the mono label; off the named line scale by design. |
 | `--chip-pad-x` | Component | `10px` | Chip inline (left/right) padding. Component-level literal; sits off the 4px space scale by design (between space-200 and space-300), kept so the live chip is unchanged. |
 | `--chip-pad-y` | Component | `4px`, from `--space-100` | Chip block (top/bottom) padding; 4px. |

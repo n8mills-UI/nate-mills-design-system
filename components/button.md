@@ -194,13 +194,13 @@ button-icon:
 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
-| `.btn` | base | base; always pair with a variant | `--btn-focus-ring`, `--btn-font`, `--btn-font-size`, `--btn-font-weight`, `--btn-gap`, `--btn-pad-x`, `--btn-pad-y`, `--btn-radius`, `--btn-transition`, `--focus-ring-offset`, `--opacity-disabled`, `--touch-target-min` |
+| `.btn` | base | base; always pair with a variant | `--btn-focus-ring`, `--btn-font`, `--btn-font-size`, `--btn-font-weight`, `--btn-gap`, `--btn-glyph`, `--btn-pad-x`, `--btn-pad-y`, `--btn-radius`, `--btn-transition`, `--duration-expressive`, `--duration-fast`, `--ease-default`, `--ease-linear`, `--focus-ring-offset`, `--opacity-disabled`, `--touch-target-min` |
 | `.btn--primary` | modifier | lime fill, ink label; inverts on hover | `--brand-ink`, `--brand-primary-dim`, `--btn-primary-bg`, `--btn-primary-bg-hover`, `--btn-primary-border`, `--btn-primary-fg`, `--btn-primary-fg-hover` |
 | `.btn--secondary` | modifier | transparent, border-grey outline (stronger grey in dark); fills lime on hover | `--brand-primary-dim`, `--btn-primary-bg`, `--btn-primary-border`, `--btn-primary-fg`, `--btn-secondary-border`, `--btn-secondary-fg` |
 | `.btn--icon` | modifier | the one canonical icon button: 44px circle, never a labelled pill | `--brand-primary-dim`, `--btn-icon-border`, `--btn-icon-fg`, `--btn-lg`, `--btn-md`, `--btn-primary-bg`, `--btn-primary-border`, `--btn-primary-fg`, `--btn-radius`, `--btn-sm`, `--touch-target-min` |
-| `.btn--sm` | modifier | 32px | `--btn-sm`, `--size-xs`, `--space-100`, `--space-300` |
+| `.btn--sm` | modifier | 32px | `--btn-glyph-sm`, `--btn-sm`, `--size-xs`, `--space-100`, `--space-300` |
 | `.btn--md` | modifier | 44px like base, with tighter 8px / 16px padding | `--btn-md`, `--size-sm`, `--space-200`, `--space-400` |
-| `.btn--lg` | modifier | 52px | `--btn-lg`, `--size-base`, `--space-300`, `--space-500` |
+| `.btn--lg` | modifier | 52px | `--btn-glyph-lg`, `--btn-lg`, `--size-base`, `--space-300`, `--space-500` |
 
 ## Tokens
 
@@ -213,6 +213,9 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--btn-font-size` | Component | `0.875rem`, from `--size-sm` | Button label size at the default (md) button. |
 | `--btn-font-weight` | Component | `600`, from `--weight-semibold` | Button label weight; semibold on every button. |
 | `--btn-gap` | Component | `8px`, from `--space-200` | Space between a button's icon and its label. |
+| `--btn-glyph` | Component | `1rem`, from `--size-base` | Lucide glyph size inside a default button. |
+| `--btn-glyph-lg` | Component | `1.125rem`, from `--size-lg` | Lucide glyph size inside a --lg button. |
+| `--btn-glyph-sm` | Component | `0.875rem`, from `--size-sm` | Lucide glyph size inside a --sm button. |
 | `--btn-icon-border` | Component | `#e4e4e7`; dark `#d4d4d8`, from `--btn-secondary-border` | Icon button border. Aliases secondary-border: the icon button is the secondary button without text, so its chrome reads the secondary's tokens and cannot drift. |
 | `--btn-icon-fg` | Component | `#0a0a0b`; dark `#f4f4f5`, from `--btn-secondary-fg` | Icon button glyph at rest. Aliases secondary-fg: the icon button is the secondary button without text, so the two must not drift; before this it pointed at text-secondary and the grey read dim next to a secondary label wherever the two sat in one row (hero CTA row at ultrawide, where the icon buttons grow labels). |
 | `--btn-lg` | Component | `52px` | Hero CTAs and primary conversion actions. |
@@ -231,6 +234,10 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--btn-transition` | Component | `background var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default), transform var(--duration-fast) var(--ease-default)` | CSS composite: the button's hover/focus transition across its four animated properties. Reads var(--duration-fast)/var(--ease-default) directly so it follows a motion re-point (same pattern as --gradient; DTCG forbids embedded aliases inside string values). |
 | `--brand-ink` | Semantic | `#1c1c1f`, from `--neutral-850` | Fixed, theme-invariant brand ink. The always-dark bed, and the dark foreground on a fixed lime or static-white bed. |
 | `--brand-primary-dim` | Semantic | `#b8e030`, from `--lime-600` | Hover-dim step of the brand lime (lime.600). |
+| `--duration-expressive` | Semantic | `1300ms` | The slow, cinematic entrance for one large hero moment. |
+| `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
+| `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--ease-linear` | Semantic | `cubic-bezier(0, 0, 1, 1)` | Constant rate, no acceleration. For motion that loops forever. |
 | `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
 | `--opacity-disabled` | Semantic | `0.45` | A disabled control, dimmed as one piece and still findable. One value for every component. |
 | `--size-base` | Semantic | `1rem` | 16px. The body stop; --text-body resolves here. |

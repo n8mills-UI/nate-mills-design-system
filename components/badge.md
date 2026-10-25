@@ -124,7 +124,7 @@ badge:
 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
-| `.badge` | base | transparent, hairline border | `--badge-border`, `--badge-fg`, `--badge-font`, `--badge-font-size`, `--badge-font-weight`, `--badge-gap`, `--badge-pad-x`, `--badge-pad-y`, `--badge-radius`, `--font-feature-mono` |
+| `.badge` | base | transparent, hairline border | `--badge-border`, `--badge-fg`, `--badge-font`, `--badge-font-size`, `--badge-font-weight`, `--badge-gap`, `--badge-icon-size`, `--badge-pad-x`, `--badge-pad-y`, `--badge-radius`, `--font-feature-mono` |
 | `.badge__dot` | element | lime status dot; always pair it with a word, never colour alone | `--badge-dot`, `--badge-dot-size`, `--dot-radius` |
 
 ## Tokens
@@ -141,6 +141,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--badge-font-size` | Component | `0.6875rem`, from `--text-label` | Badge label size. |
 | `--badge-font-weight` | Component | `500`, from `--weight-medium` | Badge label weight. |
 | `--badge-gap` | Component | `8px`, from `--space-200` | Space between a badge's dot or icon and its label. |
+| `--badge-icon-size` | Component | `0.875rem`, from `--size-sm` | Leading icon footprint inside a badge (Lucide stroke icon). Sits on the --size-sm step of the size scale. |
 | `--badge-pad-x` | Component | `12px`, from `--space-300` | Badge inline (left/right) padding; 12px. |
 | `--badge-pad-y` | Component | `4px`, from `--space-100` | Badge block (top/bottom) padding; 4px. |
 | `--badge-radius` | Component | `999px`, from `--radius-full` | Badge corner radius; full pill. |

@@ -142,8 +142,8 @@ link:
 |---|---|---|---|
 | `.link-underline` | base | base | `--border-focus`, `--color-accent`, `--color-border-brand`, `--color-text-primary`, `--duration-fast`, `--ease-default`, `--focus-ring-offset`, `--font-body`, `--tracking-normal`, `--weight-semibold` |
 | `.link-underline--prose` | modifier | inside body copy | `--color-text-primary` |
-| `.link-underline--icon` | modifier | carries a trailing glyph; give the glyph .icon-size-xs | `--space-200` |
-| `.icon-size-xs` | base | the trailing glyph inside .link-underline--icon: sizes it and nudges it on hover; does nothing elsewhere | None |
+| `.link-underline--icon` | modifier | carries a trailing glyph; give the glyph .icon-size-xs | `--duration-fast`, `--ease-default`, `--space-200` |
+| `.icon-size-xs` | base | the trailing glyph inside .link-underline--icon: sizes it and nudges it on hover; does nothing elsewhere | `--duration-fast`, `--ease-default` |
 
 ## Tokens
 

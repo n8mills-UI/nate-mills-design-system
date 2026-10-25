@@ -96,9 +96,9 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
 | `.tabs` | base | the row; role="tablist" | None |
-| `.tabs--lg` | modifier | display-face tabs that head a whole view | None |
-| `.tabs--compact` | modifier | mono caption tabs inside a card, each with its own underline | None |
-| `.tab` | base | one tab: a <button type="button" role="tab"> | `--border-focus`, `--color-text-primary`, `--color-text-tertiary`, `--duration-fast`, `--ease-default`, `--radius-sm` |
+| `.tabs--lg` | modifier | display-face tabs that head a whole view | `--font-display`, `--size-lg`, `--space-200`, `--space-400`, `--weight-semibold` |
+| `.tabs--compact` | modifier | mono caption tabs inside a card, each with its own underline | `--color-accent`, `--font-mono`, `--space-200`, `--space-400`, `--tab-compact-min-h`, `--text-caption` |
+| `.tab` | base | one tab: a <button type="button" role="tab"> | `--border-focus`, `--color-accent`, `--color-text-primary`, `--color-text-tertiary`, `--duration-fast`, `--ease-default`, `--font-display`, `--font-mono`, `--radius-sm`, `--size-lg`, `--space-200`, `--space-400`, `--tab-compact-min-h`, `--text-caption`, `--weight-semibold` |
 
 ## Tokens
 
@@ -106,12 +106,21 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 
 | Token | Tier | Value | What it is for |
 |---|---|---|---|
+| `--tab-compact-min-h` | Component | `48px`, from `--space-700` | Minimum height of a compact tab (.tabs--compact .tab): 48px, so the row clears the 44px touch target with room for its 2px selected underline. |
 | `--border-focus` | Semantic | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
+| `--color-accent` | Semantic | `#1c1c1f`; dark `#d2ff37`, from `--neutral-850` | The single theme-aware interactive role: ink on light, brand lime on dark. Active and selected states. |
 | `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
 | `--color-text-tertiary` | Semantic | `#67676f`; dark `#909096`, from `--neutral-600` | Tertiary text: section labels and quiet meta copy; the last step that still clears 4.5:1 on light. |
 | `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
 | `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
+| `--font-display` | Semantic | `"Anton", Impact, "Haettenschweiler", sans-serif` | Display headings and large numbers. Anton, one weight, never faux-bolded. |
+| `--font-mono` | Semantic | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace` | Tabular numbers, code, and eyebrow labels. |
 | `--radius-sm` | Semantic | `8px` | Small radius. The workhorse for inputs and small controls; chips, badges and buttons take the full radius. |
+| `--size-lg` | Semantic | `1.125rem` | 18px. Intro lines, award titles, component names. |
+| `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
+| `--space-400` | Semantic | `16px` | Base unit. Default gap between related elements; the compact card-padding tier (--card-pad-compact). |
+| `--text-caption` | Semantic | `0.75rem`, from `--size-xs` | Tiny captions, footnotes, stat descriptions. |
+| `--weight-semibold` | Semantic | `600` | 600. The workhorse emphasis: buttons, subheads, labels. |
 
 ## Source
 

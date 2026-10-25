@@ -73,7 +73,7 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Mark the row `role="tablist"` with an `aria-label`, each tab `role="tab"` with `aria-selected`, and each panel `role="tabpanel"`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
+| MUST | Mark the row `role="tablist"` with an `aria-label`, each tab `role="tab"` with `aria-selected`, and each panel `role="tabpanel"`. | [Automated: Tab walk: keyboard](checks.md#tab-walk-keyboard) |
 | MUST | Keep one Tab stop on the row and move between tabs with the arrow keys. | [Automated: Tab walk: keyboard](checks.md#tab-walk-keyboard) |
 | MUST | Make each tab a `<button type="button">`. | [Manual: Tabs review](checks.md#tabs-review) |
 | MUST NOT | Use tabs to pick a carousel slide or switch a view mode. | [Manual: Tabs review](checks.md#tabs-review) |

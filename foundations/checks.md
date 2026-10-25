@@ -38,7 +38,7 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **What it checks:** Runs axe-core's WCAG 2.2 A and AA rules on every page state in both themes, including the rules that every button has a name and every image has alt text.
 - **WCAG:** WCAG 2.2 A and AA, including 4.1.2 Name, Role, Value and 1.1.1 Non-text Content
 - **When it runs:** Every deploy.
-- **Rules it checks:** [Button](../components/button.md#rules), [Tabs](../components/tabs.md#rules), [Carousel navigation](../components/carousel-navigation.md#rules), [Avatar](../components/avatar.md#rules)
+- **Rules it checks:** [Button](../components/button.md#rules), [Carousel navigation](../components/carousel-navigation.md#rules), [Avatar](../components/avatar.md#rules)
 - **Reference:** [github.com/dequelabs](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md)
 
 ### External-link lint
@@ -60,8 +60,8 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 ### Tab walk: keyboard
 
 - **Kind:** Automated
-- **What it checks:** Part of the Tab walk. Walks the page with real key presses: the skip link first, focus returning from overlays, carousel tracks that are Tab stops only while they can scroll, and every tab row one Tab stop that the arrows, Home and End move along.
-- **WCAG:** 2.1.1 Keyboard, A; 2.4.3 Focus Order, A; 2.4.11 Focus Not Obscured (Minimum), AA
+- **What it checks:** Part of the Tab walk. Walks the page with real key presses: the skip link first, focus returning from overlays, carousel tracks that are Tab stops only while they can scroll, and every tab row one Tab stop that the arrows, Home and End move along, named by its `aria-label`, with `aria-selected` on every tab and a `tabpanel` behind each.
+- **WCAG:** 2.1.1 Keyboard, A; 2.4.3 Focus Order, A; 2.4.11 Focus Not Obscured (Minimum), AA; 4.1.2 Name, Role, Value, A
 - **When it runs:** Every deploy.
 - **Rules it checks:** [Tabs](../components/tabs.md#rules), [Carousel navigation](../components/carousel-navigation.md#rules)
 

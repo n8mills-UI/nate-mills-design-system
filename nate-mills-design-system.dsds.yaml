@@ -1371,9 +1371,9 @@ entries:
             level: "must"
             checkedBy: "automated"
             checks:
-              - href: "./foundations/checks.md#axe-accessibility-scan"
+              - href: "./foundations/checks.md#tab-walk-keyboard"
                 rel: "test"
-                role: "axe accessibility scan"
+                role: "Tab walk: keyboard"
             tags:
               - "rule"
           - id: "rule-2"

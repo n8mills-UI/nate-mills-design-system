@@ -84,7 +84,7 @@ The published CSS draws the tabs; the behaviour comes from the script that drive
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Mark the row `role="tablist"` with an `aria-label`, each tab `role="tab"` with `aria-selected`, and each panel `role="tabpanel"`. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
+| MUST | Mark the row `role="tablist"` with an `aria-label`, each tab `role="tab"` with `aria-selected`, and each panel `role="tabpanel"`. | [Automated: Tab walk: keyboard](../foundations/checks.md#tab-walk-keyboard) |
 | MUST | Keep one Tab stop on the row and move between tabs with the arrow keys. | [Automated: Tab walk: keyboard](../foundations/checks.md#tab-walk-keyboard) |
 | MUST | Make each tab a `<button type="button">`. | [Manual: Tabs review](../foundations/checks.md#tabs-review) |
 | MUST NOT | Use tabs to pick a carousel slide or switch a view mode. | [Manual: Tabs review](../foundations/checks.md#tabs-review) |

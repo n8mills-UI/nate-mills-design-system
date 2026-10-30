@@ -82,11 +82,11 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | [Automated: Touch-target lint](checks.md#touch-target-lint) |
-| MUST | Label each chevron `<button>` with an `aria-label`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
-| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Automated: Screen-reader structure gate](checks.md#screen-reader-structure-gate) |
+| MUST | Keep each `.ds-carousel-nav__arrow` at 44px. | [Automated: Touch-target lint](checks.md#touch-target-lint) |
+| MUST | Label each arrow `<button>` with an `aria-label`. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
+| MUST | Announce the position through a polite live region, because the dots are hidden from assistive tech. | [Automated: Screen-reader structure gate](checks.md#screen-reader-structure-gate) |
 | MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Tab walk: keyboard](checks.md#tab-walk-keyboard) |
-| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Carousel autoplay review](checks.md#carousel-autoplay-review) |
+| MUST NOT | Autoplay without a visible pause control (WCAG 2.2.2). | [Manual: Carousel autoplay review](checks.md#carousel-autoplay-review) |
 
 ### [Avatar](../components/avatar.md)
 
@@ -109,7 +109,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | [Section heading](../components/section-heading.md) | Not focusable. Tab; Enter, Space; H in a screen reader's browse mode (VoiceOver: VO + Command + H); 2 or 3 in browse mode (NVDA, JAWS); Down arrow in a screen reader's browse mode (VoiceOver: VO + Right arrow) |
 | [Link](../components/link.md) | Tab; Shift + Tab; Enter; Space |
 | [Tabs](../components/tabs.md) | Tab; Left arrow, Right arrow; Home, End |
-| [Carousel navigation](../components/carousel-navigation.md) | Tab; Enter or Space; Left arrow, Right arrow; Enter on the forward chevron at the last card |
+| [Carousel navigation](../components/carousel-navigation.md) | Tab; Enter or Space; Left arrow, Right arrow; Enter on the forward arrow at the last card |
 | [Avatar](../components/avatar.md) | Not focusable. Enter, Space; Tab; Enter; G in a screen reader's browse mode (VoiceOver: VO + Command + G) |
 
 ## Helper classes

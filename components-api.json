@@ -1042,7 +1042,7 @@
     },
     {
       "name": "Carousel navigation",
-      "note": "Bare chevrons plus a mono counter on a rail BELOW the cards. One nav, site-wide.",
+      "note": "The default carousel: dots bottom left, round arrows bottom right, BELOW the cards. One nav, site-wide.",
       "classes": [
         {
           "name": "ds-carousel-nav",
@@ -1056,31 +1056,24 @@
           "states": [],
           "parts": [],
           "reads": [
-            "--color-border",
-            "--color-dot-active",
-            "--size-xl",
-            "--space-400",
-            "--space-500"
+            "--color-text-primary",
+            "--space-400"
           ],
           "descendantReads": [],
-          "sets": [
-            "--cn-glyph",
-            "--cn-rail-fill",
-            "--cn-rail-track"
-          ],
+          "sets": [],
           "unpublished": []
         },
         {
           "name": "ds-carousel-nav--full",
           "kind": "modifier",
-          "note": "full-width rail",
+          "note": "phone swipe nav; also shows after a strip",
           "selectors": [
             ".ds-carousel-nav--full"
           ],
-          "contexts": [],
-          "descendants": [
-            ".ds-carousel-nav--full .ds-carousel-nav__rail"
+          "contexts": [
+            ".ds-carousel--strip + .ds-carousel-nav--full"
           ],
+          "descendants": [],
           "states": [],
           "parts": [],
           "reads": [
@@ -1091,23 +1084,64 @@
           "unpublished": []
         },
         {
-          "name": "ds-carousel-nav__rail",
+          "name": "ds-carousel-nav__dots",
           "kind": "element",
-          "note": "the track",
+          "note": "the row of dots",
           "selectors": [
-            ".ds-carousel-nav__rail"
+            ".ds-carousel-nav__dots"
           ],
-          "contexts": [
-            ".ds-carousel-nav--full .ds-carousel-nav__rail"
-          ],
+          "contexts": [],
           "descendants": [],
           "states": [],
           "parts": [],
           "reads": [
-            "--bar-radius",
-            "--cn-rail-track",
-            "--space-100",
-            "--space-1100"
+            "--space-100"
+          ],
+          "descendantReads": [],
+          "sets": [],
+          "unpublished": []
+        },
+        {
+          "name": "ds-carousel-nav__dot",
+          "kind": "element",
+          "note": "one per card; data-on stretches the current one",
+          "selectors": [
+            ".ds-carousel-nav__dot",
+            ".ds-carousel-nav__dot::before",
+            ".ds-carousel-nav__dot[data-on]"
+          ],
+          "contexts": [],
+          "descendants": [],
+          "states": [],
+          "parts": [
+            "before"
+          ],
+          "reads": [
+            "--alpha-500",
+            "--dot-radius",
+            "--duration-slow",
+            "--ease-emphasized",
+            "--space-200",
+            "--space-50",
+            "--space-500"
+          ],
+          "descendantReads": [],
+          "sets": [],
+          "unpublished": []
+        },
+        {
+          "name": "ds-carousel-nav__pager",
+          "kind": "element",
+          "note": "groups the prev / next arrows",
+          "selectors": [
+            ".ds-carousel-nav__pager"
+          ],
+          "contexts": [],
+          "descendants": [],
+          "states": [],
+          "parts": [],
+          "reads": [
+            "--space-300"
           ],
           "descendantReads": [],
           "sets": [],
@@ -1116,13 +1150,12 @@
         {
           "name": "ds-carousel-nav__arrow",
           "kind": "element",
-          "note": "prev / next",
+          "note": "44px round prev / next",
           "selectors": [
             ".ds-carousel-nav__arrow",
-            ".ds-carousel-nav__arrow::before",
             ".ds-carousel-nav__arrow:hover:not(:disabled)",
-            ".ds-carousel-nav__arrow:focus-visible",
             ".ds-carousel-nav__arrow:active:not(:disabled)",
+            ".ds-carousel-nav__arrow:focus-visible",
             ".ds-carousel-nav__arrow:disabled"
           ],
           "contexts": [],
@@ -1136,15 +1169,12 @@
             "focus-visible",
             "hover"
           ],
-          "parts": [
-            "before"
-          ],
+          "parts": [],
           "reads": [
+            "--alpha-300",
+            "--alpha-400",
             "--border-focus",
             "--btn-radius",
-            "--cn-glyph",
-            "--color-text-primary",
-            "--color-text-secondary",
             "--duration-fast",
             "--ease-default",
             "--focus-ring-offset",
@@ -1152,74 +1182,54 @@
             "--touch-target-min"
           ],
           "descendantReads": [
-            "--cn-glyph"
+            "--size-xl"
           ],
           "sets": [],
           "unpublished": []
         },
         {
-          "name": "ds-carousel-nav__pager",
-          "kind": "element",
-          "note": "groups the prev / next chevrons around the counter",
+          "name": "ds-carousel--strip",
+          "kind": "modifier",
+          "note": "wide-screen strip that bleeds to the page edge",
           "selectors": [
-            ".ds-carousel-nav__pager"
-          ],
-          "contexts": [],
-          "descendants": [],
-          "states": [],
-          "parts": [],
-          "reads": [
-            "--space-200"
-          ],
-          "descendantReads": [],
-          "sets": [],
-          "unpublished": []
-        },
-        {
-          "name": "ds-carousel-nav__fill",
-          "kind": "element",
-          "note": "progress fill",
-          "selectors": [
-            ".ds-carousel-nav__fill"
-          ],
-          "contexts": [],
-          "descendants": [],
-          "states": [],
-          "parts": [],
-          "reads": [
-            "--bar-radius",
-            "--cn-rail-fill",
-            "--duration-slow",
-            "--ease-spring"
-          ],
-          "descendantReads": [],
-          "sets": [],
-          "unpublished": []
-        },
-        {
-          "name": "ds-carousel-nav__count",
-          "kind": "element",
-          "note": "mono counter",
-          "selectors": [
-            ".ds-carousel-nav__count"
+            ":where(.ds-carousel--strip)",
+            ".ds-carousel--strip[data-ds-carousel]",
+            ".ds-carousel--strip[data-ds-carousel][data-ds-carousel]",
+            ".ds-carousel--strip[data-ds-carousel]::-webkit-scrollbar",
+            ".ds-carousel--strip[data-ds-carousel]:focus-visible"
           ],
           "contexts": [],
           "descendants": [
-            ".ds-carousel-nav__count b"
+            ".ds-carousel--strip[data-ds-carousel][data-ds-carousel] > :not([data-region-motion])",
+            ".ds-carousel--strip + .ds-carousel-nav--full"
           ],
-          "states": [],
-          "parts": [],
+          "states": [
+            "focus-visible"
+          ],
+          "parts": [
+            "-webkit-scrollbar"
+          ],
           "reads": [
-            "--color-text-secondary",
-            "--font-mono",
-            "--size-sm",
-            "--tracking-normal",
-            "--weight-bold"
+            "--border-focus",
+            "--space-100",
+            "--space-300",
+            "--space-400",
+            "--space-500",
+            "--space-600",
+            "--strip-edge",
+            "--strip-gap"
           ],
           "descendantReads": [
-            "--color-text-primary"
+            "--strip-across",
+            "--strip-gap",
+            "--strip-gaps"
           ],
-          "sets": [],
+          "sets": [
+            "--strip-across",
+            "--strip-edge",
+            "--strip-gap",
+            "--strip-gaps"
+          ],
           "unpublished": []
         }
       ]

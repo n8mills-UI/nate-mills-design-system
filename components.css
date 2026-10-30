@@ -1083,9 +1083,9 @@ a.card:focus-visible { text-decoration: none; }
    Opt in by adding `ds-carousel` + `data-ds-carousel` to a grid
    container. Below 768px the container becomes a swipeable
    scroll-snap track (one card per view) with a single row of dots
-   (built by the ds-carousel init in index.html). At 769px and up it
-   is inert and the container keeps its own grid layout. Dots + swipe
-   only, no arrows. Selector note (audit AR-06): the section grid rules
+   (built by the ds-carousel init in index.html). At 768px and up it
+   is inert and the container keeps its own layout, unless it also
+   carries .ds-carousel--strip (below). Selector note (audit AR-06): the section grid rules
    used to live behind raw #id scopes that only !important could beat;
    they are now flattened to [id="..."] attribute selectors (class tier,
    no :where() involved), and this component wins with its own honest
@@ -1154,199 +1154,190 @@ a.card:focus-visible { text-decoration: none; }
   }
 }
 
-/* The .ds-dots pagination component was deleted 2026-07-12 (deep-audit M-08):
-   zero consumers since the unified .ds-carousel-nav shipped. */
+/* The .ds-dots pagination component was deleted 2026-07-12 (deep-audit M-08).
+   Dots came back on 2026-10-28 as part of .ds-carousel-nav below (Nathan's
+   final picks, chat CAROUSEL ALL), drawn by the shared engine, not a second
+   component. */
 @media (prefers-reduced-motion: reduce) {
   .ds-carousel { scroll-behavior: auto; }
 }
 
 /* ============================================================
+   Sideways strip (.ds-carousel--strip), 768px and up
+   The Apple style strip (Nathan's final picks, 28 Oct 2026, chat CAROUSEL
+   ALL): cards in one row that runs off the right edge of the page, the first
+   card on the heading's line, every card as tall as the tallest. Add it to a
+   .ds-carousel track; under 768 the phone carousel above still applies. The
+   negative inline margin takes the track out to the page edge and the
+   matching padding puts the first card back on the section gutter, so the
+   track's content box IS the section's content width and a card's
+   flex-basis can be a share of it. Each section sets how many cards sit
+   across (--strip-across, a fraction so the next card peeks) and how many
+   whole gaps that includes (--strip-gaps). The doubled attribute is the
+   phone block's own (0,3,0) bump: the layout must beat a section's grid.
+   ============================================================ */
+@media (min-width: 768px) {
+  /* Defaults at zero specificity, so a section's own setting always wins. */
+  :where(.ds-carousel--strip) {
+    --strip-gap: var(--space-400);
+    --strip-across: 1.5;
+    --strip-gaps: 1;
+    --strip-edge: var(--gutter-centered, var(--space-600));
+  }
+  .ds-carousel--strip[data-ds-carousel] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-inline: var(--strip-edge);
+    scroll-padding-inline: var(--strip-edge);
+    /* Room for a card's focus ring and lift, cancelled by the margin. */
+    padding-block: var(--space-300);
+    margin-block: calc(var(--space-300) * -1);
+  }
+  .ds-carousel--strip[data-ds-carousel][data-ds-carousel] {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: var(--strip-gap);
+    max-width: none;
+    margin-inline: calc(var(--strip-edge) * -1);
+  }
+  .ds-carousel--strip[data-ds-carousel]::-webkit-scrollbar { display: none; }
+  .ds-carousel--strip[data-ds-carousel]:focus-visible { outline: var(--border-focus); outline-offset: calc(-1 * var(--space-100)); }
+  /* A motion region's invisible pause toggle is not a card. */
+  .ds-carousel--strip[data-ds-carousel][data-ds-carousel] > :not([data-region-motion]) {
+    flex: 0 0 calc((100% - var(--strip-gaps) * var(--strip-gap)) / var(--strip-across));
+    min-width: 0;
+    max-width: none;
+    scroll-snap-align: start;
+  }
+}
+@media (min-width: 1024px) {
+  :where(.ds-carousel--strip) { --strip-gap: var(--space-500); }
+}
+
+/* ============================================================
    Carousel nav (.ds-carousel-nav)
-   One shared desktop/tablet control for the Featured projects and
-   Testimonials carousels: a thin progress rail (position), a mono
-   "N/total" counter, and bare Lucide chevrons that flank the
-   counter. Replaces the old split arrows-left / dots-right bars.
-   Colours follow the page theme via --color-dot-active (ink on light,
-   lime on dark); the testimonials band re-maps the rail tokens locally
-   (sections.css). Rail + counter are decorative and aria-hidden;
-   position is announced via the carousels' live region.
+   The one control under every carousel on the site, phones and strips
+   alike (Nathan's final picks, 28 Oct 2026, chat CAROUSEL ALL): dots on
+   the left, two round arrows on the right. It replaced the progress rail
+   and the "N/total" counter. Both colours are the ink of whatever band
+   the carousel sits on (--color-text-primary), so the Kind words lime
+   band, dark mode and the Theme lab themes need no re-map.
+   Dots: one per card, the current one stretched from 8px to 24px with
+   the Glide motion (--duration-slow, --ease-emphasized, no overshoot).
+   They are a picture of the position, aria-hidden like the rail they
+   replace; a pointer may click one, and the arrows, the arrow keys and
+   the polite live region ("Project 3 of 6") are the accessible route
+   (WCAG 2.5.8's equivalent-control exception covers their size).
+   Arrows: 44px circles, a 12% tint of the ink (--alpha-300), Apple's
+   round paddles. Only the back arrow disables at the first card; the
+   forward one rewinds from the last (the engine in index.html).
    ============================================================ */
 .ds-carousel-nav {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--space-400);
+  width: 100%;
   max-width: 100%;
   min-width: 0;
-  /* The track is a SUBTLE groove (a light line), not an inactive-dot grey:
-     a dot grey is dark enough to blur into the ink fill. The fill is the
-     accent. Both are re-mappable per band (see the testimonials override in
-     sections.css). */
-  --cn-rail-track: var(--color-border);
-  --cn-rail-fill: var(--color-dot-active);
-  /* Chevron size, shared by the button box and the glyph inside it. Sits
-     between --btn-glyph-lg (18px) and the 36px header icon circles; see the
-     note on the one-size rule further down. */
-  --cn-glyph: var(--size-xl);
+  color: var(--color-text-primary);
 }
-.ds-carousel-nav__rail {
+.ds-carousel-nav__dots {
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+  min-width: 0;
+}
+.ds-carousel-nav__dot {
   position: relative;
-  width: var(--space-1100);
-  height: var(--space-100);
-  /* 0 1 auto, not 0 0 auto (2026-08-23, deploy overflow gate): Kind words is
-     the first band to show this nav at 320, where the fixed 192px rail plus
-     the pager measures 315px and pokes 11px past the viewport. The rail is
-     the one part with nothing inside it, so it alone gives way; every wider
-     band still gets the full 192. min-width: 0 on the nav below is the other
-     half, a flex item's default min-width: auto refuses the shrink. */
-  flex: 0 1 auto;
-  background: var(--cn-rail-track);
-  border-radius: var(--bar-radius);
-  overflow: hidden;
+  flex: none;
+  width: var(--space-200);
+  height: var(--space-200);
+  border-radius: var(--dot-radius);
+  background: color-mix(in srgb, currentColor calc(var(--alpha-500) * 100%), transparent);
+  cursor: pointer;
+  transition: width var(--duration-slow) var(--ease-emphasized),
+              background-color var(--duration-slow) var(--ease-emphasized);
 }
-.ds-carousel-nav__fill {
+/* A taller pointer area that never overlaps the next dot. */
+.ds-carousel-nav__dot::before {
+  content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 0;
-  background: var(--cn-rail-fill);
-  border-radius: var(--bar-radius);
-  /* Spring, not a linear slide (2026-09-07, Nathan picked P2 from the motion
-     mockup). The fill runs a little past the new position and settles back, so
-     a step reads as the bar CATCHING UP with you rather than a value being
-     set. --ease-spring overshoots by design; the rail's overflow: hidden
-     clips the last card's overshoot past 100%, and a backwards step cannot
-     undershoot below 0. Reduced motion drops the transition entirely below. */
-  transition: width var(--duration-slow) var(--ease-spring);
+  inset: calc(-1 * var(--space-200)) calc(-1 * var(--space-50));
+}
+.ds-carousel-nav__dot[data-on] {
+  width: var(--space-500);
+  background: currentColor;
+  cursor: default;
 }
 .ds-carousel-nav__pager {
   display: flex;
   align-items: center;
-  gap: var(--space-200);
+  gap: var(--space-300);
+  flex: none;
+  margin-inline-start: auto;
 }
-/* Bare chevron: visually small, no circle or border. A >=44px (WCAG 2.5.5
-   AAA) invisible tap area is centred on the glyph via ::before, so the arrow
-   stays an easy target without adding visible chrome. */
 .ds-carousel-nav__arrow {
   position: relative;
-  z-index: 1;
-  width: var(--cn-glyph);
-  height: var(--cn-glyph);
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   border: 0;
-  background: transparent;
-  color: var(--color-text-secondary);
-  cursor: pointer;
   border-radius: var(--btn-radius);
-  transition: color var(--duration-fast) var(--ease-default),
+  background: color-mix(in srgb, currentColor calc(var(--alpha-300) * 100%), transparent);
+  color: inherit;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-default),
+              opacity var(--duration-fast) var(--ease-default),
               transform var(--duration-fast) var(--ease-default);
 }
-.ds-carousel-nav__arrow::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: var(--touch-target-min);
-  height: var(--touch-target-min);
-  transform: translate(-50%, -50%);
-}
-/* Grows in place. It replaces the directional nudge the chevron used to run
-   (see the glyph-moments block below): a bare arrow that slides toward the
-   edge of its own 44px target reads as the control moving away from the
-   cursor, and Nathan called it out on 2026-09-07. A scale has no direction to
-   get wrong, and it is the same gesture on both arrows. Transform on the
-   BUTTON, not the glyph, so the whole control answers as one thing. */
-.ds-carousel-nav__arrow:hover:not(:disabled) { color: var(--color-text-primary); }
-/* The MOTION half sits behind the capability gate while the colour above does
-   not: a touch tap synthesises hover, and a latched colour is invisible where a
-   latched scale leaves the arrow sitting enlarged after the finger lifts. */
+/* The tint deepens on hover, behind the capability gate so a tap on a
+   phone never leaves it latched. */
 @media (hover: hover) {
-  .ds-carousel-nav__arrow:hover:not(:disabled) { transform: scale(1.22); }
+  .ds-carousel-nav__arrow:hover:not(:disabled) { background: color-mix(in srgb, currentColor calc(var(--alpha-400) * 100%), transparent); }
 }
+.ds-carousel-nav__arrow:active:not(:disabled) { transform: scale(0.94); }
 .ds-carousel-nav__arrow:focus-visible {
   outline: var(--border-focus);
   outline-offset: var(--focus-ring-offset);
 }
-/* Press: the glyph snaps small under the finger, full-strength ink, and no
-   circle behind it (2026-09-07, Nathan picked A3 from the motion mockup).
-   This REVERSES the earlier "background only, no transform" ruling
-   (2026-07-02 review, group 4), which was written to keep the arrows still beside a live
-   scroll-snap track. A scale is not a translate: nothing changes position, so
-   the press cannot be mistaken for the track moving, and it is the one press
-   signal that survives on touch where there is no hover. The filled circle it
-   replaces was the only consumer of --cn-arrow-press, so that token and its
-   per-band re-maps went with it. */
-.ds-carousel-nav__arrow:active:not(:disabled) {
-  color: var(--color-text-primary);
-  transform: scale(0.9);
-}
-/* Boundary state. Only the BACKWARD arrow reaches it now: forward rewinds to
-   the first card instead of dead-ending (2026-09-07, see the carousel engine in
-   index.html). Dimmed + non-interactive; disabled controls are exempt from
-   WCAG 1.4.3 contrast, so the low opacity is fine. */
+/* Disabled controls are exempt from WCAG 1.4.3, so the low opacity is fine. */
 .ds-carousel-nav__arrow:disabled { opacity: var(--opacity-disabled); cursor: default; }
 .ds-carousel-nav__arrow i,
 .ds-carousel-nav__arrow svg {
-  width: var(--cn-glyph);
-  height: var(--cn-glyph);
-}
-/* One tight lockup, not three loose words (2026-09-07). The counter used to
-   read "3 / 8": semibold current, regular total, wide tracking, and a literal
-   space either side of the slash. At 14px mono that is four gaps inside a
-   three-glyph number and it drifted apart from the rail it belongs to. Now the
-   whole count is bold at normal tracking and the markup carries no spaces, so
-   it reads as one object. The slash and total keep the secondary ink, which is
-   the only thing still separating "where you are" from "how many there are";
-   dropping that too would flatten the pair into one grey number. */
-.ds-carousel-nav__count {
-  font-family: var(--font-mono);
-  font-size: var(--size-sm);
-  letter-spacing: var(--tracking-normal);
-  font-weight: var(--weight-bold);
-  color: var(--color-text-secondary);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-/* Colour only; the weight comes from the parent so the three parts cannot
-   drift to different weights again. */
-.ds-carousel-nav__count b {
-  color: var(--color-text-primary);
+  width: var(--size-xl);
+  height: var(--size-xl);
 }
 @media (prefers-reduced-motion: reduce) {
-  .ds-carousel-nav__fill { transition: none; }
+  .ds-carousel-nav__dot, .ds-carousel-nav__arrow { transition: none; }
 }
-/* Full-width variant for the mobile swipe carousels (disciplines, certifications,
-   compact testimonials), built by the ds-carousel init in index.html: the rail
-   stretches to fill the row, the counter + chevrons sit at the end, and the whole
-   nav is hidden on desktop where those carousels are an inert grid (the swipe
-   track only exists at <=768px). Replaces the old .ds-dots row for one nav pattern
-   site-wide. */
-.ds-carousel-nav--full { display: none; width: 100%; margin-top: var(--space-400); }
-.ds-carousel-nav--full .ds-carousel-nav__rail { flex: 1; width: auto; }
+@media (forced-colors: active) {
+  /* Forced colours drop author backgrounds, which is all a dot is drawn
+     with; the system pair keeps the current one readable. */
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- system colour keywords are the whole point under forced colours */
+  .ds-carousel-nav__dot { forced-color-adjust: none; background: GrayText; }
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- system colour keywords are the whole point under forced colours */
+  .ds-carousel-nav__dot[data-on] { background: CanvasText; }
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- system colour keywords are the whole point under forced colours */
+  .ds-carousel-nav__arrow { border: 1px solid ButtonText; }
+}
+/* The nav the engine builds for a .ds-carousel (the phone carousels):
+   phones only, unless its track is also a strip, where it serves 768 and
+   up as well. The engine puts it straight after the track. */
+.ds-carousel-nav--full { display: none; margin-top: var(--space-400); }
 @media (max-width: 767.98px) {
   .ds-carousel-nav--full { display: flex; }
 }
-/* ONE size at every width (2026-08-17). This used to be a split: a compact
-   18px glyph with a 12px counter on phones, stepping up to 24/14 at >=769px.
-   Reviewing on a phone, Nathan read the compact end as too quiet to find, and
-   he is right that it was the odd one out: the nav is the only control on the
-   page that got SMALLER on the device where it matters most. Rather than add a
-   third size, the comfort scale (already reasoned about and shipped for
-   desktop) now applies everywhere, so the component has one set of numbers.
-   Still deliberately NOT a literal 2x: a 36px glyph would out-size the 36px
-   header icon circles, and a 24px counter would be the largest mono text on
-   the page, ahead of the 22px card stat.
-   The visual size varies over a CONSTANT 44px pointer target (the ::before
-   ghost is untouched), the sanctioned refinement from design-system.md
-   Section 3, here in the enlarge direction.
-   `--cn-glyph` is a component token rather than a raw px because it now has
-   two consumers (the box and the glyph) at every width instead of one inside
-   a media query. */
 @media (min-width: 768px) {
-  .ds-carousel-nav { gap: var(--space-500); }
+  .ds-carousel--strip + .ds-carousel-nav--full { display: flex; }
 }
 
 /* The .placeholder component family was deleted 2026-07-12 (deep-audit n-29):

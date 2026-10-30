@@ -14,13 +14,13 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 ## When not to use
 
 - A plain label or tag: use a Chip.
-- A position in a carousel: use the Carousel navigation counter.
+- A position in a carousel: the Carousel navigation dots show it.
 - Anything clickable: use a Button or a Link.
 
 ## Alternatives
 
 - **[Chip](chip.md):** Same pill shape, different job: a badge reports a status, a chip labels. Pick by what the words do.
-- **[Carousel navigation](carousel-navigation.md):** A position in a carousel ("2 / 6") is the carousel counter, not a badge.
+- **[Carousel navigation](carousel-navigation.md):** A position in a carousel is shown by its dots, never a badge.
 
 ## How to use
 
@@ -81,7 +81,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 
 - Use `.badge` for a read-only status or count, and give every status a word as well as a dot.
 - Keep `.badge__dot` decorative and `aria-hidden`, so colour is never the only channel carrying the state.
-- Send a plain label to `.chip` and a carousel position to `.ds-carousel-nav__count`; `.badge` covers the middle case.
+- Send a plain label to `.chip` and leave a carousel position to its dots (`.ds-carousel-nav__dot`); `.badge` covers the middle case.
 - Write a text label on every badge, because `.badge__dot` is `aria-hidden` and colour alone reaches no screen reader.
 
 ### Don't

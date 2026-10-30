@@ -85,8 +85,8 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 **Tabs:** Swap panels in place.
 `.tabs`, `.tabs--lg`, `.tabs--compact`, `.tab`
 
-**Carousel navigation:** Bare chevrons plus a mono counter on a rail BELOW the cards. One nav, site-wide.
-`.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__rail`, `.ds-carousel-nav__arrow`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__fill`, `.ds-carousel-nav__count`
+**Carousel navigation:** The default carousel: dots bottom left, round arrows bottom right, BELOW the cards. One nav, site-wide.
+`.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__dots`, `.ds-carousel-nav__dot`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__arrow`, `.ds-carousel--strip`
 
 **Other**
 `.avatar`, `.sr-only`

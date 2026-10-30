@@ -110,17 +110,17 @@ Rules for using it:
 | `.tabs--compact` | mono caption tabs inside a card, each with its own underline |
 | `.tab` | one tab: a <button type="button" role="tab"> |
 
-**Carousel navigation:** Bare chevrons plus a mono counter on a rail BELOW the cards. One nav, site-wide.
+**Carousel navigation:** The default carousel: dots bottom left, round arrows bottom right, BELOW the cards. One nav, site-wide.
 
 | Class | Use |
 | --- | --- |
 | `.ds-carousel-nav` | wrapper |
-| `.ds-carousel-nav--full` | full-width rail |
-| `.ds-carousel-nav__rail` | the track |
-| `.ds-carousel-nav__arrow` | prev / next |
-| `.ds-carousel-nav__pager` | groups the prev / next chevrons around the counter |
-| `.ds-carousel-nav__fill` | progress fill |
-| `.ds-carousel-nav__count` | mono counter |
+| `.ds-carousel-nav--full` | phone swipe nav; also shows after a strip |
+| `.ds-carousel-nav__dots` | the row of dots |
+| `.ds-carousel-nav__dot` | one per card; data-on stretches the current one |
+| `.ds-carousel-nav__pager` | groups the prev / next arrows |
+| `.ds-carousel-nav__arrow` | 44px round prev / next |
+| `.ds-carousel--strip` | wide-screen strip that bleeds to the page edge |
 
 **Other**
 

@@ -2,62 +2,67 @@
 
 # Carousel navigation
 
-> The one pager for every carousel: a progress rail, bare chevrons around a mono counter, sitting below the cards.
+> The default carousel: a sideways strip of cards with dots bottom left and two round arrows bottom right. When a page says "use the carousel", this is it.
 
 Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not a JavaScript component, so its props are the classes and HTML attributes below. Link the stylesheets as [Getting started](../foundations/getting-started.md) shows, then add the classes. Every component: [Components](../COMPONENTS.md).
 
 ## When to use
 
 - Any carousel or horizontal track of cards, at any width.
-- A mobile swipe carousel that becomes a grid on wider screens.
+- A row of cards that will not fit across a wide screen: add `.ds-carousel--strip` so the track bleeds to the page edge.
+- A phone swipe carousel that becomes a grid or a strip on wider screens.
 
 ## When not to use
 
-- Pagination dots: this system has none.
+- A long story told card by card on a phone: the phone stack (sticky cards that pile up as you scroll, no nav) is the other pattern.
 - A status or a label: use a Badge or a Chip.
 
 ## Alternatives
 
-- **[Badge](badge.md):** The counter shows a position in the carousel ("2 / 6"); a Badge shows a status or a count of something else. Never show a carousel position in a badge.
-- **[Button](button.md):** The chevrons are bare glyphs with a hidden 44px target. A labelled action under a carousel is a Button.
+- **[Badge](badge.md):** A Badge shows a status or a count of something else. The carousel shows its position with dots, never a badge or a number.
+- **[Button](button.md):** The arrows are round icon buttons at 44px. A labelled action under a carousel is a Button.
 - **[Tabs](tabs.md):** The nav moves along a track of cards; Tabs swap panels in the same place. If nothing scrolls sideways, it is Tabs.
 
 ## How to use
 
-**Element:** A `role="group"` container with an `aria-label`, two `<button type="button">` chevrons, and a rail and counter hidden from assistive tech.
+**Element:** A `role="group"` container with an `aria-label`, holding a row of dots hidden from assistive tech and two `<button type="button">` round arrows.
 
-- Place `.ds-carousel-nav` below the cards, holding the rail with its fill, and the pager with the two chevrons around the counter.
-- Add `.ds-carousel-nav--full` for a mobile swipe carousel.
-- Drive it with a script that steps the track, updates the fill and the counter, and announces the position in a polite live region.
+- Place `.ds-carousel-nav` below the cards: the dots on the left, the pager with the two round arrows on the right.
+- Add `.ds-carousel-nav--full` for a phone swipe carousel; it also shows from 768px up when it follows a `.ds-carousel--strip` track.
+- For a wide-screen strip, add `.ds-carousel--strip` to the track and set `--strip-across` (cards in view, such as 1.6) and `--strip-gaps` (the gaps inside that view) on the section. The cards stretch to one height and the first card lines up with the heading.
+- Drive it with a script that builds one dot per card, marks the current dot with `data-on`, steps the track, and announces the position in a polite live region.
 
-**Classes:** `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__rail`, `.ds-carousel-nav__arrow`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__fill`, `.ds-carousel-nav__count`
+**Classes:** `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__dots`, `.ds-carousel-nav__dot`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__arrow`, `.ds-carousel--strip`
 
 ## Props
 
 | Prop | Type | Allowed values | Default | Description |
 |---|---|---|---|---|
-| `variant` | modifier class | `full` (`.ds-carousel-nav--full`) | No class: the compact nav below the cards. | How wide the rail runs. |
-| `parts` | element classes | `.ds-carousel-nav__rail` (the track), `.ds-carousel-nav__fill` (the progress), `.ds-carousel-nav__pager` (groups the chevrons around the counter), `.ds-carousel-nav__arrow` (each chevron), `.ds-carousel-nav__count` (the "N / total" counter) | All five are used together. | The pieces inside `.ds-carousel-nav`. |
-| `aria-label` | attribute, string | Text such as "Next project" | None. Required on each chevron. | The chevrons have no visible words. |
-| `disabled` | attribute, boolean | present or absent | Absent. | On the backward chevron at the first card, where it dims instead of hiding. |
+| `variant` | modifier class | `full` (`.ds-carousel-nav--full`) | No class: the nav below the cards. | When the nav shows. |
+| `parts` | element classes | `.ds-carousel-nav__dots` (the row of dots), `.ds-carousel-nav__dot` (one per card), `.ds-carousel-nav__pager` (groups the arrows), `.ds-carousel-nav__arrow` (each round arrow) | All four are used together. | The pieces inside `.ds-carousel-nav`. |
+| `data-on` | attribute, boolean | present on one dot | On the first dot. | The current card. The dot stretches from 8px to 24px with the Glide motion. |
+| `aria-label` | attribute, string | Text such as "Next project" | None. Required on each arrow. | The arrows have no visible words. |
+| `disabled` | attribute, boolean | present or absent | Absent. | On the backward arrow at the first card, where it dims instead of hiding. |
+| `--strip-across` | custom property, number | How many cards show across, such as 1.5 or 2.6 | 1.5 | On a `.ds-carousel--strip` track; a part card at the edge says there is more. |
+| `--strip-gaps` | custom property, number | The gaps inside the view, usually the whole cards in view | 1 | Pairs with `--strip-across` so card widths come out exact. |
 
 ## Variants
 
 Available variants: `full`.
 
-- `full` (`.ds-carousel-nav--full`): A full-width rail for mobile swipe carousels; hidden on wider screens.
+- `full` (`.ds-carousel-nav--full`): The nav for phone swipe carousels and wide-screen strips; hidden on other wide layouts.
 
-Default variant: No class: the compact nav below the cards.
+Default variant: No class: the nav below the cards.
 
 ## States
 
 | State | What changes | Tokens |
 |---|---|---|
-| `default` | Bare chevron glyphs in the secondary text colour, each with a hidden 44px target. | `--color-text-secondary`, `--touch-target-min` |
-| `hover` | The glyph steps to primary text and grows; the growth is for pointer devices only. | `--color-text-primary` |
+| `default` | A 44px round arrow filled with a 12% tint of the text colour; dots 8px wide in a 30% tint. The current dot (`data-on`) stretches to 24px and fills with the text colour, on the Glide motion. | `--touch-target-min`, `--btn-radius`, `--alpha-300`, `--alpha-500`, `--color-text-primary`, `--duration-slow`, `--ease-emphasized` |
+| `hover` | The arrow tint deepens to 18%, on pointer devices only. | `--alpha-400` |
 | `focus-visible` | The system ring around the arrow. | `--border-focus`, `--focus-ring-offset` |
-| `active` | The glyph turns primary text and shrinks under the finger. | `--color-text-primary` |
-| `disabled` | The backward chevron at the first card dims and stops taking clicks; it stays visible so the end of the rail reads. | `--opacity-disabled` |
+| `active` | The arrow shrinks a little under the finger. | None |
+| `disabled` | The backward arrow at the first card dims and stops taking clicks; it stays visible. | `--opacity-disabled` |
 
 The CSS styles these pseudo-classes: `:active`, `:disabled`, `:focus-visible`, `:hover`.
 
@@ -67,31 +72,32 @@ Options that must not be used together. Each names the props above.
 
 | Combination | Level | Why |
 |---|---|---|
-| `variant: full` on a screen wider than a phone | MUST NOT | It is the mobile swipe variant, and the CSS hides it on wider screens. |
+| `variant: full` on a wide screen with no strip before it | MUST NOT | It is the phone and strip variant, and the CSS hides it elsewhere. |
 | `.ds-carousel-nav` with a second, hand-built pager | MUST NOT | There is one nav, site-wide. |
-| `disabled` on a chevron with the chevron hidden | MUST NOT | It dims instead, so the end of the rail stays visible. |
-| `.ds-carousel-nav` with an autoplay timer | MUST NOT | There is no visible pause control (WCAG 2.2.2). |
+| `disabled` on an arrow with the arrow hidden | MUST NOT | It dims instead, so the end of the track stays readable. |
+| `.ds-carousel-nav` with an autoplay timer and no pause control | MUST NOT | Moving content needs a way to stop it (WCAG 2.2.2). |
+| A progress bar or an "N / total" count beside the dots | MUST NOT | The dots show the position; a second readout repeats it (retired 28 Oct 2026). |
 
 ## Keyboard
 
 | Key | Action |
 |---|---|
-| Tab | Moves to the carousel track while it can scroll (a labelled region), then to the backward and forward chevrons, each a labelled `<button>`. |
+| Tab | Moves to the carousel track while it can scroll (a labelled region), then to the backward and forward arrows, each a labelled `<button>`. The dots are not Tab stops; the arrows do the same job. |
 | Enter or Space | Steps one card back or forward. |
 | Left arrow, Right arrow | Step one card back or forward while focus is inside the carousel track. |
-| Enter on the forward chevron at the last card | Rewinds to the first card; the chevron renames itself to say so first. |
+| Enter on the forward arrow at the last card | Rewinds to the first card; the arrow renames itself to say so first. |
 
-The published CSS draws the nav; the behaviour comes from the script that drives your carousel. natemills.me's carousel engine does what this table says: at the first card the backward chevron is disabled and focus moves to the forward one.
+The published CSS draws the nav; the behaviour comes from the script that drives your carousel. natemills.me's carousel engine does what this table says: at the first card the backward arrow is disabled and focus moves to the forward one. A click on a dot jumps to its card for pointer users.
 
 ## Rules
 
 | Level | Rule | Checked by |
 |---|---|---|
-| MUST | Keep the invisible 44px hit area on each `.ds-carousel-nav__arrow`. | [Automated: Touch-target lint](../foundations/checks.md#touch-target-lint) |
-| MUST | Label each chevron `<button>` with an `aria-label`. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
-| MUST | Announce the position through a polite live region, because the counter is hidden from assistive tech. | [Automated: Screen-reader structure gate](../foundations/checks.md#screen-reader-structure-gate) |
+| MUST | Keep each `.ds-carousel-nav__arrow` at 44px. | [Automated: Touch-target lint](../foundations/checks.md#touch-target-lint) |
+| MUST | Label each arrow `<button>` with an `aria-label`. | [Automated: axe accessibility scan](../foundations/checks.md#axe-accessibility-scan) |
+| MUST | Announce the position through a polite live region, because the dots are hidden from assistive tech. | [Automated: Screen-reader structure gate](../foundations/checks.md#screen-reader-structure-gate) |
 | MUST | Keep the track a Tab stop only while it can scroll. | [Automated: Tab walk: keyboard](../foundations/checks.md#tab-walk-keyboard) |
-| MUST NOT | Autoplay the carousel; there is no visible pause control (WCAG 2.2.2). | [Manual: Carousel autoplay review](../foundations/checks.md#carousel-autoplay-review) |
+| MUST NOT | Autoplay without a visible pause control (WCAG 2.2.2). | [Manual: Carousel autoplay review](../foundations/checks.md#carousel-autoplay-review) |
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
@@ -99,16 +105,17 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 
 ### Do
 
-- Use `.ds-carousel-nav` for every carousel on the site; one control and one grammar, whatever the rail holds.
-- Keep the invisible 44px hit area on `.ds-carousel-nav__arrow`; the bare chevron is far smaller than the target floor.
-- Announce position through a polite live region, because `.ds-carousel-nav__count` is hidden from assistive tech.
-- Retheme a rail by repointing `--cn-rail-fill` and `--cn-rail-track` on the block, never by restyling the arrows.
+- Use `.ds-carousel-nav` for every carousel: dots bottom left, round arrows bottom right. It is what "use the carousel" means.
+- Add `.ds-carousel--strip` to a track too wide for the screen; set `--strip-across` and `--strip-gaps` on the section.
+- Announce position through a polite live region, because `.ds-carousel-nav__dots` is hidden from assistive tech.
+- Retheme the nav by remapping `--color-text-primary` on the block; the dots and arrows paint from it, so never restyle them one by one.
 
 ### Don't
 
 - Do not build a bespoke pager; `.ds-carousel-nav` was unified site-wide precisely to stop a second grammar.
-- Do not use `.ds-carousel-nav--full` above 768px; it is the mobile swipe variant and is hidden on wider screens.
-- Do not hide a disabled `.ds-carousel-nav__arrow`; it dims instead, so the end of the rail stays visible.
+- Do not use `.ds-carousel-nav--full` above 768px unless it follows a `.ds-carousel--strip` track; elsewhere the CSS hides it.
+- Do not hide a disabled `.ds-carousel-nav__arrow`; it dims instead, so the end of the track stays readable.
+- Do not add a progress bar or an "N / total" count beside `.ds-carousel-nav__dots`; the dots already show the position.
 
 ## Look
 
@@ -125,25 +132,24 @@ The recipe from [DESIGN.md](../DESIGN.md), one entry per state. Names in braces 
 
 ```yaml
 carousel-nav:
-  layout: "a progress rail, then bare chevrons around a counter, below the cards; no pagination dots"
-  railTrack: "{colors.border}, a 4px hairline groove"
-  railFill: "{colors.accent} (ink on light, lime on dark), grows with the position"
-  counter: "{typography.families.mono} at 14px, weight 700, normal tracking; current number {colors.text-primary}, slash and total {colors.text-secondary}"
-  arrows: "{colors.text-secondary} glyph, {colors.text-primary} on hover; 24px glyph on a {structure.touch-target-min} invisible target"
-  onDarkSlab: "re-map --cn-rail-fill to {colors.brand-lime} and --cn-rail-track to --color-on-ink-hover on that band; the default ink fill vanishes on near-black"
+  layout: "dots bottom left, two round arrows bottom right, below the cards; no progress bar and no count"
+  dots: "8px {colors.text-primary} dots at 30% alpha; the current one fills and stretches to 24px over {motion.duration-slow}"
+  arrows: "{structure.touch-target-min} circles, {colors.text-primary} at 12% alpha (18% on hover), a 24px chevron"
+  strip: "from 768px .ds-carousel--strip bleeds the track to the page edge; set --strip-across and --strip-gaps on the section"
+  onDarkSlab: "re-map --color-text-primary on that band; the dots and arrows paint from it"
 ```
 
 ## Classes
 
 | Class | Kind | What it does | Tokens it reads |
 |---|---|---|---|
-| `.ds-carousel-nav` | base | wrapper | `--color-border`, `--color-dot-active`, `--size-xl`, `--space-400`, `--space-500` |
-| `.ds-carousel-nav--full` | modifier | full-width rail | `--space-400` |
-| `.ds-carousel-nav__rail` | element | the track | `--bar-radius`, `--cn-rail-track`, `--space-100`, `--space-1100` |
-| `.ds-carousel-nav__arrow` | element | prev / next | `--border-focus`, `--btn-radius`, `--cn-glyph`, `--color-text-primary`, `--color-text-secondary`, `--duration-fast`, `--ease-default`, `--focus-ring-offset`, `--opacity-disabled`, `--touch-target-min` |
-| `.ds-carousel-nav__pager` | element | groups the prev / next chevrons around the counter | `--space-200` |
-| `.ds-carousel-nav__fill` | element | progress fill | `--bar-radius`, `--cn-rail-fill`, `--duration-slow`, `--ease-spring` |
-| `.ds-carousel-nav__count` | element | mono counter | `--color-text-primary`, `--color-text-secondary`, `--font-mono`, `--size-sm`, `--tracking-normal`, `--weight-bold` |
+| `.ds-carousel-nav` | base | wrapper | `--color-text-primary`, `--space-400` |
+| `.ds-carousel-nav--full` | modifier | phone swipe nav; also shows after a strip | `--space-400` |
+| `.ds-carousel-nav__dots` | element | the row of dots | `--space-100` |
+| `.ds-carousel-nav__dot` | element | one per card; data-on stretches the current one | `--alpha-500`, `--dot-radius`, `--duration-slow`, `--ease-emphasized`, `--space-200`, `--space-50`, `--space-500` |
+| `.ds-carousel-nav__pager` | element | groups the prev / next arrows | `--space-300` |
+| `.ds-carousel-nav__arrow` | element | 44px round prev / next | `--alpha-300`, `--alpha-400`, `--border-focus`, `--btn-radius`, `--duration-fast`, `--ease-default`, `--focus-ring-offset`, `--opacity-disabled`, `--size-xl`, `--touch-target-min` |
+| `.ds-carousel--strip` | modifier | wide-screen strip that bleeds to the page edge | `--border-focus`, `--space-100`, `--space-300`, `--space-400`, `--space-500`, `--space-600`, `--strip-across`, `--strip-edge`, `--strip-gap`, `--strip-gaps` |
 
 ## Tokens
 
@@ -152,32 +158,31 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | Token | Tier | Value | What it is for |
 |---|---|---|---|
 | `--btn-radius` | Component | `999px`, from `--radius-full` | Button corner radius; full pill. |
-| `--cn-glyph` | Component | `1.5rem`, from `--size-xl` | The chevron size, shared by the arrow's box and the glyph inside it. |
-| `--cn-rail-fill` | Component | `#1c1c1f`; dark `#d2ff37`, from `--color-dot-active` | The carousel rail's fill, the active-dot accent. A section band may re-map it. |
-| `--cn-rail-track` | Component | `#e4e4e7`; dark `#27272a`, from `--color-border` | The groove the carousel rail draws behind its fill: a subtle line, not a dot grey, so the fill stands out. A section band may re-map it. |
-| `--bar-radius` | Semantic | `999px`, from `--radius-full` | End-cap rounding for thin bars, rails, tracks, indicators, and capsule strips (progress rails, tab indicators, slider tracks, chart bars, the hero edge widget's pill). Full by definition; it rounds the ends of a strip at any height. |
+| `--strip-across` | Component | `1.5` | How many cards a wide-screen carousel strip shows across, such as 1.6; a part card at the edge says there is more. Set on the section. |
+| `--strip-edge` | Component | `var(--gutter-centered, var(--space-600))` | How far the strip bleeds past the content column, so the first card lines up with the heading and the last runs to the page edge. |
+| `--strip-gap` | Component | `16px`, from `--space-400` | The space between cards in a carousel strip. |
+| `--strip-gaps` | Component | `1` | How many gaps sit inside the strip's view, so card widths come out exact. Pairs with --strip-across. |
 | `--border-focus` | Semantic | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
-| `--color-border` | Semantic | `#e4e4e7`; dark `#27272a`, from `--neutral-300` | Default hairline border and divider colour, theme-aware. Decoration only: never the only edge of an input or control, which needs 3:1; use text-tertiary there. |
-| `--color-dot-active` | Semantic | `#1c1c1f`; dark `#d2ff37`, from `--color-accent` | The fill on the carousel nav progress rail (.ds-carousel-nav__fill), reached through --cn-rail-fill, which defaults to this token. Renaming the pair is a follow-up (it moves the showcase manifest and the doc tables too), so the job is written here instead. |
 | `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
-| `--color-text-secondary` | Semantic | `#3f3f46`; dark `#a1a1aa`, from `--neutral-700` | Secondary text: supporting copy one step quieter than text-primary. Checked at 4.5:1 on bg, surface, surface-sunken and the four tint surfaces; for labels and quiet meta copy use text-tertiary. |
+| `--dot-radius` | Semantic | `999px`, from `--radius-full` | Circle geometry: dots, markers, slider thumbs, and drawn circles (the brand period, status dots, touch-target rings). Full by definition: a re-theme that softens buttons leaves a dot round, and the theme lab's corner tier squares it only when the whole system goes sharp (0 at sharp, full at soft and round). |
 | `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
 | `--duration-slow` | Semantic | `400ms` | Context shift and slide transitions. |
 | `--ease-default` | Semantic | `cubic-bezier(0.4, 0, 0.2, 1)` | The workhorse symmetric curve. Begins and ends on screen. |
-| `--ease-spring` | Semantic | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Overshoot and settle, so a move reads as a bounce. Micro-moments only. |
+| `--ease-emphasized` | Semantic | `cubic-bezier(0.16, 1, 0.3, 1)` | Pronounced ease-out for overlay and menu entrance motion (items rising into view). A stronger, slower-settling decelerate than --ease-entrance. |
 | `--focus-ring-offset` | Semantic | `2px` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. |
-| `--font-mono` | Semantic | `"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace` | Tabular numbers, code, and eyebrow labels. |
 | `--opacity-disabled` | Semantic | `0.45` | A disabled control, dimmed as one piece and still findable. One value for every component. |
-| `--size-sm` | Semantic | `0.875rem` | 14px. Compact body: footer text, card bullets, dense UI copy. |
 | `--size-xl` | Semantic | `1.5rem` | 24px. Modal and tile titles. |
 | `--space-100` | Semantic | `4px` | Hairline gap. Icon-to-label, tight inline spacing. |
-| `--space-1100` | Semantic | `192px` | Outsized spacing for full-bleed editorial breaks. |
 | `--space-200` | Semantic | `8px` | Tight gap. Chip padding, small stacks. |
+| `--space-300` | Semantic | `12px` | Medium-tight break. Heading-to-body, compact rows. |
 | `--space-400` | Semantic | `16px` | Base unit. Default gap between related elements; the compact card-padding tier (--card-pad-compact). |
+| `--space-50` | Semantic | `2px` | Half step under the base. Optical nudges: an alias line under its token, a count chip's inset, the burger bars. |
 | `--space-500` | Semantic | `24px` | Medium break. Group separation inside a section; the standard card-padding tier (--card-pad-standard). |
+| `--space-600` | Semantic | `32px` | Large gap. Between subsections and card to card; the spacious card-padding tier (--card-pad-spacious). |
 | `--touch-target-min` | Semantic | `44px` | Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px). |
-| `--tracking-normal` | Semantic | `0` | 0. The body default; most text sits here. |
-| `--weight-bold` | Semantic | `700` | 700. Strong emphasis inside body copy. |
+| `--alpha-300` | Primitive | `0.12` | Soft: the workhorse divider and tint step, the biggest cluster in the audit (17 uses at exactly 0.12). Absorbed 0.14 and 0.16. |
+| `--alpha-400` | Primitive | `0.18` | Medium: hover tints and strong dividers; the same weight as color.on-ink-hover. Absorbed 0.2 and 0.22. |
+| `--alpha-500` | Primitive | `0.3` | Strong: emphatic borders and mid washes. Absorbed the 0.26 to 0.4 cluster. |
 
 ## Source
 

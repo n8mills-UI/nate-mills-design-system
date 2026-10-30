@@ -13,7 +13,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 ## When not to use
 
 - A status, such as "Open to work": use a Badge.
-- A position in a carousel: use the Carousel navigation counter.
+- A position in a carousel: the Carousel navigation dots show it.
 - Anything clickable: use a Button or a Link.
 
 ## Alternatives

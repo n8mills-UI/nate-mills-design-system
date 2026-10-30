@@ -248,12 +248,11 @@ components:
     textColor: "{colors.on-ink-primary}"
     border: "1px solid {colors.on-ink-border}"
   carousel-nav:
-    layout: "a progress rail, then bare chevrons around a counter, below the cards; no pagination dots"
-    railTrack: "{colors.border}, a 4px hairline groove"
-    railFill: "{colors.accent} (ink on light, lime on dark), grows with the position"
-    counter: "{typography.families.mono} at 14px, weight 700, normal tracking; current number {colors.text-primary}, slash and total {colors.text-secondary}"
-    arrows: "{colors.text-secondary} glyph, {colors.text-primary} on hover; 24px glyph on a {structure.touch-target-min} invisible target"
-    onDarkSlab: "re-map --cn-rail-fill to {colors.brand-lime} and --cn-rail-track to --color-on-ink-hover on that band; the default ink fill vanishes on near-black"
+    layout: "dots bottom left, two round arrows bottom right, below the cards; no progress bar and no count"
+    dots: "8px {colors.text-primary} dots at 30% alpha; the current one fills and stretches to 24px over {motion.duration-slow}"
+    arrows: "{structure.touch-target-min} circles, {colors.text-primary} at 12% alpha (18% on hover), a 24px chevron"
+    strip: "from 768px .ds-carousel--strip bleeds the track to the page edge; set --strip-across and --strip-gaps on the section"
+    onDarkSlab: "re-map --color-text-primary on that band; the dots and arrows paint from it"
   badge:
     backgroundColor: "transparent"
     textColor: "{colors.text-secondary}"
@@ -391,17 +390,17 @@ Rules for using it:
 | `.tabs--compact` | mono caption tabs inside a card, each with its own underline |
 | `.tab` | one tab: a <button type="button" role="tab"> |
 
-**Carousel navigation:** Bare chevrons plus a mono counter on a rail BELOW the cards. One nav, site-wide.
+**Carousel navigation:** The default carousel: dots bottom left, round arrows bottom right, BELOW the cards. One nav, site-wide.
 
 | Class | Use |
 | --- | --- |
 | `.ds-carousel-nav` | wrapper |
-| `.ds-carousel-nav--full` | full-width rail |
-| `.ds-carousel-nav__rail` | the track |
-| `.ds-carousel-nav__arrow` | prev / next |
-| `.ds-carousel-nav__pager` | groups the prev / next chevrons around the counter |
-| `.ds-carousel-nav__fill` | progress fill |
-| `.ds-carousel-nav__count` | mono counter |
+| `.ds-carousel-nav--full` | phone swipe nav; also shows after a strip |
+| `.ds-carousel-nav__dots` | the row of dots |
+| `.ds-carousel-nav__dot` | one per card; data-on stretches the current one |
+| `.ds-carousel-nav__pager` | groups the prev / next arrows |
+| `.ds-carousel-nav__arrow` | 44px round prev / next |
+| `.ds-carousel--strip` | wide-screen strip that bleeds to the page edge |
 
 **Other**
 

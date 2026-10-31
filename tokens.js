@@ -341,6 +341,8 @@ export const tokens = {
   "glass-saturate": "170%",
   "glass-dim": "1",
   "glass-dim-scrolled": "1.15",
+  "edge-fade-height": "96px",
+  "edge-fade-blur": "5px",
   "sbtn-pad-y": "8px",
   "sbtn-pad-x": "12px",
   "sbtn-gap": "8px",

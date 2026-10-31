@@ -360,6 +360,8 @@
   --glass-saturate: 170%;
   --glass-dim: 1;
   --glass-dim-scrolled: 1.15;
+  --edge-fade-height: var(--space-900);
+  --edge-fade-blur: 5px;
   --sbtn-pad-y: var(--space-200);
   --sbtn-pad-x: var(--space-300);
   --sbtn-gap: var(--space-200);

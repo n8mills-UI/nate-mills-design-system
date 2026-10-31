@@ -1340,6 +1340,86 @@ a.card:focus-visible { text-decoration: none; }
   .ds-carousel--strip + .ds-carousel-nav--full { display: flex; }
 }
 
+/* -----------------------------------------------------------------------------
+   Bottom blur strip (.edge-fade)
+   ---
+   Content leaving the bottom of the screen softens into the edge instead of
+   being cut off by it, so a block arriving from below reads as coming out of
+   something rather than switching on (Nathan, 2026-09-19 on the home page;
+   shared by every page since 2026-11-01, Hybrid motion step 2).
+
+   Markup, static in the page, never injected:
+     <div class="edge-fade" aria-hidden="true"><span></span><span></span><span></span></div>
+   plus assets/edge-fade.js, which owns when it shows.
+
+   backdrop-filter cannot ramp, so this is the stacked recipe: three layers,
+   each blurring harder and masked to a shorter band off the bottom edge, so
+   the strength builds towards the edge instead of ending on a line. One layer
+   alone is a sheet of frosted glass with a visible top border. Each layer's
+   backdrop includes the one painted before it, which is what makes the stack
+   read as a gradient. The three spans cannot be pseudo-elements: an element
+   only has two.
+
+   Tokens: --edge-fade-height (the band) and --edge-fade-blur (its strongest
+   layer; the other two take two thirds and one third of it).
+
+   THE RULE: nothing you can press, type in or swipe is ever blurred
+   (Nathan, 2026-10-28). The strip stands down (opacity 0) while:
+     body:not([data-past-intro])  the view's opening block still touches the band
+     body[data-control-in-band]   a control in the main region reaches the band
+     body[data-scroll-end]        the page is scrolled to its very end
+     body[data-footer-near]       a page that keeps this signal (the home page)
+                                  is showing its footer
+   All four are written by assets/edge-fade.js (the last by the home page's
+   own scroll script), each only when its answer flips. What counts as a
+   control is written there and in design-system.md Section 10;
+   a11y/edge-fade-gate.mjs fails a build that blurs one.
+
+   The stack: the strip sits at --z-dropdown, so anything a page docks to the
+   bottom of the viewport as a control (the home page's Ask AI bar at
+   --z-sticky, its chip at --z-overlay) must sit above it and stays crisp.
+   Decoration, so pointer-events is none and the host is aria-hidden; nothing
+   here can be focused or clicked through to. Reduced transparency stands it
+   down entirely, the way the site honours the OS rather than offering a
+   preference panel of its own.
+   -------------------------------------------------------------------------- */
+.edge-fade {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--edge-fade-height);
+  z-index: var(--z-dropdown);
+  pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-default);
+}
+body:not([data-past-intro]) .edge-fade,
+body[data-control-in-band] .edge-fade,
+body[data-scroll-end] .edge-fade,
+body[data-footer-near] .edge-fade { opacity: 0; }
+.edge-fade > span {
+  position: absolute;
+  inset: 0;
+  display: block;
+  -webkit-backdrop-filter: blur(var(--edge-fade-layer-blur));
+  backdrop-filter: blur(var(--edge-fade-layer-blur));
+  -webkit-mask-image: linear-gradient(to top,
+    rgb(0 0 0) 0%, rgb(0 0 0) var(--edge-fade-layer-hold), rgb(0 0 0 / 0) var(--edge-fade-layer-reach));
+  mask-image: linear-gradient(to top,
+    rgb(0 0 0) 0%, rgb(0 0 0) var(--edge-fade-layer-hold), rgb(0 0 0 / 0) var(--edge-fade-layer-reach));
+}
+/* Softest layer covers the whole height, hardest only the bottom third. */
+.edge-fade > span:nth-child(1) { --edge-fade-layer-blur: calc(var(--edge-fade-blur) / 3); --edge-fade-layer-hold: 35%; --edge-fade-layer-reach: 100%; }
+.edge-fade > span:nth-child(2) { --edge-fade-layer-blur: calc(var(--edge-fade-blur) / 3 * 2); --edge-fade-layer-hold: 23%; --edge-fade-layer-reach: 67%; }
+.edge-fade > span:nth-child(3) { --edge-fade-layer-blur: var(--edge-fade-blur); --edge-fade-layer-hold: 12%; --edge-fade-layer-reach: 33%; }
+@media (prefers-reduced-transparency: reduce) {
+  .edge-fade { display: none; }
+}
+/* Paper has no bottom edge to soften into. */
+@media print {
+  .edge-fade { display: none; }
+}
+
 /* The .placeholder component family was deleted 2026-07-12 (deep-audit n-29):
    zero consumers, never documented. */
 

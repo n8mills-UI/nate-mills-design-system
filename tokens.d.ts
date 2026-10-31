@@ -341,6 +341,8 @@ export interface DesignTokens {
   "glass-saturate": string;
   "glass-dim": string;
   "glass-dim-scrolled": string;
+  "edge-fade-height": string;
+  "edge-fade-blur": string;
   "sbtn-pad-y": string;
   "sbtn-pad-x": string;
   "sbtn-gap": string;

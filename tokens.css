@@ -286,6 +286,9 @@
   --duration-flourish: 600ms;
   --duration-beat: 240ms;
   --duration-expressive: 1300ms;
+  --duration-reveal-fade: 900ms;
+  --duration-reveal-rise: 700ms;
+  --duration-reveal-gap: 150ms;
   --duration-marquee: 36000ms;
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-entrance: cubic-bezier(0, 0, 0.2, 1);
@@ -294,6 +297,7 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-linear: cubic-bezier(0, 0, 1, 1);
   --motion-reveal-rise: 64px;
+  --motion-reveal-text-rise: 30px;
   --motion-reveal-shift: 48px;
   --motion-reveal-scale: 0.9;
   --motion-reveal-slide: 80px;
@@ -550,6 +554,11 @@
     --duration-slow: 1ms;
     --duration-flourish: 1ms;
     --duration-expressive: 1ms;
+    --duration-reveal-fade: 1ms;
+    --duration-reveal-rise: 1ms;
+    /* duration.reveal-gap is a DELAY between text blocks arriving together, the
+       same reason as stagger and beat: the blanket rule never reaches a delay. */
+    --duration-reveal-gap: 1ms;
   }
   *,
   *::before,

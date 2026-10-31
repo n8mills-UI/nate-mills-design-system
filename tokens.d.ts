@@ -267,6 +267,9 @@ export interface DesignTokens {
   "duration-flourish": string;
   "duration-beat": string;
   "duration-expressive": string;
+  "duration-reveal-fade": string;
+  "duration-reveal-rise": string;
+  "duration-reveal-gap": string;
   "duration-marquee": string;
   "ease-default": string;
   "ease-entrance": string;
@@ -275,6 +278,7 @@ export interface DesignTokens {
   "ease-spring": string;
   "ease-linear": string;
   "motion-reveal-rise": string;
+  "motion-reveal-text-rise": string;
   "motion-reveal-shift": string;
   "motion-reveal-scale": string;
   "motion-reveal-slide": string;

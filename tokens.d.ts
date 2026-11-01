@@ -62,6 +62,7 @@ export interface DesignTokens {
   "ext-brand-bupa-blue-subtle": string;
   "ext-brand-github": string;
   "ext-brand-wcag-amber": string;
+  "ext-brand-figma": string;
   "fx-glitch-magenta": string;
   "fx-glitch-cyan": string;
   "fx-glitch-cyan-deep": string;

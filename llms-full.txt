@@ -745,7 +745,7 @@ and buttons use `{rounded.full}`.
 ## Do's and Don'ts
 
 Each rule carries its reason, so a rule whose reason no longer holds can be argued with instead of
-inherited. A rule with no "because" is a house choice whose reason is not written down yet.
+inherited. A rule that rests on a house choice rather than a standard says so.
 
 Do:
 - Do keep the lime scarce. If two primary buttons would appear in one viewport, make one secondary.
@@ -763,6 +763,8 @@ Do:
 
 Don't:
 - Don't use pure white as the page canvas or pure black as ink. The canvas is `{colors.bg}`.
+  Because: full white against full black glares, and in dark mode bright text can seem to glow and
+  blur, worst for readers with astigmatism. Softer ends still clear WCAG contrast.
 - Don't put lime on a light background as text, a link, or a large fill (it fails WCAG at ~1.06:1).
 - Don't paint a solid lime panel in dark mode; use charcoal with lime text. Because: lime is an
   accent, never wallpaper; charcoal with lime text reads at roughly 10:1.
@@ -776,7 +778,8 @@ Don't:
   elevation scale on purpose; depth is the surface ladder plus an edge, the Swiss-minimal choice.
 - Don't justify body text. Because: justified text opens rivers between words and slows scanning,
   worst for dyslexic and low-vision readers; use `start`, not `left`, so right-to-left text mirrors.
-- Don't drop below the 11px mono label floor (`--text-label`).
+- Don't drop below the 11px mono label floor (`--text-label`). Because: it is a house floor, not a
+  standard; WCAG sets no minimum size, and 11 matches Apple's smallest recommended text size.
 - Don't leak an external client brand colour into general UI; those are locked constants for their
   own case-study context only. Because: they are reproduced for accuracy, never themed and never
   aliased into a semantic token.

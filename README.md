@@ -106,16 +106,23 @@ tokens must load first. `fonts.css` declares the self-hosted Anton and mono, and
 - **The Claude Code plugin:** `claude plugin marketplace add n8mills-UI/nate-mills-design-system`, then `claude plugin install nate-mills-design-system@nate-mills-design-system`, installs the [skill](./skills/nate-mills-design-system/SKILL.md) that carries the same rules.
 - **The index for AI tools:** `https://natemills.me/llms.txt` (and `llms-full.txt` for one file) lists every agent-facing document: [`DESIGN.md`](./DESIGN.md) for every resolved value, recipe and the voice; [`components-api.json`](./components-api.json) for the class API as data (per class: kind, own selectors, states, parts, descendant rules, the tokens it reads and sets).
 
+Installing it? It's on npm:
+
+```bash
+npm install @n8mills/design-tokens
+```
+
+```css
+@import "@n8mills/design-tokens/tokens.css";
+@import "@n8mills/design-tokens/components.css";
+```
+
 Prefer the source? Clone it and take what you need, including the raw DTCG token file and the typed
 JS export:
 
 ```bash
 git clone https://github.com/n8mills-UI/nate-mills-design-system.git
 ```
-
-> **Note on npm.** `@n8mills/design-tokens` was published in 2026 and is now retired. The
-> registry copy is frozen at an old version and does not match this repo. Link the CSS above or
-> clone the source instead.
 
 See the [live design system](https://natemills.me/#under-the-hood) for the why. Read [`DESIGN.md`](./DESIGN.md), `tokens.json` and `components.css` for the how. Fork it for another brand by changing `--lime-500` and watching every consumer follow. That is the system working as designed.
 

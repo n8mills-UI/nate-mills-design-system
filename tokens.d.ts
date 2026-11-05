@@ -63,6 +63,7 @@ export interface DesignTokens {
   "ext-brand-github": string;
   "ext-brand-wcag-amber": string;
   "ext-brand-figma": string;
+  "ext-brand-npm": string;
   "fx-glitch-magenta": string;
   "fx-glitch-cyan": string;
   "fx-glitch-cyan-deep": string;

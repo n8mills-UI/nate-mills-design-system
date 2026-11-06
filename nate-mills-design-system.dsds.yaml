@@ -8,7 +8,7 @@ entries:
     kind: "system"
     name: "Nate Mills Design System"
     description: "The design system behind natemills.me: DTCG tokens, generated CSS and a small published class API. Every component and published token is an entry in this document, and every helper class (a published class that is not a component) is a set of guidelines on this system entry; anything not listed is not in the system."
-    purpose: "A CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, so its traits are those classes and attributes. Not in this system: text field, checkbox, radio button, select, switch, slider, dialog or modal, tooltip, popover, accordion, toast, table, pagination dots."
+    purpose: "A CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, so its traits are those classes and attributes. Not in this system: text field, checkbox, radio button, select, switch, slider, dialog or modal, tooltip, popover, accordion, toast, table."
     metadata:
       version: "4.0.0"
       organization: "Nate Mills"

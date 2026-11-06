@@ -432,7 +432,7 @@
    the card rules in tokens/mobile-consistency-lint.mjs, rule 4).
      .card--compact / --spacious   padding tiers (16 / 32; base is standard 24)
      .card--interactive            clickable: pair with a real <a>/<button>
-     .card--empty / --error        a centred message, frame still renders
+     .card--empty                  a centred message, frame still renders
      .card--loading                a skeleton matching card proportions
    ----------------------------------------------------------------------------- */
 
@@ -671,7 +671,7 @@ a.card:focus-visible { text-decoration: none; }
 /* -----------------------------------------------------------------------------
    Avatar
    ---
-   .avatar              identity shape (--avatar-radius, a circle by default), sized via --size class, lime ring on hover
+   .avatar              identity shape (--avatar-radius, a circle by default), at --touch-target-min, no hover or focus state
    ----------------------------------------------------------------------------- */
 .avatar {
   display: inline-flex;

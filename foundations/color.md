@@ -18,13 +18,13 @@ only inside their own case-study or logo context, never as system colour).
 
 **Brand voltage rule: use the lime (`{colors.brand-lime}`) ONLY for** the primary button fill, brand
 outlines (`{colors.border-brand}`), focus rings on dark surfaces, the lime period after a section
-title, the carousel rail's fill on dark, status dots, and the footer slab. **Never** use lime as body
+title, status dots, and the footer slab. **Never** use lime as body
 text, as a link on a light background, as a section background, or as a large fill on the light page.
 On the off-white canvas raw lime composites to roughly 1.06:1 and fails WCAG outright.
 
 **The theme-aware accent.** `{colors.accent}` is the one interactive role that follows the theme: it
 resolves to ink on light and to lime on dark. Anything that signals an active or selected state
-(current nav item, pressed toggle, the carousel rail's fill) uses `accent`, never raw lime, so it
+(current nav item, pressed toggle) uses `accent`, never raw lime, so it
 stays legible on the light page. `{colors.border-brand}` is the deliberate exception: it stays fixed
 lime in both themes because it is a brand-identity outline, not a state signal.
 

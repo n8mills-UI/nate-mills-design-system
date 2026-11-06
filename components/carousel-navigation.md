@@ -29,7 +29,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 - Place `.ds-carousel-nav` below the cards: the dots on the left, the pager with the two round arrows on the right.
 - Add `.ds-carousel-nav--full` for a phone swipe carousel; it also shows from 768px up when it follows a `.ds-carousel--strip` track.
-- For a wide-screen strip, add `.ds-carousel--strip` to the track and set `--strip-across` (cards in view, such as 1.6) and `--strip-gaps` (the gaps inside that view) on the section. The cards stretch to one height and the first card lines up with the heading.
+- For a wide-screen strip, put `.ds-carousel`, `.ds-carousel--strip` and the `data-ds-carousel` attribute on the track, and set `--strip-across` (cards in view, such as 1.6) and `--strip-gaps` (the gaps inside that view) on the track, not the section: the sheet declares their defaults on the track, so a value on a parent never reaches it. The cards stretch to one height and the first card lines up with the heading.
 - Drive it with a script that builds one dot per card, marks the current dot with `data-on`, steps the track, and announces the position in a polite live region.
 
 **Classes:** `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__dots`, `.ds-carousel-nav__dot`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__arrow`, `.ds-carousel--strip`
@@ -106,7 +106,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 ### Do
 
 - Use `.ds-carousel-nav` for every carousel: dots bottom left, round arrows bottom right. It is what "use the carousel" means.
-- Add `.ds-carousel--strip` to a track too wide for the screen; set `--strip-across` and `--strip-gaps` on the section.
+- Put `.ds-carousel`, `.ds-carousel--strip` and `data-ds-carousel` on a too-wide track; set `--strip-across` and `--strip-gaps` on it too.
 - Announce position through a polite live region, because `.ds-carousel-nav__dots` is hidden from assistive tech.
 - Retheme the nav by remapping `--color-text-primary` on the block; the dots and arrows paint from it, so never restyle them one by one.
 
@@ -119,10 +119,10 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 
 ## Look
 
-- **Carousel nav** is a progress rail plus bare chevrons around a mono counter, below the cards. There
-  are no pagination dots. The rail is a `{colors.border}` hairline groove with a `{colors.accent}` fill
-  that grows to the current position. The counter reads "N/total" in bold 14px mono: the current
-  number in `{colors.text-primary}`, the slash and total in `{colors.text-secondary}`.
+- **Carousel nav** sits below the cards: dots bottom left, two round arrows bottom right, with no
+  progress bar and no count. One dot per card, 8px in `{colors.text-primary}` at 30% alpha; the
+  current one fills and stretches to 24px. The arrows are `{structure.touch-target-min}` circles in
+  `{colors.text-primary}` at 12% alpha.
 
 Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md); every token with its purpose is on [Tokens](../foundations/tokens.md).
 
@@ -135,7 +135,7 @@ carousel-nav:
   layout: "dots bottom left, two round arrows bottom right, below the cards; no progress bar and no count"
   dots: "8px {colors.text-primary} dots at 30% alpha; the current one fills and stretches to 24px over {motion.duration-slow}"
   arrows: "{structure.touch-target-min} circles, {colors.text-primary} at 12% alpha (18% on hover), a 24px chevron"
-  strip: "from 768px .ds-carousel--strip bleeds the track to the page edge; set --strip-across and --strip-gaps on the section"
+  strip: "from 768px .ds-carousel--strip bleeds the track to the page edge; put .ds-carousel and data-ds-carousel on the same track and set --strip-across and --strip-gaps on the track"
   onDarkSlab: "re-map --color-text-primary on that band; the dots and arrows paint from it"
 ```
 
@@ -158,7 +158,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | Token | Tier | Value | What it is for |
 |---|---|---|---|
 | `--btn-radius` | Component | `999px`, from `--radius-full` | Button corner radius; full pill. |
-| `--strip-across` | Component | `1.5` | How many cards a wide-screen carousel strip shows across, such as 1.6; a part card at the edge says there is more. Set on the section. |
+| `--strip-across` | Component | `1.5` | How many cards a wide-screen carousel strip shows across, such as 1.6; a part card at the edge says there is more. Set on the track. |
 | `--strip-edge` | Component | `var(--gutter-centered, var(--space-600))` | How far the strip bleeds past the content column, so the first card lines up with the heading and the last runs to the page edge. |
 | `--strip-gap` | Component | `16px`, from `--space-400` | The space between cards in a carousel strip. |
 | `--strip-gaps` | Component | `1` | How many gaps sit inside the strip's view, so card widths come out exact. Pairs with --strip-across. |

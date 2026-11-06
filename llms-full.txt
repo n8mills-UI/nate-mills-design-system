@@ -415,7 +415,7 @@ components:
     layout: "dots bottom left, two round arrows bottom right, below the cards; no progress bar and no count"
     dots: "8px {colors.text-primary} dots at 30% alpha; the current one fills and stretches to 24px over {motion.duration-slow}"
     arrows: "{structure.touch-target-min} circles, {colors.text-primary} at 12% alpha (18% on hover), a 24px chevron"
-    strip: "from 768px .ds-carousel--strip bleeds the track to the page edge; set --strip-across and --strip-gaps on the section"
+    strip: "from 768px .ds-carousel--strip bleeds the track to the page edge; put .ds-carousel and data-ds-carousel on the same track and set --strip-across and --strip-gaps on the track"
     onDarkSlab: "re-map --color-text-primary on that band; the dots and arrows paint from it"
   badge:
     backgroundColor: "transparent"
@@ -623,13 +623,13 @@ only inside their own case-study or logo context, never as system colour).
 
 **Brand voltage rule: use the lime (`{colors.brand-lime}`) ONLY for** the primary button fill, brand
 outlines (`{colors.border-brand}`), focus rings on dark surfaces, the lime period after a section
-title, the carousel rail's fill on dark, status dots, and the footer slab. **Never** use lime as body
+title, status dots, and the footer slab. **Never** use lime as body
 text, as a link on a light background, as a section background, or as a large fill on the light page.
 On the off-white canvas raw lime composites to roughly 1.06:1 and fails WCAG outright.
 
 **The theme-aware accent.** `{colors.accent}` is the one interactive role that follows the theme: it
 resolves to ink on light and to lime on dark. Anything that signals an active or selected state
-(current nav item, pressed toggle, the carousel rail's fill) uses `accent`, never raw lime, so it
+(current nav item, pressed toggle) uses `accent`, never raw lime, so it
 stays legible on the light page. `{colors.border-brand}` is the deliberate exception: it stays fixed
 lime in both themes because it is a brand-identity outline, not a state signal.
 
@@ -679,13 +679,14 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
 </div>
 ```
 
-- **Chips vs badges vs counters** resolve by job: a label is a chip, a status is a badge, a count is
-  the carousel counter. A badge is read-only and never interactive; its dot stays lime in both themes
-  but colour is never the only signal, every status also carries a word.
-- **Carousel nav** is a progress rail plus bare chevrons around a mono counter, below the cards. There
-  are no pagination dots. The rail is a `{colors.border}` hairline groove with a `{colors.accent}` fill
-  that grows to the current position. The counter reads "N/total" in bold 14px mono: the current
-  number in `{colors.text-primary}`, the slash and total in `{colors.text-secondary}`.
+- **Chips vs badges vs dots** resolve by job: a label is a chip, a status or a count is a badge, a
+  position in a carousel is its dots, never a badge or a number. A badge is read-only and never
+  interactive; its dot stays lime in both themes but colour is never the only signal, every status
+  also carries a word.
+- **Carousel nav** sits below the cards: dots bottom left, two round arrows bottom right, with no
+  progress bar and no count. One dot per card, 8px in `{colors.text-primary}` at 30% alpha; the
+  current one fills and stretches to 24px. The arrows are `{structure.touch-target-min}` circles in
+  `{colors.text-primary}` at 12% alpha.
 - **Footer** is a fixed lime slab with ink text, lime in both themes.
 - **Links** are underlined, `{colors.link}` (ink on light, lime on dark). External links open a new
   tab, set `rel`, and carry a trailing up-right arrow glyph plus a screen-reader cue.

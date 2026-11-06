@@ -105,9 +105,10 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 
 ## Look
 
-- **Chips vs badges vs counters** resolve by job: a label is a chip, a status is a badge, a count is
-  the carousel counter. A badge is read-only and never interactive; its dot stays lime in both themes
-  but colour is never the only signal, every status also carries a word.
+- **Chips vs badges vs dots** resolve by job: a label is a chip, a status or a count is a badge, a
+  position in a carousel is its dots, never a badge or a number. A badge is read-only and never
+  interactive; its dot stays lime in both themes but colour is never the only signal, every status
+  also carries a word.
 
 Values in braces, such as `{colors.border}`, are named on the foundation pages, starting with [Colour](../foundations/color.md); every token with its purpose is on [Tokens](../foundations/tokens.md).
 

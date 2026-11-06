@@ -1171,13 +1171,13 @@ a.card:focus-visible { text-decoration: none; }
    negative inline margin takes the track out to the page edge and the
    matching padding puts the first card back on the section gutter, so the
    track's content box IS the section's content width and a card's
-   flex-basis can be a share of it. Each section sets how many cards sit
+   flex-basis can be a share of it. Each section's rule on the track sets how many cards sit
    across (--strip-across, a fraction so the next card peeks) and how many
    whole gaps that includes (--strip-gaps). The doubled attribute is the
    phone block's own (0,3,0) bump: the layout must beat a section's grid.
    ============================================================ */
 @media (min-width: 768px) {
-  /* Defaults at zero specificity, so a section's own setting always wins. */
+  /* Defaults at zero specificity, so a section's own rule on the track always wins. */
   :where(.ds-carousel--strip) {
     --strip-gap: var(--space-400);
     --strip-across: 1.5;

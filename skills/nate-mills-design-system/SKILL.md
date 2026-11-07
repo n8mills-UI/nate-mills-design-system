@@ -16,7 +16,7 @@ The system is a small CSS class layer over DTCG tokens, served live from natemil
 1. Read `references/AGENTS.md` beside this file (the foundation links, the rules, the published classes with examples, the token names). It is short and always applies.
 2. Link the foundation exactly as its first block shows, in that order.
 3. Compose from the published classes before writing a value. For anything else, write your own class next to them using `var(--token)` names only.
-4. Need a value, a recipe, the voice or the do's and don'ts? Read `references/DESIGN.md`. Need the classes as data (selectors, states, tokens read)? https://natemills.me/components-api.json.
+4. Need a value, a recipe, the voice or the do's and don'ts? Read `references/DESIGN.md`. Need the classes as data (selectors, states, tokens read)? https://natemills.me/components-api.json. Need a component's props and invalid combinations? https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/COMPONENTS.md. Need the token source? https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json.
 5. Check both themes (`data-theme="dark"` on `<html>`) and WCAG 2.2 AA: 4.5:1 body text, 3:1 non-text, a visible focus ring.
 
 ## Never

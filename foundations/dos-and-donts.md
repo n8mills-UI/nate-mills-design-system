@@ -31,7 +31,7 @@ Don't:
   blur, worst for readers with astigmatism. Softer ends still clear WCAG contrast.
 - Don't put lime on a light background as text, a link, or a large fill (it fails WCAG at ~1.06:1).
 - Don't paint a solid lime panel in dark mode; use charcoal with lime text. Because: lime is an
-  accent, never wallpaper; charcoal with lime text reads at roughly 10:1.
+  accent, never wallpaper; charcoal with lime text reads at roughly 15:1.
 - Don't dim text with opacity to fake a secondary tone; step down a text style. Because: opacity
   blends with whatever sits behind it, so the same colour passes on one surface and fails on the
   next, and no checker reading the source sees it.
@@ -68,7 +68,9 @@ generated.
   `#7c3aed`, `#8b5cf6`, `#a855f7`, `#06b6d4`, `#d946ef` and relatives) is the single loudest tell.
   This system's colour is the set under **Color roles**: neutral greys and one lime with its yellow
   gradient partner.
-- No gradient text, glows, blobs, mesh backgrounds, glass, noise overlays, or fake depth. The one
+- No gradient text, glows, blobs, mesh backgrounds, glass, noise overlays, or fake depth. The site keeps
+  glass for its own chrome and overlays (the header, menus, tooltips, Ask AI, modal backdrops and the
+  scroll-edge blur); do not add it to a page you build. The one
   gradient in the system is `{colors.brand-gradient}`, and it is brand identity, not decoration.
 - No decorative surface to fill space. A border is earned by grouping or interaction.
 

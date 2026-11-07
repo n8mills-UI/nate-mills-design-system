@@ -97,7 +97,7 @@ Then compose with the published classes and tokens:
 }
 ```
 
-`tokens.css` carries every custom property in all three themes and `components.css` reads them, so
+`tokens.css` carries every custom property in all four themes and `components.css` reads them, so
 tokens must load first. `fonts.css` declares the self-hosted Anton and mono, and the mono's slashed zero.
 
 **Building with an AI agent?** Three ways in, cheapest first:

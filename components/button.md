@@ -132,7 +132,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 - Do not shrink `.btn--primary` down to a single glyph; `.btn--icon` already exists and is round by contract.
 - Do not read `.btn--md` as a no-op on the base button; it pads 8px by 16px where the base pads 10px by 18px.
 - Do not let `.btn` carry an underline in any state; the rule is held above the global link hover on purpose.
-- Do not span a `.btn` full width on mobile outside the two registered places; an unbounded CTA reached 1155px on a tablet.
+- Do not span a `.btn` full width; the two registered phone CTAs are site code, not a pattern. In a form row, the field takes the spare width.
 
 ## Example
 
@@ -146,7 +146,8 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 - **Buttons** are full pills, Work Sans semibold at 14px, padding 10px/18px, default height 44px. The
   primary button is a lime fill with ink label; on hover it inverts to an ink fill with a lime label.
   The secondary button is transparent with a `{colors.border}` outline (a stronger grey in dark) and
-  on hover takes the primary's resting look: a lime fill with an ink label.
+  on hover takes the primary's resting look: a lime fill with an ink label. In a form row the field
+  takes the spare width and the button keeps its own.
 - **Icon button** is the one canonical circle: a `{colors.border}` hairline ring,
   `{colors.text-primary}` glyph, 44px, `{rounded.full}`, filling lime on hover. Never a pill with a
   label.

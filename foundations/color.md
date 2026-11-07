@@ -30,12 +30,25 @@ lime in both themes because it is a brand-identity outline, not a state signal.
 
 **Dark-mode accent is the lime, deliberately.** On the dark theme, `accent`, `link`, and `focus-ring`
 all resolve to brand lime. This is a locked brand ruling, not a contrast bug: lime on near-black reads
-at roughly 10:1 (AAA). Do not "fix" it to a near-white. What is forbidden in dark mode is a solid lime
+at roughly 17:1 (AAA). Do not "fix" it to a near-white. What is forbidden in dark mode is a solid lime
 panel; the calm dark treatment is charcoal with lime text, not lime wallpaper.
 
 **Text on dark slabs.** Some surfaces (testimonials, contact) stay near-black in both themes. Text on
-them uses the `on-ink-*` family (88% / 66% / 40% white), never the theme-aware text tokens. Do not use
-an `on-ink` colour on a light surface; it is white-on-dark only and will vanish on a white card.
+them uses the solid `{colors.on-ink-primary}` or `{colors.on-ink-secondary}`, never the theme-aware
+text tokens. `{colors.on-ink-muted}` and `{colors.on-ink-border}` are see-through and never text: they
+are for dots, quiet fills and hairlines. Do not use an `on-ink` colour on a light surface; it is
+white-on-dark only and will vanish on a white card.
+
+**Colours that read alike.** `{colors.surface-inverse}` is the near-black band itself;
+`{colors.brand-ink}` is the charcoal for a card on that band and for text on lime.
+`{colors.brand-lime-dim}` is lime's hover step. `{colors.brand-lime-vivid}` and
+`{colors.brand-secondary}` share a value today but do different jobs: vivid is only the gradient's
+end stop, and secondary is the named second brand colour. Neither is a flat fill.
+
+**How the themes switch.** A page follows the visitor's OS dark setting on its own. Set
+`data-theme="dark"` or `data-theme="light"` on `<html>` to pin one. High contrast applies by itself
+under `prefers-contrast: more`, in both themes, so there is nothing to build. All of this works only
+through the semantic names.
 
 ## Values
 
@@ -64,7 +77,7 @@ colors:
   border-brand: "#d2ff37"                                                       # --color-border-brand (lime, fixed both themes)
   accent: "#1c1c1f"                                                             # --color-accent (theme-aware: ink light, lime dark)
   accent-hover: "#0a0a0b"                                                       # --color-accent-hover
-  on-accent: "#ffffff"                                                          # --color-on-accent
+  on-accent: "#ffffff"                                                          # --color-on-accent (theme-aware)
   focus-ring: "#1c1c1f"                                                         # --color-focus-ring (theme-aware)
   link: "#1c1c1f"                                                               # --color-link (theme-aware)
   link-hover: "#0a0a0b"                                                         # --color-link-hover
@@ -83,10 +96,13 @@ colors:
   dark-text-secondary: "#a1a1aa"                                                # --color-text-secondary (dark theme)
   dark-text-tertiary: "#909096"                                                 # --color-text-tertiary (dark theme)
   dark-border: "#27272a"                                                        # --color-border (dark theme)
+  dark-border-strong: "#3f3f46"                                                 # --color-border-strong (dark theme)
   dark-accent: "#d2ff37"                                                        # --color-accent (dark theme; brand lime, deliberate)
   dark-accent-hover: "#b8e030"                                                  # --color-accent-hover (dark theme)
+  dark-on-accent: "#0a0a0b"                                                     # --color-on-accent (dark theme)
   dark-focus-ring: "#d2ff37"                                                    # --color-focus-ring (dark theme)
   dark-link: "#d2ff37"                                                          # --color-link (dark theme)
+  dark-link-hover: "#ffffff"                                                    # --color-link-hover (dark theme)
 
   # Scrims
   overlay-soft: "rgb(10 10 11 / 0.35)"                                          # --color-overlay-soft

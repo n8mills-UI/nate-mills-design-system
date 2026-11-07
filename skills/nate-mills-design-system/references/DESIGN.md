@@ -1,9 +1,9 @@
 ---
-# The value blocks below (colors, typography, rounded, spacing, structure) are GENERATED from
+# The value blocks below (colors, typography, rounded, spacing, structure, motion) and the version are GENERATED from
 # tokens.json by tokens/designmd.mjs and drift-gated on deploy. Do not hand-edit between the
 # `# DESIGN:*:start` / `# DESIGN:*:end` markers; edit tokens.json and regenerate. The prose, the
 # component recipe map, and everything outside the markers is hand-authored.
-version: 2.0.0
+version: 4.0.0
 name: Nate Mills Portfolio
 description: >
   Design, build, or substantially improve any page, prototype, or document that has to look like it
@@ -42,7 +42,7 @@ colors:
   border-brand: "#d2ff37"                                                       # --color-border-brand (lime, fixed both themes)
   accent: "#1c1c1f"                                                             # --color-accent (theme-aware: ink light, lime dark)
   accent-hover: "#0a0a0b"                                                       # --color-accent-hover
-  on-accent: "#ffffff"                                                          # --color-on-accent
+  on-accent: "#ffffff"                                                          # --color-on-accent (theme-aware)
   focus-ring: "#1c1c1f"                                                         # --color-focus-ring (theme-aware)
   link: "#1c1c1f"                                                               # --color-link (theme-aware)
   link-hover: "#0a0a0b"                                                         # --color-link-hover
@@ -61,10 +61,13 @@ colors:
   dark-text-secondary: "#a1a1aa"                                                # --color-text-secondary (dark theme)
   dark-text-tertiary: "#909096"                                                 # --color-text-tertiary (dark theme)
   dark-border: "#27272a"                                                        # --color-border (dark theme)
+  dark-border-strong: "#3f3f46"                                                 # --color-border-strong (dark theme)
   dark-accent: "#d2ff37"                                                        # --color-accent (dark theme; brand lime, deliberate)
   dark-accent-hover: "#b8e030"                                                  # --color-accent-hover (dark theme)
+  dark-on-accent: "#0a0a0b"                                                     # --color-on-accent (dark theme)
   dark-focus-ring: "#d2ff37"                                                    # --color-focus-ring (dark theme)
   dark-link: "#d2ff37"                                                          # --color-link (dark theme)
+  dark-link-hover: "#ffffff"                                                    # --color-link-hover (dark theme)
 
   # Scrims
   overlay-soft: "rgb(10 10 11 / 0.35)"                                          # --color-overlay-soft
@@ -188,6 +191,16 @@ structure:
   touch-target-min: "44px"              # --touch-target-min (the smallest tap target)
   # DESIGN:structure:end
 
+motion:
+  # DESIGN:motion:start
+  duration-fast: "150ms"                        # --duration-fast (hover, focus, small state changes)
+  duration-base: "220ms"                        # --duration-base (reveals, modals, swaps)
+  duration-slow: "400ms"                        # --duration-slow (context shifts and slides)
+  ease-default: "cubic-bezier(0.4, 0, 0.2, 1)"  # --ease-default
+  ease-entrance: "cubic-bezier(0, 0, 0.2, 1)"   # --ease-entrance (arriving on screen)
+  ease-exit: "cubic-bezier(0.4, 0, 1, 1)"       # --ease-exit (leaving the screen)
+  # DESIGN:motion:end
+
 # There is no elevation scale. Depth is the surface ladder plus hairline borders (see "Depth and
 # elevation" below). The focus ring is the one ring-shaped value, and it is an outline, not a step.
 focus:
@@ -283,8 +296,9 @@ components:
 
 This is a portable brand contract. Hand it to any AI coding agent, or a contractor, and it has
 everything needed to build a page that feels like natemills.me: no repo, no build tools, just this
-file. Every colour, size, radius, and spacing value in the frontmatter above is resolved to a literal
-and generated straight from the design token source, so it cannot drift from the real system.
+file. Every value in the frontmatter's generated blocks is resolved to a literal straight from the design
+token source, so it cannot drift from the real system. The source is `tokens.json`, in DTCG format, in
+the public repository.
 
 ## Use the published CSS
 
@@ -299,7 +313,7 @@ Link the foundation. Do not rebuild it from the values above.
 <link href="https://natemills.me/assets/components.css" rel="stylesheet">
 ```
 
-`tokens.css` carries every custom property in all three themes (light, dark, high-contrast) and
+`tokens.css` carries every custom property in all four themes (light, dark, and high contrast of each) and
 `components.css` reads them, so tokens must load first. `fonts.css` is separate and required: it
 declares the self-hosted Anton and JetBrains Mono and turns on the slashed zero. Work Sans comes from
 Google Fonts, which is why that request is in the list too. Drop any one of the six and the type
@@ -471,12 +485,25 @@ lime in both themes because it is a brand-identity outline, not a state signal.
 
 **Dark-mode accent is the lime, deliberately.** On the dark theme, `accent`, `link`, and `focus-ring`
 all resolve to brand lime. This is a locked brand ruling, not a contrast bug: lime on near-black reads
-at roughly 10:1 (AAA). Do not "fix" it to a near-white. What is forbidden in dark mode is a solid lime
+at roughly 17:1 (AAA). Do not "fix" it to a near-white. What is forbidden in dark mode is a solid lime
 panel; the calm dark treatment is charcoal with lime text, not lime wallpaper.
 
 **Text on dark slabs.** Some surfaces (testimonials, contact) stay near-black in both themes. Text on
-them uses the `on-ink-*` family (88% / 66% / 40% white), never the theme-aware text tokens. Do not use
-an `on-ink` colour on a light surface; it is white-on-dark only and will vanish on a white card.
+them uses the solid `{colors.on-ink-primary}` or `{colors.on-ink-secondary}`, never the theme-aware
+text tokens. `{colors.on-ink-muted}` and `{colors.on-ink-border}` are see-through and never text: they
+are for dots, quiet fills and hairlines. Do not use an `on-ink` colour on a light surface; it is
+white-on-dark only and will vanish on a white card.
+
+**Colours that read alike.** `{colors.surface-inverse}` is the near-black band itself;
+`{colors.brand-ink}` is the charcoal for a card on that band and for text on lime.
+`{colors.brand-lime-dim}` is lime's hover step. `{colors.brand-lime-vivid}` and
+`{colors.brand-secondary}` share a value today but do different jobs: vivid is only the gradient's
+end stop, and secondary is the named second brand colour. Neither is a flat fill.
+
+**How the themes switch.** A page follows the visitor's OS dark setting on its own. Set
+`data-theme="dark"` or `data-theme="light"` on `<html>` to pin one. High contrast applies by itself
+under `prefers-contrast: more`, in both themes, so there is nothing to build. All of this works only
+through the semantic names.
 
 ## Typography rules
 
@@ -494,7 +521,8 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
 - **Buttons** are full pills, Work Sans semibold at 14px, padding 10px/18px, default height 44px. The
   primary button is a lime fill with ink label; on hover it inverts to an ink fill with a lime label.
   The secondary button is transparent with a `{colors.border}` outline (a stronger grey in dark) and
-  on hover takes the primary's resting look: a lime fill with an ink label.
+  on hover takes the primary's resting look: a lime fill with an ink label. In a form row the field
+  takes the spare width and the button keeps its own.
 - **Icon button** is the one canonical circle: a `{colors.border}` hairline ring,
   `{colors.text-primary}` glyph, 44px, `{rounded.full}`, filling lime on hover. Never a pill with a
   label.
@@ -513,6 +541,18 @@ an `on-ink` colour on a light surface; it is white-on-dark only and will vanish 
   <div class="card-skel card-skel--title"></div>
   <div class="card-skel card-skel--line"></div>
 </div>
+```
+
+- **Tabs** are one row of real buttons tied to their panels. A script moves focus and shows the chosen
+  panel; the published CSS only draws them.
+
+```html
+<div class="tabs tabs--compact" role="tablist" aria-label="Project views">
+  <button class="tab" type="button" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview">Overview</button>
+  <button class="tab" type="button" role="tab" id="tab-specs" aria-selected="false" aria-controls="panel-specs" tabindex="-1">Specs</button>
+</div>
+<div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview">Overview content</div>
+<div role="tabpanel" id="panel-specs" aria-labelledby="tab-specs" hidden>Specs content</div>
 ```
 
 - **Chips vs badges vs dots** resolve by job: a label is a chip, a status or a count is a badge, a
@@ -604,7 +644,7 @@ Don't:
   blur, worst for readers with astigmatism. Softer ends still clear WCAG contrast.
 - Don't put lime on a light background as text, a link, or a large fill (it fails WCAG at ~1.06:1).
 - Don't paint a solid lime panel in dark mode; use charcoal with lime text. Because: lime is an
-  accent, never wallpaper; charcoal with lime text reads at roughly 10:1.
+  accent, never wallpaper; charcoal with lime text reads at roughly 15:1.
 - Don't dim text with opacity to fake a secondary tone; step down a text style. Because: opacity
   blends with whatever sits behind it, so the same colour passes on one surface and fails on the
   next, and no checker reading the source sees it.
@@ -674,7 +714,9 @@ generated.
   `#7c3aed`, `#8b5cf6`, `#a855f7`, `#06b6d4`, `#d946ef` and relatives) is the single loudest tell.
   This system's colour is the set under **Color roles**: neutral greys and one lime with its yellow
   gradient partner.
-- No gradient text, glows, blobs, mesh backgrounds, glass, noise overlays, or fake depth. The one
+- No gradient text, glows, blobs, mesh backgrounds, glass, noise overlays, or fake depth. The site keeps
+  glass for its own chrome and overlays (the header, menus, tooltips, Ask AI, modal backdrops and the
+  scroll-edge blur); do not add it to a page you build. The one
   gradient in the system is `{colors.brand-gradient}`, and it is brand identity, not decoration.
 - No decorative surface to fill space. A border is earned by grouping or interaction.
 
@@ -730,7 +772,8 @@ When building a new page or prototype with this system:
 1. Work one component at a time and reference tokens by name (`{colors.accent}`, `{typography.h1}`,
    `{rounded.lg}`), never by inventing a hex or px value.
 2. Decide first which surface a section sits on (`bg`, `surface`, `surface-sunken`, or an always-dark
-   `surface-inverse`), then pick text colours to match: `text-*` on light, `on-ink-*` on dark slabs.
+   `surface-inverse`), then pick text colours to match: `text-*` on light, `on-ink-primary` or `on-ink-secondary` on dark
+   slabs.
 3. Keep the lime scarce. It appears on the primary button, brand outlines, focus rings on dark, status
    dots, and the footer. Nowhere else.
 4. For any active or selected state use `{colors.accent}` (theme-aware), not raw lime, so it survives

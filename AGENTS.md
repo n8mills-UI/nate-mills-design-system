@@ -22,18 +22,17 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 1. Use a published class before a value. The list below is the whole public API; anything else in components.css is a portfolio internal.
 2. Use the exact names. No `.button`, no `.btn-primary`, no `.card-dark`.
 3. Never redefine a published class. Compose: write your own class next to `.btn` or `.card`, never inside it.
-4. Every colour, size, radius, border and spacing is a `var(--token)` from the names below. No hex and no px of your own.
+4. Every colour, size, radius, border, spacing and timing is a `var(--token)` from the names below. No hex and no px of your own.
 5. Semantic names flip by theme on their own: `--color-bg`, `--color-text-primary`, `--color-accent`. There is no `--dark-*` or `--darkTheme-*` name; the dark value belongs to the same property.
 6. Lime (`--brand-primary`) is scarce: primary button, brand outlines, focus rings on dark, status dots. Never body text on a light surface. For a selected state use `--color-accent`.
-7. Pick the surface first (`--color-bg`, `--color-surface`, `--color-surface-sunken`, or always-dark `--color-surface-inverse`), then its text: `--color-text-*` on light, `--color-on-ink-*` on a dark slab.
+7. Pick the surface first (`--color-bg`, `--color-surface`, `--color-surface-sunken`, or always-dark `--color-surface-inverse`), then its text: `--color-text-*` on light, `--color-on-ink-primary` or `-secondary` on a dark slab.
 8. Hairline borders separate (`--border-hairline`); a shadow is only for an overlay. No gradients on surfaces, no opacity for hierarchy.
 9. Both themes are first class. Build light, then check dark: `data-theme="dark"` on `<html>`.
 10. WCAG 2.2 AA in both themes: 4.5:1 body text, 3:1 large text and non-text, a visible focus ring. Default targets are 44px (`--touch-target-min`); the dense `.btn--sm` is 32px, which still clears AA's 24px minimum. An icon is decorative: give its control a text label or an `aria-label`.
 
-## Slips seen in our agent test (October 2026, 15 builds)
+## Slips in our agent test (October 2026, 15 builds)
 
 - Hand-building carousel controls (`.ds-carousel-nav` exists). Nav bars and form fields have no published class: build them from tokens and leave `.btn` alone.
-- Copying a dark-theme name that does not exist (see rule 5).
 - Inventing a status colour: there is no error, success or warning colour. Say what happened in words.
 
 ## Published classes
@@ -99,7 +98,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 
 ## Token names you will use
 
-As the CSS declares them; values are in DESIGN.md.
+Values are in DESIGN.md; motion: tokens.json.
 
 <!-- AGENTS:names:start -->
 - **Colour (the same names in every theme):** `--brand-primary`, `--brand-primary-dim`, `--brand-primary-vivid`, `--brand-secondary`, `--brand-ink`, `--brand-gradient`, `--color-bg`, `--color-surface`, `--color-surface-sunken`, `--color-surface-inverse`, `--color-text-primary`, `--color-text-secondary`, `--color-text-tertiary`, `--color-border`, `--color-border-strong`, `--color-border-brand`, `--color-accent`, `--color-accent-hover`, `--color-on-accent`, `--color-focus-ring`, `--color-link`, `--color-link-hover`, `--color-on-ink-primary`, `--color-on-ink-secondary`, `--color-on-ink-muted`, `--color-on-ink-border`, `--color-overlay-soft`, `--color-overlay-base`, `--color-overlay-strong`
@@ -108,11 +107,13 @@ As the CSS declares them; values are in DESIGN.md.
 - **Radius:** `--radius-none`, `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-xl`, `--radius-full`
 - **Spacing:** `--space-50`, `--space-100`, `--space-200`, `--space-250`, `--space-300`, `--space-400`, `--space-500`, `--space-600`, `--space-700`, `--space-800`, `--space-900`, `--space-1000`, `--space-1100`, `--space-1200`, `--section-padding`, `--card-pad-compact`, `--card-pad-standard`, `--card-pad-spacious`
 - **Borders, focus and targets:** `--border-hairline`, `--border-strong`, `--border-focus`, `--focus-ring-offset`, `--touch-target-min`
+- **Motion:** `--duration-*`, `--ease-*`
 <!-- AGENTS:names:end -->
 
 ## More
 
 - DESIGN.md: https://natemills.me/DESIGN.md (values, recipes, voice and tone)
-- components-api.json: https://natemills.me/components-api.json (the classes as data)
-- Index for AI tools: https://natemills.me/llms.txt
+- components-api.json: https://natemills.me/components-api.json
+- Component props: https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/COMPONENTS.md
+- Index for AI tools, with tokens.json: https://natemills.me/llms.txt
 - Claude Code plugin: `claude plugin marketplace add n8mills-UI/nate-mills-design-system`, then `claude plugin install nate-mills-design-system@nate-mills-design-system`

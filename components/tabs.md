@@ -91,6 +91,17 @@ The published CSS draws the tabs; the behaviour comes from the script that drive
 
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
+## Example
+
+```html
+<div class="tabs tabs--compact" role="tablist" aria-label="Project views">
+  <button class="tab" type="button" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview">Overview</button>
+  <button class="tab" type="button" role="tab" id="tab-specs" aria-selected="false" aria-controls="panel-specs" tabindex="-1">Specs</button>
+</div>
+<div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview">Overview content</div>
+<div role="tabpanel" id="panel-specs" aria-labelledby="tab-specs" hidden>Specs content</div>
+```
+
 ## Classes
 
 | Class | Kind | What it does | Tokens it reads |

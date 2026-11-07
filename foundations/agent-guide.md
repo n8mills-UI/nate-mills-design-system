@@ -13,7 +13,8 @@ When building a new page or prototype with this system:
 1. Work one component at a time and reference tokens by name (`{colors.accent}`, `{typography.h1}`,
    `{rounded.lg}`), never by inventing a hex or px value.
 2. Decide first which surface a section sits on (`bg`, `surface`, `surface-sunken`, or an always-dark
-   `surface-inverse`), then pick text colours to match: `text-*` on light, `on-ink-*` on dark slabs.
+   `surface-inverse`), then pick text colours to match: `text-*` on light, `on-ink-primary` or `on-ink-secondary` on dark
+   slabs.
 3. Keep the lime scarce. It appears on the primary button, brand outlines, focus rings on dark, status
    dots, and the footer. Nowhere else.
 4. For any active or selected state use `{colors.accent}` (theme-aware), not raw lime, so it survives

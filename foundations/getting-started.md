@@ -19,7 +19,7 @@ Link the foundation. Do not rebuild it from the values above.
 <link href="https://natemills.me/assets/components.css" rel="stylesheet">
 ```
 
-`tokens.css` carries every custom property in all three themes (light, dark, high-contrast) and
+`tokens.css` carries every custom property in all four themes (light, dark, and high contrast of each) and
 `components.css` reads them, so tokens must load first. `fonts.css` is separate and required: it
 declares the self-hosted Anton and JetBrains Mono and turns on the slashed zero. Work Sans comes from
 Google Fonts, which is why that request is in the list too. Drop any one of the six and the type

@@ -4,7 +4,7 @@
 
 > Every token name the published CSS gives you, what each one is for, and its value.
 
-Part of the [Nate Mills Design System](../README.md). These 84 names are the core tokens [AGENTS.md](../AGENTS.md) lists for building pages: write `var(--name)`, never the raw value. tokens.css declares more (motion, weights, stacking, component tokens); every one is in [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json) with its description. Each purpose below comes from that description, each value from [DESIGN.md](../DESIGN.md) or tokens.json, and the last column is the token's path in tokens.json, its DTCG source. All foundations: [Foundations](README.md).
+Part of the [Nate Mills Design System](../README.md). These 90 names are the core tokens [AGENTS.md](../AGENTS.md) lists for building pages: write `var(--name)`, never the raw value. tokens.css declares more (motion, weights, stacking, component tokens); every one is in [tokens.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/tokens.json) with its description. Each purpose below comes from that description, each value from [DESIGN.md](../DESIGN.md) or tokens.json, and the last column is the token's path in tokens.json, its DTCG source. All foundations: [Foundations](README.md).
 
 ## Three tiers
 
@@ -13,7 +13,7 @@ Every token in tokens.json sits in one of three tiers. Build with semantic token
 | Tier | What it is | Example | Where it is listed | Use it? |
 |---|---|---|---|---|
 | Primitive | A raw value, named by hue and stop. | `--neutral-850` (`#1c1c1f`) | Only in tokens.json, in the neutral, lime, yellow, pastel, alpha groups. | Never pick one: primitives are the source semantic tokens read from. |
-| Semantic | A role: what the value is for, such as reading text or the gap between sections. | `--color-text-primary` (`#0a0a0b`; dark `#f4f4f5`, from `--neutral-950`) | This page lists the 84 core ones; the rest are in tokens.json. | Yes: pick these for anything you build. |
+| Semantic | A role: what the value is for, such as reading text or the gap between sections. | `--color-text-primary` (`#0a0a0b`; dark `#f4f4f5`, from `--neutral-950`) | This page lists the 90 core ones; the rest are in tokens.json. | Yes: pick these for anything you build. |
 | Component | One component's own value, usually aliasing a semantic token. | `--card-bg` (`#ffffff`; dark `#1c1c1f`, from `--color-surface`) | The Tokens table on each [component page](../COMPONENTS.md). | Only to restyle that one component; never reuse one elsewhere. |
 
 One way, top to bottom: a component token aliases a semantic token, a semantic token aliases a primitive, and a primitive is a literal. Nothing reaches back up. The primary button is the one deliberate shortcut: its fill aliases the brand lime directly, so it keeps the brand in every theme.
@@ -135,3 +135,14 @@ Size, weight, line height and tracking for the named styles on the Typography pa
 | `--border-focus` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. | `2px solid #1c1c1f` | `border.focus` |
 | `--focus-ring-offset` | Offset between an element and its focus ring. Outsets the 2px ring so it clears the element edge. | `2px` | `focus-ring-offset` |
 | `--touch-target-min` | Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px). | `44px` | `touch-target-min` |
+
+## Motion
+
+| Token | Use it for | Value | Source in tokens.json |
+|---|---|---|---|
+| `--duration-fast` | Hover, focus, and micro state feedback. | `150ms` | `duration.fast` |
+| `--duration-base` | Reveal, modal, and swap transitions. | `220ms` | `duration.base` |
+| `--duration-slow` | Context shift and slide transitions. | `400ms` | `duration.slow` |
+| `--ease-default` | The workhorse symmetric curve. Begins and ends on screen. | `cubic-bezier(0.4, 0, 0.2, 1)` | `ease.default` |
+| `--ease-entrance` | Decelerate, for elements entering the screen. | `cubic-bezier(0, 0, 0.2, 1)` | `ease.entrance` |
+| `--ease-exit` | Accelerate, for elements leaving the screen. | `cubic-bezier(0.4, 0, 1, 1)` | `ease.exit` |

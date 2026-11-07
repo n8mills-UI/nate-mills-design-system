@@ -638,7 +638,7 @@ copy wander still feels inconsistent.
 
 The voice never changes; only the length does. Short copy compresses it:
 
-- **Buttons:** verb plus outcome. "Read the case study", "Get in touch".
+- **Buttons:** verb plus outcome. "Read the case study", "Get in touch". A button that only names where it goes can be the name alone: "LinkedIn", "Resume".
 - **Errors:** name the problem and the workaround. No apology.
 - **Status pills:** declarative present tense, "Available for work". Never aspirational.
 - **Section subtitle:** one sentence that sets the stake, 18 words or fewer.

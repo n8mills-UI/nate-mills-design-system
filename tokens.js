@@ -292,6 +292,8 @@ export const tokens = {
   "radius-md": "10px",
   "radius-lg": "14px",
   "radius-xl": "20px",
+  "radius-2xl": "28px",
+  "radius-3xl": "32px",
   "radius-full": "999px",
   "border-hairline": "1px solid #e4e4e7",
   "border-strong": "1px solid #d4d4d8",

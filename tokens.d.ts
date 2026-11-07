@@ -292,6 +292,8 @@ export interface DesignTokens {
   "radius-md": string;
   "radius-lg": string;
   "radius-xl": string;
+  "radius-2xl": string;
+  "radius-3xl": string;
   "radius-full": string;
   "border-hairline": string;
   "border-strong": string;

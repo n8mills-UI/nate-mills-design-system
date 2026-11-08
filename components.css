@@ -1259,7 +1259,10 @@ a.card:focus-visible { text-decoration: none; }
   width: var(--space-200);
   height: var(--space-200);
   border-radius: var(--dot-radius);
-  background: color-mix(in srgb, currentColor calc(var(--alpha-500) * 100%), transparent);
+  /* The resting dot is the 3:1 dot grey (5.1:1 light, 7.7:1 dark, 3.5:1 on the ink band),
+     not 30% currentColor (2.0:1 light, 2.5:1 dark): WCAG 1.4.11 asks 3:1 for the parts that
+     show a control's state. Nathan's pick 8 Nov 2026, chat A11Y COMPONENTS. */
+  background: var(--color-dot-inactive);
   cursor: pointer;
   transition: width var(--duration-slow) var(--ease-emphasized),
               background-color var(--duration-slow) var(--ease-emphasized);

@@ -1117,7 +1117,7 @@
             "before"
           ],
           "reads": [
-            "--alpha-500",
+            "--color-dot-inactive",
             "--dot-radius",
             "--duration-slow",
             "--ease-emphasized",

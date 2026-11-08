@@ -58,7 +58,7 @@ Default variant: No class: the nav below the cards.
 
 | State | What changes | Tokens |
 |---|---|---|
-| `default` | A 44px round arrow filled with a 12% tint of the text colour; dots 8px wide in a 30% tint. The current dot (`data-on`) stretches to 24px and fills with the text colour, on the Glide motion. | `--touch-target-min`, `--btn-radius`, `--alpha-300`, `--alpha-500`, `--color-text-primary`, `--duration-slow`, `--ease-emphasized` |
+| `default` | A 44px round arrow filled with a 12% tint of the text colour; dots 8px wide in the dot grey, which holds 3:1 in both themes. The current dot (`data-on`) stretches to 24px and fills with the text colour, on the Glide motion. | `--touch-target-min`, `--btn-radius`, `--alpha-300`, `--color-dot-inactive`, `--color-text-primary`, `--duration-slow`, `--ease-emphasized` |
 | `hover` | The arrow tint deepens to 18%, on pointer devices only. | `--alpha-400` |
 | `focus-visible` | The system ring around the arrow. | `--border-focus`, `--focus-ring-offset` |
 | `active` | The arrow shrinks a little under the finger. | None |
@@ -146,7 +146,7 @@ carousel-nav:
 | `.ds-carousel-nav` | base | wrapper | `--color-text-primary`, `--space-400` |
 | `.ds-carousel-nav--full` | modifier | phone swipe nav; also shows after a strip | `--space-400` |
 | `.ds-carousel-nav__dots` | element | the row of dots | `--space-100` |
-| `.ds-carousel-nav__dot` | element | one per card; data-on stretches the current one | `--alpha-500`, `--dot-radius`, `--duration-slow`, `--ease-emphasized`, `--space-200`, `--space-50`, `--space-500` |
+| `.ds-carousel-nav__dot` | element | one per card; data-on stretches the current one | `--color-dot-inactive`, `--dot-radius`, `--duration-slow`, `--ease-emphasized`, `--space-200`, `--space-50`, `--space-500` |
 | `.ds-carousel-nav__pager` | element | groups the prev / next arrows | `--space-300` |
 | `.ds-carousel-nav__arrow` | element | 44px round prev / next | `--alpha-300`, `--alpha-400`, `--border-focus`, `--btn-radius`, `--duration-fast`, `--ease-default`, `--focus-ring-offset`, `--opacity-disabled`, `--size-xl`, `--touch-target-min` |
 | `.ds-carousel--strip` | modifier | wide-screen strip that bleeds to the page edge | `--border-focus`, `--space-100`, `--space-300`, `--space-400`, `--space-500`, `--space-600`, `--strip-across`, `--strip-edge`, `--strip-gap`, `--strip-gaps` |
@@ -163,6 +163,7 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--strip-gap` | Component | `16px`, from `--space-400` | The space between cards in a carousel strip. |
 | `--strip-gaps` | Component | `1` | How many gaps sit inside the strip's view, so card widths come out exact. Pairs with --strip-across. |
 | `--border-focus` | Semantic | `2px solid var(--color-focus-ring)` | 2px focus outline; reads --color-focus-ring (ink on light, lime on dark). The keyboard-focus indicator, never removed without a replacement. |
+| `--color-dot-inactive` | Semantic | `#67676f`; dark `#a1a1aa`, from `--neutral-600` | Was the unfilled half of the carousel position indicator. Solid theme-aware grey: clears the SC 1.4.11 3:1 floor on light surfaces; dark themes override to neutral-500. |
 | `--color-text-primary` | Semantic | `#0a0a0b`; dark `#f4f4f5`, from `--neutral-950` | Default reading text. Near-black on light, near-white on dark. |
 | `--dot-radius` | Semantic | `999px`, from `--radius-full` | Circle geometry: dots, markers, slider thumbs, and drawn circles (the brand period, status dots, touch-target rings). Full by definition: a re-theme that softens buttons leaves a dot round, and the theme lab's corner tier squares it only when the whole system goes sharp (0 at sharp, full at soft and round). |
 | `--duration-fast` | Semantic | `150ms` | Hover, focus, and micro state feedback. |
@@ -182,7 +183,6 @@ Every token the classes above read, as data from tokens.json: write `var(--name)
 | `--touch-target-min` | Semantic | `44px` | Minimum size of a tappable control such as a button or icon button (44px, WCAG 2.5.5). The AA floor for small carousel dots is touch-target-dot (24px). |
 | `--alpha-300` | Primitive | `0.12` | Soft: the workhorse divider and tint step, the biggest cluster in the audit (17 uses at exactly 0.12). Absorbed 0.14 and 0.16. |
 | `--alpha-400` | Primitive | `0.18` | Medium: hover tints and strong dividers; the same weight as color.on-ink-hover. Absorbed 0.2 and 0.22. |
-| `--alpha-500` | Primitive | `0.3` | Strong: emphatic borders and mid washes. Absorbed the 0.26 to 0.4 cluster. |
 
 ## Source
 

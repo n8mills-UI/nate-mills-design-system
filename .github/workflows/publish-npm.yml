@@ -1,0 +1,69 @@
+# Publishes @n8mills/design-tokens to npm when package.json carries a version npm does not have yet.
+#
+# Lives only in this PUBLIC repo (n8mills-UI/nate-mills-design-system). The sync from the private
+# repo (scripts/publish-showcase.sh) leaves .github alone, because GitHub refuses workflow changes from
+# its deploy key, so edit this file here.
+#
+# Trusted publishing (OIDC, docs.npmjs.com/trusted-publishers): npmjs.com trusts this workflow file in
+# this repo, so no npm token or password is stored anywhere and nobody signs in to publish. Set up
+# once on npmjs.com: package settings, Trusted publishing, GitHub Actions, user n8mills-UI, repository
+# nate-mills-design-system, workflow publish-npm.yml, allow npm publish. (Added 9 Nov 2026: npm sign-ins
+# on the Mac expire quickly, and every by-hand publish needed Nathan.)
+#
+# How a release goes: bump "version" in public-showcase/package.json, merge, and the mirror push runs this.
+# A push whose version is already on npm does nothing. portfolio/scripts/publish-npm.sh is the by-hand fallback.
+name: Publish to npm
+
+on:
+  push:
+    branches: [main]
+    paths: ['package.json']
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+
+      - name: Is this version new on npm?
+        id: version
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "$NAME@$VERSION" version 2>/dev/null | grep -q .; then
+            echo "$NAME@$VERSION is already on npm, so there is nothing to publish."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "$NAME@$VERSION is new; publishing."
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Every packed file is present, and the package installs and imports
+        if: steps.version.outputs.publish == 'true'
+        run: |
+          node -e "const fs=require('fs');for(const f of require('./package.json').files){if(!fs.existsSync(f)||!fs.statSync(f).size){console.error(f+' is missing or empty');process.exit(1)}}"
+          NAME=$(node -p "require('./package.json').name")
+          TARBALL="$PWD/$(npm pack --silent)"
+          TRY=$(mktemp -d)
+          (cd "$TRY" && npm init -y >/dev/null && npm install --silent "$TARBALL" >/dev/null \
+            && node --input-type=module -e "const m = await import('$NAME'); if (!m.tokens) process.exit(1);")
+          rm -f "$TARBALL"
+
+      - name: Publish
+        if: steps.version.outputs.publish == 'true'
+        run: npm publish --access public

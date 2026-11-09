@@ -14,15 +14,15 @@
 
 </div>
 
-This is the real design system behind my portfolio, opened up so you can see how it is built, not just that it exists. It is small on purpose: one accent, a tuned neutral scale, two fonts, and a strict three-tier token model. Everything starts in one `tokens.json` file and propagates outward, so reskinning the brand is a one-line change and every component follows.
+This is the real design system behind my portfolio, open so you can see how it's built, not just that it exists. It's small on purpose: one accent, a tuned neutral scale, three fonts and a strict three-tier token model. Everything starts in one `tokens.json` file, so you change the brand colour once and every component follows.
 
-I publish it because the discipline is the point. A design system is easy to claim and hard to govern. This repo is the audit trail for the claims: the token source, the generated CSS, the component layer, and the written rules that keep them honest.
+I publish it because a design system is easy to claim and hard to govern. This repo is the proof: the token source, the generated CSS, the component layer, and the written rules that keep them honest.
 
-> **See it live.** The [under-the-hood design system](https://natemills.me/#uth-colour) resolves every token in real time, in light and dark, section by section. This repo is the source it runs on.
+> **See it live.** The [design system on my site](https://natemills.me/#uth-colour) shows every token working in light and dark. This repo is the source it runs on.
 
 ## What's inside
 
-One source, three generated outputs, and the discipline between them. That is the whole system.
+It's one source file, three generated outputs, and the rules between them.
 
 - **`tokens.json`** : the single source of truth, in the [W3C Design Tokens Community Group](https://www.designtokens.org/) (DTCG) format. Three tiers: primitives (raw values), semantics (roles), and component tokens (btn/card/chip/badge, aliasing semantics only).
 - **`tokens.resolver.json`** : how the light, dark and high contrast themes combine, in the DTCG Resolver Module format, so Terrazzo, Tokens Studio, Figma or Penpot can build every theme from `tokens.json` without reading my build code.
@@ -44,7 +44,7 @@ SEMANTICS    roles, reference primitives via var()   -->  e.g. --color-accent: v
 COMPONENTS   classes that read semantics only        -->  e.g. .btn--primary { background: var(--brand-primary) }
 ```
 
-One way, top to bottom: components read semantics, semantics read primitives, primitives are literals. Nothing reaches back up. So one edit at the top, a new brand hue, propagates through every semantic and component that uses it. No find-and-replace, no drift. That propagation is the whole point.
+It only flows one way: components read semantics, semantics read primitives, and primitives are plain values. Nothing reaches back up, so a new brand hue at the top flows through every semantic and component that uses it, with no find-and-replace and no drift.
 
 ## The foundations at a glance
 
@@ -57,16 +57,16 @@ One way, top to bottom: components read semantics, semantics read primitives, pr
 
 Colour, type, and spacing, all generated from `tokens.json`. Display type is Anton, set large and tight; Work Sans carries body copy and controls; and JetBrains Mono is for labels and numbers, with the slashed zero the system insists on.
 
-## Accessibility is a constraint, not a feature
+## Accessibility is built into the tokens
 
-It is wired into the tokens, so you cannot opt out of it by accident:
+You can't opt out of it by accident:
 
 - Every text token is contrast-checked for WCAG 2.2 AA: a blocking CI lint over the token source in both themes, plus live ratio computation on the Under-the-Hood page.
 - Focus rings are never removed without a replacement.
 - Default control height is 44 by 44 px. One documented dense size sits below it on purpose: the 32px small button, `.btn--sm`. Its pointer target is its painted box, and it clears the WCAG 2.5.8 AA 24px floor. The carousel's round arrows hold the default: a 44px circle around a 24px glyph.
 - Every animation is gated behind `prefers-reduced-motion`, collapsed in one place, not per component.
 
-There is one honest carveout. The brand lime is a background and accent only. It fails as foreground text on the light surface, roughly 1.06 to 1, so the system refuses to let you use it there and hands you a theme-aware token instead. The full reasoning is in [`DESIGN.md`](./DESIGN.md#color-roles).
+There's one exception. The brand lime is a background and accent only. It fails as text on the light surface, roughly 1.06:1, so the system won't let you use it there and gives you a theme-aware token instead. The full reasoning is in [`DESIGN.md`](./DESIGN.md#color-roles).
 
 ## Use it
 
@@ -124,7 +124,7 @@ JS export:
 git clone https://github.com/n8mills-UI/nate-mills-design-system.git
 ```
 
-See the [live design system](https://natemills.me/#under-the-hood) for the why. Read [`DESIGN.md`](./DESIGN.md), `tokens.json` and `components.css` for the how. Fork it for another brand by changing `--lime-500` and watching every consumer follow. That is the system working as designed.
+The [live design system](https://natemills.me/#under-the-hood) shows the why; [`DESIGN.md`](./DESIGN.md), `tokens.json` and `components.css` show the how. To fork it for another brand, change `--lime-500` and every consumer follows.
 
 ## License
 
@@ -134,7 +134,7 @@ See the [live design system](https://natemills.me/#under-the-hood) for the why. 
 
 <div align="center">
 
-Built by Nate Mills, Design Systems and Full-Stack Design.
+Built by Nate Mills, Senior Product Designer, Design Systems.
 [natemills.me](https://natemills.me) | [LinkedIn](https://www.linkedin.com/in/millsdesign)
 
 </div>

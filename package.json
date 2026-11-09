@@ -1,7 +1,7 @@
 {
   "name": "@n8mills/design-tokens",
-  "version": "4.0.0",
-  "description": "The design tokens behind natemills.me: DTCG 2025.10 source, generated CSS custom properties, the component layer, and a resolved JS/TS export. Three-tier, OKLCH-authored, WCAG 2.2 AA.",
+  "version": "4.0.1",
+  "description": "The design tokens and components my site natemills.me runs on, in DTCG format, built to CSS and typed JS, WCAG 2.2 AA in both themes.",
   "license": "MIT",
   "author": "Nate Mills <mail@natemills.me> (https://natemills.me)",
   "homepage": "https://github.com/n8mills-UI/nate-mills-design-system#readme",

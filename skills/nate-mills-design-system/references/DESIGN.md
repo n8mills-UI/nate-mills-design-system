@@ -3,7 +3,7 @@
 # tokens.json by tokens/designmd.mjs and drift-gated on deploy. Do not hand-edit between the
 # `# DESIGN:*:start` / `# DESIGN:*:end` markers; edit tokens.json and regenerate. The prose, the
 # component recipe map, and everything outside the markers is hand-authored.
-version: 4.0.0
+version: 4.0.1
 name: Nate Mills Portfolio
 description: >
   Design, build, or substantially improve any page, prototype, or document that has to look like it
@@ -294,11 +294,9 @@ components:
 
 # Nate Mills Portfolio: Brand Contract
 
-This is a portable brand contract. Hand it to any AI coding agent, or a contractor, and it has
-everything needed to build a page that feels like natemills.me: no repo, no build tools, just this
-file. Every value in the frontmatter's generated blocks is resolved to a literal straight from the design
-token source, so it cannot drift from the real system. The source is `tokens.json`, in DTCG format, in
-the public repository.
+Hand this file to an AI coding agent or a contractor, and they can build a page that feels like
+natemills.me without the repo or any build tools. Every value in the generated blocks comes straight
+from `tokens.json`, the DTCG token source in the public repository, so it can't drift.
 
 ## Use the published CSS
 
@@ -428,22 +426,20 @@ Anything not in that table is a portfolio internal, not public API. Build it you
 
 ## Overview
 
-This is the portfolio of a Senior Product Designer (Design Systems). The site is the argument: a calm,
-Swiss-minimal editorial surface where a single high-chroma lime does all the talking and everything
-else stays quiet. The atmosphere is a neutral off-white page in light mode and a cool near-black in
-dark mode. The page is never pure white (cards are) and the ink is never pure black. Depth is built
-from a surface ladder and honest 1px hairlines, not from drop shadows or decorative gradients. Display
-type is Anton, set large and tight; body copy and controls are Work Sans; JetBrains Mono carries
-eyebrows and labels.
+This is my portfolio's design system. It's calm and Swiss-minimal: one bright lime does the talking,
+and everything else stays quiet. Light mode sits on a neutral off-white, dark mode on a cool
+near-black. Pure white is only for cards, and the ink is never pure black. Depth comes from stepped
+surfaces and 1px hairlines, never drop shadows or decorative gradients. Headings are Anton, set
+large and tight. Body copy and controls are Work Sans, and JetBrains Mono carries eyebrows and
+labels.
 
-The counter-position is deliberate: most portfolios scatter accent colour across whole sections and
-lean on soft shadows to fake hierarchy. This one refuses both. Colour is scarce, borders are honest,
-and hierarchy comes from weight and scale. If you are building a new page, the system is the pitch:
-make it look composed, restrained, and inevitable.
+Most portfolios splash accent colour across whole sections and use soft shadows to fake hierarchy. I
+don't. Colour is scarce, borders separate, and weight and scale make the hierarchy. A new page
+should feel just as calm.
 
-It is not a component library, not Tailwind-driven, and not CSS-in-JS. There is no DaisyUI, Material
-or utility framework underneath: just CSS custom properties and one hand-built class layer, shipped
-as static stylesheets. The custom build is the point, so do not reach for a framework to fill a gap.
+No framework sits underneath. It's CSS custom properties and one hand-built class layer, shipped as
+static stylesheets, so build what's missing from the tokens rather than pulling in Tailwind or
+Material.
 
 ### Key characteristics
 

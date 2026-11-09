@@ -1,6 +1,6 @@
 # AGENTS.md: building with the Nate Mills design system
 
-Rules for any AI coding agent building something that must look like natemills.me. In your own AGENTS.md (or CLAUDE.md, for Claude Code) add: "Before writing UI for natemills.me, read https://natemills.me/AGENTS.md and follow it."
+Rules for any AI coding agent building something that should look like natemills.me. Add this line to your own AGENTS.md (or CLAUDE.md, for Claude Code): "Before writing UI for natemills.me, read https://natemills.me/AGENTS.md and follow it."
 
 ## Link the foundation, never rebuild it
 
@@ -19,7 +19,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 
 ## Rules
 
-1. Use a published class before a value. The list below is the whole public API; anything else in components.css is a portfolio internal.
+1. Use a published class before a value. The list below is the whole public API; anything else is a portfolio internal.
 2. Use the exact names. No `.button`, no `.btn-primary`, no `.card-dark`.
 3. Never redefine a published class. Compose: write your own class next to `.btn` or `.card`, never inside it.
 4. Every colour, size, radius, border, spacing and timing is a `var(--token)` from the names below. No hex and no px of your own.
@@ -30,7 +30,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 9. Both themes are first class. Build light, then check dark: `data-theme="dark"` on `<html>`.
 10. WCAG 2.2 AA in both themes: 4.5:1 body text, 3:1 large text and non-text, a visible focus ring. Default targets are 44px (`--touch-target-min`); the dense `.btn--sm` is 32px, which still clears AA's 24px minimum. An icon is decorative: give its control a text label or an `aria-label`.
 
-## Slips in our agent test (October 2026, 15 builds)
+## Slips in my agent test (October 2026, 15 builds)
 
 - Hand-building carousel controls (`.ds-carousel-nav` exists). Nav bars and form fields have no published class: build them from tokens and leave `.btn` alone.
 - Inventing a status colour: there is no error, success or warning colour. Say what happened in words.

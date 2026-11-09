@@ -134,22 +134,20 @@ Anything not in that table is a portfolio internal, not public API. Build it you
 
 ## Overview
 
-This is the portfolio of a Senior Product Designer (Design Systems). The site is the argument: a calm,
-Swiss-minimal editorial surface where a single high-chroma lime does all the talking and everything
-else stays quiet. The atmosphere is a neutral off-white page in light mode and a cool near-black in
-dark mode. The page is never pure white (cards are) and the ink is never pure black. Depth is built
-from a surface ladder and honest 1px hairlines, not from drop shadows or decorative gradients. Display
-type is Anton, set large and tight; body copy and controls are Work Sans; JetBrains Mono carries
-eyebrows and labels.
+This is my portfolio's design system. It's calm and Swiss-minimal: one bright lime does the talking,
+and everything else stays quiet. Light mode sits on a neutral off-white, dark mode on a cool
+near-black. Pure white is only for cards, and the ink is never pure black. Depth comes from stepped
+surfaces and 1px hairlines, never drop shadows or decorative gradients. Headings are Anton, set
+large and tight. Body copy and controls are Work Sans, and JetBrains Mono carries eyebrows and
+labels.
 
-The counter-position is deliberate: most portfolios scatter accent colour across whole sections and
-lean on soft shadows to fake hierarchy. This one refuses both. Colour is scarce, borders are honest,
-and hierarchy comes from weight and scale. If you are building a new page, the system is the pitch:
-make it look composed, restrained, and inevitable.
+Most portfolios splash accent colour across whole sections and use soft shadows to fake hierarchy. I
+don't. Colour is scarce, borders separate, and weight and scale make the hierarchy. A new page
+should feel just as calm.
 
-It is not a component library, not Tailwind-driven, and not CSS-in-JS. There is no DaisyUI, Material
-or utility framework underneath: just CSS custom properties and one hand-built class layer, shipped
-as static stylesheets. The custom build is the point, so do not reach for a framework to fill a gap.
+No framework sits underneath. It's CSS custom properties and one hand-built class layer, shipped as
+static stylesheets, so build what's missing from the tokens rather than pulling in Tailwind or
+Material.
 
 ### Key characteristics
 

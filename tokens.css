@@ -288,9 +288,9 @@
   --duration-flourish: 600ms;
   --duration-beat: 240ms;
   --duration-expressive: 1300ms;
-  --duration-reveal-fade: 900ms;
-  --duration-reveal-rise: 700ms;
-  --duration-reveal-gap: 150ms;
+  --duration-reveal-fade: 600ms;
+  --duration-reveal-rise: 500ms;
+  --duration-reveal-gap: 80ms;
   --duration-marquee: 36000ms;
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-entrance: cubic-bezier(0, 0, 0.2, 1);
@@ -300,6 +300,7 @@
   --ease-linear: cubic-bezier(0, 0, 1, 1);
   --motion-reveal-rise: 64px;
   --motion-reveal-text-rise: 30px;
+  --motion-reveal-text-lead: 120px;
   --motion-reveal-shift: 48px;
   --motion-reveal-scale: 0.9;
   --motion-reveal-slide: 80px;

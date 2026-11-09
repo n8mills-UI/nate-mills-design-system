@@ -281,6 +281,7 @@ export interface DesignTokens {
   "ease-linear": string;
   "motion-reveal-rise": string;
   "motion-reveal-text-rise": string;
+  "motion-reveal-text-lead": string;
   "motion-reveal-shift": string;
   "motion-reveal-scale": string;
   "motion-reveal-slide": string;

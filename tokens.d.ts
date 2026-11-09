@@ -191,6 +191,7 @@ export interface DesignTokens {
   "header-clearance": string;
   "header-menu-width": string;
   "card-radius": string;
+  "card-stack-gap": string;
   "card-padding": string;
   "card-border": string;
   "card-bg": string;

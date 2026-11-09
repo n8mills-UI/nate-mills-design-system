@@ -191,6 +191,7 @@ export const tokens = {
   "header-clearance": "80px",
   "header-menu-width": "400px",
   "card-radius": "20px",
+  "card-stack-gap": "96px",
   "card-padding": "24px",
   "card-border": "1px solid #e4e4e7",
   "card-bg": "#ffffff",

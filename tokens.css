@@ -210,6 +210,7 @@
   --header-clearance: 80px;
   --header-menu-width: 400px;
   --card-radius: var(--radius-xl);
+  --card-stack-gap: var(--space-900);
   --card-padding: var(--card-pad-standard);
   --card-border: var(--border-hairline);
   --card-bg: var(--color-surface);

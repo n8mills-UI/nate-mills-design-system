@@ -242,6 +242,8 @@ entries:
             level: "should"
           - statement: "Add a size class only for a dense toolbar (`.btn--sm`) or a hero call to action (`.btn--lg`)."
             level: "should"
+          - statement: "There is no loading or busy state: the classes style rest, hover, focus, press and disabled only."
+            level: "should"
       - kind: "guidelines"
         for: "all"
         framing: "how-to-use"
@@ -641,7 +643,7 @@ entries:
             level: "should-not"
           - statement: "Not for: Nothing to show at all: use the empty state of a Card."
             level: "should-not"
-          - statement: "Not for: A failure: use the error state of a Card."
+          - statement: "Not for: A failure: say what happened in words. The system has no error state or status colour."
             level: "should-not"
       - kind: "guidelines"
         for: "all"
@@ -705,7 +707,7 @@ entries:
             level: "must-not"
             tags:
               - "invalid-combination"
-          - statement: "`.card--loading` with the `empty` or `error` state of a Card: A card shows one state at a time."
+          - statement: "`.card--loading` with `.card--empty`: A card shows one state at a time."
             level: "must-not"
             tags:
               - "invalid-combination"
@@ -2022,7 +2024,7 @@ entries:
     kind: "token"
     name: "--weight-extrabold"
     description: "Five distinct weights. The body face loads 400 to 800 as one variable file; the display face ships a single 400, so font-synthesis is off site-wide."
-    tokenType: "number"
+    tokenType: "fontWeight"
     source: "./tokens.json"
     metadata:
       group: "Type styles"
@@ -2081,7 +2083,7 @@ entries:
     kind: "token"
     name: "--weight-regular"
     description: "400. Body copy and captions."
-    tokenType: "number"
+    tokenType: "fontWeight"
     source: "./tokens.json"
     metadata:
       group: "Type styles"
@@ -2142,7 +2144,7 @@ entries:
     kind: "token"
     name: "--weight-medium"
     description: "500. UI text, chips, mono labels."
-    tokenType: "number"
+    tokenType: "fontWeight"
     source: "./tokens.json"
     metadata:
       group: "Type styles"

@@ -25,6 +25,9 @@ declares the self-hosted Anton and JetBrains Mono and turns on the slashed zero.
 Google Fonts, which is why that request is in the list too. Drop any one of the six and the type
 silently falls back.
 
+Icons are Lucide, and no stylesheet draws them: an `<i data-lucide="name" aria-hidden="true">` stays
+empty until you load Lucide and call `lucide.createIcons()`.
+
 Rules for using it:
 
 - **Use the exact class names below.** Do not invent synonyms. There is no `.button`, no `.btn-primary`

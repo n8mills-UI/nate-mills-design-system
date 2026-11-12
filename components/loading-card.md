@@ -14,7 +14,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 
 - Content that is already there: use a Card.
 - Nothing to show at all: use the empty state of a Card.
-- A failure: use the error state of a Card.
+- A failure: say what happened in words. The system has no error state or status colour.
 
 ## Alternatives
 
@@ -59,7 +59,7 @@ Options that must not be used together. Each names the props above.
 | `.card--loading` with no `.card-skel` bars inside | MUST NOT | It renders as an empty box. |
 | `.card-skel` with no `bar` size | MUST NOT | The bar has no shape. |
 | `.card-skel` outside a `.card--loading` | MUST NOT | The bars are made to sit inside a loading card. |
-| `.card--loading` with the `empty` or `error` state of a Card | MUST NOT | A card shows one state at a time. |
+| `.card--loading` with `.card--empty` | MUST NOT | A card shows one state at a time. |
 
 ## Keyboard
 

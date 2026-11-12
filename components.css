@@ -375,14 +375,13 @@
 .btn.is-disabled,
 .btn[aria-disabled="true"] {
   opacity: var(--opacity-disabled);
-  cursor: not-allowed;
   pointer-events: none;
   transform: none;
 }
 /* Link-case extra cue (SC 1.4.1): dimming alone is a single-channel signal, and
-   the not-allowed cursor never renders on this rule anyway (pointer-events:
-   none makes the element non-hit-testable, so the surface underneath supplies
-   the cursor). The strike-through carries the disabled state visually and
+   no cursor can carry it (pointer-events: none makes the element
+   non-hit-testable, so the surface underneath supplies the cursor; the dead
+   not-allowed line went 2026-11-12, chat DS AUDIT). The strike-through carries the disabled state visually and
    survives greyscale and forced-colors. :not(:disabled) keeps the native
    button-board specimen (a real <button disabled>) on its unchanged look. */
 .btn.is-disabled:not(:disabled),

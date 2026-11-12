@@ -34,6 +34,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 - Put `.btn` and exactly one variant class on a `<button type="button">` for an action, or on an `<a href>` for a destination.
 - For an icon-only control, use `.btn--icon` and give it an `aria-label`. A `.sr-only` span adds words to content; it never names a control.
 - Add a size class only for a dense toolbar (`.btn--sm`) or a hero call to action (`.btn--lg`).
+- There is no loading or busy state: the classes style rest, hover, focus, press and disabled only.
 
 **Classes:** `.btn`, `.btn--primary`, `.btn--secondary`, `.btn--icon`, `.btn--sm`, `.btn--md`, `.btn--lg`
 

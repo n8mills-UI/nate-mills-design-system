@@ -1481,3 +1481,47 @@ body[data-footer-near] .edge-fade { opacity: 0; }
     border-width: 2px;
   }
 }
+
+/* =========================================================================
+   MotionPauseControl (.strip-motion-toggle), WCAG 2.2.2
+   ---------------------------------------------------------------------------
+   ONE pause pattern for every auto-moving region: the region itself is an
+   invisible toggle. Cursor change on hover, click or Space/Enter stops and
+   starts, keyboard focus ring, aria-pressed state, nothing drawn (his call
+   2026-06-10). The press feedback IS the motion halting, so no :active cue.
+   Markup: <button type="button" class="strip-motion-toggle" aria-pressed="false"
+   aria-label="Pause ..."> as the LAST child of a [data-motion-region] box.
+   The page script flips aria-pressed and data-motion-paused on the region.
+   Moved here from portfolio/assets/sections.css on 2026-11-12 (chat MODERN
+   WEB AUDIT) so the case study can use it; page colour pins stay there.
+   ========================================================================= */
+[data-motion-region] { position: relative; }
+/* Full-bleed overlay: real <button> semantics without wrapping flow
+   content in a button or feeding the region's text into the accessible
+   name (stable "Pause animation"; the enclosing group label says which
+   region). */
+.strip-motion-toggle {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.strip-motion-toggle:focus-visible {
+  /* Inset ring: the strip containers clip and edge-fade their contents
+     (overflow: hidden + mask-image), so the house outside offset would
+     be clipped invisible here. */
+  outline: var(--border-focus);
+  outline-offset: calc(-1 * var(--focus-ring-offset));
+}
+@media (prefers-reduced-motion: reduce), (scripting: none) {
+  /* Inert when motion is already off, or when the handler that drives the
+     toggle never runs (scripting off, where every region it covers holds
+     still by the same query): display none removes the toggles from
+     pointer, tab order and the accessibility tree. The Kind words and
+     footer grounds carry the same pair on their own rules. */
+  .strip-motion-toggle { display: none; }
+}

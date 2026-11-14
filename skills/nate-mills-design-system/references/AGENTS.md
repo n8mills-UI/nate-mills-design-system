@@ -19,7 +19,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 
 ## Rules
 
-1. Use a published class before a value. The list below is the whole public API; anything else is a portfolio internal.
+1. Use a published class before a value. The list below is the whole public API; anything else is internal.
 2. Use the exact names. No `.button`, no `.btn-primary`, no `.card-dark`.
 3. Never redefine a published class. Compose: write your own class next to `.btn` or `.card`, never inside it.
 4. Every colour, size, radius, border, spacing and timing is a `var(--token)` from the names below. No hex and no px of your own.
@@ -88,7 +88,7 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__dots`, `.ds-carousel-nav__dot`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__arrow`, `.ds-carousel--strip`
 
 **Other**
-`.avatar`, `.sr-only`
+`.avatar`, `.sr-only`, `.uw-range`
 
 ```html
 <span class="avatar"><img src="your-portrait.jpg" alt="Your name" width="44" height="44"></span>

@@ -95,6 +95,14 @@ Part of the [Nate Mills Design System](../README.md). The system is authored to 
 | MUST | Give the `<img>` alt text naming the person. | [Automated: axe accessibility scan](checks.md#axe-accessibility-scan) |
 | MUST | Give the `<img>` `width` and `height`, so the page does not shift as it loads. | [Automated: Image-size checks](checks.md#image-size-checks) |
 
+### [Range slider](../components/range-slider.md)
+
+| Level | Rule | Checked by |
+|---|---|---|
+| MUST | Name every slider with a `<label>`. | [Manual: Range slider review](checks.md#range-slider-review) |
+| MUST | Keep the 44px hit area, so the target stays at 44px. | [Manual: Range slider review](checks.md#range-slider-review) |
+| MUST | Show a visible focus ring when the slider has keyboard focus. | [Manual: Range slider review](checks.md#range-slider-review) |
+
 Automated checks run on natemills.me before every publish; the scripts live in the private source repository.
 
 ## Keyboard at a glance
@@ -111,6 +119,7 @@ Automated checks run on natemills.me before every publish; the scripts live in t
 | [Tabs](../components/tabs.md) | Tab; Left arrow, Right arrow; Home, End |
 | [Carousel navigation](../components/carousel-navigation.md) | Tab; Enter or Space; Left arrow, Right arrow; Enter on the forward arrow at the last card |
 | [Avatar](../components/avatar.md) | Not focusable. Enter, Space; Tab; Enter; G in a screen reader's browse mode (VoiceOver: VO + Command + G) |
+| [Range slider](../components/range-slider.md) | Tab; Left arrow, Down arrow; Right arrow, Up arrow; Home, End; Page Up, Page Down |
 
 ## Helper classes
 

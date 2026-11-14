@@ -2,7 +2,7 @@
 
 # Components
 
-> Every component in the Nate Mills Design System: 10 components, 46 classes. This list and the helper classes under it are the whole inventory; anything not on them is not part of the system.
+> Every component in the Nate Mills Design System: 11 components, 47 classes. This list and the helper classes under it are the whole inventory; anything not on them is not part of the system.
 
 The system is a CSS class API, not a JavaScript component library: each component is a set of classes on plain HTML, and its props are those classes and attributes. Link the stylesheets as [Getting started](foundations/getting-started.md) shows. The same facts as data: [nate-mills-design-system.dsds.yaml](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/nate-mills-design-system.dsds.yaml), one Design System Doc Spec 0.20.0 document with every component and token, and [components-api.json](https://raw.githubusercontent.com/n8mills-UI/nate-mills-design-system/main/components-api.json), the class API.
 
@@ -20,9 +20,10 @@ The system is a CSS class API, not a JavaScript component library: each componen
 | [Tabs](components/tabs.md) | One row of tabs that switches panels in the same place: large tabs that head a view, compact tabs inside a card. | `.tabs`, `.tabs--lg`, `.tabs--compact`, `.tab` | Yes |
 | [Carousel navigation](components/carousel-navigation.md) | The default carousel: a sideways strip of cards with dots bottom left and two round arrows bottom right. When a page says "use the carousel", this is it. | `.ds-carousel-nav`, `.ds-carousel-nav--full`, `.ds-carousel-nav__dots`, `.ds-carousel-nav__dot`, `.ds-carousel-nav__pager`, `.ds-carousel-nav__arrow`, `.ds-carousel--strip` | Yes |
 | [Avatar](components/avatar.md) | A round portrait at the touch-target size. | `.avatar` | No |
+| [Range slider](components/range-slider.md) | A native range input for picking one number along a scale: a 44px hit area, a 16px track with an accent fill, a 20px thumb. | `.uw-range` | Yes |
 
 Helper classes are published too, but they are not components: no look of their own, no variants and no input. Each is covered on the Accessibility page: [Screen-reader text](foundations/accessibility.md#screen-reader-text) (`.sr-only`).
 
 ## Not in this system
 
-There is no text field, checkbox, radio button, select, switch, slider, dialog or modal, tooltip, popover, accordion, toast or table component. If a page needs one, build it from the tokens on the [foundation pages](foundations/README.md); never invent a class name for it. A variant is never a component of its own: Button's `secondary` is a Button, and Card's `dark` is a Card; there is no separate component for any variant. The `nav`, `hero-headline` and `footer` recipes in [DESIGN.md](DESIGN.md) describe natemills.me's own page, not published components.
+There is no text field, checkbox, radio button, select, switch, dialog or modal, tooltip, popover, accordion, toast or table component. If a page needs one, build it from the tokens on the [foundation pages](foundations/README.md); never invent a class name for it. A variant is never a component of its own: Button's `secondary` is a Button, and Card's `dark` is a Card; there is no separate component for any variant. The `nav`, `hero-headline` and `footer` recipes in [DESIGN.md](DESIGN.md) describe natemills.me's own page, not published components.

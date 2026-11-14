@@ -423,6 +423,7 @@ Rules for using it:
 | --- | --- |
 | `.avatar` | round portrait |
 | `.sr-only` | visually hidden, still announced |
+| `.uw-range` | range slider |
 <!-- DESIGN:classes:end -->
 
 Anything not in that table is a portfolio internal, not public API. Build it yourself from the tokens.
@@ -552,6 +553,15 @@ through the semantic names.
 </div>
 <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview">Overview content</div>
 <div role="tabpanel" id="panel-specs" aria-labelledby="tab-specs" hidden>Specs content</div>
+```
+
+- **Range slider** is a native `<input type="range">` with a `<label>`: a 44px hit area, a 16px track,
+  a 20px thumb. The accent fill left of the thumb reads `--range-pct`, a percentage the page sets on
+  the input as the value changes; without it the track shows no fill and the slider still works.
+
+```html
+<label for="size">Size</label>
+<input class="uw-range" type="range" id="size" min="20" max="56" step="2" value="30" style="--range-pct: 30%">
 ```
 
 - **Chips vs badges vs dots** resolve by job: a label is a chip, a status or a count is a badge, a

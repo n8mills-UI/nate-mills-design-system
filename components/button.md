@@ -26,6 +26,7 @@ Part of the [Nate Mills Design System](../README.md). It is a CSS class API, not
 - **[Carousel navigation](carousel-navigation.md):** Paging a carousel is the round arrows of Carousel navigation. A labelled action under a carousel is a Button.
 - **[Avatar](avatar.md):** Both are circles. An avatar is a person and never acts; an icon button is a control.
 - **[Tabs](tabs.md):** A Button runs an action once; a tab selects a panel and stays selected.
+- **[Range slider](range-slider.md):** A Button runs an action once; a range slider picks one value along a scale and keeps it.
 
 ## How to use
 

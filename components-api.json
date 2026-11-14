@@ -1277,6 +1277,48 @@
           "descendantReads": [],
           "sets": [],
           "unpublished": []
+        },
+        {
+          "name": "uw-range",
+          "kind": "base",
+          "note": "range slider",
+          "selectors": [
+            ".uw-range",
+            ".uw-range:focus-visible",
+            ".uw-range::-webkit-slider-runnable-track",
+            ".uw-range::-moz-range-track",
+            ".uw-range::-webkit-slider-thumb",
+            ".uw-range::-moz-range-thumb",
+            ".uw-range:focus-visible::-webkit-slider-thumb",
+            ".uw-range:focus-visible::-moz-range-thumb"
+          ],
+          "contexts": [],
+          "descendants": [],
+          "states": [
+            "focus-visible"
+          ],
+          "parts": [
+            "-moz-range-thumb",
+            "-moz-range-track",
+            "-webkit-slider-runnable-track",
+            "-webkit-slider-thumb"
+          ],
+          "reads": [
+            "--bar-radius",
+            "--border-focus",
+            "--color-accent",
+            "--color-dot-inactive",
+            "--color-focus-ring",
+            "--color-surface",
+            "--dot-radius",
+            "--focus-ring-offset",
+            "--space-100",
+            "--space-400",
+            "--touch-target-min"
+          ],
+          "descendantReads": [],
+          "sets": [],
+          "unpublished": []
         }
       ]
     }

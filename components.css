@@ -1525,3 +1525,33 @@ body[data-footer-near] .edge-fade { opacity: 0; }
      footer grounds carry the same pair on their own rules. */
   .strip-motion-toggle { display: none; }
 }
+
+
+/* -----------------------------------------------------------------------------
+   Range slider
+   ---
+   .uw-range            a native <input type="range">, styled: a 44px tall hit area (--touch-target-min), a 16px track with a 2px edge, a 20px thumb
+   States: focus-visible (site focus ring on the input, USWDS blue on the thumb). No hover state and no disabled style: USWDS's slider has none, so none is invented here.
+   ----
+   The USWDS range slider (usa-range, USWDS 3.14.0), its shape, sizes and
+   contrast recipe, with our tokens for colour. Its test page passed all 12 manual checks:
+   https://designsystem.digital.gov/components/range-slider/accessibility-tests/
+   Role for role: USWDS's pale track and thumb are --color-surface, their 2px dark edge is
+   --color-dot-inactive (5.1:1 light, 7.7:1 dark; WCAG 1.4.11 asks 3:1), its focus blue is
+   --color-focus-ring. The 16px track, 20px thumb, 2px edges and the thumb's -4px offset are
+   USWDS's own numbers (lint-ok: they centre the thumb on the track). Ours, beyond the source:
+   the accent fill left of the thumb (--range-pct), the 44px input height (touch target) and
+   the site focus ring. Nathan's pick 8 Nov 2026, chat A11Y COMPONENTS.
+   The fill needs --range-pct: a page sets it itself, as a percentage on the input, whenever
+   the value changes (natemills.me does it with rangeFill in index.html). Without it the track
+   shows no fill and the slider still works.
+   Moved here 14 Nov 2026, chat CHAR BUILDER, so case study pages share it.
+   ----------------------------------------------------------------------------- */
+.uw-range { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: var(--touch-target-min); margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.uw-range:focus-visible { outline: var(--border-focus); outline-offset: var(--focus-ring-offset); border-radius: var(--bar-radius); }
+.uw-range::-webkit-slider-runnable-track { height: var(--space-400); border: 2px solid var(--color-dot-inactive); border-radius: var(--bar-radius); background: linear-gradient(to right, var(--color-accent) var(--range-pct, 0%), var(--color-surface) var(--range-pct, 0%)); }
+.uw-range::-moz-range-track { height: var(--space-400); border: 2px solid var(--color-dot-inactive); border-radius: var(--bar-radius); background: linear-gradient(to right, var(--color-accent) var(--range-pct, 0%), var(--color-surface) var(--range-pct, 0%)); }
+.uw-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: calc(var(--space-400) + var(--space-100)); height: calc(var(--space-400) + var(--space-100)); margin-top: calc(-1 * var(--space-100)); border: 0; border-radius: var(--dot-radius); background: var(--color-surface); box-shadow: 0 0 0 2px var(--color-dot-inactive); }
+.uw-range::-moz-range-thumb { width: calc(var(--space-400) + var(--space-100)); height: calc(var(--space-400) + var(--space-100)); border: 0; border-radius: var(--dot-radius); background: var(--color-surface); box-shadow: 0 0 0 2px var(--color-dot-inactive); }
+.uw-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 2px var(--color-focus-ring); }
+.uw-range:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 2px var(--color-focus-ring); }

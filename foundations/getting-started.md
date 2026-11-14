@@ -131,6 +131,7 @@ Rules for using it:
 | --- | --- |
 | `.avatar` | round portrait |
 | `.sr-only` | visually hidden, still announced |
+| `.uw-range` | range slider |
 <!-- DESIGN:classes:end -->
 
 Anything not in that table is a portfolio internal, not public API. Build it yourself from the tokens.

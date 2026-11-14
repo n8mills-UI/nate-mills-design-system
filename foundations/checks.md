@@ -174,6 +174,14 @@ Part of the [Nate Mills Design System](../README.md). Every rule on a [component
 - **When it runs:** Every pull request that adds screen-reader text, by hand.
 - **Rules it checks:** [Screen-reader text](accessibility.md#screen-reader-text)
 
+### Range slider review
+
+- **Kind:** Manual
+- **What it checks:** In the pull request, open every new range slider. Confirm it has a `<label>`, keeps the full 44px height, shows a focus ring when tabbed to, and moves with the arrow keys. The USWDS test page behind the design passed all 12 of its manual checks.
+- **WCAG:** 1.4.11 Non-text Contrast, AA; 2.1.1 Keyboard, A; 2.4.7 Focus Visible, AA; 4.1.2 Name, Role, Value, A
+- **When it runs:** Every pull request that adds or changes a range slider, by hand.
+- **Rules it checks:** [Range slider](../components/range-slider.md#rules)
+
 ## Values
 
 The tokens this page names, as data from tokens.json: write `var(--name)`, never the raw value. Every token: [Tokens](tokens.md).

@@ -63,13 +63,13 @@ Tokens before components. fonts.css is required (self-hosted Anton and JetBrains
 1. Use a published class before a value. The list below is the whole public API; anything else is internal.
 2. Use the exact names. No `.button`, no `.btn-primary`, no `.card-dark`.
 3. Never redefine a published class. Compose: write your own class next to `.btn` or `.card`, never inside it.
-4. Every colour, size, radius, border, spacing and timing is a `var(--token)` from the names below. No hex and no px of your own.
+4. Every colour, size, radius, border, spacing and timing is a `var(--token)` from the names below. No hex or px of your own; if none fits, ask.
 5. Semantic names flip by theme on their own: `--color-bg`, `--color-text-primary`, `--color-accent`. There is no `--dark-*` or `--darkTheme-*` name; the dark value belongs to the same property.
 6. Lime (`--brand-primary`) is scarce: primary button, brand outlines, focus rings on dark, status dots. Never body text on a light surface. For a selected state use `--color-accent`.
 7. Pick the surface first (`--color-bg`, `--color-surface`, `--color-surface-sunken`, or always-dark `--color-surface-inverse`), then its text: `--color-text-*` on light, `--color-on-ink-primary` or `-secondary` on a dark slab.
 8. Hairline borders separate (`--border-hairline`); a shadow is only for an overlay. No gradients on surfaces, no opacity for hierarchy.
 9. Both themes are first class. Build light, then check dark: `data-theme="dark"` on `<html>`.
-10. WCAG 2.2 AA in both themes: 4.5:1 body text, 3:1 large text and non-text, a visible focus ring. Default targets are 44px (`--touch-target-min`); the dense `.btn--sm` is 32px, which still clears AA's 24px minimum. An icon is decorative: give its control a text label or an `aria-label`.
+10. WCAG 2.2 AA in both themes: 4.5:1 body text, 3:1 large text and non-text, a visible focus ring. Default targets are 44px (`--touch-target-min`); the dense `.btn--sm` is 32px, still above AA's 24px minimum. An icon is decorative: give its control a text label or an `aria-label`.
 
 ## Slips in my agent test (October 2026, 15 builds)
 
